@@ -40,7 +40,7 @@ list.files()
 # Nisha,20,88
 
 
-students <- read.csv("/Users/rr/repos/biostatistics_cdfd/2026_Huber_Holmes/Rfiles/students.csv")
+students <- read.csv("students.csv")
 
 # Display the data
 students
@@ -240,7 +240,7 @@ write.csv(
 # They are often useful when text fields themselves
 # may contain commas.
 
-data_tsv <- read.delim("/Users/rr/repos/biostatistics_cdfd/2026_Huber_Holmes/Rfiles/students.tsv")
+data_tsv <- read.delim("students.tsv")
 
 # Alternatively:
 
@@ -273,7 +273,7 @@ saveRDS(
 
 # Read it back:
 
-students2 <- readRDS("/Users/rr/repos/biostatistics_cdfd/2026_Huber_Holmes/Rfiles/students.rds")
+students2 <- readRDS("students.rds")
 
 students2
 
@@ -291,19 +291,19 @@ save(
   x,
   y,
   students,
-  file = "/Users/rr/repos/biostatistics_cdfd/2026_Huber_Holmes/Rfiles/my_data.RData"
+  file = "my_data.RData"
 )
 
 # Load them again
 
-load("/Users/rr/repos/biostatistics_cdfd/2026_Huber_Holmes/Rfiles/my_data.RData")
+load("my_data.RData")
 
 
 # ============================================================
 # 16. CHECK FILE EXISTENCE
 # ============================================================
 
-file.exists("/Users/rr/repos/biostatistics_cdfd/2026_Huber_Holmes/Rfiles/students.csv")
+file.exists("students.csv")
 
 # Useful before attempting to read a file.
 

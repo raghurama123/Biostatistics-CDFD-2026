@@ -751,12 +751,11 @@ gc_percent
 
 The GC percentage is
 
-\[
-\mathrm{GC\%}
-=
-\frac{N_G + N_C}{N_{\mathrm{total}}}
-\times 100.
-\]
+$$
+\mathrm{GC\%} =
+\frac{G + C}{A + T + G + C}
+\times 100
+$$
 
 ---
 
