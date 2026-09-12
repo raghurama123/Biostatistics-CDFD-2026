@@ -5,7 +5,8 @@ This lecture introduces the basic R workflow used in the course: working with R 
 [1. R Basics](#1-r-basics)  
 [2. Reading and Writing Data](#2-reading-and-writing-data)  
 [3. Plotting with `ggplot2`](#3-plotting-with-ggplot2)   
-[4. Introduction to Bioconductor](#4-introduction-to-bioconductor)   
+[4. Monte Carlo Simulation](#4-monte-carlo-simulation)    
+[5. Introduction to Bioconductor](#5-introduction-to-bioconductor)   
 
 ---
 
@@ -22,6 +23,8 @@ By the end of this lecture, you should be able to:
 - read data from CSV and other common file formats;
 - modify and save data;
 - create plots using `ggplot2`;
+- use random numbers in a simple Monte Carlo simulation;
+- estimate $\pi$ using random sampling and visualize the simulation;
 - install and load an R package;
 - understand the role of Bioconductor in biological data analysis;
 - perform simple operations on a DNA sequence using `Biostrings`.
@@ -663,7 +666,354 @@ The important idea is that `ggplot2` builds plots by adding layers with the `+` 
 
 ---
 
-# 4. Introduction to Bioconductor
+# 4. Monte Carlo Simulation
+
+File: [`MonteCarlo.R`](MonteCarlo.R)
+
+Monte Carlo methods use **random sampling** to estimate numerical quantities.  
+They are widely used in statistics, physics, biology, finance, and many other
+fields when an exact calculation is difficult or when we want to study the
+behavior of a random process.
+
+In this introductory example, random points are used to estimate the value of
+$\pi$.
+
+---
+
+## Geometrical idea
+
+Consider a square covering the region
+
+$$
+0 \le x \le 1,
+\qquad
+0 \le y \le 1.
+$$
+
+Inside this square is a quarter-circle of radius 1.
+
+A point $(x,y)$ lies inside the quarter-circle when
+
+$$
+x^2 + y^2 \le 1.
+$$
+
+The area of the square is
+
+$$
+A_{\mathrm{square}} = 1,
+$$
+
+while the area of the quarter-circle is
+
+$$
+A_{\mathrm{quarter\ circle}}
+=
+\frac{\pi r^2}{4}
+=
+\frac{\pi}{4}.
+$$
+
+Therefore,
+
+$$
+\frac{
+A_{\mathrm{quarter\ circle}}
+}{
+A_{\mathrm{square}}
+}
+=
+\frac{\pi}{4}.
+$$
+
+If points are generated uniformly inside the square, the fraction that fall
+inside the quarter-circle should approach $\pi/4$ as the number of points
+becomes large.
+
+Thus,
+
+$$
+\pi
+\approx
+4 \times
+\frac{
+\text{number of points inside the quarter-circle}
+}{
+\text{total number of points}
+}.
+$$
+
+---
+
+## Reproducible random numbers
+
+The script begins with
+
+```r
+set.seed(123)
+```
+
+Computer-generated random numbers are actually **pseudorandom**.  
+Using `set.seed()` fixes the starting point of the random-number generator so
+that the same script produces the same sequence of random values every time.
+
+This is important for **reproducible scientific analysis**.
+
+---
+
+## Generating random points
+
+Choose the number of simulated points:
+
+```r
+N <- 100000
+```
+
+Generate random $x$ and $y$ coordinates between 0 and 1:
+
+```r
+x <- runif(N, 0, 1)
+y <- runif(N, 0, 1)
+```
+
+The function
+
+```r
+runif(N, min, max)
+```
+
+generates `N` random numbers from a **uniform distribution** between `min` and
+`max`.
+
+Here, every location between 0 and 1 has equal probability of being sampled.
+
+---
+
+## Testing whether points are inside the circle
+
+The condition
+
+```r
+inside <- x^2 + y^2 <= 1
+```
+
+creates a logical vector containing values such as
+
+```text
+TRUE
+FALSE
+TRUE
+TRUE
+FALSE
+...
+```
+
+`TRUE` means that the corresponding point lies inside the quarter-circle.
+
+Because R treats
+
+```text
+TRUE  -> 1
+FALSE -> 0
+```
+
+when calculating a mean, the command
+
+```r
+mean(inside)
+```
+
+directly gives the fraction of points inside the quarter-circle.
+
+For example,
+
+```r
+fraction_inside <- mean(inside)
+```
+
+estimates
+
+$$
+\frac{\pi}{4}.
+$$
+
+---
+
+## Estimating pi
+
+The estimate is therefore
+
+```r
+pi_estimate <- 4 * fraction_inside
+```
+
+and can be compared with R's built-in value:
+
+```r
+pi_estimate
+pi
+```
+
+With a sufficiently large value of `N`, the Monte Carlo estimate should be
+close to the true value of $\pi$.
+
+The result will not usually be exactly equal to $\pi$ because the estimate is
+based on a finite random sample.
+
+---
+
+## Complete numerical calculation
+
+```r
+set.seed(123)
+
+# Number of random points
+N <- 100000
+
+# Generate uniformly distributed coordinates
+x <- runif(N, 0, 1)
+y <- runif(N, 0, 1)
+
+# TRUE if the point lies inside the quarter-circle
+inside <- x^2 + y^2 <= 1
+
+# Fraction of simulated points inside
+fraction_inside <- mean(inside)
+
+# Monte Carlo estimate of pi
+pi_estimate <- 4 * fraction_inside
+
+pi_estimate
+pi
+```
+
+---
+
+## Visualizing the simulation
+
+For visualization, a smaller number of points is convenient:
+
+```r
+set.seed(123)
+
+N <- 5000
+
+x <- runif(N)
+y <- runif(N)
+
+inside <- x^2 + y^2 <= 1
+```
+
+Plot the simulated points:
+
+```r
+plot(
+  x, y,
+  pch = 16,
+  cex = 0.5,
+  xlab = "x",
+  ylab = "y",
+  asp = 1,
+  main = "Monte Carlo Estimation of Pi"
+)
+```
+
+Important plotting arguments are:
+
+- `pch = 16` — draws each point as a filled circle;
+- `cex = 0.5` — reduces the point size;
+- `asp = 1` — forces equal scaling of the $x$ and $y$ axes.
+
+The argument
+
+```r
+asp = 1
+```
+
+is particularly important here. Without equal axis scaling, a geometrically
+circular curve may appear stretched or compressed on the screen.
+
+---
+
+## Drawing the quarter-circle
+
+The upper boundary of the quarter-circle follows from
+
+$$
+x^2 + y^2 = 1.
+$$
+
+Solving for $y$ gives
+
+$$
+y = \sqrt{1-x^2}.
+$$
+
+It can be added to the existing plot using
+
+```r
+curve(
+  sqrt(1 - x^2),
+  from = 0,
+  to = 1,
+  add = TRUE,
+  lwd = 2
+)
+```
+
+Here:
+
+- `from = 0` and `to = 1` specify the range of $x$;
+- `add = TRUE` means **draw the curve on the existing plot** rather than
+  opening a new plot;
+- `lwd = 2` increases the line width.
+
+---
+
+## Final estimate from the plotted sample
+
+The Monte Carlo estimate can again be calculated directly:
+
+```r
+4 * mean(inside)
+```
+
+Since this visualization uses only 5000 points rather than 100000, its estimate
+may differ slightly more from the exact value of $\pi$.
+
+---
+
+## Effect of sample size
+
+An important idea in Monte Carlo simulation is that estimates usually become
+more stable as the number of random samples increases.
+
+For example, try:
+
+```r
+N <- 100
+N <- 1000
+N <- 10000
+N <- 100000
+```
+
+and compare the corresponding estimates of $\pi$.
+
+The exact sequence of estimates will depend on the random sample, but larger
+values of `N` generally give estimates closer to the true value.
+
+This example therefore introduces several useful R ideas at once:
+
+- random-number generation with `runif()`;
+- reproducibility with `set.seed()`;
+- logical vectors;
+- using `mean()` with `TRUE` and `FALSE`;
+- simulation-based numerical estimation;
+- geometric visualization with `plot()` and `curve()`.
+
+---
+
+# 5. Introduction to Bioconductor
 
 File: [`BioConductor.R`](BioConductor.R)
 
