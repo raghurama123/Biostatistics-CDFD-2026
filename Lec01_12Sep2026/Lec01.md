@@ -15,6 +15,73 @@ The material should be discussed in the following order:
 
 ---
 
+# Lecture workflow
+
+```text
+Rbasics.R
+   |
+   |  Learn R objects, vectors, data frames,
+   |  statistics, plots, and simple models
+   v
+ReadCSV.R
+   |
+   |  Move from manually created data
+   |  to data stored in external files
+   v
+Plotggplot2.R
+   |
+   |  Move from basic plotting
+   |  to layered publication-style graphics
+   v
+BioConductor.R
+   |
+   |  Apply R to biological data using
+   |  specialized scientific packages
+   v
+Biostatistics / Bioinformatics workflows
+```
+---
+
+# Files for this lecture
+
+The lecture directory is:
+
+```text
+Biostatistics-CDFD-2026/
+└── Rfiles/
+    └── Lec01_12Sep2026/
+        ├── Lec01.md
+        ├── Rbasics.R
+        ├── ReadCSV.R
+        ├── Plotggplot2.R
+        └── BioConductor.R
+```
+
+If the data files used in `ReadCSV.R` are kept with the lecture material, a convenient structure is:
+
+```text
+Biostatistics-CDFD-2026/
+└── Rfiles/
+    └── Lec01_12Sep2026/
+        ├── Lec01.md
+        ├── Rbasics.R
+        ├── ReadCSV.R
+        ├── Plotggplot2.R
+        ├── BioConductor.R
+        ├── students.csv
+        └── students.tsv
+```
+
+With this structure, scripts can use portable relative paths such as:
+
+```r
+students <- read.csv("students.csv")
+```
+
+rather than a computer-specific absolute path.
+
+---
+
 ## Learning objectives
 
 By the end of this lecture, you should be able to:
@@ -781,123 +848,6 @@ protein
 
 This provides a simple example of how specialized R packages can represent and manipulate biological data directly.
 
----
 
-# Lecture workflow
-
-The four scripts form a progression:
-
-```text
-Rbasics.R
-   |
-   |  Learn R objects, vectors, data frames,
-   |  statistics, plots, and simple models
-   v
-ReadCSV.R
-   |
-   |  Move from manually created data
-   |  to data stored in external files
-   v
-Plotggplot2.R
-   |
-   |  Move from basic plotting
-   |  to layered publication-style graphics
-   v
-BioConductor.R
-   |
-   |  Apply R to biological data using
-   |  specialized scientific packages
-   v
-Biostatistics / Bioinformatics workflows
-```
 
 ---
-
-# Files for this lecture
-
-The lecture directory is:
-
-```text
-Biostatistics-CDFD-2026/
-└── Rfiles/
-    └── Lec01_12Sep2026/
-        ├── Lec01.md
-        ├── Rbasics.R
-        ├── ReadCSV.R
-        ├── Plotggplot2.R
-        └── BioConductor.R
-```
-
-If the data files used in `ReadCSV.R` are kept with the lecture material, a convenient structure is:
-
-```text
-Biostatistics-CDFD-2026/
-└── Rfiles/
-    └── Lec01_12Sep2026/
-        ├── Lec01.md
-        ├── Rbasics.R
-        ├── ReadCSV.R
-        ├── Plotggplot2.R
-        ├── BioConductor.R
-        ├── students.csv
-        └── students.tsv
-```
-
-With this structure, scripts can use portable relative paths such as:
-
-```r
-students <- read.csv("students.csv")
-```
-
-rather than a computer-specific absolute path.
-
----
-
-# Commands to remember
-
-| Task | R command |
-|---|---|
-| Assignment | `x <- 10` |
-| Create a vector | `c(...)` |
-| Mean | `mean(x)` |
-| Standard deviation | `sd(x)` |
-| Summary | `summary(x)` |
-| Create data frame | `data.frame(...)` |
-| Select a column | `data$column` |
-| Select rows/columns | `data[row, column]` |
-| Base scatter plot | `plot(x, y)` |
-| Histogram | `hist(x)` |
-| Boxplot | `boxplot(x)` |
-| t-test | `t.test(x, y)` |
-| Correlation | `cor(x, y)` |
-| Linear model | `lm(y ~ x)` |
-| Read CSV | `read.csv()` |
-| Write CSV | `write.csv()` |
-| Load an R package | `library(package)` |
-| Install CRAN package | `install.packages()` |
-| Install Bioconductor package | `BiocManager::install()` |
-| Start a ggplot | `ggplot()` |
-| DNA sequence | `DNAString()` |
-
----
-
-# Suggested exercise
-
-After working through all four scripts:
-
-1. Create a CSV file containing at least five observations and two numerical variables.
-2. Read it into R using `read.csv()`.
-3. Use `summary()` to inspect the data.
-4. Calculate the mean and standard deviation of one variable.
-5. Make a scatter plot using base R.
-6. Make the same plot using `ggplot2`.
-7. Fit a simple linear model using `lm()`.
-8. Create a short DNA sequence with `DNAString()`.
-9. Calculate its nucleotide composition and GC percentage.
-10. Find its reverse complement.
-
----
-
-## Next lecture
-
-The next lecture can build on these ideas by introducing probability distributions, simulation, statistical inference, and additional data-analysis workflows in R.
