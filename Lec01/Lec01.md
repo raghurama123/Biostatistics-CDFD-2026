@@ -2,6 +2,11 @@
 
 This lecture introduces the basic R workflow used in the course: working with R objects, reading data from files, visualizing data with `ggplot2`, and using a simple Bioconductor package for biological sequence analysis.
 
+[1. R Basics](#1-r-basics)
+[2. Reading and Writing Data](#2-read-write)
+[3. Plotting with `ggplot2`](#3-r-ggplot2)
+[4. Biocondunctor](#4-bioconductor)
+
 The following R scripts will be used:
 
 1. [`Rbasics.R`](Rbasics.R)
@@ -36,46 +41,6 @@ BioConductor.R
    v
 Biostatistics / Bioinformatics workflows
 ```
----
-
-# Files for this lecture
-
-The lecture directory is:
-
-```text
-Biostatistics-CDFD-2026/
-└── Rfiles/
-    └── Lec01/
-        ├── Lec01.md
-        ├── Rbasics.R
-        ├── ReadCSV.R
-        ├── Plotggplot2.R
-        └── BioConductor.R
-```
-
-If the data files used in `ReadCSV.R` are kept with the lecture material, a convenient structure is:
-
-```text
-Biostatistics-CDFD-2026/
-└── Rfiles/
-    └── Lec01/
-        ├── Lec01.md
-        ├── Rbasics.R
-        ├── ReadCSV.R
-        ├── Plotggplot2.R
-        ├── BioConductor.R
-        ├── students.csv
-        └── students.tsv
-```
-
-With this structure, scripts can use portable relative paths such as:
-
-```r
-students <- read.csv("students.csv")
-```
-
-rather than a computer-specific absolute path.
-
 ---
 
 ## Learning objectives
