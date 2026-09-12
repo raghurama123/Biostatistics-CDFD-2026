@@ -5,7 +5,7 @@ This lecture introduces the basic R workflow used in the course: working with R 
 [1. R Basics](#1-r-basics)  
 [2. Reading and Writing Data](#2-read-write)  
 [3. Plotting with `ggplot2`](#3-r-ggplot2)   
-[4. Biocondunctor](#4-bioconductor)   
+[4. Introduction to Bioconductor](#4-bioconductor)   
 
 The following R scripts will be used:
 
