@@ -7,40 +7,6 @@ This lecture introduces the basic R workflow used in the course: working with R 
 [3. Plotting with `ggplot2`](#3-plotting-with-ggplot2)   
 [4. Introduction to Bioconductor](#4-introduction-to-bioconductor)   
 
-The following R scripts will be used:
-
-1. [`Rbasics.R`](Rbasics.R)
-2. [`ReadCSV.R`](ReadCSV.R)
-3. [`Plotggplot2.R`](Plotggplot2.R)
-4. [`BioConductor.R`](BioConductor.R)
-
----
-
-# Lecture workflow
-
-```text
-Rbasics.R
-   |
-   |  Learn R objects, vectors, data frames,
-   |  statistics, plots, and simple models
-   v
-ReadCSV.R
-   |
-   |  Move from manually created data
-   |  to data stored in external files
-   v
-Plotggplot2.R
-   |
-   |  Move from basic plotting
-   |  to layered publication-style graphics
-   v
-BioConductor.R
-   |
-   |  Apply R to biological data using
-   |  specialized scientific packages
-   v
-Biostatistics / Bioinformatics workflows
-```
 ---
 
 ## Learning objectives
