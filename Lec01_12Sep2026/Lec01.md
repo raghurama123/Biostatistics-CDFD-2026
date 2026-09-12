@@ -6,7 +6,7 @@
 
 This lecture introduces the basic R workflow used in the course: working with R objects, reading data from files, visualizing data with `ggplot2`, and using a simple Bioconductor package for biological sequence analysis.
 
-The material should be discussed in the following order:
+The following R scripts will be used:
 
 1. [`Rbasics.R`](Rbasics.R)
 2. [`ReadCSV.R`](ReadCSV.R)
