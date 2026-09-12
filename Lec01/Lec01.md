@@ -1,9 +1,5 @@
 # Lecture 01 — Introduction to R for Biostatistics
 
-**Date:** 12 September 2026  
-**Course:** Biostatistics  
-**Repository:** `Biostatistics-CDFD-2026`
-
 This lecture introduces the basic R workflow used in the course: working with R objects, reading data from files, visualizing data with `ggplot2`, and using a simple Bioconductor package for biological sequence analysis.
 
 The following R scripts will be used:
@@ -49,7 +45,7 @@ The lecture directory is:
 ```text
 Biostatistics-CDFD-2026/
 └── Rfiles/
-    └── Lec01_12Sep2026/
+    └── Lec01/
         ├── Lec01.md
         ├── Rbasics.R
         ├── ReadCSV.R
@@ -62,7 +58,7 @@ If the data files used in `ReadCSV.R` are kept with the lecture material, a conv
 ```text
 Biostatistics-CDFD-2026/
 └── Rfiles/
-    └── Lec01_12Sep2026/
+    └── Lec01/
         ├── Lec01.md
         ├── Rbasics.R
         ├── ReadCSV.R
