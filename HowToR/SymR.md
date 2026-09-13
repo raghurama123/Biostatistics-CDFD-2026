@@ -49,8 +49,7 @@ df
 R returns a symbolic expression equivalent to
 
 $$
-\frac{df}{dx}
-=
+\frac{df}{dx}=
 3x^2+4x+5.
 $$
 
@@ -107,11 +106,9 @@ eval(
 This calculates
 
 $$
-f(2)
-=
+f(2)=
 2^3+2(2^2)+5(2)+1
-=
-27.
+=27.
 $$
 
 ---
@@ -173,8 +170,7 @@ d2f
 This gives
 
 $$
-\frac{d^2f}{dx^2}
-=
+\frac{d^2f}{dx^2}=
 6x+4.
 $$
 
@@ -607,8 +603,7 @@ F
 which corresponds to
 
 $$
-\int x^2\,dx
-=
+\int x^2\,dx=
 \frac{x^3}{3}.
 $$
 
@@ -898,8 +893,7 @@ df_dy <- der(f, y)
 The gradient is
 
 $$
-\nabla f
-=
+\nabla f=
 \begin{pmatrix}
 \frac{\partial f}{\partial x} \\
 \frac{\partial f}{\partial y}
@@ -1043,8 +1037,7 @@ The result remains symbolic.
 For a \(2\times2\) matrix, it corresponds to
 
 $$
-A^{-1}
-=
+A^{-1}=
 \frac{1}{ad-bc}
 \begin{pmatrix}
 d & -b \\
