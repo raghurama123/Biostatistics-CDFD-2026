@@ -34,9 +34,9 @@ Lecture 01 introduces R and follows this sequence:
 3. **ggplot2** — introduction to plotting with `ggplot2`, including scatter plots and fitted regression lines.
 4. **Bioconductor** — a first example using `Biostrings` to work with DNA sequences.
 
-## HowToR
+## How to do various things in R programming? 
 
-The [`HowToR`](HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. These guides are intended as quick references for common workflows, such as organizing R code, working with files, plotting data, and writing reusable functions.
+The [`HowToR`](HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. 
 
 ## General reference
 
