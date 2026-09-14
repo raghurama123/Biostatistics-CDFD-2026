@@ -100,8 +100,7 @@ This is different from a dot product.
 The dot product of two vectors is
 
 $$
-\mathbf{x}\cdot\mathbf{y}
-=
+\mathbf{x}\cdot\mathbf{y}=
 \sum_i x_i y_i.
 $$
 
@@ -428,13 +427,11 @@ Output:
 because
 
 $$
-A\mathbf{x}
-=
+A\mathbf{x}=
 \begin{pmatrix}
 1(5)+2(6) \\
 3(5)+4(6)
-\end{pmatrix}
-=
+\end{pmatrix}=
 \begin{pmatrix}
 17 \\
 39
@@ -618,9 +615,7 @@ Output:
 
 The trace of a matrix is the sum of its diagonal elements:
 
-$$
-\mathrm{Tr}(A)
-=
+$$\mathrm{Tr}(A)=
 \sum_i A_{ii}.
 $$
 
@@ -831,8 +826,7 @@ The columns of `result$vectors` contain the eigenvectors corresponding to the ei
 An eigenvector satisfies:
 
 $$
-A\mathbf{v}
-=
+A\mathbf{v}=
 \lambda\mathbf{v}.
 $$
 
