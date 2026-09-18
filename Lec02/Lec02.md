@@ -14,13 +14,13 @@ The same example is then used to introduce:
 * p-values;
 * exact binomial hypothesis testing.
 
-[1. Binomial Distribution](#1-binomial-distribution)
-[2. Poisson Distribution](#2-poisson-distribution)
-[3. HIV Mutation Example](#3-hiv-mutation-example)
-[4. Central 95% Region for a Binomial Distribution](#4-central-95-region-for-a-binomial-distribution)
-[5. Left-Tailed Binomial Test](#5-left-tailed-binomial-test)
-[6. Cumulative Distribution Function](#6-cumulative-distribution-function)
-[7. Hypothesis Test for the HIV Mutation Rate](#7-hypothesis-test-for-the-hiv-mutation-rate)
+[1. Binomial Distribution](#1-binomial-distribution)      
+[2. Poisson Distribution](#2-poisson-distribution)     
+[3. HIV Mutation Example](#3-hiv-mutation-example)     
+[4. Central 95% Region for a Binomial Distribution](#4-central-95-region-for-a-binomial-distribution)     
+[5. Left-Tailed Binomial Test](#5-left-tailed-binomial-test)    
+[6. Cumulative Distribution Function](#6-cumulative-distribution-function)     
+[7. Hypothesis Test for the HIV Mutation Rate](#7-hypothesis-test-for-the-hiv-mutation-rate)        
 
 ---
 
@@ -117,14 +117,13 @@ A binomial distribution applies when:
 If $X$ is the number of successes in $n$ trials, then
 
 $$
-X \sim \operatorname{Binomial}(n,p).
+X \sim \mathrm{Binomial}(n,p).
 $$
 
 The probability of obtaining exactly $x$ successes is
 
 $$
-P(X=x)
-=
+P(X=x)=
 {n \choose x}
 p^x
 (1-p)^{n-x}.
@@ -134,8 +133,7 @@ The quantity
 
 $$
 {n \choose x}
-=
-\frac{n!}{x!(n-x)!}
+=\frac{n!}{x!(n-x)!}
 $$
 
 counts the number of different ways in which $x$ successes can occur among $n$ trials.
@@ -207,14 +205,11 @@ $$
 For three fair coin tosses,
 
 $$
-P(X=3)
-=
+P(X=3)=
 {3 \choose 3}
 (0.5)^3
-(0.5)^0
-=
-\frac{1}{8}
-=
+(0.5)^0=
+\frac{1}{8}=
 0.125.
 $$
 
@@ -328,7 +323,7 @@ Here:
 For a binomial random variable,
 
 $$
-X \sim \operatorname{Binomial}(n,p),
+X \sim \mathrm{Binomial}(n,p),
 $$
 
 the expected number of successes is
@@ -378,14 +373,13 @@ which represents the expected number of events.
 If
 
 $$
-X\sim\operatorname{Poisson}(\lambda),
+X\sim\mathrmname{Poisson}(\lambda),
 $$
 
 then
 
 $$
-P(X=x)
-=
+P(X=x)=
 \frac{e^{-\lambda}\lambda^x}{x!}.
 $$
 
@@ -614,9 +608,9 @@ The two distributions become progressively more similar.
 This illustrates the limiting relationship
 
 $$
-\operatorname{Binomial}(n,p)
+\mathrmname{Binomial}(n,p)
 \longrightarrow
-\operatorname{Poisson}(\lambda)
+\mathrmname{Poisson}(\lambda)
 $$
 
 when
@@ -678,7 +672,7 @@ p <- 5e-4
 Thus,
 
 $$
-X\sim\operatorname{Binomial}(10000,0.0005).
+X\sim\mathrmname{Binomial}(10000,0.0005).
 $$
 
 ---
@@ -694,10 +688,8 @@ $$
 Therefore,
 
 $$
-E[X]
-=
-10000\times0.0005
-=
+E[X]=
+10000\times0.0005=
 5.
 $$
 
@@ -789,7 +781,7 @@ print(poisson_prob)
 This gives the approximation
 
 $$
-X\approx\operatorname{Poisson}(5).
+X\approx\mathrmname{Poisson}(5).
 $$
 
 The exact binomial and approximate Poisson probabilities should be very similar.
@@ -929,8 +921,7 @@ gives
 For a two-tailed procedure, the significance level is divided between the two tails:
 
 $$
-\frac{\alpha}{2}
-=
+\frac{\alpha}{2}=
 0.025.
 $$
 
@@ -1467,8 +1458,7 @@ $$
 Adding them gives
 
 $$
-P(X\le3)
-=
+P(X\le3)=
 P(X=0)
 +
 P(X=1)
@@ -1769,10 +1759,8 @@ Three mutations may be below the expected value of five, but observing three or 
 Under $H_0$, the expected number of mutations is
 
 $$
-np_0
-=
-10000\times0.0005
-=
+np_0=
+10000\times0.0005=
 5.
 $$
 
