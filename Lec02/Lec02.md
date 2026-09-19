@@ -1979,6 +1979,10 @@ p_value <- pbinom(
 print(p_value)
 ```
 
+The p-value is **not** the probability that the null hypothesis is true.
+
+Instead, it is calculated **assuming $H_0$ is true**.
+
 For these data,
 
 $$
@@ -1992,9 +1996,6 @@ This means:
 
 Therefore, observing 3 mutations is lower than the expected value of 5, but it is **not particularly unusual** under the null model.
 
-The p-value is **not** the probability that the null hypothesis is true.
-
-Instead, it is calculated **assuming $H_0$ is true**.
 
 ---
 
