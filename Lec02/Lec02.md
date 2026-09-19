@@ -1208,7 +1208,7 @@ $$
 The hypotheses are
 
 $$
-H_0:p=5\times10^{-4}
+H_0:p>=5\times10^{-4}
 $$
 
 and
