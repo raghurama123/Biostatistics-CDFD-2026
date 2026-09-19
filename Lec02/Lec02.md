@@ -1726,16 +1726,126 @@ $$
 
 The value $p_0$ is not calculated from the current observation. It is a **reference value specified before the hypothesis test**. Depending on the scientific problem, such a value may come from previous experiments, published evidence, an established model, or another scientifically meaningful baseline.
 
-Thus, in this example,
+Thus,
 
 ```text
 p     = unknown underlying mutation probability
 
-p0    = reference mutation probability assumed under H0
+p0    = reference mutation probability
         = 5 x 10^-4
 ```
 
-We have observed 3 mutations among 10,000 nucleotides and want to determine whether the data provide evidence that the underlying mutation probability $p$ is smaller than the reference value $p_0$.
+We observe 3 mutations among 10,000 nucleotides.
+
+---
+
+## Why is a hypothesis test necessary?
+
+If the mutation probability were
+
+$$
+p_0=5\times10^{-4},
+$$
+
+then for
+
+$$
+n=10000
+$$
+
+nucleotides, the expected number of mutations would be
+
+$$
+np_0
+=
+10000\times5\times10^{-4}
+=
+5.
+$$
+
+But we observed only
+
+$$
+x_{\mathrm{obs}}=3.
+$$
+
+At first, we might simply compare
+
+$$
+3<5
+$$
+
+and conclude that the mutation rate appears to be smaller.
+
+Equivalently, the observed mutation proportion is
+
+$$
+\hat p
+=
+\frac{3}{10000}
+=
+3\times10^{-4},
+$$
+
+which is smaller than
+
+$$
+p_0=5\times10^{-4}.
+$$
+
+However, this comparison alone is **not sufficient**.
+
+Even if the mutation probability really were exactly
+
+$$
+p=p_0,
+$$
+
+we would not observe exactly 5 mutations every time.
+
+Because mutation is a random process, different experiments could produce different numbers of mutations:
+
+```text
+2 mutations
+3 mutations
+4 mutations
+5 mutations
+6 mutations
+7 mutations
+...
+```
+
+even when the underlying mutation probability remains unchanged.
+
+The value
+
+$$
+np_0=5
+$$
+
+is therefore an **expected value**, not a value that must occur in every experiment.
+
+The important question is not simply
+
+> Is the observed number smaller than 5?
+
+Instead, we ask
+
+> **If the mutation probability were really $p_0$, how unusual would it be to observe only 3 mutations, or even fewer?**
+
+This is the purpose of the hypothesis test.
+
+It allows us to distinguish between
+
+```text
+a difference that could reasonably arise
+from random variation
+
+                    and
+
+a difference that is sufficiently unusual
+to provide evidence against the reference model
+```
 
 ---
 
@@ -1765,7 +1875,7 @@ $$
 H_A:p<p_0,
 $$
 
-or, equivalently,
+or equivalently,
 
 $$
 H_A:p<5\times10^{-4}.
@@ -1818,26 +1928,6 @@ x_obs = 3
 ```
 
 comes from the **observed data**.
-
-The observed mutation proportion is
-
-$$
-\hat p=\frac{x_{\mathrm{obs}}}{n}
-      =\frac{3}{10000}
-      =3\times10^{-4}.
-$$
-
-However, simply observing
-
-$$
-\hat p<p_0
-$$
-
-is not enough to conclude that $p<p_0$.
-
-Random variation can produce an observed proportion smaller than $p_0$ even when the null hypothesis is true.
-
-We therefore need to determine how unusual the observation is under $H_0$.
 
 ---
 
@@ -1904,6 +1994,8 @@ This means:
 
 > If the mutation probability were really $p_0=5\times10^{-4}$, the probability of observing 3 or fewer mutations in 10,000 nucleotides would be about 26.5%.
 
+Therefore, observing 3 mutations is lower than the expected value of 5, but it is **not particularly unusual** under the null model.
+
 The p-value is **not** the probability that the null hypothesis is true.
 
 Instead, it is calculated **assuming $H_0$ is true**.
@@ -1939,7 +2031,6 @@ p\text{-value}\ge\alpha
 \quad\Rightarrow\quad
 \text{do not reject }H_0.
 $$
-
 
 ---
 
