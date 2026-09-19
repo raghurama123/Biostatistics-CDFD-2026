@@ -1778,10 +1778,8 @@ and conclude that the mutation rate appears to be smaller.
 Equivalently, the observed mutation proportion is
 
 $$
-\hat p
-=
-\frac{3}{10000}
-=
+\hat p=
+\frac{3}{10000}=
 3\times10^{-4},
 $$
 
