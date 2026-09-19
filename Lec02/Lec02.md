@@ -452,7 +452,7 @@ which represents the expected number of events.
 If
 
 $$
-X\sim\mathrmname{Poisson}(\lambda),
+X\sim\mathrm{Poisson}(\lambda),
 $$
 
 then
@@ -687,9 +687,9 @@ The two distributions become progressively more similar.
 This illustrates the limiting relationship
 
 $$
-\mathrmname{Binomial}(n,p)
+\mathrm{Binomial}(n,p)
 \longrightarrow
-\mathrmname{Poisson}(\lambda)
+\mathrm{Poisson}(\lambda)
 $$
 
 when
@@ -751,7 +751,7 @@ p <- 5e-4
 Thus,
 
 $$
-X\sim\mathrmname{Binomial}(10000,0.0005).
+X\sim\mathrm{Binomial}(10000,0.0005).
 $$
 
 ---
@@ -860,7 +860,7 @@ print(poisson_prob)
 This gives the approximation
 
 $$
-X\approx\mathrmname{Poisson}(5).
+X\approx\mathrm{Poisson}(5).
 $$
 
 The exact binomial and approximate Poisson probabilities should be very similar.
