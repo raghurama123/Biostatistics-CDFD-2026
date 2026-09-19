@@ -412,6 +412,181 @@ This means that the **average number of heads over many repetitions of the 10-to
 
 This quantity will become particularly important when we connect the binomial distribution to the Poisson distribution.
 
+---
+
+## Central Limit Theorem
+
+A binomial random variable can be viewed as the sum of many independent Bernoulli trials.
+
+If
+
+$$
+X \sim \mathrm{Binomial}(n,p),
+$$
+
+then we can write
+
+$$
+X=X_1+X_2+\cdots+X_n,
+$$
+
+where each $X_i$ represents one trial:
+
+$$
+X_i=
+\begin{cases}
+1, & \text{success},\\
+0, & \text{failure}.
+\end{cases}
+$$
+
+Each trial has mean
+
+$$
+E[X_i]=p
+$$
+
+and variance
+
+$$
+\mathrm{Var}(X_i)=p(1-p).
+$$
+
+Therefore, for the total number of successes,
+
+$$
+E[X]=np
+$$
+
+and
+
+$$
+\mathrm{Var}(X)=np(1-p).
+$$
+
+The standard deviation is therefore
+
+$$
+\sigma=\sqrt{np(1-p)}.
+$$
+
+The **Central Limit Theorem (CLT)** states that when a large number of independent random variables are added together, their sum tends to have an approximately normal distribution, under fairly general conditions.
+
+For the binomial distribution, this means that when $n$ is sufficiently large,
+
+$$
+X \sim \mathrm{Binomial}(n,p)
+$$
+
+can be approximated by
+
+$$
+X \approx N\left(np,\;np(1-p)\right).
+$$
+
+Here, the normal distribution has
+
+$$
+\mu=np
+$$
+
+and
+
+$$
+\sigma=\sqrt{np(1-p)}.
+$$
+
+Thus, as the number of trials becomes large, the shape of the binomial distribution becomes increasingly similar to the familiar bell-shaped normal distribution.
+
+For example, consider 100 tosses of a fair coin:
+
+$$
+X \sim \mathrm{Binomial}(100,0.5).
+$$
+
+The mean is
+
+$$
+\mu=np=100\times0.5=50,
+$$
+
+and the standard deviation is
+
+$$
+\sigma=
+\sqrt{np(1-p)}=
+\sqrt{100\times0.5\times0.5}=
+5.
+$$
+
+Therefore,
+
+$$
+X \approx N(50,25),
+$$
+
+where $25$ is the variance, or equivalently,
+
+$$
+X \approx N(\mu=50,\sigma=5).
+$$
+
+A useful way to express the Central Limit Theorem is to standardize $X$:
+
+$$
+Z=
+\frac{X-np}{\sqrt{np(1-p)}}.
+$$
+
+For sufficiently large $n$,
+
+$$
+Z \approx N(0,1),
+$$
+
+the **standard normal distribution**.
+
+A commonly used rule of thumb for the normal approximation to the binomial distribution is that both
+
+$$
+np \geq 5
+$$
+
+and
+
+$$
+n(1-p)\geq 5.
+$$
+
+Using 10 instead of 5 gives a more conservative criterion.
+
+It is important to remember that the binomial random variable itself remains **discrete**. The Central Limit Theorem does not turn the binomial distribution into a continuous distribution. Instead, the normal distribution provides an increasingly good approximation to the binomial distribution as $n$ becomes large.
+
+This gives an important connection between discrete and continuous probability distributions:
+
+$$
+\boxed{
+\text{Bernoulli trials}
+\longrightarrow
+\text{Binomial distribution}
+\overset{n\text{ large}}{\longrightarrow}
+\text{Normal approximation}
+}
+$$
+
+When the normal distribution is used to calculate binomial probabilities, a **continuity correction** is often applied because the binomial distribution is discrete while the normal distribution is continuous. For example,
+
+$$
+P(X\leq 60)
+$$
+
+is approximated using
+
+$$
+P(Y\leq60.5),
+$$
+
+where $Y$ is the corresponding normal random variable.
 
 ---
 
