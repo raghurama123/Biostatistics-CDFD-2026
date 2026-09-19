@@ -1889,7 +1889,7 @@ We then ask whether the observed data would be unusual if this reference model w
 
 ---
 
-## What does the hypothesis test imagine?
+## How to interpret a hypothesis test? (The idea of repeated sampling). 
 
 We have observed only **one experiment**:
 
