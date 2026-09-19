@@ -1756,10 +1756,8 @@ $$
 nucleotides, the expected number of mutations would be
 
 $$
-np_0
-=
-10000\times5\times10^{-4}
-=
+np_0=
+10000\times5\times10^{-4} =
 5.
 $$
 
