@@ -410,64 +410,13 @@ $$
 
 This means that the **average number of heads over many repetitions of the 10-toss experiment** would approach 5. It does not mean that every set of 10 tosses will contain exactly 5 heads.
 
+This is an example of the **Law of Large Numbers**: as the experiment is repeated many times, the mean of the observed values of $X$ approaches the mean (expected value) of its probability distribution,
+
+$$
+E[X]=np.
+$$
+
 This quantity will become particularly important when we connect the binomial distribution to the Poisson distribution.
-
----
-
-## Expected number of successes
-
-For a binomial random variable,
-
-$$
-X\sim\mathrm{Binomial}(n,p),
-$$
-
-$X$ is the number of successes in $n$ independent trials, where each trial has probability $p$ of success.
-
-We can think of $X$ as the sum of the outcomes of the individual trials:
-
-$$
-X=X_1+X_2+\cdots+X_n,
-$$
-
-where each $X_i$ is 1 for a success and 0 for a failure.
-
-For one trial,
-
-$$
-E[X_i]=p.
-$$
-
-Therefore,
-
-$$
-E[X]=
-E[X_1]+E[X_2]+\cdots+E[X_n]=
-np.
-$$
-
-Thus, the expected number of successes is
-
-$$
-\boxed{E[X]=np}.
-$$
-
-For example, if a fair coin is tossed 10 times,
-
-$$
-X\sim\mathrm{Binomial}(10,0.5),
-$$
-
-so
-
-$$
-E[X]=10\times0.5=5.
-$$
-
-This does **not** mean that every set of 10 tosses will contain exactly 5 heads. It means that if the 10-toss experiment is repeated many times, the **average number of heads per experiment will approach 5**.
-
-This long-run interpretation of the expected value is related to the **Law of Large Numbers**.
-
 
 ---
 
