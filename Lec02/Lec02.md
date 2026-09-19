@@ -1237,6 +1237,42 @@ small number of mutations                    large number
    <----------------|---------------------------->
 ```
 
+A **right-tailed test** is also possible.
+
+For example, if we want to test whether the mutation probability is **larger** than the value specified by $H_0$, the hypotheses would be
+
+$$
+H_0:p=p_0
+$$
+
+and
+
+$$
+H_A:p>p_0.
+$$
+
+In this case, unusually **large numbers of mutations** provide evidence against $H_0$, so the rejection region lies in the right tail.
+
+```text
+small number of mutations                    large number
+                                                     |
+                                                     v
+
+    do-not-reject region          rejection region
+   ----------------------------|-------------------->
+```
+
+Thus:
+
+```text
+HA: p < p0    -> left-tailed test
+
+HA: p > p0    -> right-tailed test
+
+HA: p != p0   -> two-tailed test
+```
+
+
 ---
 
 ## Significance level
