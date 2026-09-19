@@ -103,6 +103,46 @@ $$
 1-p.
 $$
 
+### Connection to the Binomial distribution
+
+A **Bernoulli trial** describes a single trial.
+
+Let
+
+$$
+X_i =
+\begin{cases}
+1, & \text{if trial } i \text{ is a success},\\
+0, & \text{if trial } i \text{ is a failure}.
+\end{cases}
+$$
+
+Each $X_i$ is therefore a Bernoulli random variable.
+
+If the experiment is repeated independently $n$ times, with the same probability of success $p$, then the total number of successes is
+
+$$
+X = X_1 + X_2 + \cdots + X_n.
+$$
+
+This sum follows a binomial distribution:
+
+$$
+X \sim \mathrm{Binomial}(n,p).
+$$
+
+For example:
+
+```text
+one coin toss        -> Bernoulli trial
+
+3 coin tosses        -> X = X1 + X2 + X3
+                         = total number of heads
+                         -> Binomial distribution
+```
+
+So the binomial distribution can be thought of as **counting the number of successes in repeated Bernoulli trials**.
+
 ---
 
 ## Binomial experiment
@@ -326,13 +366,52 @@ $$
 X \sim \mathrm{Binomial}(n,p),
 $$
 
-the expected number of successes is
+the symbol
+
+$$
+\sim
+$$
+
+means **"is distributed as"** or **"follows the distribution"**.
+
+Thus,
+
+$$
+X \sim \mathrm{Binomial}(n,p)
+$$
+
+is read as:
+
+> **$X$ follows a binomial distribution with parameters $n$ and $p$.**
+
+Here,
+
+* $X$ is the random variable: the number of successes;
+* $n$ is the number of independent trials;
+* $p$ is the probability of success in each trial.
+
+The expected number of successes is
 
 $$
 E[X]=np.
 $$
 
+For example, if a fair coin is tossed 10 times,
+
+$$
+X \sim \mathrm{Binomial}(10,0.5),
+$$
+
+and
+
+$$
+E[X]=10\times0.5=5.
+$$
+
+This means that the **average number of heads over many repetitions of the 10-toss experiment** would approach 5. It does not mean that every set of 10 tosses will contain exactly 5 heads.
+
 This quantity will become particularly important when we connect the binomial distribution to the Poisson distribution.
+
 
 ---
 
