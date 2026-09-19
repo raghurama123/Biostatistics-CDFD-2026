@@ -1889,6 +1889,69 @@ We then ask whether the observed data would be unusual if this reference model w
 
 ---
 
+## What does the hypothesis test imagine?
+
+We have observed only **one experiment**:
+
+$$
+x_{\mathrm{obs}}=3
+$$
+
+mutations among
+
+$$
+n=10000
+$$
+
+nucleotides.
+
+The observed mutation proportion is therefore
+
+$$
+\hat p=\frac{3}{10000}.
+$$
+
+However, the hypothesis test asks us to imagine what would happen if the **same experiment were repeated many times** under the null hypothesis.
+
+If
+
+$$
+H_0:p=p_0,
+$$
+
+then in each repetition the number of observed mutations could be different because of random variation.
+
+For example, repeated experiments might produce counts such as
+
+```text
+4
+6
+3
+5
+2
+7
+5
+...
+```
+
+Under $H_0$, these possible counts follow
+
+$$
+X\sim\mathrm{Binomial}(n,p_0).
+$$
+
+Thus, although we have only one observed value,
+
+$$
+x_{\mathrm{obs}}=3,
+$$
+
+we judge whether it is unusual by comparing it with the **distribution of values that could occur in hypothetical repeated experiments under $H_0$**.
+
+This is the basic repeated-sampling idea behind the hypothesis test.
+
+---
+
 ## Step 2: Define the data
 
 ```r
