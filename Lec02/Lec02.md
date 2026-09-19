@@ -1908,8 +1908,7 @@ Since 3 is not in the rejection region, we do not reject $H_0$.
 The p-value approach gives the same conclusion:
 
 $$
-p\text{-value}
-=
+p\text{-value}=
 P(X\le3\mid H_0)
 \approx0.265
 >
@@ -2056,71 +2055,7 @@ qbinom(
 
 finds a mutation count associated with the lower 5% of the cumulative distribution.
 
----
 
-# Lecture Workflow
-
-The seven scripts develop one connected statistical argument:
-
-```text
-BinomialDistribution.R
-        |
-        |  Introduce discrete probabilities
-        |  using coin tosses
-        v
-PoissonDistribution.R
-        |
-        |  Show how the Poisson distribution
-        |  approximates the binomial distribution
-        |  for large n and small p
-        v
-HIVMutation.R
-        |
-        |  Apply both distributions to
-        |  rare mutations in a genome
-        v
-ConfidenceInterval_Binomial_2Tail.R
-        |
-        |  Introduce alpha and the
-        |  central 95% probability region
-        v
-ConfidenceInterval_Binomial_LeftTail.R
-        |
-        |  Move to a directional question
-        |  and construct a left-tail
-        |  rejection region
-        v
-HIVMutation_CDF.R
-        |
-        |  Introduce cumulative probability:
-        |  P(X <= x)
-        v
-HIVMutation_HypothesisTest.R
-        |
-        |  Interpret the cumulative probability
-        |  as a p-value and perform an
-        |  exact binomial hypothesis test
-        v
-Statistical inference
-```
-
-The central progression is therefore
-
-$$
-\boxed{
-\text{probability distribution}
-\rightarrow
-\text{cumulative probability}
-\rightarrow
-\text{significance level}
-\rightarrow
-\text{rejection region}
-\rightarrow
-\text{p-value}
-\rightarrow
-\text{hypothesis test}
-}
-$$
 
 This progression connects probability theory with the statistical methods used to draw conclusions from biological data.
 
