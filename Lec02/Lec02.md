@@ -1702,13 +1702,40 @@ File: [`HIVMutation_HypothesisTest.R`](HIVMutation_HypothesisTest.R)
 
 We can now combine the ideas from the previous sections into a formal hypothesis test.
 
-Suppose we want to determine whether the true HIV mutation probability (i.e. underlying mutation probability per nucleotide) is smaller than
+Suppose the mutation probability per nucleotide is denoted by
 
 $$
-5\times10^{-4}.
+p.
 $$
 
-We have observed 3 mutations among 10,000 nucleotides.
+This is the **underlying mutation probability** that we want to learn about from the data. Its value is generally unknown.
+
+We need a reference value against which to compare the data. We denote this value by
+
+$$
+p_0.
+$$
+
+The subscript $0$ indicates that this is the probability specified by the **null hypothesis**, $H_0$.
+
+In this example, we take
+
+$$
+p_0 = 5\times10^{-4}.
+$$
+
+The value $p_0$ is not calculated from the current observation. It is a **reference value specified before the hypothesis test**. Depending on the scientific problem, such a value may come from previous experiments, published evidence, an established model, or another scientifically meaningful baseline.
+
+Thus, in this example,
+
+```text
+p     = unknown underlying mutation probability
+
+p0    = reference mutation probability assumed under H0
+        = 5 x 10^-4
+```
+
+We have observed 3 mutations among 10,000 nucleotides and want to determine whether the data provide evidence that the underlying mutation probability $p$ is smaller than the reference value $p_0$.
 
 ---
 
@@ -1717,16 +1744,42 @@ We have observed 3 mutations among 10,000 nucleotides.
 The null hypothesis is
 
 $$
+H_0:p=p_0,
+$$
+
+where
+
+$$
+p_0=5\times10^{-4}.
+$$
+
+Therefore,
+
+$$
 H_0:p=5\times10^{-4}.
 $$
 
 The alternative hypothesis is
 
 $$
+H_A:p<p_0,
+$$
+
+or, equivalently,
+
+$$
 H_A:p<5\times10^{-4}.
 $$
 
-The null hypothesis specifies the probability distribution that will be used to judge whether the observation is unusual.
+The null hypothesis gives us a specific probability model to use as a reference.
+
+Under $H_0$,
+
+$$
+X\sim\mathrm{Binomial}(n,p_0).
+$$
+
+We then ask whether the observed data would be unusual if this reference model were correct.
 
 ---
 
@@ -1735,8 +1788,10 @@ The null hypothesis specifies the probability distribution that will be used to 
 ```r
 n <- 10000
 
+# Reference mutation probability specified by H0
 p0 <- 5e-4
 
+# Observed number of mutations
 x_obs <- 3
 ```
 
@@ -1745,10 +1800,44 @@ Here:
 ```text
 n       = total number of nucleotides
 
-p0      = mutation probability under H0
+p0      = reference mutation probability under H0
 
 x_obs   = observed number of mutations
 ```
+
+Notice that
+
+```text
+p0 = 5e-4
+```
+
+is part of the **null model**, whereas
+
+```text
+x_obs = 3
+```
+
+comes from the **observed data**.
+
+The observed mutation proportion is
+
+$$
+\hat p=\frac{x_{\mathrm{obs}}}{n}
+      =\frac{3}{10000}
+      =3\times10^{-4}.
+$$
+
+However, simply observing
+
+$$
+\hat p<p_0
+$$
+
+is not enough to conclude that $p<p_0$.
+
+Random variation can produce an observed proportion smaller than $p_0$ even when the null hypothesis is true.
+
+We therefore need to determine how unusual the observation is under $H_0$.
 
 ---
 
@@ -1768,6 +1857,24 @@ The relevant probability is therefore
 
 $$
 P(X\le3\mid H_0).
+$$
+
+Because $H_0$ specifies
+
+$$
+p=p_0,
+$$
+
+this means calculating the probability
+
+$$
+P(X\le3)
+$$
+
+for
+
+$$
+X\sim\mathrm{Binomial}(10000,5\times10^{-4}).
 $$
 
 ---
@@ -1795,7 +1902,7 @@ $$
 
 This means:
 
-> If the null hypothesis were true, the probability of observing 3 or fewer mutations is about 26.5%.
+> If the mutation probability were really $p_0=5\times10^{-4}$, the probability of observing 3 or fewer mutations in 10,000 nucleotides would be about 26.5%.
 
 The p-value is **not** the probability that the null hypothesis is true.
 
@@ -1832,6 +1939,7 @@ p\text{-value}\ge\alpha
 \quad\Rightarrow\quad
 \text{do not reject }H_0.
 $$
+
 
 ---
 
