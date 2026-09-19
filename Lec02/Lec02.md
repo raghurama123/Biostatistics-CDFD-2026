@@ -1702,7 +1702,7 @@ File: [`HIVMutation_HypothesisTest.R`](HIVMutation_HypothesisTest.R)
 
 We can now combine the ideas from the previous sections into a formal hypothesis test.
 
-Suppose we want to determine whether the true HIV mutation probability is smaller than
+Suppose we want to determine whether the true HIV mutation probability (i.e. underlying mutation probability per nucleotide) is smaller than
 
 $$
 5\times10^{-4}.
