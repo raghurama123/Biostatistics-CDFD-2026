@@ -414,218 +414,60 @@ This quantity will become particularly important when we connect the binomial di
 
 ---
 
-## Central Limit Theorem
+## Expected number of successes
 
-The **Central Limit Theorem (CLT)** is one of the most important results in statistics.
-
-Suppose we repeatedly take random samples of size $n$ from a population and calculate the mean of each sample.
-
-If $n$ is sufficiently large, the distribution of these **sample means** becomes approximately normal, even if the original population is not normally distributed.
-
-In other words,
+For a binomial random variable,
 
 $$
-\boxed{
-\text{sample means tend to follow a normal distribution for large } n
-}
+X\sim\mathrm{Binomial}(n,p),
 $$
 
-If the original population has mean
+$X$ is the number of successes in $n$ independent trials, where each trial has probability $p$ of success.
+
+We can think of $X$ as the sum of the outcomes of the individual trials:
 
 $$
-\mu
+X=X_1+X_2+\cdots+X_n,
 $$
 
-and standard deviation
+where each $X_i$ is 1 for a success and 0 for a failure.
+
+For one trial,
 
 $$
-\sigma,
-$$
-
-then the sample mean
-
-$$
-\bar X
-$$
-
-has approximately the distribution
-
-$$
-\bar X
-\approx
-N\left(
-\mu,
-\frac{\sigma^2}{n}
-\right).
+E[X_i]=p.
 $$
 
 Therefore,
 
 $$
-E[\bar X]=\mu
+E[X]=
+E[X_1]+E[X_2]+\cdots+E[X_n]=
+np.
 $$
 
-and the standard deviation of the sample mean is
+Thus, the expected number of successes is
 
 $$
-\sigma_{\bar X}
-=\frac{\sigma}{\sqrt{n}}.
+\boxed{E[X]=np}.
 $$
 
-This quantity is called the **standard error of the mean**.
-
-### Connection to the binomial distribution
-
-A binomial experiment consists of repeated trials in which each observation is either
+For example, if a fair coin is tossed 10 times,
 
 $$
-1=\text{success}
+X\sim\mathrm{Binomial}(10,0.5),
 $$
 
-or
+so
 
 $$
-0=\text{failure}.
+E[X]=10\times0.5=5.
 $$
 
-For a Bernoulli trial,
+This does **not** mean that every set of 10 tosses will contain exactly 5 heads. It means that if the 10-toss experiment is repeated many times, the **average number of heads per experiment will approach 5**.
 
-$$
-E[X_i]=p
-$$
+This long-run interpretation of the expected value is related to the **Law of Large Numbers**.
 
-and
-
-$$
-\mathrm{Var}(X_i)=p(1-p).
-$$
-
-If we perform $n$ trials, the sample mean is
-
-$$
-\bar X=
-\frac{X_1+X_2+\cdots+X_n}{n}.
-$$
-
-Since each observation is either 0 or 1, this sample mean is simply the **fraction of successful trials**.
-
-For example, if there are 60 heads in 100 coin tosses,
-
-$$
-\bar X=\frac{60}{100}=0.60.
-$$
-
-The Central Limit Theorem tells us that, for sufficiently large $n$,
-
-$$
-\bar X
-\approx
-N\left(
-p,
-\frac{p(1-p)}{n}
-\right).
-$$
-
-The total number of successes is
-
-$$
-X=n\bar X.
-$$
-
-Therefore, the binomial count itself is approximately normal:
-
-$$
-X
-\approx
-N\left(
-np,
-np(1-p)
-\right).
-$$
-
-Thus,
-
-$$
-\boxed{
-X\sim\mathrm{Binomial}(n,p)
-\quad\Longrightarrow\quad
-X\approx N\left(np,np(1-p)\right)
-}
-$$
-
-when $n$ is sufficiently large.
-
-For example, for 100 tosses of a fair coin,
-
-$$
-n=100,
-\qquad
-p=0.5.
-$$
-
-The expected number of heads is
-
-$$
-np=50,
-$$
-
-and the standard deviation is
-
-$$
-\sqrt{np(1-p)}=
-\sqrt{100\times0.5\times0.5}=
-5.
-$$
-
-Therefore,
-
-$$
-X\approx N(50,25),
-$$
-
-or equivalently, the number of heads is approximately normally distributed with
-
-$$
-\mu=50
-$$
-
-and
-
-$$
-\sigma=5.
-$$
-
-A commonly used rule of thumb for the normal approximation to the binomial distribution is
-
-$$
-np\geq5
-$$
-
-and
-
-$$
-n(1-p)\geq5.
-$$
-
-The important idea is therefore:
-
-$$
-\boxed{
-\text{large samples}
-\longrightarrow
-\text{sample means are approximately normal}
-}
-$$
-
-and, for Bernoulli trials,
-
-$$
-\boxed{
-\text{sample proportion}
-\longrightarrow
-\text{normal approximation to the binomial}
-}
-$$
 
 ---
 
