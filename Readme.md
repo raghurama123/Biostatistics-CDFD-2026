@@ -15,6 +15,7 @@ Biostatistics-CDFD-2026/
 │
 └── Lec01/
 |   ├── Lec01.md
+|   ├── Lec01.html
 |   ├── Rbasics.R
 |   ├── ...
 └── Lec02/
@@ -27,7 +28,7 @@ Additional lecture folders will be added as the course progresses.
 
 Lecture 01 introduces R:
 
-[**Lec01/Lec01.md**](https://github.com/raghurama123/Biostatistics-CDFD-2026/tree/main/Lec01/Lec01.md)
+[**Lec01/Lec01.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
 
 1. **R Basics** — basic syntax, variables, vectors, data frames, descriptive statistics, plots, statistical tests, correlation, and linear regression.
 2. **Reading data files** — reading CSV/TSV files, inspecting data, selecting rows and columns, modifying data, and saving results.
@@ -38,7 +39,7 @@ Lecture 01 introduces R:
 
 Lecture 02 introduces discrete probability distributions and hypothesis testing using biological examples:
 
-[**Lec02/Lec02.md**](https://github.com/raghurama123/Biostatistics-CDFD-2026/tree/main/Lec02/Lec02.md)
+[**Lec02/Lec02.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html)
 
 1. **Discrete random variables** — introduction to discrete data, probability distributions, and biological examples involving counts.
 2. **Binomial distribution** — modeling repeated independent trials with two possible outcomes, illustrated using coin tosses and implemented in R with `dbinom()` and `pbinom()`.
