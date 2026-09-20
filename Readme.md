@@ -32,7 +32,7 @@ Lecture 02 introduces discrete probability distributions and hypothesis testing 
 6. **Hypothesis testing** — introducing the null and alternative hypotheses, p-values, significance levels, rejection regions, and left-tailed tests using the HIV mutation example.
 7. **Confidence and significance levels** — connecting $\alpha=0.05$ with a corresponding 95% probability level and interpreting significance thresholds in discrete probability distributions.
 
-## Repository. 
+## Repository 
 
 The repository [https://github.com/raghurama123/Biostatistics-CDFD-2026](https://github.com/raghurama123/Biostatistics-CDFD-2026) contains R scripts, data, and notes.
 

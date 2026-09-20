@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Biostatistics-CDFD-2026</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Biostatistics-CDFD-2026</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#biostatistics-cdfd-2026"
+id="toc-biostatistics-cdfd-2026">Biostatistics-CDFD-2026</a>
+<ul>
+<li><a href="#lecture-notes" id="toc-lecture-notes">Lecture
+notes</a></li>
+<li><a href="#repository" id="toc-repository">Repository</a></li>
+<li><a href="#how-to-do-various-things-in-r-programming"
+id="toc-how-to-do-various-things-in-r-programming">How to do various
+things in R programming?</a></li>
+<li><a href="#general-reference" id="toc-general-reference">General
+reference</a></li>
+<li><a href="#contact" id="toc-contact">Contact</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="biostatistics-cdfd-2026">Biostatistics-CDFD-2026</h1>
+<p>A Biostatistics course offered to PhD students at <a
+href="https://www.cdfd.org.in/"><em>BRIC-Centre for DNA Fingerprinting
+and Diagnostics - CDFD</em></a> during August-December 2026.</p>
+<h2 id="lecture-notes">Lecture notes</h2>
+<p>Read the lecture notes here: <a
+href="https://raghurama123.github.io/Biostatistics-CDFD-2026/"><strong>https://raghurama123.github.io/Biostatistics-CDFD-2026/</strong></a></p>
+<p>Additional content will be added as the course progresses.</p>
+<h3 id="lecture-01">Lecture 01</h3>
+<p>Lecture 01 introduces R:</p>
+<p><a
+href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html"><strong>Lec01/Lec01.html</strong></a></p>
+<ol type="1">
+<li><strong>R Basics</strong> — basic syntax, variables, vectors, data
+frames, descriptive statistics, plots, statistical tests, correlation,
+and linear regression.</li>
+<li><strong>Reading data files</strong> — reading CSV/TSV files,
+inspecting data, selecting rows and columns, modifying data, and saving
+results.</li>
+<li><strong>ggplot2</strong> — introduction to plotting with
+<code>ggplot2</code>, including scatter plots and fitted regression
+lines.</li>
+<li><strong>Bioconductor</strong> — a first example using
+<code>Biostrings</code> to work with DNA sequences.</li>
+</ol>
+<h3 id="lecture-02">Lecture 02</h3>
+<p>Lecture 02 introduces discrete probability distributions and
+hypothesis testing using biological examples:</p>
+<p><a
+href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html"><strong>Lec02/Lec02.html</strong></a></p>
+<ol type="1">
+<li><strong>Discrete random variables</strong> — introduction to
+discrete data, probability distributions, and biological examples
+involving counts.</li>
+<li><strong>Binomial distribution</strong> — modeling repeated
+independent trials with two possible outcomes, illustrated using coin
+tosses and implemented in R with <code>dbinom()</code> and
+<code>pbinom()</code>.</li>
+<li><strong>Poisson distribution</strong> — modeling counts of rare
+events and understanding the Poisson approximation to the binomial
+distribution when
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+is large and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+is small.</li>
+<li><strong>HIV mutation example</strong> — modeling the number of
+mutations in an HIV genome using the binomial distribution and comparing
+it with the Poisson approximation.</li>
+<li><strong>Cumulative probability</strong> — calculating probabilities
+such as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>≤</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(X\leq x)</annotation></semantics></math>
+by summing individual probabilities and using cumulative distribution
+functions.</li>
+<li><strong>Hypothesis testing</strong> — introducing the null and
+alternative hypotheses, p-values, significance levels, rejection
+regions, and left-tailed tests using the HIV mutation example.</li>
+<li><strong>Confidence and significance levels</strong> — connecting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha=0.05</annotation></semantics></math>
+with a corresponding 95% probability level and interpreting significance
+thresholds in discrete probability distributions.</li>
+</ol>
+<h2 id="repository">Repository</h2>
+<p>The repository <a
+href="https://github.com/raghurama123/Biostatistics-CDFD-2026">https://github.com/raghurama123/Biostatistics-CDFD-2026</a>
+contains R scripts, data, and notes.</p>
+<p>The repository is organized lecture-wise. Each lecture folder
+contains the corresponding R scripts, data files, and lecture notes.</p>
+<pre class="text"><code>Biostatistics-CDFD-2026/
+│
+├── README.md
+│
+└── Lec01/
+|   ├── Lec01.md
+|   ├── Lec01.html
+|   ├── Rbasics.R
+|   ├── ...
+└── Lec02/
+|   ├── ...</code></pre>
+<h2 id="how-to-do-various-things-in-r-programming">How to do various
+things in R programming?</h2>
+<p>The <a href="HowToR/"><code>HowToR</code></a> folder contains short
+manuals and examples explaining how to perform various tasks in
+<strong>R</strong>.</p>
+<h2 id="general-reference">General reference</h2>
+<p>The main general reference for the course is the online book:</p>
+<p><strong>Modern Statistics for Modern Biology</strong> Susan Holmes
+and Wolfgang Huber <a
+href="https://www.huber.embl.de/msmb/">https://www.huber.embl.de/msmb/</a></p>
+<p>The book provides a modern introduction to statistical thinking and
+data analysis for biological applications, with extensive use of R.</p>
+<h2 id="contact">Contact</h2>
+<p>Raghunathan Ramakrishnan Tata Institute of Fundamental Research
+Hyderabad, India ramakrishnan@tifr.res.in</p>
+</body>
+</html>
