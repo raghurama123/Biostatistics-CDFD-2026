@@ -1,3 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lec01</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#lecture-01-introduction-to-r-for-biostatistics"
+id="toc-lecture-01-introduction-to-r-for-biostatistics">Lecture 01 —
+Introduction to R for Biostatistics</a>
+<ul>
+<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
+objectives</a></li>
+</ul></li>
+<li><a href="#r-basics" id="toc-r-basics">1. R Basics</a>
+<ul>
+<li><a href="#running-commands-in-rstudio"
+id="toc-running-commands-in-rstudio">Running commands in
+RStudio</a></li>
+<li><a href="#main-topics-in-rbasics.r"
+id="toc-main-topics-in-rbasics.r">Main topics in
+<code>Rbasics.R</code></a>
+<ul>
+<li><a href="#basic-mathematics" id="toc-basic-mathematics">Basic
+mathematics</a></li>
+<li><a href="#variables" id="toc-variables">Variables</a></li>
+<li><a href="#vectors" id="toc-vectors">Vectors</a></li>
+<li><a href="#descriptive-statistics"
+id="toc-descriptive-statistics">Descriptive statistics</a></li>
+<li><a href="#selecting-elements" id="toc-selecting-elements">Selecting
+elements</a></li>
+<li><a href="#data-frames" id="toc-data-frames">Data frames</a></li>
+</ul></li>
+<li><a href="#basic-visualization" id="toc-basic-visualization">Basic
+visualization</a>
+<ul>
+<li><a href="#scatter-plot" id="toc-scatter-plot">Scatter plot</a></li>
+<li><a href="#histogram" id="toc-histogram">Histogram</a></li>
+<li><a href="#boxplot" id="toc-boxplot">Boxplot</a></li>
+</ul></li>
+<li><a href="#introductory-statistical-methods"
+id="toc-introductory-statistical-methods">Introductory statistical
+methods</a>
+<ul>
+<li><a href="#independent-two-sample-t-test"
+id="toc-independent-two-sample-t-test">Independent two-sample
+t-test</a></li>
+<li><a href="#paired-t-test" id="toc-paired-t-test">Paired
+t-test</a></li>
+<li><a href="#correlation" id="toc-correlation">Correlation</a></li>
+<li><a href="#linear-regression" id="toc-linear-regression">Linear
+regression</a></li>
+</ul></li>
+<li><a href="#random-numbers-and-missing-values"
+id="toc-random-numbers-and-missing-values">Random numbers and missing
+values</a></li>
+</ul></li>
+<li><a href="#reading-and-writing-data"
+id="toc-reading-and-writing-data">2. Reading and Writing Data</a>
+<ul>
+<li><a href="#working-directory" id="toc-working-directory">Working
+directory</a></li>
+<li><a href="#examining-imported-data"
+id="toc-examining-imported-data">Examining imported data</a></li>
+<li><a href="#selecting-data" id="toc-selecting-data">Selecting
+data</a></li>
+<li><a href="#creating-a-new-variable"
+id="toc-creating-a-new-variable">Creating a new variable</a></li>
+<li><a href="#sorting-data" id="toc-sorting-data">Sorting data</a></li>
+<li><a href="#missing-values" id="toc-missing-values">Missing
+values</a></li>
+<li><a href="#modifying-data" id="toc-modifying-data">Modifying
+data</a></li>
+<li><a href="#writing-a-csv-file" id="toc-writing-a-csv-file">Writing a
+CSV file</a></li>
+<li><a href="#other-file-formats" id="toc-other-file-formats">Other file
+formats</a>
+<ul>
+<li><a href="#tab-separated-files"
+id="toc-tab-separated-files">Tab-separated files</a></li>
+<li><a href="#rds" id="toc-rds">RDS</a></li>
+<li><a href="#rdata" id="toc-rdata">RData</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#plotting-with-ggplot2" id="toc-plotting-with-ggplot2">3.
+Plotting with <code>ggplot2</code></a>
+<ul>
+<li><a href="#installing-and-loading-ggplot2"
+id="toc-installing-and-loading-ggplot2">Installing and loading
+<code>ggplot2</code></a></li>
+<li><a href="#example-dataset" id="toc-example-dataset">Example
+dataset</a></li>
+<li><a href="#base-r-version" id="toc-base-r-version">Base R
+version</a></li>
+<li><a href="#the-same-plot-with-ggplot2"
+id="toc-the-same-plot-with-ggplot2">The same plot with
+<code>ggplot2</code></a></li>
+<li><a href="#adding-a-fitted-line" id="toc-adding-a-fitted-line">Adding
+a fitted line</a></li>
+<li><a href="#common-themes" id="toc-common-themes">Common
+themes</a></li>
+</ul></li>
+<li><a href="#monte-carlo-simulation" id="toc-monte-carlo-simulation">4.
+Monte Carlo Simulation</a>
+<ul>
+<li><a href="#geometrical-idea" id="toc-geometrical-idea">Geometrical
+idea</a></li>
+<li><a href="#reproducible-random-numbers"
+id="toc-reproducible-random-numbers">Reproducible random
+numbers</a></li>
+<li><a href="#generating-random-points"
+id="toc-generating-random-points">Generating random points</a></li>
+<li><a href="#testing-whether-points-are-inside-the-circle"
+id="toc-testing-whether-points-are-inside-the-circle">Testing whether
+points are inside the circle</a></li>
+<li><a href="#estimating-pi" id="toc-estimating-pi">Estimating
+pi</a></li>
+<li><a href="#complete-numerical-calculation"
+id="toc-complete-numerical-calculation">Complete numerical
+calculation</a></li>
+<li><a href="#visualizing-the-simulation"
+id="toc-visualizing-the-simulation">Visualizing the simulation</a></li>
+<li><a href="#drawing-the-quarter-circle"
+id="toc-drawing-the-quarter-circle">Drawing the quarter-circle</a></li>
+<li><a href="#final-estimate-from-the-plotted-sample"
+id="toc-final-estimate-from-the-plotted-sample">Final estimate from the
+plotted sample</a></li>
+<li><a href="#effect-of-sample-size"
+id="toc-effect-of-sample-size">Effect of sample size</a></li>
+</ul></li>
+<li><a href="#introduction-to-bioconductor"
+id="toc-introduction-to-bioconductor">5. Introduction to
+Bioconductor</a>
+<ul>
+<li><a href="#installing-bioconductor-packages"
+id="toc-installing-bioconductor-packages">Installing Bioconductor
+packages</a></li>
+<li><a href="#creating-a-dna-sequence"
+id="toc-creating-a-dna-sequence">Creating a DNA sequence</a></li>
+<li><a href="#sequence-length" id="toc-sequence-length">Sequence
+length</a></li>
+<li><a href="#nucleotide-composition"
+id="toc-nucleotide-composition">Nucleotide composition</a></li>
+<li><a href="#gc-content" id="toc-gc-content">GC content</a></li>
+<li><a href="#reverse-complement" id="toc-reverse-complement">Reverse
+complement</a></li>
+<li><a href="#translation" id="toc-translation">Translation</a></li>
+</ul></li>
+</ul>
+</nav>
 <h1 id="lecture-01-introduction-to-r-for-biostatistics">Lecture 01 —
 Introduction to R for Biostatistics</h1>
 <p>This lecture introduces the basic R workflow used in the course:
@@ -26,7 +271,7 @@ Bioconductor</a></p>
 <li>modify and save data;</li>
 <li>create plots using <code>ggplot2</code>;</li>
 <li>use random numbers in a simple Monte Carlo simulation;</li>
-<li>estimate <span class="math inline"><em>π</em></span> using random
+<li>estimate <span class="math inline">\(\pi\)</span> using random
 sampling and visualize the simulation;</li>
 <li>install and load an R package;</li>
 <li>understand the role of Bioconductor in biological data
@@ -414,30 +659,35 @@ They are widely used in statistics, physics, biology, finance, and many
 other fields when an exact calculation is difficult or when we want to
 study the behavior of a random process.</p>
 <p>In this introductory example, random points are used to estimate the
-value of <span class="math inline"><em>π</em></span>.</p>
+value of <span class="math inline">\(\pi\)</span>.</p>
 <hr />
 <h2 id="geometrical-idea">Geometrical idea</h2>
 <p>Consider a square covering the region</p>
-<p><span
-class="math display">0 ≤ <em>x</em> ≤ 1,   0 ≤ <em>y</em> ≤ 1.</span></p>
+<p><span class="math display">\[
+0 \le x \le 1,
+\qquad
+0 \le y \le 1.
+\]</span></p>
 <p>Inside this square is a quarter-circle of radius 1.</p>
-<p>A point <span class="math inline">(<em>x</em>, <em>y</em>)</span>
-lies inside the quarter-circle when</p>
-<p><span
-class="math display"><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> ≤ 1.</span></p>
+<p>A point <span class="math inline">\((x,y)\)</span> lies inside the
+quarter-circle when</p>
+<p><span class="math display">\[
+x^2 + y^2 \le 1.
+\]</span></p>
 <p>The area of the square is</p>
-<p><span
-class="math display"><em>A</em><sub>square</sub> = 1,</span></p>
+<p><span class="math display">\[
+A_{\mathrm{square}} = 1,
+\]</span></p>
 <p>while the area of the quarter-circle is</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 A_{\mathrm{quarter\ circle}}
 =
 \frac{\pi r^2}{4}
 =
 \frac{\pi}{4}.
-$$</span></p>
+\]</span></p>
 <p>Therefore,</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \frac{
 A_{\mathrm{quarter\ circle}}
 }{
@@ -445,13 +695,13 @@ A_{\mathrm{square}}
 }
 =
 \frac{\pi}{4}.
-$$</span></p>
+\]</span></p>
 <p>If points are generated uniformly inside the square, the fraction
 that fall inside the quarter-circle should approach <span
-class="math inline"><em>π</em>/4</span> as the number of points becomes
+class="math inline">\(\pi/4\)</span> as the number of points becomes
 large.</p>
 <p>Thus,</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \pi
 \approx
 4 \times
@@ -460,7 +710,7 @@ large.</p>
 }{
 \text{total number of points}
 }.
-$$</span></p>
+\]</span></p>
 <hr />
 <h2 id="reproducible-random-numbers">Reproducible random numbers</h2>
 <p>The script begins with</p>
@@ -476,8 +726,8 @@ analysis</strong>.</p>
 <h2 id="generating-random-points">Generating random points</h2>
 <p>Choose the number of simulated points:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100000</span></span></code></pre></div>
-<p>Generate random <span class="math inline"><em>x</em></span> and <span
-class="math inline"><em>y</em></span> coordinates between 0 and 1:</p>
+<p>Generate random <span class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span> coordinates between 0 and 1:</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
 <span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
 <p>The function</p>
@@ -509,9 +759,9 @@ FALSE -&gt; 0</code></pre>
 <p>For example,</p>
 <div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>fraction_inside <span class="ot">&lt;-</span> <span class="fu">mean</span>(inside)</span></code></pre></div>
 <p>estimates</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \frac{\pi}{4}.
-$$</span></p>
+\]</span></p>
 <hr />
 <h2 id="estimating-pi">Estimating pi</h2>
 <p>The estimate is therefore</p>
@@ -521,9 +771,9 @@ $$</span></p>
 <span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
 <p>With a sufficiently large value of <code>N</code>, the Monte Carlo
 estimate should be close to the true value of <span
-class="math inline"><em>π</em></span>.</p>
+class="math inline">\(\pi\)</span>.</p>
 <p>The result will not usually be exactly equal to <span
-class="math inline"><em>π</em></span> because the estimate is based on a
+class="math inline">\(\pi\)</span> because the estimate is based on a
 finite random sample.</p>
 <hr />
 <h2 id="complete-numerical-calculation">Complete numerical
@@ -574,8 +824,8 @@ calculation</h2>
 <li><code>pch = 16</code> — draws each point as a filled circle;</li>
 <li><code>cex = 0.5</code> — reduces the point size;</li>
 <li><code>asp = 1</code> — forces equal scaling of the <span
-class="math inline"><em>x</em></span> and <span
-class="math inline"><em>y</em></span> axes.</li>
+class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span> axes.</li>
 </ul>
 <p>The argument</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>asp <span class="ot">=</span> <span class="dv">1</span></span></code></pre></div>
@@ -585,12 +835,13 @@ screen.</p>
 <hr />
 <h2 id="drawing-the-quarter-circle">Drawing the quarter-circle</h2>
 <p>The upper boundary of the quarter-circle follows from</p>
-<p><span
-class="math display"><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> = 1.</span></p>
-<p>Solving for <span class="math inline"><em>y</em></span> gives</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
+x^2 + y^2 = 1.
+\]</span></p>
+<p>Solving for <span class="math inline">\(y\)</span> gives</p>
+<p><span class="math display">\[
 y = \sqrt{1-x^2}.
-$$</span></p>
+\]</span></p>
 <p>It can be added to the existing plot using</p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(</span>
 <span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">2</span>),</span>
@@ -602,7 +853,7 @@ $$</span></p>
 <p>Here:</p>
 <ul>
 <li><code>from = 0</code> and <code>to = 1</code> specify the range of
-<span class="math inline"><em>x</em></span>;</li>
+<span class="math inline">\(x\)</span>;</li>
 <li><code>add = TRUE</code> means <strong>draw the curve on the existing
 plot</strong> rather than opening a new plot;</li>
 <li><code>lwd = 2</code> increases the line width.</li>
@@ -614,7 +865,7 @@ plotted sample</h2>
 <div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="fu">mean</span>(inside)</span></code></pre></div>
 <p>Since this visualization uses only 5000 points rather than 100000,
 its estimate may differ slightly more from the exact value of <span
-class="math inline"><em>π</em></span>.</p>
+class="math inline">\(\pi\)</span>.</p>
 <hr />
 <h2 id="effect-of-sample-size">Effect of sample size</h2>
 <p>An important idea in Monte Carlo simulation is that estimates usually
@@ -625,7 +876,7 @@ become more stable as the number of random samples increases.</p>
 <span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100000</span></span></code></pre></div>
 <p>and compare the corresponding estimates of <span
-class="math inline"><em>π</em></span>.</p>
+class="math inline">\(\pi\)</span>.</p>
 <p>The exact sequence of estimates will depend on the random sample, but
 larger values of <code>N</code> generally give estimates closer to the
 true value.</p>
@@ -688,11 +939,11 @@ object rather than as ordinary text.</p>
 <span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>gc_percent</span></code></pre></div>
 <p>The GC percentage is</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \mathrm{GC\%} =
 \frac{G + C}{A + T + G + C}
 \times 100
-$$</span></p>
+\]</span></p>
 <hr />
 <h2 id="reverse-complement">Reverse complement</h2>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reverseComplement</span>(dna)</span></code></pre></div>
@@ -707,3 +958,5 @@ strand written in the standard <code>5' -&gt; 3'</code> direction.</p>
 <p>This provides a simple example of how specialized R packages can
 represent and manipulate biological data directly.</p>
 <hr />
+</body>
+</html>

@@ -1,3 +1,292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lec02</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a
+href="#lecture-02-discrete-probability-distributions-and-hypothesis-testing"
+id="toc-lecture-02-discrete-probability-distributions-and-hypothesis-testing">Lecture
+02 — Discrete Probability Distributions and Hypothesis Testing</a>
+<ul>
+<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
+objectives</a></li>
+</ul></li>
+<li><a href="#binomial-distribution" id="toc-binomial-distribution">1.
+Binomial Distribution</a>
+<ul>
+<li><a href="#bernoulli-trials" id="toc-bernoulli-trials">Bernoulli
+trials</a>
+<ul>
+<li><a href="#connection-to-the-binomial-distribution"
+id="toc-connection-to-the-binomial-distribution">Connection to the
+Binomial distribution</a></li>
+</ul></li>
+<li><a href="#binomial-experiment" id="toc-binomial-experiment">Binomial
+experiment</a></li>
+<li><a href="#example-three-tosses-of-a-fair-coin"
+id="toc-example-three-tosses-of-a-fair-coin">Example: three tosses of a
+fair coin</a></li>
+<li><a href="#probability-of-exactly-three-heads"
+id="toc-probability-of-exactly-three-heads">Probability of exactly three
+heads</a></li>
+<li><a href="#complete-binomial-distribution"
+id="toc-complete-binomial-distribution">Complete binomial
+distribution</a></li>
+<li><a href="#plotting-a-discrete-probability-distribution"
+id="toc-plotting-a-discrete-probability-distribution">Plotting a
+discrete probability distribution</a></li>
+<li><a href="#expected-number-of-successes"
+id="toc-expected-number-of-successes">Expected number of
+successes</a></li>
+</ul></li>
+<li><a href="#poisson-distribution" id="toc-poisson-distribution">2.
+Poisson Distribution</a>
+<ul>
+<li><a href="#poisson-parameter" id="toc-poisson-parameter">Poisson
+parameter</a></li>
+<li><a href="#connection-between-binomial-and-poisson-distributions"
+id="toc-connection-between-binomial-and-poisson-distributions">Connection
+between binomial and Poisson distributions</a></li>
+<li><a href="#comparing-one-probability"
+id="toc-comparing-one-probability">Comparing one probability</a></li>
+<li><a href="#comparing-complete-distributions"
+id="toc-comparing-complete-distributions">Comparing complete
+distributions</a></li>
+<li><a href="#what-happens-as-n-increases"
+id="toc-what-happens-as-n-increases">What happens as <span
+class="math inline">\(n\)</span> increases?</a></li>
+</ul></li>
+<li><a href="#hiv-mutation-example" id="toc-hiv-mutation-example">3. HIV
+Mutation Example</a>
+<ul>
+<li><a href="#defining-the-model" id="toc-defining-the-model">Defining
+the model</a></li>
+<li><a href="#expected-number-of-mutations"
+id="toc-expected-number-of-mutations">Expected number of
+mutations</a></li>
+<li><a href="#probability-of-exactly-three-mutations"
+id="toc-probability-of-exactly-three-mutations">Probability of exactly
+three mutations</a></li>
+<li><a href="#poisson-approximation"
+id="toc-poisson-approximation">Poisson approximation</a></li>
+<li><a href="#comparing-the-complete-distributions"
+id="toc-comparing-the-complete-distributions">Comparing the complete
+distributions</a></li>
+<li><a href="#why-use-the-exact-binomial-distribution"
+id="toc-why-use-the-exact-binomial-distribution">Why use the exact
+binomial distribution?</a></li>
+</ul></li>
+<li><a href="#central-95-region-for-a-binomial-distribution"
+id="toc-central-95-region-for-a-binomial-distribution">4. Central 95%
+Region for a Binomial Distribution</a>
+<ul>
+<li><a href="#significance-level"
+id="toc-significance-level">Significance level</a></li>
+<li><a href="#binomial-distribution-under-the-model"
+id="toc-binomial-distribution-under-the-model">Binomial distribution
+under the model</a></li>
+<li><a href="#finding-the-central-region"
+id="toc-finding-the-central-region">Finding the central region</a></li>
+<li><a href="#visualizing-the-central-and-tail-regions"
+id="toc-visualizing-the-central-and-tail-regions">Visualizing the
+central and tail regions</a></li>
+<li><a href="#connection-with-hypothesis-testing"
+id="toc-connection-with-hypothesis-testing">Connection with hypothesis
+testing</a></li>
+<li><a href="#a-note-about-discreteness"
+id="toc-a-note-about-discreteness">A note about discreteness</a></li>
+</ul></li>
+<li><a href="#left-tailed-binomial-test"
+id="toc-left-tailed-binomial-test">5. Left-Tailed Binomial Test</a>
+<ul>
+<li><a href="#why-is-it-left-tailed" id="toc-why-is-it-left-tailed">Why
+is it left-tailed?</a></li>
+<li><a href="#significance-level-1"
+id="toc-significance-level-1">Significance level</a></li>
+<li><a href="#finding-a-critical-value"
+id="toc-finding-a-critical-value">Finding a critical value</a></li>
+<li><a href="#coloring-the-rejection-region"
+id="toc-coloring-the-rejection-region">Coloring the rejection
+region</a></li>
+<li><a href="#interpretation"
+id="toc-interpretation">Interpretation</a></li>
+</ul></li>
+<li><a href="#cumulative-distribution-function"
+id="toc-cumulative-distribution-function">6. Cumulative Distribution
+Function</a>
+<ul>
+<li><a href="#the-hiv-example" id="toc-the-hiv-example">The HIV
+example</a></li>
+<li><a href="#probability-distribution-under-h_0"
+id="toc-probability-distribution-under-h_0">Probability distribution
+under <span class="math inline">\(H_0\)</span></a></li>
+<li><a href="#highlighting-the-observed-lower-tail"
+id="toc-highlighting-the-observed-lower-tail">Highlighting the observed
+lower tail</a></li>
+<li><a href="#calculating-the-cumulative-probability-manually"
+id="toc-calculating-the-cumulative-probability-manually">Calculating the
+cumulative probability manually</a></li>
+<li><a href="#using-pbinom" id="toc-using-pbinom">Using
+<code>pbinom()</code></a></li>
+<li><a href="#probability-mass-and-cumulative-probability"
+id="toc-probability-mass-and-cumulative-probability">Probability mass
+and cumulative probability</a></li>
+<li><a href="#cumulative-distribution-function-1"
+id="toc-cumulative-distribution-function-1">Cumulative distribution
+function</a></li>
+</ul></li>
+<li><a href="#hypothesis-test-for-the-hiv-mutation-rate"
+id="toc-hypothesis-test-for-the-hiv-mutation-rate">7. Hypothesis Test
+for the HIV Mutation Rate</a>
+<ul>
+<li><a href="#why-is-a-hypothesis-test-necessary"
+id="toc-why-is-a-hypothesis-test-necessary">Why is a hypothesis test
+necessary?</a></li>
+<li><a href="#step-1-state-the-hypotheses"
+id="toc-step-1-state-the-hypotheses">Step 1: State the
+hypotheses</a></li>
+<li><a href="#the-repeated-sampling-idea"
+id="toc-the-repeated-sampling-idea">The repeated-sampling idea</a></li>
+<li><a href="#step-2-define-the-data-and-significance-level"
+id="toc-step-2-define-the-data-and-significance-level">Step 2: Define
+the data and significance level</a></li>
+<li><a href="#step-3-decide-which-tail-is-relevant"
+id="toc-step-3-decide-which-tail-is-relevant">Step 3: Decide which tail
+is relevant</a></li>
+<li><a href="#step-4-perform-the-exact-binomial-test"
+id="toc-step-4-perform-the-exact-binomial-test">Step 4: Perform the
+exact binomial test</a>
+<ul>
+<li><a href="#a-note-about-the-wording-in-the-r-output"
+id="toc-a-note-about-the-wording-in-the-r-output">A note about the
+wording in the R output</a></li>
+</ul></li>
+<li><a href="#what-is-binom.test-comparing"
+id="toc-what-is-binom.test-comparing">What is <code>binom.test()</code>
+comparing?</a></li>
+<li><a href="#step-5-extract-the-p-value"
+id="toc-step-5-extract-the-p-value">Step 5: Extract the p-value</a></li>
+<li><a href="#step-6-compare-the-p-value-with-alpha"
+id="toc-step-6-compare-the-p-value-with-alpha">Step 6: Compare the
+p-value with <span class="math inline">\(\alpha\)</span></a></li>
+<li><a href="#step-7-make-the-statistical-decision"
+id="toc-step-7-make-the-statistical-decision">Step 7: Make the
+statistical decision</a></li>
+<li><a href="#interpretation-1"
+id="toc-interpretation-1">Interpretation</a></li>
+<li><a href="#forms-of-the-alternative-hypothesis"
+id="toc-forms-of-the-alternative-hypothesis">Forms of the alternative
+hypothesis</a></li>
+<li><a
+href="#rejection-region-and-p-value-are-two-views-of-the-same-test"
+id="toc-rejection-region-and-p-value-are-two-views-of-the-same-test">Rejection
+region and p-value are two views of the same test</a></li>
+</ul></li>
+<li><a href="#important-statistical-language"
+id="toc-important-statistical-language">Important Statistical
+Language</a></li>
+<li><a href="#r-probability-functions-introduced-in-this-lecture"
+id="toc-r-probability-functions-introduced-in-this-lecture">R
+Probability Functions Introduced in This Lecture</a></li>
+</ul>
+</nav>
 <h1
 id="lecture-02-discrete-probability-distributions-and-hypothesis-testing">Lecture
 02 — Discrete Probability Distributions and Hypothesis Testing</h1>
@@ -35,27 +324,26 @@ Test for the HIV Mutation Rate</a></p>
 distribution;</li>
 <li>calculate binomial probabilities using <code>dbinom()</code>;</li>
 <li>understand the meaning of the parameters <span
-class="math inline"><em>n</em></span> and <span
-class="math inline"><em>p</em></span>;</li>
+class="math inline">\(n\)</span> and <span
+class="math inline">\(p\)</span>;</li>
 <li>understand when a Poisson distribution can approximate a binomial
 distribution;</li>
 <li>calculate Poisson probabilities using <code>dpois()</code>;</li>
-<li>understand the parameter <span class="math inline"><em>λ</em></span>
-of a Poisson distribution;</li>
+<li>understand the parameter <span
+class="math inline">\(\lambda\)</span> of a Poisson distribution;</li>
 <li>calculate cumulative probabilities using <code>pbinom()</code>;</li>
 <li>obtain quantiles and critical values using
 <code>qbinom()</code>;</li>
 <li>understand the meaning of a significance level <span
-class="math inline"><em>α</em></span>;</li>
+class="math inline">\(\alpha\)</span>;</li>
 <li>distinguish between one-tailed and two-tailed tests;</li>
 <li>identify a rejection region;</li>
 <li>formulate null and alternative hypotheses;</li>
 <li>calculate and interpret a p-value;</li>
 <li>perform an exact binomial test using <code>binom.test()</code>;</li>
 <li>distinguish between <strong>rejecting <span
-class="math inline"><em>H</em><sub>0</sub></span></strong> and
-<strong>not rejecting <span
-class="math inline"><em>H</em><sub>0</sub></span></strong>.</li>
+class="math inline">\(H_0\)</span></strong> and <strong>not rejecting
+<span class="math inline">\(H_0\)</span></strong>.</li>
 </ul>
 <hr />
 <h1 id="binomial-distribution">1. Binomial Distribution</h1>
@@ -71,7 +359,9 @@ href="BinomialDistribution.R"><code>BinomialDistribution.R</code></a></p>
 </ul>
 <p>Such quantities are <strong>discrete variables</strong> because they
 take countable values such as</p>
-<p><span class="math display">0, 1, 2, 3, …</span></p>
+<p><span class="math display">\[
+0,1,2,3,\ldots
+\]</span></p>
 <p>rather than any possible value on a continuous scale.</p>
 <p>The <strong>binomial distribution</strong> is one of the simplest
 probability distributions for count data.</p>
@@ -87,31 +377,37 @@ infected    / not infected
 positive    / negative</code></pre>
 <p>One such experiment is called a <strong>Bernoulli trial</strong>.</p>
 <p>If the probability of success is</p>
-<p><span class="math display"><em>p</em>,</span></p>
+<p><span class="math display">\[
+p,
+\]</span></p>
 <p>then the probability of failure is</p>
-<p><span class="math display">1 − <em>p</em>.</span></p>
+<p><span class="math display">\[
+1-p.
+\]</span></p>
 <h3 id="connection-to-the-binomial-distribution">Connection to the
 Binomial distribution</h3>
 <p>A <strong>Bernoulli trial</strong> describes a single trial.</p>
 <p>Let</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 X_i =
 \begin{cases}
 1, &amp; \text{if trial } i \text{ is a success},\\
 0, &amp; \text{if trial } i \text{ is a failure}.
 \end{cases}
-$$</span></p>
-<p>Each <span class="math inline"><em>X</em><sub><em>i</em></sub></span>
-is therefore a Bernoulli random variable.</p>
+\]</span></p>
+<p>Each <span class="math inline">\(X_i\)</span> is therefore a
+Bernoulli random variable.</p>
 <p>If the experiment is repeated independently <span
-class="math inline"><em>n</em></span> times, with the same probability
-of success <span class="math inline"><em>p</em></span>, then the total
-number of successes is</p>
-<p><span
-class="math display"><em>X</em> = <em>X</em><sub>1</sub> + <em>X</em><sub>2</sub> + ⋯ + <em>X</em><sub><em>n</em></sub>.</span></p>
+class="math inline">\(n\)</span> times, with the same probability of
+success <span class="math inline">\(p\)</span>, then the total number of
+successes is</p>
+<p><span class="math display">\[
+X = X_1 + X_2 + \cdots + X_n.
+\]</span></p>
 <p>This sum follows a binomial distribution:</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em>).</span></p>
+<p><span class="math display">\[
+X \sim \mathrm{Binomial}(n,p).
+\]</span></p>
 <p>For example:</p>
 <pre class="text"><code>one coin toss        -&gt; Bernoulli trial
 
@@ -125,33 +421,33 @@ the number of successes in repeated Bernoulli trials</strong>.</p>
 <p>A binomial distribution applies when:</p>
 <ol type="1">
 <li>there is a fixed number of trials, <span
-class="math inline"><em>n</em></span>;</li>
+class="math inline">\(n\)</span>;</li>
 <li>each trial has two possible outcomes;</li>
-<li>the probability of success, <span
-class="math inline"><em>p</em></span>, is the same for every trial;</li>
+<li>the probability of success, <span class="math inline">\(p\)</span>,
+is the same for every trial;</li>
 <li>the trials are independent.</li>
 </ol>
-<p>If <span class="math inline"><em>X</em></span> is the number of
-successes in <span class="math inline"><em>n</em></span> trials,
-then</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em>).</span></p>
+<p>If <span class="math inline">\(X\)</span> is the number of successes
+in <span class="math inline">\(n\)</span> trials, then</p>
+<p><span class="math display">\[
+X \sim \mathrm{Binomial}(n,p).
+\]</span></p>
 <p>The probability of obtaining exactly <span
-class="math inline"><em>x</em></span> successes is</p>
-<p><span class="math display">$$
+class="math inline">\(x\)</span> successes is</p>
+<p><span class="math display">\[
 P(X=x)=
 {n \choose x}
 p^x
 (1-p)^{n-x}.
-$$</span></p>
+\]</span></p>
 <p>The quantity</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 {n \choose x}
 =\frac{n!}{x!(n-x)!}
-$$</span></p>
+\]</span></p>
 <p>counts the number of different ways in which <span
-class="math inline"><em>x</em></span> successes can occur among <span
-class="math inline"><em>n</em></span> trials.</p>
+class="math inline">\(x\)</span> successes can occur among <span
+class="math inline">\(n\)</span> trials.</p>
 <hr />
 <h2 id="example-three-tosses-of-a-fair-coin">Example: three tosses of a
 fair coin</h2>
@@ -161,9 +457,13 @@ fair coin</h2>
 <p>and the probability of a head on each toss is</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">0.5</span></span></code></pre></div>
 <p>Let</p>
-<p><span class="math display"><em>X</em> = number of heads.</span></p>
+<p><span class="math display">\[
+X = \text{number of heads}.
+\]</span></p>
 <p>The possible values are</p>
-<p><span class="math display"><em>X</em> = 0, 1, 2, 3.</span></p>
+<p><span class="math display">\[
+X=0,1,2,3.
+\]</span></p>
 <hr />
 <h2 id="probability-of-exactly-three-heads">Probability of exactly three
 heads</h2>
@@ -181,16 +481,18 @@ prob    probability of success in each trial</code></pre>
 <p>Thus,</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">prob =</span> <span class="fl">0.5</span>)</span></code></pre></div>
 <p>calculates</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 3).</span></p>
+<p><span class="math display">\[
+P(X=3).
+\]</span></p>
 <p>For three fair coin tosses,</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 P(X=3)=
 {3 \choose 3}
 (0.5)^3
 (0.5)^0=
 \frac{1}{8}=
 0.125.
-$$</span></p>
+\]</span></p>
 <hr />
 <h2 id="complete-binomial-distribution">Complete binomial
 distribution</h2>
@@ -206,8 +508,12 @@ possible probabilities at once.</p>
 <p>Because <code>x</code> is a vector,</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span></span></code></pre></div>
 <p>R calculates</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> = 0),  <em>P</em>(<em>X</em> = 1),  <em>P</em>(<em>X</em> = 2),  <em>P</em>(<em>X</em> = 3).</span></p>
+<p><span class="math display">\[
+P(X=0),\quad
+P(X=1),\quad
+P(X=2),\quad
+P(X=3).
+\]</span></p>
 <p>The results can be placed in a data frame:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Heads =</span> x,</span>
@@ -243,8 +549,9 @@ class="math display"><em>P</em>(<em>X</em> = 0),  <em>P</em>(<em>X</em>�
 </tbody>
 </table>
 <p>Notice that</p>
-<p><span
-class="math display">∑<sub><em>x</em></sub><em>P</em>(<em>X</em> = <em>x</em>) = 1.</span></p>
+<p><span class="math display">\[
+\sum_x P(X=x)=1.
+\]</span></p>
 <p>The probabilities of all possible outcomes of a probability
 distribution must add to 1.</p>
 <hr />
@@ -281,48 +588,56 @@ probability.</p>
 <hr />
 <h2 id="expected-number-of-successes">Expected number of successes</h2>
 <p>For a binomial random variable,</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em>),</span></p>
+<p><span class="math display">\[
+X \sim \mathrm{Binomial}(n,p),
+\]</span></p>
 <p>the symbol</p>
-<p><span class="math display">∼</span></p>
+<p><span class="math display">\[
+\sim
+\]</span></p>
 <p>means <strong>“is distributed as”</strong> or <strong>“follows the
 distribution”</strong>.</p>
 <p>Thus,</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em>)</span></p>
+<p><span class="math display">\[
+X \sim \mathrm{Binomial}(n,p)
+\]</span></p>
 <p>is read as:</p>
 <blockquote>
-<p><strong><span class="math inline"><em>X</em></span> follows a
-binomial distribution with parameters <span
-class="math inline"><em>n</em></span> and <span
-class="math inline"><em>p</em></span>.</strong></p>
+<p><strong><span class="math inline">\(X\)</span> follows a binomial
+distribution with parameters <span class="math inline">\(n\)</span> and
+<span class="math inline">\(p\)</span>.</strong></p>
 </blockquote>
 <p>Here,</p>
 <ul>
-<li><span class="math inline"><em>X</em></span> is the random variable:
-the number of successes;</li>
-<li><span class="math inline"><em>n</em></span> is the number of
-independent trials;</li>
-<li><span class="math inline"><em>p</em></span> is the probability of
-success in each trial.</li>
+<li><span class="math inline">\(X\)</span> is the random variable: the
+number of successes;</li>
+<li><span class="math inline">\(n\)</span> is the number of independent
+trials;</li>
+<li><span class="math inline">\(p\)</span> is the probability of success
+in each trial.</li>
 </ul>
 <p>The expected number of successes is</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>n</em><em>p</em>.</span></p>
+<p><span class="math display">\[
+E[X]=np.
+\]</span></p>
 <p>For example, if a fair coin is tossed 10 times,</p>
-<p><span class="math display"><em>X</em> ∼ Binomial(10, 0.5),</span></p>
+<p><span class="math display">\[
+X \sim \mathrm{Binomial}(10,0.5),
+\]</span></p>
 <p>and</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = 10 × 0.5 = 5.</span></p>
+<p><span class="math display">\[
+E[X]=10\times0.5=5.
+\]</span></p>
 <p>This means that the <strong>average number of heads over many
 repetitions of the 10-toss experiment</strong> would approach 5. It does
 not mean that every set of 10 tosses will contain exactly 5 heads.</p>
 <p>This is an example of the <strong>Law of Large Numbers</strong>: as
 the experiment is repeated many times, the mean of the observed values
-of <span class="math inline"><em>X</em></span> approaches the mean
-(expected value) of its probability distribution,</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>n</em><em>p</em>.</span></p>
+of <span class="math inline">\(X\)</span> approaches the mean (expected
+value) of its probability distribution,</p>
+<p><span class="math display">\[
+E[X]=np.
+\]</span></p>
 <p>This quantity will become particularly important when we connect the
 binomial distribution to the Poisson distribution.</p>
 <hr />
@@ -351,30 +666,39 @@ fixed interval of:</p>
 <hr />
 <h2 id="poisson-parameter">Poisson parameter</h2>
 <p>The Poisson distribution has one parameter,</p>
-<p><span class="math display"><em>λ</em>,</span></p>
+<p><span class="math display">\[
+\lambda,
+\]</span></p>
 <p>which represents the expected number of events.</p>
 <p>If</p>
-<p><span
-class="math display"><em>X</em> ∼ Poisson(<em>λ</em>),</span></p>
+<p><span class="math display">\[
+X\sim\mathrm{Poisson}(\lambda),
+\]</span></p>
 <p>then</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 P(X=x)=
 \frac{e^{-\lambda}\lambda^x}{x!}.
-$$</span></p>
+\]</span></p>
 <p>The mean of the Poisson distribution is</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>λ</em>.</span></p>
+<p><span class="math display">\[
+E[X]=\lambda.
+\]</span></p>
 <hr />
 <h2
 id="connection-between-binomial-and-poisson-distributions">Connection
 between binomial and Poisson distributions</h2>
 <p>A Poisson distribution can approximate a binomial distribution
 when:</p>
-<p><span class="math display"><em>n</em> is large,</span></p>
-<p><span class="math display"><em>p</em> is small,</span></p>
+<p><span class="math display">\[
+n \text{ is large},
+\]</span></p>
+<p><span class="math display">\[
+p \text{ is small},
+\]</span></p>
 <p>and</p>
-<p><span
-class="math display"><em>n</em><em>p</em> = <em>λ</em></span></p>
+<p><span class="math display">\[
+np=\lambda
+\]</span></p>
 <p>remains approximately constant.</p>
 <p>This is particularly useful for <strong>rare events</strong>.</p>
 <p>For example, we can choose</p>
@@ -386,8 +710,9 @@ class="math display"><em>n</em><em>p</em> = <em>λ</em></span></p>
 <p>or</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span></code></pre></div>
 <p>To keep</p>
-<p><span
-class="math display"><em>n</em><em>p</em> = <em>λ</em>,</span></p>
+<p><span class="math display">\[
+np=\lambda,
+\]</span></p>
 <p>we choose</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> lambda <span class="sc">/</span> n</span></code></pre></div>
 <p>Thus:</p>
@@ -397,12 +722,16 @@ n = 100      p = 0.02
 
 n = 1000     p = 0.002</code></pre>
 <p>In each case,</p>
-<p><span class="math display"><em>n</em><em>p</em> = 2.</span></p>
-<p>As <span class="math inline"><em>n</em></span> becomes larger and
-<span class="math inline"><em>p</em></span> becomes smaller, the
-binomial distribution becomes increasingly similar to a Poisson
-distribution with</p>
-<p><span class="math display"><em>λ</em> = 2.</span></p>
+<p><span class="math display">\[
+np=2.
+\]</span></p>
+<p>As <span class="math inline">\(n\)</span> becomes larger and <span
+class="math inline">\(p\)</span> becomes smaller, the binomial
+distribution becomes increasingly similar to a Poisson distribution
+with</p>
+<p><span class="math display">\[
+\lambda=2.
+\]</span></p>
 <hr />
 <h2 id="comparing-one-probability">Comparing one probability</h2>
 <p>The exact binomial probability of one success is</p>
@@ -471,7 +800,7 @@ distributions</h2>
 <span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <hr />
 <h2 id="what-happens-as-n-increases">What happens as <span
-class="math inline"><em>n</em></span> increases?</h2>
+class="math inline">\(n\)</span> increases?</h2>
 <p>Try the calculation with</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div>
 <p>then</p>
@@ -482,11 +811,19 @@ class="math inline"><em>n</em></span> increases?</h2>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> lambda <span class="sc">/</span> n</span></code></pre></div>
 <p>The two distributions become progressively more similar.</p>
 <p>This illustrates the limiting relationship</p>
-<p><span
-class="math display">Binomial(<em>n</em>, <em>p</em>) → Poisson(<em>λ</em>)</span></p>
+<p><span class="math display">\[
+\mathrm{Binomial}(n,p)
+\longrightarrow
+\mathrm{Poisson}(\lambda)
+\]</span></p>
 <p>when</p>
-<p><span
-class="math display"><em>n</em> → ∞,   <em>p</em> → 0,   <em>n</em><em>p</em> = <em>λ</em>.</span></p>
+<p><span class="math display">\[
+n\rightarrow\infty,
+\qquad
+p\rightarrow 0,
+\qquad
+np=\lambda.
+\]</span></p>
 <p>This relationship is particularly useful in biology because many
 biological events are individually rare but occur across a large number
 of opportunities.</p>
@@ -496,11 +833,15 @@ of opportunities.</p>
 <p>We now apply the binomial and Poisson distributions to a biological
 example.</p>
 <p>Suppose the HIV genome contains approximately</p>
-<p><span class="math display">10 000</span></p>
+<p><span class="math display">\[
+10\,000
+\]</span></p>
 <p>nucleotides.</p>
 <p>Assume that during one replication cycle each nucleotide
 independently has probability</p>
-<p><span class="math display">5 × 10<sup>−4</sup></span></p>
+<p><span class="math display">\[
+5\times10^{-4}
+\]</span></p>
 <p>of undergoing a mutation.</p>
 <p>We ask:</p>
 <blockquote>
@@ -513,16 +854,21 @@ independently has probability</p>
 <p>and the probability of mutation at each nucleotide is</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fl">5e-4</span></span></code></pre></div>
 <p>Thus,</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(10000, 0.0005).</span></p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(10000,0.0005).
+\]</span></p>
 <hr />
 <h2 id="expected-number-of-mutations">Expected number of mutations</h2>
 <p>For a binomial distribution,</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>n</em><em>p</em>.</span></p>
+<p><span class="math display">\[
+E[X]=np.
+\]</span></p>
 <p>Therefore,</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = 10000 × 0.0005 = 5.</span></p>
+<p><span class="math display">\[
+E[X]=
+10000\times0.0005=
+5.
+\]</span></p>
 <p>In R:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> n <span class="sc">*</span> p</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -548,18 +894,25 @@ three mutations</h2>
 <span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(binom_prob)</span></code></pre></div>
 <p>This calculates</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 3)</span></p>
+<p><span class="math display">\[
+P(X=3)
+\]</span></p>
 <p>using the binomial distribution.</p>
 <hr />
 <h2 id="poisson-approximation">Poisson approximation</h2>
 <p>Here,</p>
-<p><span class="math display"><em>n</em> = 10000</span></p>
+<p><span class="math display">\[
+n=10000
+\]</span></p>
 <p>is large and</p>
-<p><span class="math display"><em>p</em> = 0.0005</span></p>
+<p><span class="math display">\[
+p=0.0005
+\]</span></p>
 <p>is small.</p>
 <p>The expected number of mutations is</p>
-<p><span
-class="math display"><em>λ</em> = <em>n</em><em>p</em> = 5.</span></p>
+<p><span class="math display">\[
+\lambda=np=5.
+\]</span></p>
 <p>This is therefore a situation in which a Poisson approximation should
 work well.</p>
 <p>Calculate</p>
@@ -570,7 +923,9 @@ work well.</p>
 <span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(poisson_prob)</span></code></pre></div>
 <p>This gives the approximation</p>
-<p><span class="math display"><em>X</em> ≈ Poisson(5).</span></p>
+<p><span class="math display">\[
+X\approx\mathrm{Poisson}(5).
+\]</span></p>
 <p>The exact binomial and approximate Poisson probabilities should be
 very similar.</p>
 <hr />
@@ -614,9 +969,9 @@ distributions</h2>
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">1.2</span>,</span>
 <span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="st">&quot;red&quot;</span></span>
 <span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>Because <span class="math inline"><em>n</em></span> is large and
-<span class="math inline"><em>p</em></span> is small, the red Poisson
-points lie very close to the exact binomial distribution.</p>
+<p>Because <span class="math inline">\(n\)</span> is large and <span
+class="math inline">\(p\)</span> is small, the red Poisson points lie
+very close to the exact binomial distribution.</p>
 <hr />
 <h2 id="why-use-the-exact-binomial-distribution">Why use the exact
 binomial distribution?</h2>
@@ -635,8 +990,9 @@ href="ConfidenceInterval_Binomial_2Tail.R"><code>ConfidenceInterval_Binomial_2Ta
 <p>We now connect probability distributions with <strong>statistical
 hypothesis testing</strong>.</p>
 <p>Suppose the mutation probability specified by a model is</p>
-<p><span
-class="math display"><em>p</em> = 5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+p=5\times10^{-4}.
+\]</span></p>
 <p>If that model is correct, some numbers of mutations will be common
 and others will be unusually small or unusually large.</p>
 <p>We can use the binomial distribution to identify these regions.</p>
@@ -645,9 +1001,13 @@ and others will be unusually small or unusually large.</p>
 <p>Choose a significance level</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
 <p>Thus,</p>
-<p><span class="math display"><em>α</em> = 0.05.</span></p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
 <p>The corresponding central probability is</p>
-<p><span class="math display">1 − <em>α</em> = 0.95.</span></p>
+<p><span class="math display">\[
+1-\alpha=0.95.
+\]</span></p>
 <p>In R:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>confidence_level <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> alpha</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -656,10 +1016,10 @@ and others will be unusually small or unusually large.</p>
 <pre class="text"><code>0.95</code></pre>
 <p>For a two-tailed procedure, the significance level is divided between
 the two tails:</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \frac{\alpha}{2}=
 0.025.
-$$</span></p>
+\]</span></p>
 <p>Conceptually:</p>
 <pre class="text"><code>left tail        central region        right tail
   2.5%               95%                  2.5%</code></pre>
@@ -741,14 +1101,16 @@ red     tail regions</code></pre>
 <h2 id="connection-with-hypothesis-testing">Connection with hypothesis
 testing</h2>
 <p>Suppose the null hypothesis specifies</p>
-<p><span
-class="math display"><em>H</em><sub>0</sub> : <em>p</em> = <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_0:p=p_0.
+\]</span></p>
 <p>If an observed result falls far into either tail of the distribution
-expected under <span class="math inline"><em>H</em><sub>0</sub></span>,
-it provides evidence against that null hypothesis.</p>
+expected under <span class="math inline">\(H_0\)</span>, it provides
+evidence against that null hypothesis.</p>
 <p>For a two-sided alternative,</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> ≠ <em>p</em><sub>0</sub>,</span></p>
+<p><span class="math display">\[
+H_A:p\ne p_0,
+\]</span></p>
 <p>both unusually small and unusually large mutation counts are
 relevant.</p>
 <p>Conceptually:</p>
@@ -761,7 +1123,9 @@ against H0             with H0           against H0</code></pre>
 <p>The binomial distribution is discrete.</p>
 <p>Therefore, we cannot always choose integer boundaries that place
 exactly</p>
-<p><span class="math display">2.5%</span></p>
+<p><span class="math display">\[
+2.5\%
+\]</span></p>
 <p>of the probability in each tail.</p>
 <p>The probability in the rejection region may therefore be slightly
 smaller than the nominal significance level.</p>
@@ -777,25 +1141,29 @@ href="ConfidenceInterval_Binomial_LeftTail.R"><code>ConfidenceInterval_Binomial_
 direction</strong>.</p>
 <p>Suppose we want to test whether the mutation probability is
 <strong>smaller</strong> than</p>
-<p><span class="math display">5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+5\times10^{-4}.
+\]</span></p>
 <p>For the exact binomial calculation, we use the null model</p>
-<p><span
-class="math display"><em>H</em><sub>0</sub> : <em>p</em> = <em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup>,</span></p>
+<p><span class="math display">\[
+H_0:p=p_0=5\times10^{-4},
+\]</span></p>
 <p>and the alternative hypothesis</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; 5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+H_A:p&lt;5\times10^{-4}.
+\]</span></p>
 <p>Because the alternative hypothesis contains</p>
-<p><span
-class="math display"><em>p</em> &lt; <em>p</em><sub>0</sub>,</span></p>
+<p><span class="math display">\[
+p&lt;p_0,
+\]</span></p>
 <p>this is a <strong>left-tailed test</strong>.</p>
 <hr />
 <h2 id="why-is-it-left-tailed">Why is it left-tailed?</h2>
 <p>If the true mutation probability is smaller than the value specified
-by <span class="math inline"><em>H</em><sub>0</sub></span>, we expect to
-observe unusually <strong>small numbers of mutations</strong>.</p>
-<p>Therefore, evidence against <span
-class="math inline"><em>H</em><sub>0</sub></span> occurs in the left
-tail of the distribution.</p>
+by <span class="math inline">\(H_0\)</span>, we expect to observe
+unusually <strong>small numbers of mutations</strong>.</p>
+<p>Therefore, evidence against <span class="math inline">\(H_0\)</span>
+occurs in the left tail of the distribution.</p>
 <pre class="text"><code>small number of mutations                    large number
           |
           v
@@ -805,17 +1173,17 @@ tail of the distribution.</p>
 <p>A <strong>right-tailed test</strong> is also possible.</p>
 <p>For example, if we want to test whether the mutation probability is
 <strong>larger</strong> than the value specified by <span
-class="math inline"><em>H</em><sub>0</sub></span>, the hypotheses would
-be</p>
-<p><span
-class="math display"><em>H</em><sub>0</sub> : <em>p</em> = <em>p</em><sub>0</sub></span></p>
+class="math inline">\(H_0\)</span>, the hypotheses would be</p>
+<p><span class="math display">\[
+H_0:p=p_0
+\]</span></p>
 <p>and</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &gt; <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_A:p&gt;p_0.
+\]</span></p>
 <p>In this case, unusually <strong>large numbers of mutations</strong>
-provide evidence against <span
-class="math inline"><em>H</em><sub>0</sub></span>, so the rejection
-region lies in the right tail.</p>
+provide evidence against <span class="math inline">\(H_0\)</span>, so
+the rejection region lies in the right tail.</p>
 <pre class="text"><code>small number of mutations                    large number
                                                      |
                                                      v
@@ -835,8 +1203,10 @@ HA: p != p0   -&gt; two-tailed test</code></pre>
 <p>For a left-tailed test, the complete significance level is placed in
 the left tail.</p>
 <p>Thus we want a critical value satisfying approximately</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ <em>x</em><sub>critical</sub> ∣ <em>H</em><sub>0</sub>) ≤ 0.05.</span></p>
+<p><span class="math display">\[
+P(X\le x_{\mathrm{critical}}\mid H_0)
+\le 0.05.
+\]</span></p>
 <hr />
 <h2 id="finding-a-critical-value">Finding a critical value</h2>
 <p>First calculate</p>
@@ -850,7 +1220,7 @@ cumulative probability <strong>reaches or exceeds</strong> the requested
 probability.</p>
 <p>Because the binomial distribution is discrete, that value can
 sometimes give a cumulative probability greater than <span
-class="math inline"><em>α</em></span>.</p>
+class="math inline">\(\alpha\)</span>.</p>
 <p>The script therefore checks it explicitly:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">pbinom</span>(q, <span class="at">size =</span> n, <span class="at">prob =</span> p0) <span class="sc">&lt;=</span> alpha) {</span>
 <span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -862,13 +1232,18 @@ class="math inline"><em>α</em></span>.</p>
 <span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>This ensures that</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ critical ∣ <em>H</em><sub>0</sub>) ≤ <em>α</em>.</span></p>
+<p><span class="math display">\[
+P(X\le \text{critical}\mid H_0)
+\le\alpha.
+\]</span></p>
 <p>For the HIV example, the rejection region becomes</p>
-<p><span class="math display"><em>X</em> ≤ 1.</span></p>
+<p><span class="math display">\[
+X\le1.
+\]</span></p>
 <p>The probability of this region is approximately</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ 1) ≈ 0.0404.</span></p>
+<p><span class="math display">\[
+P(X\le1)\approx0.0404.
+\]</span></p>
 <p>It is smaller than 0.05 because there is no integer mutation count
 that gives a tail probability exactly equal to 0.05.</p>
 <hr />
@@ -897,23 +1272,27 @@ skyblue    do-not-reject region</code></pre>
 <hr />
 <h2 id="interpretation">Interpretation</h2>
 <p>If the observed number of mutations falls in the red region,</p>
-<p><span class="math display"><em>X</em> ≤ 1,</span></p>
+<p><span class="math display">\[
+X\le1,
+\]</span></p>
 <p>we reject</p>
-<p><span class="math display"><em>H</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_0.
+\]</span></p>
 <p>The data then provide evidence that</p>
-<p><span
-class="math display"><em>p</em> &lt; <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+p&lt;p_0.
+\]</span></p>
 <p>If the observed number of mutations falls outside this rejection
 region, we <strong>do not reject</strong> <span
-class="math inline"><em>H</em><sub>0</sub></span>.</p>
+class="math inline">\(H_0\)</span>.</p>
 <p>This wording is important.</p>
 <pre class="text"><code>Do not reject H0</code></pre>
 <p>does <strong>not</strong> mean</p>
 <pre class="text"><code>H0 has been proven true.</code></pre>
 <p>It means only that the observed data do not provide sufficiently
-strong evidence against <span
-class="math inline"><em>H</em><sub>0</sub></span> at the chosen
-significance level.</p>
+strong evidence against <span class="math inline">\(H_0\)</span> at the
+chosen significance level.</p>
 <hr />
 <h1 id="cumulative-distribution-function">6. Cumulative Distribution
 Function</h1>
@@ -921,19 +1300,28 @@ Function</h1>
 href="HIVMutation_CDF.R"><code>HIVMutation_CDF.R</code></a></p>
 <p>So far we have often calculated probabilities for individual counts
 such as</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 3).</span></p>
+<p><span class="math display">\[
+P(X=3).
+\]</span></p>
 <p>Hypothesis testing often requires probabilities such as</p>
-<p><span class="math display"><em>P</em>(<em>X</em> ≤ 3).</span></p>
+<p><span class="math display">\[
+P(X\le3).
+\]</span></p>
 <p>This is a <strong>cumulative probability</strong>.</p>
 <hr />
 <h2 id="the-hiv-example">The HIV example</h2>
 <p>Under the null hypothesis,</p>
-<p><span
-class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup></span></p>
+<p><span class="math display">\[
+p_0=5\times10^{-4}
+\]</span></p>
 <p>and</p>
-<p><span class="math display"><em>n</em> = 10000.</span></p>
+<p><span class="math display">\[
+n=10000.
+\]</span></p>
 <p>Suppose we observe</p>
-<p><span class="math display"><em>x</em><sub>obs</sub> = 3</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=3
+\]</span></p>
 <p>mutations.</p>
 <p>In R:</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
@@ -941,7 +1329,7 @@ class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup></sp
 <span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="dv">3</span></span></code></pre></div>
 <hr />
 <h2 id="probability-distribution-under-h_0">Probability distribution
-under <span class="math inline"><em>H</em><sub>0</sub></span></h2>
+under <span class="math inline">\(H_0\)</span></h2>
 <p>Calculate probabilities for mutation counts from 0 to 15:</p>
 <div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span></span>
 <span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -958,7 +1346,9 @@ lower tail</h2>
 <p>For a left-tailed question, we are interested not only in exactly
 three mutations but also in outcomes even smaller than three.</p>
 <p>Thus the relevant outcomes are</p>
-<p><span class="math display">0, 1, 2, 3.</span></p>
+<p><span class="math display">\[
+0,1,2,3.
+\]</span></p>
 <p>They can be highlighted using</p>
 <div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>bar_col <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
 <span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a>  x <span class="sc">&lt;=</span> x_obs,</span>
@@ -993,19 +1383,37 @@ cumulative probability manually</h2>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pvals)</span></code></pre></div>
 <p>These are</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 0),</span></p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 1),</span></p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 2),</span></p>
+<p><span class="math display">\[
+P(X=0),
+\]</span></p>
+<p><span class="math display">\[
+P(X=1),
+\]</span></p>
+<p><span class="math display">\[
+P(X=2),
+\]</span></p>
 <p>and</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 3).</span></p>
+<p><span class="math display">\[
+P(X=3).
+\]</span></p>
 <p>Adding them gives</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ 3) = <em>P</em>(<em>X</em> = 0) + <em>P</em>(<em>X</em> = 1) + <em>P</em>(<em>X</em> = 2) + <em>P</em>(<em>X</em> = 3).</span></p>
+<p><span class="math display">\[
+P(X\le3)=
+P(X=0)
++
+P(X=1)
++
+P(X=2)
++
+P(X=3).
+\]</span></p>
 <p>In R:</p>
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(pvals)</span></code></pre></div>
 <p>For this example,</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ 3) ≈ 0.265.</span></p>
+<p><span class="math display">\[
+P(X\le3)
+\approx0.265.
+\]</span></p>
 <hr />
 <h2 id="using-pbinom">Using <code>pbinom()</code></h2>
 <p>Instead of calculating the individual probabilities and adding them,
@@ -1018,7 +1426,9 @@ R can calculate the cumulative probability directly:</p>
 <p>Thus</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> <span class="dv">10000</span>, <span class="at">prob =</span> <span class="fl">5e-4</span>)</span></code></pre></div>
 <p>calculates</p>
-<p><span class="math display"><em>P</em>(<em>X</em> ≤ 3).</span></p>
+<p><span class="math display">\[
+P(X\le3).
+\]</span></p>
 <hr />
 <h2 id="probability-mass-and-cumulative-probability">Probability mass
 and cumulative probability</h2>
@@ -1029,11 +1439,15 @@ pbinom()    cumulative probability up to that value</code></pre>
 <p>For example,</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> n, <span class="at">prob =</span> p0)</span></code></pre></div>
 <p>means</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 3),</span></p>
+<p><span class="math display">\[
+P(X=3),
+\]</span></p>
 <p>whereas</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(<span class="dv">3</span>, <span class="at">size =</span> n, <span class="at">prob =</span> p0)</span></code></pre></div>
 <p>means</p>
-<p><span class="math display"><em>P</em>(<em>X</em> ≤ 3).</span></p>
+<p><span class="math display">\[
+P(X\le3).
+\]</span></p>
 <p>Graphically:</p>
 <pre class="text"><code>dbinom(3)
 
@@ -1053,8 +1467,9 @@ pbinom()    cumulative probability up to that value</code></pre>
 function</h2>
 <p>The <strong>cumulative distribution function</strong>, or CDF, is
 defined as</p>
-<p><span
-class="math display"><em>F</em>(<em>x</em>) = <em>P</em>(<em>X</em> ≤ <em>x</em>).</span></p>
+<p><span class="math display">\[
+F(x)=P(X\le x).
+\]</span></p>
 <p>For the binomial distribution, <code>pbinom()</code> evaluates this
 function.</p>
 <p>This idea is central to hypothesis testing because a p-value often
@@ -1069,24 +1484,28 @@ title="HIVMutation_HypothesisTest.R"><code>HIVMutation_HypothesisTest.R</code></
 <p>We can now combine the ideas from the previous sections into a formal
 hypothesis test.</p>
 <p>Suppose the mutation probability per nucleotide is denoted by</p>
-<p><span class="math display"><em>p</em>.</span></p>
+<p><span class="math display">\[
+p.
+\]</span></p>
 <p>This is the <strong>underlying mutation probability</strong> that we
 want to learn about from the data. Its value is generally unknown.</p>
 <p>We need a reference value against which to compare the data. We
 denote this value by</p>
-<p><span class="math display"><em>p</em><sub>0</sub>.</span></p>
-<p>The subscript <span class="math inline">0</span> indicates that this
-is the probability specified by the <strong>null hypothesis</strong>,
-<span class="math inline"><em>H</em><sub>0</sub></span>.</p>
+<p><span class="math display">\[
+p_0.
+\]</span></p>
+<p>The subscript <span class="math inline">\(0\)</span> indicates that
+this is the probability specified by the <strong>null
+hypothesis</strong>, <span class="math inline">\(H_0\)</span>.</p>
 <p>In this example,</p>
-<p><span
-class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup>.</span></p>
-<p>The value <span class="math inline"><em>p</em><sub>0</sub></span> is
-not calculated from the current observation. It is a <strong>reference
-value specified before the hypothesis test</strong>. Depending on the
-scientific problem, it may come from previous experiments, published
-evidence, an established model, or another scientifically meaningful
-baseline.</p>
+<p><span class="math display">\[
+p_0 = 5\times10^{-4}.
+\]</span></p>
+<p>The value <span class="math inline">\(p_0\)</span> is not calculated
+from the current observation. It is a <strong>reference value specified
+before the hypothesis test</strong>. Depending on the scientific
+problem, it may come from previous experiments, published evidence, an
+established model, or another scientifically meaningful baseline.</p>
 <p>Thus,</p>
 <pre class="text"><code>p     = unknown underlying mutation probability
 
@@ -1097,33 +1516,45 @@ p0    = reference mutation probability specified by H0
 <h2 id="why-is-a-hypothesis-test-necessary">Why is a hypothesis test
 necessary?</h2>
 <p>If the mutation probability were</p>
-<p><span
-class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup>,</span></p>
+<p><span class="math display">\[
+p_0=5\times10^{-4},
+\]</span></p>
 <p>then for</p>
-<p><span class="math display"><em>n</em> = 10000</span></p>
+<p><span class="math display">\[
+n=10000
+\]</span></p>
 <p>nucleotides, the expected number of mutations would be</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>n</em><em>p</em><sub>0</sub> = 10000 × 5 × 10<sup>−4</sup> = 5.</span></p>
+<p><span class="math display">\[
+E[X]=np_0
+=10000\times5\times10^{-4}
+=5.
+\]</span></p>
 <p>But we observed</p>
-<p><span class="math display"><em>x</em><sub>obs</sub> = 3.</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=3.
+\]</span></p>
 <p>The observed mutation proportion is therefore</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \hat p=
 \frac{3}{10000}
 =3\times10^{-4},
-$$</span></p>
+\]</span></p>
 <p>which is smaller than</p>
-<p><span
-class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+p_0=5\times10^{-4}.
+\]</span></p>
 <p>However, neither</p>
-<p><span class="math display">3 &lt; 5</span></p>
+<p><span class="math display">\[
+3&lt;5
+\]</span></p>
 <p>nor</p>
-<p><span
-class="math display"><em>p̂</em> &lt; <em>p</em><sub>0</sub></span></p>
+<p><span class="math display">\[
+\hat p&lt;p_0
+\]</span></p>
 <p>is sufficient by itself to reject the null hypothesis.</p>
 <p>Even if the true mutation probability were exactly <span
-class="math inline"><em>p</em><sub>0</sub></span>, random variation
-would produce different mutation counts in repeated experiments.</p>
+class="math inline">\(p_0\)</span>, random variation would produce
+different mutation counts in repeated experiments.</p>
 <p>For example:</p>
 <pre class="text"><code>2 mutations
 3 mutations
@@ -1133,8 +1564,9 @@ would produce different mutation counts in repeated experiments.</p>
 7 mutations
 ...</code></pre>
 <p>The value</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>n</em><em>p</em><sub>0</sub> = 5</span></p>
+<p><span class="math display">\[
+E[X]=np_0=5
+\]</span></p>
 <p>is an <strong>expected value</strong>, not a value that must occur in
 every experiment.</p>
 <p>The relevant question is therefore not simply</p>
@@ -1144,54 +1576,64 @@ every experiment.</p>
 <p>Instead, we ask</p>
 <blockquote>
 <p><strong>If the mutation probability were really <span
-class="math inline"><em>p</em><sub>0</sub></span>, how likely would it
-be to observe 3 mutations or fewer?</strong></p>
+class="math inline">\(p_0\)</span>, how likely would it be to observe 3
+mutations or fewer?</strong></p>
 </blockquote>
 <p>This is the purpose of the hypothesis test.</p>
 <hr />
 <h2 id="step-1-state-the-hypotheses">Step 1: State the hypotheses</h2>
 <p>The null hypothesis is</p>
-<p><span
-class="math display"><em>H</em><sub>0</sub> : <em>p</em> = <em>p</em><sub>0</sub>,</span></p>
+<p><span class="math display">\[
+H_0:p=p_0,
+\]</span></p>
 <p>where</p>
-<p><span
-class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+p_0=5\times10^{-4}.
+\]</span></p>
 <p>Therefore,</p>
-<p><span
-class="math display"><em>H</em><sub>0</sub> : <em>p</em> = 5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+H_0:p=5\times10^{-4}.
+\]</span></p>
 <p>The alternative hypothesis is</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; <em>p</em><sub>0</sub>,</span></p>
+<p><span class="math display">\[
+H_A:p&lt;p_0,
+\]</span></p>
 <p>or equivalently,</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; 5 × 10<sup>−4</sup>.</span></p>
-<p>Under <span class="math inline"><em>H</em><sub>0</sub></span>,</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em><sub>0</sub>).</span></p>
+<p><span class="math display">\[
+H_A:p&lt;5\times10^{-4}.
+\]</span></p>
+<p>Under <span class="math inline">\(H_0\)</span>,</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p_0).
+\]</span></p>
 <p>The null hypothesis therefore specifies the probability distribution
 against which the observed mutation count is evaluated.</p>
 <hr />
 <h2 id="the-repeated-sampling-idea">The repeated-sampling idea</h2>
 <p>We have observed only one experiment:</p>
-<p><span class="math display"><em>x</em><sub>obs</sub> = 3</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=3
+\]</span></p>
 <p>mutations among</p>
-<p><span class="math display"><em>n</em> = 10000</span></p>
+<p><span class="math display">\[
+n=10000
+\]</span></p>
 <p>nucleotides.</p>
 <p>The hypothesis test asks us to imagine repeating the same experiment
-many times under <span
-class="math inline"><em>H</em><sub>0</sub></span>.</p>
+many times under <span class="math inline">\(H_0\)</span>.</p>
 <p>If</p>
-<p><span
-class="math display"><em>H</em><sub>0</sub> : <em>p</em> = <em>p</em><sub>0</sub>,</span></p>
+<p><span class="math display">\[
+H_0:p=p_0,
+\]</span></p>
 <p>then the mutation count would vary from experiment to experiment
 because of random variation, but those counts would follow</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em><sub>0</sub>).</span></p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p_0).
+\]</span></p>
 <p>Thus, we judge whether the observed value <span
-class="math inline"><em>x</em><sub>obs</sub> = 3</span> is unusual by
+class="math inline">\(x_{\mathrm{obs}}=3\)</span> is unusual by
 comparing it with the <strong>distribution of values that could occur
-under <span
-class="math inline"><em>H</em><sub>0</sub></span></strong>.</p>
+under <span class="math inline">\(H_0\)</span></strong>.</p>
 <hr />
 <h2 id="step-2-define-the-data-and-significance-level">Step 2: Define
 the data and significance level</h2>
@@ -1221,24 +1663,27 @@ model</strong>, whereas <code>x_obs</code> comes from the
 <h2 id="step-3-decide-which-tail-is-relevant">Step 3: Decide which tail
 is relevant</h2>
 <p>The alternative hypothesis is</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_A:p&lt;p_0.
+\]</span></p>
 <p>Therefore, unusually <strong>small</strong> mutation counts provide
 evidence in the direction of <span
-class="math inline"><em>H</em><sub><em>A</em></sub></span>.</p>
+class="math inline">\(H_A\)</span>.</p>
 <p>This is a <strong>left-tailed test</strong>.</p>
 <p>For the observed value <span
-class="math inline"><em>x</em><sub>obs</sub> = 3</span>, the relevant
-tail probability is</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ 3 ∣ <em>H</em><sub>0</sub>).</span></p>
-<p>Because <span class="math inline"><em>H</em><sub>0</sub></span>
-specifies</p>
-<p><span
-class="math display"><em>p</em> = <em>p</em><sub>0</sub>,</span></p>
+class="math inline">\(x_{\mathrm{obs}}=3\)</span>, the relevant tail
+probability is</p>
+<p><span class="math display">\[
+P(X\le3\mid H_0).
+\]</span></p>
+<p>Because <span class="math inline">\(H_0\)</span> specifies</p>
+<p><span class="math display">\[
+p=p_0,
+\]</span></p>
 <p>this probability is calculated using</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(10000, 5 × 10<sup>−4</sup>).</span></p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(10000,5\times10^{-4}).
+\]</span></p>
 <hr />
 <h2 id="step-4-perform-the-exact-binomial-test">Step 4: Perform the
 exact binomial test</h2>
@@ -1264,52 +1709,59 @@ alternative    form of the alternative hypothesis</code></pre>
 <p>Using</p>
 <div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;less&quot;</span></span></code></pre></div>
 <p>specifies</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_A:p&lt;p_0.
+\]</span></p>
 <h3 id="a-note-about-the-wording-in-the-r-output">A note about the
 wording in the R output</h3>
 <p>R may print</p>
 <pre class="text"><code>alternative hypothesis: true probability of success is less than 5e-04</code></pre>
 <p>Here, the word <strong>true</strong> refers to the <strong>true but
 unknown probability of success</strong>, <span
-class="math inline"><em>p</em></span>.</p>
+class="math inline">\(p\)</span>.</p>
 <p>It does <strong>not</strong> mean that the alternative hypothesis has
 been shown to be true.</p>
 <p>The line simply states the alternative hypothesis:</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; 5 × 10<sup>−4</sup>.</span></p>
+<p><span class="math display">\[
+H_A:p&lt;5\times10^{-4}.
+\]</span></p>
 <p>Whether the data provide sufficient evidence against <span
-class="math inline"><em>H</em><sub>0</sub></span> is decided from the
-p-value and the chosen significance level <span
-class="math inline"><em>α</em></span>.</p>
+class="math inline">\(H_0\)</span> is decided from the p-value and the
+chosen significance level <span
+class="math inline">\(\alpha\)</span>.</p>
 <hr />
 <h2 id="what-is-binom.test-comparing">What is <code>binom.test()</code>
 comparing?</h2>
 <p>It is useful to distinguish three different quantities:</p>
-<p><span
-class="math display"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup></span></p>
+<p><span class="math display">\[
+p_0=5\times10^{-4}
+\]</span></p>
 <p>is the mutation probability specified by the null hypothesis;</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \hat p=\frac{x_{\mathrm{obs}}}{n}
 =\frac{3}{10000}
 =3\times10^{-4}
-$$</span></p>
+\]</span></p>
 <p>is the mutation probability estimated from the observed sample;
 and</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ <em>x</em><sub>obs</sub> ∣ <em>H</em><sub>0</sub>)</span></p>
+<p><span class="math display">\[
+P(X\le x_{\mathrm{obs}}\mid H_0)
+\]</span></p>
 <p>is the left-tail probability used as the p-value.</p>
 <p><code>binom.test()</code> does <strong>not</strong> decide
 significance merely because</p>
-<p><span
-class="math display"><em>p̂</em> &lt; <em>p</em><sub>0</sub></span></p>
+<p><span class="math display">\[
+\hat p&lt;p_0
+\]</span></p>
 <p>or because</p>
-<p><span
-class="math display"><em>x</em><sub>obs</sub> &lt; <em>E</em>[<em>X</em>].</span></p>
-<p>Instead, <span class="math inline"><em>p</em><sub>0</sub></span>
-defines the complete null distribution</p>
-<p><span
-class="math display"><em>X</em> ∼ Binomial(<em>n</em>, <em>p</em><sub>0</sub>),</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}&lt;E[X].
+\]</span></p>
+<p>Instead, <span class="math inline">\(p_0\)</span> defines the
+complete null distribution</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p_0),
+\]</span></p>
 <p>and the observed count is used to determine the appropriate tail
 probability in that distribution.</p>
 <hr />
@@ -1320,16 +1772,21 @@ using</p>
 <span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div>
 <p>For this left-tailed test,</p>
-<p><span
-class="math display"><em>p</em>-value = <em>P</em>(<em>X</em> ≤ 3 ∣ <em>H</em><sub>0</sub>).</span></p>
+<p><span class="math display">\[
+p\text{-value}
+=
+P(X\le3\mid H_0).
+\]</span></p>
 <p>For these data,</p>
-<p><span class="math display"><em>p</em>-value ≈ 0.265.</span></p>
+<p><span class="math display">\[
+p\text{-value}\approx0.265.
+\]</span></p>
 <p>Thus:</p>
 <blockquote>
 <p>If the mutation probability were really <span
-class="math inline"><em>p</em><sub>0</sub> = 5 × 10<sup>−4</sup></span>,
-the probability of observing 3 or fewer mutations among 10,000
-nucleotides would be about 26.5%.</p>
+class="math inline">\(p_0=5\times10^{-4}\)</span>, the probability of
+observing 3 or fewer mutations among 10,000 nucleotides would be about
+26.5%.</p>
 </blockquote>
 <p>The same tail probability can be calculated directly using</p>
 <div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
@@ -1340,27 +1797,32 @@ nucleotides would be about 26.5%.</p>
 <p>so, for this one-sided test, <code>binom.test()</code> and
 <code>pbinom()</code> give the same p-value.</p>
 <p>The p-value is <strong>not</strong> the probability that <span
-class="math inline"><em>H</em><sub>0</sub></span> is true. It is
-calculated <strong>assuming that <span
-class="math inline"><em>H</em><sub>0</sub></span> is true</strong>.</p>
+class="math inline">\(H_0\)</span> is true. It is calculated
+<strong>assuming that <span class="math inline">\(H_0\)</span> is
+true</strong>.</p>
 <hr />
 <h2 id="step-6-compare-the-p-value-with-alpha">Step 6: Compare the
-p-value with <span class="math inline"><em>α</em></span></h2>
+p-value with <span class="math inline">\(\alpha\)</span></h2>
 <p>The statistical decision is made by comparing the p-value with the
 chosen significance level.</p>
 <div class="sourceCode" id="cb100"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="sc">&lt;</span> alpha</span></code></pre></div>
 <p>The decision rule is</p>
-<p><span
-class="math display"><em>p</em>-value &lt; <em>α</em>  ⇒  reject
-<em>H</em><sub>0</sub>,</span></p>
+<p><span class="math display">\[
+p\text{-value}&lt;\alpha
+\quad\Rightarrow\quad
+\text{reject }H_0,
+\]</span></p>
 <p>whereas</p>
-<p><span class="math display"><em>p</em>-value ≥ <em>α</em>  ⇒  do not
-reject <em>H</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+p\text{-value}\ge\alpha
+\quad\Rightarrow\quad
+\text{do not reject }H_0.
+\]</span></p>
 <p>An important point is that <code>binom.test()</code> itself reports
 the p-value but does <strong>not</strong> print the final decision. The
 decision depends on the value of <span
-class="math inline"><em>α</em></span> chosen for the analysis.</p>
+class="math inline">\(\alpha\)</span> chosen for the analysis.</p>
 <hr />
 <h2 id="step-7-make-the-statistical-decision">Step 7: Make the
 statistical decision</h2>
@@ -1371,31 +1833,38 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb1
 <span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Do not reject H0&quot;</span>)</span>
 <span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>For this example,</p>
-<p><span class="math display">0.265 &gt; 0.05.</span></p>
+<p><span class="math display">\[
+0.265&gt;0.05.
+\]</span></p>
 <p>Therefore,</p>
-<p><span class="math display">$$
+<p><span class="math display">\[
 \boxed{\text{Do not reject }H_0}
-$$</span></p>
+\]</span></p>
 <p>at the 5% significance level.</p>
 <hr />
 <h2 id="interpretation-1">Interpretation</h2>
 <p>The observed mutation count is</p>
-<p><span class="math display"><em>x</em><sub>obs</sub> = 3,</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=3,
+\]</span></p>
 <p>whereas the expected number under <span
-class="math inline"><em>H</em><sub>0</sub></span> is</p>
-<p><span
-class="math display"><em>E</em>[<em>X</em>] = <em>n</em><em>p</em><sub>0</sub> = 5.</span></p>
+class="math inline">\(H_0\)</span> is</p>
+<p><span class="math display">\[
+E[X]=np_0=5.
+\]</span></p>
 <p>Thus, 3 mutations is indeed <strong>below</strong> the expected value
 of 5.</p>
 <p>However,</p>
-<p><span
-class="math display"><em>P</em>(<em>X</em> ≤ 3 ∣ <em>H</em><sub>0</sub>) ≈ 0.265.</span></p>
+<p><span class="math display">\[
+P(X\le3\mid H_0)\approx0.265.
+\]</span></p>
 <p>A probability of about 26.5% is not particularly small.</p>
 <p>Therefore, observing 3 mutations is <strong>not sufficiently unusual
-under <span class="math inline"><em>H</em><sub>0</sub></span></strong>
-to provide evidence that the true mutation probability is smaller
-than</p>
-<p><span class="math display">5 × 10<sup>−4</sup>.</span></p>
+under <span class="math inline">\(H_0\)</span></strong> to provide
+evidence that the true mutation probability is smaller than</p>
+<p><span class="math display">\[
+5\times10^{-4}.
+\]</span></p>
 <p>This illustrates an important distinction:</p>
 <pre class="text"><code>observed value below the expected value
 
@@ -1410,19 +1879,22 @@ test.</p>
 <div class="sourceCode" id="cb103"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;less&quot;</span></span></code></pre></div>
 <p>corresponds to</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &lt; <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_A:p&lt;p_0.
+\]</span></p>
 <div class="sourceCode" id="cb104"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;greater&quot;</span></span></code></pre></div>
 <p>corresponds to</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> &gt; <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_A:p&gt;p_0.
+\]</span></p>
 <p>and</p>
 <div class="sourceCode" id="cb105"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;two.sided&quot;</span></span></code></pre></div>
 <p>corresponds to</p>
-<p><span
-class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> ≠ <em>p</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+H_A:p\ne p_0.
+\]</span></p>
 <p>The scientific question should determine the alternative hypothesis
 <strong>before</strong> examining the result.</p>
 <hr />
@@ -1430,19 +1902,32 @@ class="math display"><em>H</em><sub><em>A</em></sub> : <em>p</em> ≠ <e
 id="rejection-region-and-p-value-are-two-views-of-the-same-test">Rejection
 region and p-value are two views of the same test</h2>
 <p>Earlier we constructed a left-tailed rejection region for</p>
-<p><span class="math display"><em>α</em> = 0.05.</span></p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
 <p>For the HIV example, the rejection region was</p>
-<p><span class="math display"><em>X</em> ≤ 1.</span></p>
+<p><span class="math display">\[
+X\le1.
+\]</span></p>
 <p>Our observation was</p>
-<p><span class="math display"><em>X</em> = 3.</span></p>
+<p><span class="math display">\[
+X=3.
+\]</span></p>
 <p>Since 3 is not in the rejection region, we do not reject <span
-class="math inline"><em>H</em><sub>0</sub></span>.</p>
+class="math inline">\(H_0\)</span>.</p>
 <p>The p-value approach gives the same conclusion:</p>
-<p><span
-class="math display"><em>p</em>-value = <em>P</em>(<em>X</em> ≤ 3 ∣ <em>H</em><sub>0</sub>) ≈ 0.265 &gt; 0.05.</span></p>
+<p><span class="math display">\[
+p\text{-value}
+=
+P(X\le3\mid H_0)
+\approx0.265
+&gt;
+0.05.
+\]</span></p>
 <p>Therefore,</p>
-<p><span class="math display">do not reject
-<em>H</em><sub>0</sub>.</span></p>
+<p><span class="math display">\[
+\text{do not reject }H_0.
+\]</span></p>
 <p>Thus, the two approaches are equivalent ways of viewing the same
 statistical decision:</p>
 <pre class="text"><code>critical-value approach
@@ -1462,18 +1947,21 @@ Language</h1>
 <p>A hypothesis test does <strong>not</strong> normally prove that a
 hypothesis is true or false.</p>
 <p>If</p>
-<p><span
-class="math display"><em>p</em>-value &lt; <em>α</em>,</span></p>
+<p><span class="math display">\[
+p\text{-value}&lt;\alpha,
+\]</span></p>
 <p>we say</p>
 <pre class="text"><code>Reject H0</code></pre>
 <p>because the observation is sufficiently unusual under <span
-class="math inline"><em>H</em><sub>0</sub></span>.</p>
+class="math inline">\(H_0\)</span>.</p>
 <p>If</p>
-<p><span class="math display"><em>p</em>-value ≥ <em>α</em>,</span></p>
+<p><span class="math display">\[
+p\text{-value}\ge\alpha,
+\]</span></p>
 <p>we say</p>
 <pre class="text"><code>Do not reject H0</code></pre>
 <p>because the data do not provide sufficiently strong evidence against
-<span class="math inline"><em>H</em><sub>0</sub></span>.</p>
+<span class="math inline">\(H_0\)</span>.</p>
 <p>We should generally avoid saying</p>
 <pre class="text"><code>Accept H0</code></pre>
 <p>because failure to find evidence against a hypothesis is not the same
@@ -1504,7 +1992,9 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="#cb1
 <span id="cb113-4"><a href="#cb113-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">5e-4</span></span>
 <span id="cb113-5"><a href="#cb113-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>calculates</p>
-<p><span class="math display"><em>P</em>(<em>X</em> = 3),</span></p>
+<p><span class="math display">\[
+P(X=3),
+\]</span></p>
 <p>while</p>
 <div class="sourceCode" id="cb114"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
@@ -1513,7 +2003,9 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="#cb1
 <span id="cb114-4"><a href="#cb114-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">5e-4</span></span>
 <span id="cb114-5"><a href="#cb114-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>calculates</p>
-<p><span class="math display"><em>P</em>(<em>X</em> ≤ 3).</span></p>
+<p><span class="math display">\[
+P(X\le3).
+\]</span></p>
 <p>And</p>
 <div class="sourceCode" id="cb115"><pre
 class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qbinom</span>(</span>
@@ -1524,3 +2016,5 @@ class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="#cb1
 <p>finds a mutation count associated with the lower 5% of the cumulative
 distribution.</p>
 <hr />
+</body>
+</html>
