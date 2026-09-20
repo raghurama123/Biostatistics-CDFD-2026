@@ -62,7 +62,11 @@ The main general reference for the course is the online book:
 
 **Modern Statistics for Modern Biology**
 Susan Holmes and Wolfgang Huber
-
-https://www.huber.embl.de/msmb/
+[https://www.huber.embl.de/msmb/](https://www.huber.embl.de/msmb/)
 
 The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R.
+
+## Contact
+Raghunathan Ramakrishnan
+Tata Institute of Fundamental Research Hyderabad, India
+ramakrishnan@tifr.res.in
