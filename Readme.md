@@ -2,7 +2,7 @@
 
 A Biostatistics course offered to PhD students at [_BRIC-Centre for DNA Fingerprinting and Diagnostics - CDFD_](https://www.cdfd.org.in/) during August-December 2026. 
 
-Course materials, R scripts, examples, and notes for the **Biostatistics 2026** course.
+The repository [**https://github.com/raghurama123/Biostatistics-CDFD-2026**](https://github.com/raghurama123/Biostatistics-CDFD-2026) contains R scripts, data, and notes.
 
 The repository is organized lecture-wise. Each lecture folder contains the corresponding R scripts, data files, and lecture notes.
 
