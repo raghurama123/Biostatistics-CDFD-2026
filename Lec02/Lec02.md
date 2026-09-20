@@ -1205,13 +1205,13 @@ $$
 5\times10^{-4}.
 $$
 
-The hypotheses are
+For the exact binomial calculation, we use the null model
 
 $$
-H_0:p>=5\times10^{-4}
+H_0:p=p_0=5\times10^{-4},
 $$
 
-and
+and the alternative hypothesis
 
 $$
 H_A:p<5\times10^{-4}.
@@ -1703,7 +1703,7 @@ This idea is central to hypothesis testing because a p-value often represents th
 
 # 7. Hypothesis Test for the HIV Mutation Rate
 
-File: [`HIVMutation_HypothesisTest.R`](HIVMutation_HypothesisTest.R)
+File: [`HIVMutation_HypothesisTest.R`](https://github.com/raghurama123/Biostatistics-CDFD-2026/blob/main/Lec02/HIVMutation_HypothesisTest.R "HIVMutation_HypothesisTest.R")
 
 We can now combine the ideas from the previous sections into a formal hypothesis test.
 
@@ -1723,20 +1723,20 @@ $$
 
 The subscript $0$ indicates that this is the probability specified by the **null hypothesis**, $H_0$.
 
-In this example, we take
+In this example,
 
 $$
 p_0 = 5\times10^{-4}.
 $$
 
-The value $p_0$ is not calculated from the current observation. It is a **reference value specified before the hypothesis test**. Depending on the scientific problem, such a value may come from previous experiments, published evidence, an established model, or another scientifically meaningful baseline.
+The value $p_0$ is not calculated from the current observation. It is a **reference value specified before the hypothesis test**. Depending on the scientific problem, it may come from previous experiments, published evidence, an established model, or another scientifically meaningful baseline.
 
 Thus,
 
 ```text
 p     = unknown underlying mutation probability
 
-p0    = reference mutation probability
+p0    = reference mutation probability specified by H0
         = 5 x 10^-4
 ```
 
@@ -1761,31 +1761,23 @@ $$
 nucleotides, the expected number of mutations would be
 
 $$
-np_0=
-10000\times5\times10^{-4} =
-5.
+E[X]=np_0
+=10000\times5\times10^{-4}
+=5.
 $$
 
-But we observed only
+But we observed
 
 $$
 x_{\mathrm{obs}}=3.
 $$
 
-At first, we might simply compare
-
-$$
-3<5
-$$
-
-and conclude that the mutation rate appears to be smaller.
-
-Equivalently, the observed mutation proportion is
+The observed mutation proportion is therefore
 
 $$
 \hat p=
-\frac{3}{10000}=
-3\times10^{-4},
+\frac{3}{10000}
+=3\times10^{-4},
 $$
 
 which is smaller than
@@ -1794,17 +1786,23 @@ $$
 p_0=5\times10^{-4}.
 $$
 
-However, this comparison alone is **not sufficient**.
-
-Even if the mutation probability really were exactly
+However, neither
 
 $$
-p=p_0,
+3<5
 $$
 
-we would not observe exactly 5 mutations every time.
+nor
 
-Because mutation is a random process, different experiments could produce different numbers of mutations:
+$$
+\hat p<p_0
+$$
+
+is sufficient by itself to reject the null hypothesis.
+
+Even if the true mutation probability were exactly $p_0$, random variation would produce different mutation counts in repeated experiments.
+
+For example:
 
 ```text
 2 mutations
@@ -1816,37 +1814,23 @@ Because mutation is a random process, different experiments could produce differ
 ...
 ```
 
-even when the underlying mutation probability remains unchanged.
-
 The value
 
 $$
-np_0=5
+E[X]=np_0=5
 $$
 
-is therefore an **expected value**, not a value that must occur in every experiment.
+is an **expected value**, not a value that must occur in every experiment.
 
-The important question is not simply
+The relevant question is therefore not simply
 
 > Is the observed number smaller than 5?
 
 Instead, we ask
 
-> **If the mutation probability were really $p_0$, how unusual would it be to observe only 3 mutations, or even fewer?**
+> **If the mutation probability were really $p_0$, how likely would it be to observe 3 mutations or fewer?**
 
 This is the purpose of the hypothesis test.
-
-It allows us to distinguish between
-
-```text
-a difference that could reasonably arise
-from random variation
-
-                    and
-
-a difference that is sufficiently unusual
-to provide evidence against the reference model
-```
 
 ---
 
@@ -1882,21 +1866,19 @@ $$
 H_A:p<5\times10^{-4}.
 $$
 
-The null hypothesis gives us a specific probability model to use as a reference.
-
 Under $H_0$,
 
 $$
 X\sim\mathrm{Binomial}(n,p_0).
 $$
 
-We then ask whether the observed data would be unusual if this reference model were correct.
+The null hypothesis therefore specifies the probability distribution against which the observed mutation count is evaluated.
 
 ---
 
-## How to interpret a hypothesis test? (The idea of repeated sampling). 
+## The repeated-sampling idea
 
-We have observed only **one experiment**:
+We have observed only one experiment:
 
 $$
 x_{\mathrm{obs}}=3
@@ -1910,13 +1892,7 @@ $$
 
 nucleotides.
 
-The observed mutation proportion is therefore
-
-$$
-\hat p=\frac{3}{10000}.
-$$
-
-However, the hypothesis test asks us to imagine what would happen if the **same experiment were repeated many times** under the null hypothesis.
+The hypothesis test asks us to imagine repeating the same experiment many times under $H_0$.
 
 If
 
@@ -1924,49 +1900,30 @@ $$
 H_0:p=p_0,
 $$
 
-then in each repetition the number of observed mutations could be different because of random variation.
-
-For example, repeated experiments might produce counts such as
-
-```text
-4
-6
-3
-5
-2
-7
-5
-...
-```
-
-Under $H_0$, these possible counts follow
+then the mutation count would vary from experiment to experiment because of random variation, but those counts would follow
 
 $$
 X\sim\mathrm{Binomial}(n,p_0).
 $$
 
-Thus, although we have only one observed value,
-
-$$
-x_{\mathrm{obs}}=3,
-$$
-
-we judge whether it is unusual by comparing it with the **distribution of values that could occur in hypothetical repeated experiments under $H_0$**.
-
-This is the basic repeated-sampling idea behind the hypothesis test.
+Thus, we judge whether the observed value $x_{\mathrm{obs}}=3$ is unusual by comparing it with the **distribution of values that could occur under $H_0$**.
 
 ---
 
-## Step 2: Define the data
+## Step 2: Define the data and significance level
 
 ```r
+# Number of nucleotides examined
 n <- 10000
 
-# Reference mutation probability specified by H0
+# Mutation probability under the null hypothesis
 p0 <- 5e-4
 
 # Observed number of mutations
 x_obs <- 3
+
+# Significance level
+alpha <- 0.05
 ```
 
 Here:
@@ -1974,24 +1931,14 @@ Here:
 ```text
 n       = total number of nucleotides
 
-p0      = reference mutation probability under H0
+p0      = mutation probability specified by H0
 
 x_obs   = observed number of mutations
+
+alpha   = significance level used for the statistical decision
 ```
 
-Notice that
-
-```text
-p0 = 5e-4
-```
-
-is part of the **null model**, whereas
-
-```text
-x_obs = 3
-```
-
-comes from the **observed data**.
+Notice that `p0` belongs to the **null model**, whereas `x_obs` comes from the **observed data**.
 
 ---
 
@@ -2003,11 +1950,11 @@ $$
 H_A:p<p_0.
 $$
 
-Therefore, unusually **small** mutation counts support the alternative.
+Therefore, unusually **small** mutation counts provide evidence in the direction of $H_A$.
 
 This is a **left-tailed test**.
 
-The relevant probability is therefore
+For the observed value $x_{\mathrm{obs}}=3$, the relevant tail probability is
 
 $$
 P(X\le3\mid H_0).
@@ -2019,13 +1966,7 @@ $$
 p=p_0,
 $$
 
-this means calculating the probability
-
-$$
-P(X\le3)
-$$
-
-for
+this probability is calculated using
 
 $$
 X\sim\mathrm{Binomial}(10000,5\times10^{-4}).
@@ -2033,147 +1974,7 @@ $$
 
 ---
 
-## Step 4: Calculate the p-value
-
-The p-value is calculated directly using
-
-```r
-p_value <- pbinom(
-  x_obs,
-  size = n,
-  prob = p0
-)
-
-print(p_value)
-```
-
-The p-value is **not** the probability that the null hypothesis is true.
-
-Instead, it is calculated **assuming $H_0$ is true**.
-
-For these data,
-
-$$
-p\text{-value}
-\approx0.265.
-$$
-
-This means:
-
-> If the mutation probability were really $p_0=5\times10^{-4}$, the probability of observing 3 or fewer mutations in 10,000 nucleotides would be about 26.5%.
-
-Therefore, observing 3 mutations is lower than the expected value of 5, but it is **not particularly unusual** under the null model.
-
-
----
-
-## Step 5: Choose a significance level
-
-Choose
-
-```r
-alpha <- 0.05
-```
-
-Therefore,
-
-$$
-\alpha=0.05.
-$$
-
-The decision rule is
-
-$$
-p\text{-value}<\alpha
-\quad\Rightarrow\quad
-\text{reject }H_0.
-$$
-
-Otherwise,
-
-$$
-p\text{-value}\ge\alpha
-\quad\Rightarrow\quad
-\text{do not reject }H_0.
-$$
-
----
-
-## Step 6: Make the statistical decision
-
-In R:
-
-```r
-if (p_value < alpha) {
-
-  print("Reject H0")
-
-} else {
-
-  print("Do not reject H0")
-
-}
-```
-
-For this example,
-
-$$
-0.265 > 0.05.
-$$
-
-Therefore,
-
-$$
-\boxed{\text{Do not reject }H_0}
-$$
-
-at the 5% significance level.
-
-Three mutations may be below the expected value of five, but observing three or fewer mutations is not sufficiently unusual under $H_0$ to reject it.
-
----
-
-## Why "3 is below 5" is not enough
-
-Under $H_0$, the expected number of mutations is
-
-$$
-np_0=
-10000\times0.0005=
-5.
-$$
-
-We observed
-
-$$
-3.
-$$
-
-It might therefore be tempting to say:
-
-```text
-3 < 5, therefore the mutation rate must be lower.
-```
-
-But random variables fluctuate.
-
-Even when the true expected number is 5, outcomes such as 3, 4, 5, 6, or 7 can occur.
-
-Statistical hypothesis testing asks a more precise question:
-
-> How unusual would an observation of 3 or fewer mutations be if the null hypothesis were true?
-
-The answer is
-
-$$
-P(X\le3\mid H_0)\approx0.265.
-$$
-
-A probability of about 26.5% is not unusually small.
-
----
-
-## Exact binomial test in R
+## Step 4: Perform the exact binomial test
 
 R provides the function
 
@@ -2181,17 +1982,17 @@ R provides the function
 binom.test()
 ```
 
-for performing an exact binomial test directly.
-
-For this example:
+for performing an exact binomial test.
 
 ```r
-binom.test(
+result <- binom.test(
   x = x_obs,
   n = n,
   p = p0,
   alternative = "less"
 )
+
+result
 ```
 
 The arguments mean:
@@ -2218,7 +2019,211 @@ $$
 H_A:p<p_0.
 $$
 
-Thus R performs a left-tailed exact binomial test.
+### A note about the wording in the R output
+
+R may print
+
+```text
+alternative hypothesis: true probability of success is less than 5e-04
+```
+
+Here, the word **true** refers to the **true but unknown probability of success**, $p$.
+
+It does **not** mean that the alternative hypothesis has been shown to be true.
+
+The line simply states the alternative hypothesis:
+
+$$
+H_A:p<5\times10^{-4}.
+$$
+
+Whether the data provide sufficient evidence against $H_0$ is decided from the p-value and the chosen significance level $\alpha$.
+
+---
+
+## What is `binom.test()` comparing?
+
+It is useful to distinguish three different quantities:
+
+$$
+p_0=5\times10^{-4}
+$$
+
+is the mutation probability specified by the null hypothesis;
+
+$$
+\hat p=\frac{x_{\mathrm{obs}}}{n}
+=\frac{3}{10000}
+=3\times10^{-4}
+$$
+
+is the mutation probability estimated from the observed sample; and
+
+$$
+P(X\le x_{\mathrm{obs}}\mid H_0)
+$$
+
+is the left-tail probability used as the p-value.
+
+`binom.test()` does **not** decide significance merely because
+
+$$
+\hat p<p_0
+$$
+
+or because
+
+$$
+x_{\mathrm{obs}}<E[X].
+$$
+
+Instead, $p_0$ defines the complete null distribution
+
+$$
+X\sim\mathrm{Binomial}(n,p_0),
+$$
+
+and the observed count is used to determine the appropriate tail probability in that distribution.
+
+---
+
+## Step 5: Extract the p-value
+
+The p-value returned by `binom.test()` can be extracted using
+
+```r
+p_value <- result$p.value
+
+print(p_value)
+```
+
+For this left-tailed test,
+
+$$
+p\text{-value}
+=
+P(X\le3\mid H_0).
+$$
+
+For these data,
+
+$$
+p\text{-value}\approx0.265.
+$$
+
+Thus:
+
+> If the mutation probability were really $p_0=5\times10^{-4}$, the probability of observing 3 or fewer mutations among 10,000 nucleotides would be about 26.5\%.
+
+The same tail probability can be calculated directly using
+
+```r
+pbinom(
+  x_obs,
+  size = n,
+  prob = p0
+)
+```
+
+so, for this one-sided test, `binom.test()` and `pbinom()` give the same p-value.
+
+The p-value is **not** the probability that $H_0$ is true. It is calculated **assuming that $H_0$ is true**.
+
+---
+
+## Step 6: Compare the p-value with $\alpha$
+
+The statistical decision is made by comparing the p-value with the chosen significance level.
+
+```r
+p_value < alpha
+```
+
+The decision rule is
+
+$$
+p\text{-value}<\alpha
+\quad\Rightarrow\quad
+\text{reject }H_0,
+$$
+
+whereas
+
+$$
+p\text{-value}\ge\alpha
+\quad\Rightarrow\quad
+\text{do not reject }H_0.
+$$
+
+An important point is that `binom.test()` itself reports the p-value but does **not** print the final decision. The decision depends on the value of $\alpha$ chosen for the analysis.
+
+---
+
+## Step 7: Make the statistical decision
+
+```r
+if (p_value < alpha) {
+  print("Reject H0")
+} else {
+  print("Do not reject H0")
+}
+```
+
+For this example,
+
+$$
+0.265>0.05.
+$$
+
+Therefore,
+
+$$
+\boxed{\text{Do not reject }H_0}
+$$
+
+at the 5\% significance level.
+
+---
+
+## Interpretation
+
+The observed mutation count is
+
+$$
+x_{\mathrm{obs}}=3,
+$$
+
+whereas the expected number under $H_0$ is
+
+$$
+E[X]=np_0=5.
+$$
+
+Thus, 3 mutations is indeed **below** the expected value of 5.
+
+However,
+
+$$
+P(X\le3\mid H_0)\approx0.265.
+$$
+
+A probability of about 26.5\% is not particularly small.
+
+Therefore, observing 3 mutations is **not sufficiently unusual under $H_0$** to provide evidence that the true mutation probability is smaller than
+
+$$
+5\times10^{-4}.
+$$
+
+This illustrates an important distinction:
+
+```text
+observed value below the expected value
+
+                is not the same as
+
+statistically unusual under the null distribution
+```
 
 ---
 
@@ -2287,7 +2292,8 @@ Since 3 is not in the rejection region, we do not reject $H_0$.
 The p-value approach gives the same conclusion:
 
 $$
-p\text{-value}=
+p\text{-value}
+=
 P(X\le3\mid H_0)
 \approx0.265
 >
@@ -2300,7 +2306,7 @@ $$
 \text{do not reject }H_0.
 $$
 
-Thus the two approaches are equivalent ways of viewing the same statistical decision:
+Thus, the two approaches are equivalent ways of viewing the same statistical decision:
 
 ```text
 critical-value approach
@@ -2435,8 +2441,4 @@ qbinom(
 finds a mutation count associated with the lower 5% of the cumulative distribution.
 
 
-
-This progression connects probability theory with the statistical methods used to draw conclusions from biological data.
-
 ---
-

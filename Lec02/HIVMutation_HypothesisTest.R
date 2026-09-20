@@ -13,13 +13,20 @@
 #
 # HA: p < 5 x 10^(-4)
 #
-# We observed 3 mutations in a genome containing
-# 10,000 nucleotides.
+# We observed 3 mutations among 10,000 nucleotides.
 #
-# The hypothesis test asks:
+# Under H0:
 #
-# If H0 is true, how likely is it to observe
-# 3 mutations or fewer?
+# X ~ Binomial(n = 10000, p = 5 x 10^(-4))
+#
+# Because HA: p < p0, this is a LEFT-TAILED test.
+#
+# The p-value is:
+#
+# P(X <= 3 | H0)
+#
+# That is, the probability of observing 3 or fewer mutations
+# if the mutation probability really is 5 x 10^(-4).
 #
 # ============================================================
 
@@ -31,61 +38,79 @@
 # Number of nucleotides examined
 n <- 10000
 
-# Mutation probability assumed under the null hypothesis
+# Mutation probability under the null hypothesis
 p0 <- 5e-4
 
 # Observed number of mutations
 x_obs <- 3
 
+# Significance level
+alpha <- 0.05
+
 
 # ------------------------------------------------------------
-# Calculate the p-value directly
+# Perform the exact binomial test
 # ------------------------------------------------------------
 
-# Because the alternative hypothesis is:
-#
-# HA: p < p0
-#
-# this is a LEFT-TAILED hypothesis test.
-#
-# Therefore, the p-value is:
-#
-# P(X <= 3 | H0)
-#
-# That is, the probability of observing 3 or fewer mutations
-# if the true mutation probability really is p0.
-
-p_value <- pbinom(
-  
-  # Observed number of mutations
-  x_obs,
-  
-  # Total number of trials (nucleotides)
-  size = n,
-  
-  # Mutation probability under H0
-  prob = p0
+result <- binom.test(
+  x = x_obs,
+  n = n,
+  p = p0,
+  alternative = "less"
 )
+
+# Display the test results
+
+# Note:
+#
+# In the output, R may print:
+#
+# "alternative hypothesis: true probability of success is less than 5e-04"
+#
+# Here, the word "true" refers to the true, but unknown,
+# probability of success, p.
+#
+# It does NOT mean that the alternative hypothesis is true.
+#
+# The statement means:
+#
+# HA: p < 5e-04
+#
+# Whether there is sufficient evidence for HA is decided
+# from the p-value and the chosen significance level alpha.
+
+result
+
+
+# ------------------------------------------------------------
+# Extract the p-value
+# ------------------------------------------------------------
+
+p_value <- result$p.value
 
 print(p_value)
 
 
 # ------------------------------------------------------------
-# Make the statistical decision
+# Compare the p-value with alpha
 # ------------------------------------------------------------
 
-# Choose a significance level
-alpha <- 0.05
+# The decision rule is:
+#
+# p-value < alpha
+#
+#     Reject H0
+#
+# p-value >= alpha
+#
+#     Do not reject H0
 
-# Compare the p-value with alpha
-#
-# If p-value < alpha:
-#     the observation is sufficiently unusual under H0,
-#     so we reject H0.
-#
-# If p-value >= alpha:
-#     the observation is not sufficiently unusual,
-#     so we do not reject H0.
+p_value < alpha
+
+
+# ------------------------------------------------------------
+# Make the statistical decision
+# ------------------------------------------------------------
 
 if (p_value < alpha) {
   print("Reject H0")
@@ -95,25 +120,22 @@ if (p_value < alpha) {
 
 
 # ------------------------------------------------------------
-# Perform the exact binomial test using R
+# Interpretation
 # ------------------------------------------------------------
 
-# binom.test() performs the same hypothesis test directly.
+# Here the p-value is approximately 0.265.
 #
-# x = observed number of mutations
-# n = total number of nucleotides
-# p = mutation probability specified by H0
+# Since:
 #
-# alternative = "less" means:
+# 0.265 > 0.05
 #
-# HA: p < p0
+# we do not reject H0.
 #
-# Therefore, R performs a left-tailed test.
-
-binom.test(
-  x = x_obs,
-  n = n,
-  p = p0,
-  alternative = "less"
-)
-
+# The observed mutation count (3) is smaller than the expected
+# count under H0:
+#
+# E[X] = n * p0 = 5
+#
+# but 3 mutations is not sufficiently unusual under H0
+# to provide evidence that the true mutation probability
+# is smaller than 5 x 10^(-4).
