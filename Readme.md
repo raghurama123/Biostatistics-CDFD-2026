@@ -64,4 +64,4 @@ Susan Holmes and Wolfgang Huber
 
 https://www.huber.embl.de/msmb/
 
-The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R and Bioconductor.
+The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R.
