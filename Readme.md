@@ -67,6 +67,6 @@ Susan Holmes and Wolfgang Huber
 The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R.
 
 ## Contact
-Raghunathan Ramakrishnan
-Tata Institute of Fundamental Research Hyderabad, India
-ramakrishnan@tifr.res.in
+Raghunathan Ramakrishnan     
+Tata Institute of Fundamental Research Hyderabad, India     
+Email: ramakrishnan@tifr.res.in
