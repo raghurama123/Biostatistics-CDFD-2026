@@ -1,0 +1,709 @@
+<h1 id="lecture-01-introduction-to-r-for-biostatistics">Lecture 01 —
+Introduction to R for Biostatistics</h1>
+<p>This lecture introduces the basic R workflow used in the course:
+working with R objects, reading data from files, visualizing data with
+<code>ggplot2</code>, and using a simple Bioconductor package for
+biological sequence analysis.</p>
+<p><a href="#1-r-basics">1. R Basics</a><br />
+<a href="#2-reading-and-writing-data">2. Reading and Writing
+Data</a><br />
+<a href="#3-plotting-with-ggplot2">3. Plotting with
+<code>ggplot2</code></a><br />
+<a href="#4-monte-carlo-simulation">4. Monte Carlo Simulation</a><br />
+<a href="#5-introduction-to-bioconductor">5. Introduction to
+Bioconductor</a></p>
+<hr />
+<h2 id="learning-objectives">Learning objectives</h2>
+<p>By the end of this lecture, you should be able to:</p>
+<ul>
+<li>use R as a calculator;</li>
+<li>create variables, vectors, and data frames;</li>
+<li>calculate simple descriptive statistics;</li>
+<li>select rows, columns, and elements from R objects;</li>
+<li>make basic plots in R;</li>
+<li>perform simple statistical tests and linear regression;</li>
+<li>read data from CSV and other common file formats;</li>
+<li>modify and save data;</li>
+<li>create plots using <code>ggplot2</code>;</li>
+<li>use random numbers in a simple Monte Carlo simulation;</li>
+<li>estimate <span class="math inline"><em>π</em></span> using random
+sampling and visualize the simulation;</li>
+<li>install and load an R package;</li>
+<li>understand the role of Bioconductor in biological data
+analysis;</li>
+<li>perform simple operations on a DNA sequence using
+<code>Biostrings</code>.</li>
+</ul>
+<hr />
+<h1 id="r-basics">1. R Basics</h1>
+<p>File: <a href="Rbasics.R"><code>Rbasics.R</code></a></p>
+<p>We begin with the basic syntax of R and the objects used throughout
+the rest of the course.</p>
+<h2 id="running-commands-in-rstudio">Running commands in RStudio</h2>
+<p>Run the current line or selected lines using:</p>
+<ul>
+<li><strong>macOS:</strong> <code>Cmd + Enter</code></li>
+<li><strong>Windows/Linux:</strong> <code>Ctrl + Enter</code></li>
+</ul>
+<p>Lines beginning with <code>#</code> are comments and are ignored by
+R.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Store a value</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the stored value</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> <span class="dv">2</span></span></code></pre></div>
+<p>The assignment operator</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ot">&lt;-</span></span></code></pre></div>
+<p>means <em>store the value on the right in the object on the
+left</em>.</p>
+<hr />
+<h2 id="main-topics-in-rbasics.r">Main topics in
+<code>Rbasics.R</code></h2>
+<h3 id="basic-mathematics">Basic mathematics</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">25</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(<span class="sc">-</span><span class="dv">5</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">log</span>(<span class="dv">10</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="dv">1</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
+<h3 id="variables">Variables</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> y</span></code></pre></div>
+<h3 id="vectors">Vectors</h3>
+<p>The function <code>c()</code> combines values into a vector.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>x<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<h3 id="descriptive-statistics">Descriptive statistics</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(x)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(x)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(x)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(x)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(x)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(x)</span></code></pre></div>
+<h3 id="selecting-elements">Selecting elements</h3>
+<p>R indexing begins at <strong>1</strong>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">15</span>, <span class="dv">7</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x[<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>x[x <span class="sc">&gt;</span> <span class="dv">7</span>]</span></code></pre></div>
+<h3 id="data-frames">Data frames</h3>
+<p>A data frame is similar to a spreadsheet:</p>
+<ul>
+<li>rows usually represent observations;</li>
+<li>columns usually represent variables.</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name  =</span> <span class="fu">c</span>(<span class="st">&quot;Anita&quot;</span>, <span class="st">&quot;Rahul&quot;</span>, <span class="st">&quot;Meera&quot;</span>, <span class="st">&quot;Arjun&quot;</span>, <span class="st">&quot;Nisha&quot;</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">age   =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">21</span>, <span class="dv">19</span>, <span class="dv">22</span>, <span class="dv">20</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">78</span>, <span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">67</span>, <span class="dv">88</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Useful commands include:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>students</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(students)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(students)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(students)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ncol</span>(students)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(students)</span></code></pre></div>
+<p>Columns can be accessed using <code>$</code>:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>students<span class="sc">$</span>score</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(students<span class="sc">$</span>score)</span></code></pre></div>
+<p>Rows and columns can be selected using:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>students[row, column]</span></code></pre></div>
+<p>For example:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>students[<span class="dv">1</span>, ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>students[, <span class="dv">2</span>]</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>students[students<span class="sc">$</span>score <span class="sc">&gt;</span> <span class="dv">80</span>, ]</span></code></pre></div>
+<hr />
+<h2 id="basic-visualization">Basic visualization</h2>
+<p><code>Rbasics.R</code> introduces the base-R plotting system.</p>
+<h3 id="scatter-plot">Scatter plot</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y)</span></code></pre></div>
+<h3 id="histogram">Histogram</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(heights)</span></code></pre></div>
+<p>A histogram shows the distribution of a numerical variable by
+grouping observations into intervals or <strong>bins</strong>.</p>
+<h3 id="boxplot">Boxplot</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(control, treated)</span></code></pre></div>
+<p>A boxplot gives a compact summary of a distribution, including:</p>
+<ul>
+<li>median;</li>
+<li>first quartile (<code>Q1</code>);</li>
+<li>third quartile (<code>Q3</code>);</li>
+<li>interquartile range (<code>IQR = Q3 - Q1</code>);</li>
+<li>whiskers;</li>
+<li>possible outliers.</li>
+</ul>
+<hr />
+<h2 id="introductory-statistical-methods">Introductory statistical
+methods</h2>
+<p>The script also gives a first look at several statistical methods
+that will be discussed in more detail later.</p>
+<h3 id="independent-two-sample-t-test">Independent two-sample
+t-test</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(control, treated)</span></code></pre></div>
+<p>By default, R uses Welch’s two-sample t-test.</p>
+<h3 id="paired-t-test">Paired t-test</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(before, after, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>This is appropriate when the same subjects are measured twice.</p>
+<h3 id="correlation">Correlation</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(height, weight)</span></code></pre></div>
+<h3 id="linear-regression">Linear regression</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> height)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code></pre></div>
+<p>Add the fitted line to a plot:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(model)</span></code></pre></div>
+<p>Make a prediction:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  model,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">height =</span> <span class="dv">172</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<h2 id="random-numbers-and-missing-values">Random numbers and missing
+values</h2>
+<p>R can generate random data:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean =</span> <span class="dv">50</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">10</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><code>set.seed()</code> makes the simulation reproducible.</p>
+<p>Missing observations are represented by <code>NA</code>.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="dv">18</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(values)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(values, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(values)</span></code></pre></div>
+<hr />
+<h1 id="reading-and-writing-data">2. Reading and Writing Data</h1>
+<p>File: <a href="ReadCSV.R"><code>ReadCSV.R</code></a></p>
+<p>Most real analyses begin with data stored in a file rather than data
+entered directly into an R script.</p>
+<p>The second part of the lecture therefore introduces file input/output
+and simple data manipulation.</p>
+<hr />
+<h2 id="working-directory">Working directory</h2>
+<p>Check the current working directory:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div>
+<p>List the files in it:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>()</span></code></pre></div>
+<p>When possible, use <strong>relative paths</strong> rather than
+computer-specific absolute paths. This makes scripts easier to share
+through GitHub and run on another computer.</p>
+<p>For example, if <code>students.csv</code> is in the current
+folder:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;students.csv&quot;</span>)</span></code></pre></div>
+<p>R can also open a file-selection window:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.choose</span>())</span></code></pre></div>
+<hr />
+<h2 id="examining-imported-data">Examining imported data</h2>
+<p>After reading a dataset, first inspect it.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(students)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(students)</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(students)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(students)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(students)</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(students)</span></code></pre></div>
+<p>These commands help answer basic questions such as:</p>
+<ul>
+<li>How many observations are present?</li>
+<li>What are the variable names?</li>
+<li>What data type does each variable have?</li>
+<li>Are there unusual or missing values?</li>
+</ul>
+<hr />
+<h2 id="selecting-data">Selecting data</h2>
+<p>Select rows using a logical condition:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>students[students<span class="sc">$</span>score <span class="sc">&gt;</span> <span class="dv">80</span>, ]</span></code></pre></div>
+<p>Select columns:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>students[, <span class="fu">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;score&quot;</span>)]</span></code></pre></div>
+<hr />
+<h2 id="creating-a-new-variable">Creating a new variable</h2>
+<p>A new column can be created directly.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>students<span class="sc">$</span>result <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  students<span class="sc">$</span>score <span class="sc">&gt;=</span> <span class="dv">75</span>,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Pass&quot;</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;Fail&quot;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<h2 id="sorting-data">Sorting data</h2>
+<p>Sort by score:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>students[<span class="fu">order</span>(students<span class="sc">$</span>score), ]</span></code></pre></div>
+<p>Sort from highest to lowest:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>students[<span class="fu">order</span>(students<span class="sc">$</span>score, <span class="at">decreasing =</span> <span class="cn">TRUE</span>), ]</span></code></pre></div>
+<hr />
+<h2 id="missing-values">Missing values</h2>
+<p>Check for missing observations:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(students)</span></code></pre></div>
+<p>Count missing values in each column:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(students))</span></code></pre></div>
+<p>Count all missing values:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(students))</span></code></pre></div>
+<hr />
+<h2 id="modifying-data">Modifying data</h2>
+<p>Modify an existing row:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>students[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">&quot;Rahul&quot;</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="dv">22</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="dv">90</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Add a new row:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>new_student <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">&quot;Kiran&quot;</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="dv">21</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="dv">81</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">rbind</span>(students, new_student)</span></code></pre></div>
+<hr />
+<h2 id="writing-a-csv-file">Writing a CSV file</h2>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  students,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;students_modified.csv&quot;</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Using</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>row.names <span class="ot">=</span> <span class="cn">FALSE</span></span></code></pre></div>
+<p>prevents R from writing an unwanted extra column containing row
+numbers.</p>
+<hr />
+<h2 id="other-file-formats">Other file formats</h2>
+<h3 id="tab-separated-files">Tab-separated files</h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data_tsv <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">&quot;students.tsv&quot;</span>)</span></code></pre></div>
+<p>or:</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>data_tsv <span class="ot">&lt;-</span> <span class="fu">read.table</span>(</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;students.tsv&quot;</span>,</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">header =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<h3 id="rds">RDS</h3>
+<p>RDS is useful for storing an individual R object while preserving its
+R-specific structure.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(students, <span class="st">&quot;students.rds&quot;</span>)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>students2 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;students.rds&quot;</span>)</span></code></pre></div>
+<h3 id="rdata">RData</h3>
+<p>Several R objects can be saved together:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  x,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  y,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  students,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> <span class="st">&quot;my_data.RData&quot;</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>They can later be restored using:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;my_data.RData&quot;</span>)</span></code></pre></div>
+<hr />
+<h1 id="plotting-with-ggplot2">3. Plotting with
+<code>ggplot2</code></h1>
+<p>File: <a href="Plotggplot2.R"><code>Plotggplot2.R</code></a></p>
+<p>Base R provides functions such as <code>plot()</code>,
+<code>hist()</code>, and <code>boxplot()</code>. A widely used
+alternative is <strong>ggplot2</strong>, which provides a flexible
+layered system for constructing graphics.</p>
+<hr />
+<h2 id="installing-and-loading-ggplot2">Installing and loading
+<code>ggplot2</code></h2>
+<p>A package only needs to be installed once:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</span></code></pre></div>
+<p>It must be loaded in each new R session in which it is used:</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div>
+<p>A useful distinction is therefore:</p>
+<pre class="text"><code>install.packages()   -&gt; install once
+library()            -&gt; load for the current R session</code></pre>
+<hr />
+<h2 id="example-dataset">Example dataset</h2>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;Asha&quot;</span>, <span class="st">&quot;Ravi&quot;</span>, <span class="st">&quot;Meera&quot;</span>, <span class="st">&quot;Arun&quot;</span>, <span class="st">&quot;Neha&quot;</span>),</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">hours_studied =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>),</span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">65</span>, <span class="dv">72</span>, <span class="dv">78</span>, <span class="dv">90</span>)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<h2 id="base-r-version">Base R version</h2>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  students<span class="sc">$</span>hours_studied,</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  students<span class="sc">$</span>score,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Hours Studied&quot;</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Exam Score&quot;</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Study Time vs Exam Score&quot;</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<h2 id="the-same-plot-with-ggplot2">The same plot with
+<code>ggplot2</code></h2>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  students,</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> hours_studied, <span class="at">y =</span> score)</span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Study Time vs Exam Score&quot;</span>,</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Hours Studied&quot;</span>,</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Exam Score&quot;</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p>A useful way to read this code is:</p>
+<pre class="text"><code>data
+  +
+mapping of variables
+  +
+geometric objects
+  +
+labels
+  +
+theme</code></pre>
+<p>The main components are:</p>
+<ul>
+<li><code>ggplot()</code> — initializes the plot;</li>
+<li><code>aes()</code> — maps variables to visual properties;</li>
+<li><code>geom_point()</code> — adds points;</li>
+<li><code>labs()</code> — adds labels;</li>
+<li><code>theme_minimal()</code> — controls the overall appearance.</li>
+</ul>
+<hr />
+<h2 id="adding-a-fitted-line">Adding a fitted line</h2>
+<p>A linear-model fit can be added using <code>geom_smooth()</code>:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  students,</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> hours_studied, <span class="at">y =</span> score)</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;lm&quot;</span>,</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="cn">FALSE</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Study Time vs Exam Score&quot;</span>,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Hours Studied&quot;</span>,</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Exam Score&quot;</span></span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p>Here:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>method <span class="ot">=</span> <span class="st">&quot;lm&quot;</span></span></code></pre></div>
+<p>requests a linear model, while</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">=</span> <span class="cn">FALSE</span></span></code></pre></div>
+<p>suppresses the confidence band around the fitted line.</p>
+<hr />
+<h2 id="common-themes">Common themes</h2>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_gray</span>()</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_minimal</span>()</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_classic</span>()</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_bw</span>()</span></code></pre></div>
+<p>The important idea is that <code>ggplot2</code> builds plots by
+adding layers with the <code>+</code> operator.</p>
+<hr />
+<h1 id="monte-carlo-simulation">4. Monte Carlo Simulation</h1>
+<p>File: <a href="MonteCarlo.R"><code>MonteCarlo.R</code></a></p>
+<p>Monte Carlo methods use <strong>random sampling</strong> to estimate
+numerical quantities.<br />
+They are widely used in statistics, physics, biology, finance, and many
+other fields when an exact calculation is difficult or when we want to
+study the behavior of a random process.</p>
+<p>In this introductory example, random points are used to estimate the
+value of <span class="math inline"><em>π</em></span>.</p>
+<hr />
+<h2 id="geometrical-idea">Geometrical idea</h2>
+<p>Consider a square covering the region</p>
+<p><span
+class="math display">0 ≤ <em>x</em> ≤ 1,   0 ≤ <em>y</em> ≤ 1.</span></p>
+<p>Inside this square is a quarter-circle of radius 1.</p>
+<p>A point <span class="math inline">(<em>x</em>, <em>y</em>)</span>
+lies inside the quarter-circle when</p>
+<p><span
+class="math display"><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> ≤ 1.</span></p>
+<p>The area of the square is</p>
+<p><span
+class="math display"><em>A</em><sub>square</sub> = 1,</span></p>
+<p>while the area of the quarter-circle is</p>
+<p><span class="math display">$$
+A_{\mathrm{quarter\ circle}}
+=
+\frac{\pi r^2}{4}
+=
+\frac{\pi}{4}.
+$$</span></p>
+<p>Therefore,</p>
+<p><span class="math display">$$
+\frac{
+A_{\mathrm{quarter\ circle}}
+}{
+A_{\mathrm{square}}
+}
+=
+\frac{\pi}{4}.
+$$</span></p>
+<p>If points are generated uniformly inside the square, the fraction
+that fall inside the quarter-circle should approach <span
+class="math inline"><em>π</em>/4</span> as the number of points becomes
+large.</p>
+<p>Thus,</p>
+<p><span class="math display">$$
+\pi
+\approx
+4 \times
+\frac{
+\text{number of points inside the quarter-circle}
+}{
+\text{total number of points}
+}.
+$$</span></p>
+<hr />
+<h2 id="reproducible-random-numbers">Reproducible random numbers</h2>
+<p>The script begins with</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span></code></pre></div>
+<p>Computer-generated random numbers are actually
+<strong>pseudorandom</strong>.<br />
+Using <code>set.seed()</code> fixes the starting point of the
+random-number generator so that the same script produces the same
+sequence of random values every time.</p>
+<p>This is important for <strong>reproducible scientific
+analysis</strong>.</p>
+<hr />
+<h2 id="generating-random-points">Generating random points</h2>
+<p>Choose the number of simulated points:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100000</span></span></code></pre></div>
+<p>Generate random <span class="math inline"><em>x</em></span> and <span
+class="math inline"><em>y</em></span> coordinates between 0 and 1:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span></code></pre></div>
+<p>The function</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(N, min, max)</span></code></pre></div>
+<p>generates <code>N</code> random numbers from a <strong>uniform
+distribution</strong> between <code>min</code> and <code>max</code>.</p>
+<p>Here, every location between 0 and 1 has equal probability of being
+sampled.</p>
+<hr />
+<h2 id="testing-whether-points-are-inside-the-circle">Testing whether
+points are inside the circle</h2>
+<p>The condition</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>inside <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">1</span></span></code></pre></div>
+<p>creates a logical vector containing values such as</p>
+<pre class="text"><code>TRUE
+FALSE
+TRUE
+TRUE
+FALSE
+...</code></pre>
+<p><code>TRUE</code> means that the corresponding point lies inside the
+quarter-circle.</p>
+<p>Because R treats</p>
+<pre class="text"><code>TRUE  -&gt; 1
+FALSE -&gt; 0</code></pre>
+<p>when calculating a mean, the command</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(inside)</span></code></pre></div>
+<p>directly gives the fraction of points inside the quarter-circle.</p>
+<p>For example,</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>fraction_inside <span class="ot">&lt;-</span> <span class="fu">mean</span>(inside)</span></code></pre></div>
+<p>estimates</p>
+<p><span class="math display">$$
+\frac{\pi}{4}.
+$$</span></p>
+<hr />
+<h2 id="estimating-pi">Estimating pi</h2>
+<p>The estimate is therefore</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>pi_estimate <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">*</span> fraction_inside</span></code></pre></div>
+<p>and can be compared with R’s built-in value:</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>pi_estimate</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
+<p>With a sufficiently large value of <code>N</code>, the Monte Carlo
+estimate should be close to the true value of <span
+class="math inline"><em>π</em></span>.</p>
+<p>The result will not usually be exactly equal to <span
+class="math inline"><em>π</em></span> because the estimate is based on a
+finite random sample.</p>
+<hr />
+<h2 id="complete-numerical-calculation">Complete numerical
+calculation</h2>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of random points</span></span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate uniformly distributed coordinates</span></span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(N, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a><span class="co"># TRUE if the point lies inside the quarter-circle</span></span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>inside <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">1</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Fraction of simulated points inside</span></span>
+<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a>fraction_inside <span class="ot">&lt;-</span> <span class="fu">mean</span>(inside)</span>
+<span id="cb68-15"><a href="#cb68-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-16"><a href="#cb68-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Monte Carlo estimate of pi</span></span>
+<span id="cb68-17"><a href="#cb68-17" aria-hidden="true" tabindex="-1"></a>pi_estimate <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">*</span> fraction_inside</span>
+<span id="cb68-18"><a href="#cb68-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb68-19"><a href="#cb68-19" aria-hidden="true" tabindex="-1"></a>pi_estimate</span>
+<span id="cb68-20"><a href="#cb68-20" aria-hidden="true" tabindex="-1"></a>pi</span></code></pre></div>
+<hr />
+<h2 id="visualizing-the-simulation">Visualizing the simulation</h2>
+<p>For visualization, a smaller number of points is convenient:</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">5000</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(N)</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(N)</span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>inside <span class="ot">&lt;-</span> x<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">1</span></span></code></pre></div>
+<p>Plot the simulated points:</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  x, y,</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">cex =</span> <span class="fl">0.5</span>,</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;x&quot;</span>,</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;y&quot;</span>,</span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">asp =</span> <span class="dv">1</span>,</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Monte Carlo Estimation of Pi&quot;</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Important plotting arguments are:</p>
+<ul>
+<li><code>pch = 16</code> — draws each point as a filled circle;</li>
+<li><code>cex = 0.5</code> — reduces the point size;</li>
+<li><code>asp = 1</code> — forces equal scaling of the <span
+class="math inline"><em>x</em></span> and <span
+class="math inline"><em>y</em></span> axes.</li>
+</ul>
+<p>The argument</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>asp <span class="ot">=</span> <span class="dv">1</span></span></code></pre></div>
+<p>is particularly important here. Without equal axis scaling, a
+geometrically circular curve may appear stretched or compressed on the
+screen.</p>
+<hr />
+<h2 id="drawing-the-quarter-circle">Drawing the quarter-circle</h2>
+<p>The upper boundary of the quarter-circle follows from</p>
+<p><span
+class="math display"><em>x</em><sup>2</sup> + <em>y</em><sup>2</sup> = 1.</span></p>
+<p>Solving for <span class="math inline"><em>y</em></span> gives</p>
+<p><span class="math display">$$
+y = \sqrt{1-x^2}.
+$$</span></p>
+<p>It can be added to the existing plot using</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">curve</span>(</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">-</span> x<span class="sc">^</span><span class="dv">2</span>),</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="dv">0</span>,</span>
+<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="dv">1</span>,</span>
+<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span></span>
+<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Here:</p>
+<ul>
+<li><code>from = 0</code> and <code>to = 1</code> specify the range of
+<span class="math inline"><em>x</em></span>;</li>
+<li><code>add = TRUE</code> means <strong>draw the curve on the existing
+plot</strong> rather than opening a new plot;</li>
+<li><code>lwd = 2</code> increases the line width.</li>
+</ul>
+<hr />
+<h2 id="final-estimate-from-the-plotted-sample">Final estimate from the
+plotted sample</h2>
+<p>The Monte Carlo estimate can again be calculated directly:</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="sc">*</span> <span class="fu">mean</span>(inside)</span></code></pre></div>
+<p>Since this visualization uses only 5000 points rather than 100000,
+its estimate may differ slightly more from the exact value of <span
+class="math inline"><em>π</em></span>.</p>
+<hr />
+<h2 id="effect-of-sample-size">Effect of sample size</h2>
+<p>An important idea in Monte Carlo simulation is that estimates usually
+become more stable as the number of random samples increases.</p>
+<p>For example, try:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">100000</span></span></code></pre></div>
+<p>and compare the corresponding estimates of <span
+class="math inline"><em>π</em></span>.</p>
+<p>The exact sequence of estimates will depend on the random sample, but
+larger values of <code>N</code> generally give estimates closer to the
+true value.</p>
+<p>This example therefore introduces several useful R ideas at once:</p>
+<ul>
+<li>random-number generation with <code>runif()</code>;</li>
+<li>reproducibility with <code>set.seed()</code>;</li>
+<li>logical vectors;</li>
+<li>using <code>mean()</code> with <code>TRUE</code> and
+<code>FALSE</code>;</li>
+<li>simulation-based numerical estimation;</li>
+<li>geometric visualization with <code>plot()</code> and
+<code>curve()</code>.</li>
+</ul>
+<hr />
+<h1 id="introduction-to-bioconductor">5. Introduction to
+Bioconductor</h1>
+<p>File: <a href="BioConductor.R"><code>BioConductor.R</code></a></p>
+<p>The final part of the lecture gives a short introduction to
+<strong>Bioconductor</strong>, an ecosystem of R packages designed for
+biological and genomic data analysis.</p>
+<p>This example uses the <code>Biostrings</code> package to work with a
+DNA sequence.</p>
+<hr />
+<h2 id="installing-bioconductor-packages">Installing Bioconductor
+packages</h2>
+<p>Install <code>BiocManager</code> once:</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;BiocManager&quot;</span>)</span></code></pre></div>
+<p>Use it to install Bioconductor packages:</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">&quot;Biostrings&quot;</span>)</span></code></pre></div>
+<p>Load the package:</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span></code></pre></div>
+<hr />
+<h2 id="creating-a-dna-sequence">Creating a DNA sequence</h2>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>dna <span class="ot">&lt;-</span> <span class="fu">DNAString</span>(</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG&quot;</span></span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true" tabindex="-1"></a>dna</span></code></pre></div>
+<p><code>DNAString</code> stores a DNA sequence as a biological sequence
+object rather than as ordinary text.</p>
+<hr />
+<h2 id="sequence-length">Sequence length</h2>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(dna)</span></code></pre></div>
+<hr />
+<h2 id="nucleotide-composition">Nucleotide composition</h2>
+<p>Count each nucleotide:</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">letterFrequency</span>(</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>  dna,</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;G&quot;</span>, <span class="st">&quot;T&quot;</span>)</span>
+<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<hr />
+<h2 id="gc-content">GC content</h2>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a>gc_count <span class="ot">&lt;-</span> <span class="fu">letterFrequency</span>(</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a>  dna,</span>
+<span id="cb81-3"><a href="#cb81-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">letters =</span> <span class="fu">c</span>(<span class="st">&quot;G&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb81-4"><a href="#cb81-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb81-5"><a href="#cb81-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-6"><a href="#cb81-6" aria-hidden="true" tabindex="-1"></a>gc_percent <span class="ot">&lt;-</span> <span class="fu">sum</span>(gc_count) <span class="sc">/</span> <span class="fu">length</span>(dna) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb81-7"><a href="#cb81-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb81-8"><a href="#cb81-8" aria-hidden="true" tabindex="-1"></a>gc_percent</span></code></pre></div>
+<p>The GC percentage is</p>
+<p><span class="math display">$$
+\mathrm{GC\%} =
+\frac{G + C}{A + T + G + C}
+\times 100
+$$</span></p>
+<hr />
+<h2 id="reverse-complement">Reverse complement</h2>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">reverseComplement</span>(dna)</span></code></pre></div>
+<p>For double-stranded DNA, this gives the sequence of the complementary
+strand written in the standard <code>5' -&gt; 3'</code> direction.</p>
+<hr />
+<h2 id="translation">Translation</h2>
+<p>Translate the DNA sequence into an amino-acid sequence:</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>protein <span class="ot">&lt;-</span> <span class="fu">translate</span>(dna)</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>protein</span></code></pre></div>
+<p>This provides a simple example of how specialized R packages can
+represent and manipulate biological data directly.</p>
+<hr />
