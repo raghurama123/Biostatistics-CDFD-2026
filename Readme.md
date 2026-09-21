@@ -1,11 +1,8 @@
 # Biostatistics-CDFD-2026
 
-A Biostatistics course offered to PhD students at [_BRIC-Centre for DNA Fingerprinting and Diagnostics - CDFD_](https://www.cdfd.org.in/) during August-December 2026. 
+A Biostatistics course offered to PhD students at _BRIC-Centre for DNA Fingerprinting and Diagnostics - CDFD_ during August-December 2026. 
 
 ## Lecture notes
-Read the lecture notes here: [**https://raghurama123.github.io/Biostatistics-CDFD-2026/**](https://raghurama123.github.io/Biostatistics-CDFD-2026/)
-
-Additional content will be added as the course progresses.
 
 ### [**Lecture 01**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
 
@@ -27,6 +24,8 @@ Lecture 02 introduces discrete probability distributions and hypothesis testing 
 5. **Cumulative probability** — calculating probabilities such as $P(X\leq x)$ by summing individual probabilities and using cumulative distribution functions.
 6. **Hypothesis testing** — introducing the null and alternative hypotheses, p-values, significance levels, rejection regions, and left-tailed tests using the HIV mutation example.
 7. **Confidence and significance levels** — connecting $\alpha=0.05$ with a corresponding 95% probability level and interpreting significance thresholds in discrete probability distributions.
+
+_Additional content will be added as the course progresses._
 
 ## Repository 
 
