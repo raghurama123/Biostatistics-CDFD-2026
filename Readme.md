@@ -7,7 +7,7 @@ Read the lecture notes here: [**https://raghurama123.github.io/Biostatistics-CDF
 
 Additional content will be added as the course progresses.
 
-### Lecture 01 [**Lec01.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
+### [**Lecture 01**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
 
 Lecture 01 introduces R:
 
@@ -16,7 +16,7 @@ Lecture 01 introduces R:
 3. **ggplot2** — introduction to plotting with `ggplot2`, including scatter plots and fitted regression lines.
 4. **Bioconductor** — a first example using `Biostrings` to work with DNA sequences.
 
-### Lecture 02 [**Lec02.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html)
+### [**Lecture 02**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html)
 
 Lecture 02 introduces discrete probability distributions and hypothesis testing using biological examples:
 
@@ -56,9 +56,8 @@ The [`HowToR`](HowToR/) folder contains short manuals and examples explaining ho
 
 The main general reference for the course is the online book:
 
-**Modern Statistics for Modern Biology**
-Susan Holmes and Wolfgang Huber
-[https://www.huber.embl.de/msmb/](https://www.huber.embl.de/msmb/)
+**[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)**
+Susan Holmes and Wolfgang Huber    
 
 The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R.
 

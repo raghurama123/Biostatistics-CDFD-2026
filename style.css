@@ -1,26 +1,23 @@
 /* ==========================================================
    Biostatistics-CDFD-2026
    Course website stylesheet
+   Blue is reserved for hyperlinks only
    ========================================================== */
 
 :root {
     --bg: #ffffff;
     --bg-soft: #f6f8fb;
+
     --text: #20242a;
     --muted: #5f6b76;
 
-    --primary: #174a7e;
-    --primary-dark: #10375e;
-    --accent: #2f80c9;
+    --link: #174a7e;
+    --link-hover: #2f80c9;
 
     --border: #dfe5eb;
     --code-bg: #f3f5f7;
 
     --max-width: 980px;
-
-    --shadow:
-        0 1px 2px rgba(0, 0, 0, 0.04),
-        0 6px 20px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -67,9 +64,9 @@ h1 {
     letter-spacing: -0.04em;
     line-height: 1.1;
 
-    color: var(--primary-dark);
+    color: var(--text);
 
-    border-bottom: 4px solid var(--accent);
+    border-bottom: 2px solid var(--border);
     padding-bottom: 20px;
 }
 
@@ -99,7 +96,7 @@ h2 {
     font-weight: 650;
     letter-spacing: -0.02em;
 
-    color: var(--primary-dark);
+    color: var(--text);
 
     border-bottom: 1px solid var(--border);
     padding-bottom: 10px;
@@ -112,11 +109,14 @@ h3 {
     font-size: 1.3rem;
     font-weight: 650;
 
-    color: var(--primary);
+    color: var(--text);
 }
 
 h4 {
-    color: var(--primary);
+    margin-top: 28px;
+    margin-bottom: 12px;
+
+    color: var(--text);
 }
 
 
@@ -130,19 +130,24 @@ p {
 
 
 /* ----------------------------------------------------------
-   Links
+   Hyperlinks
    ---------------------------------------------------------- */
 
 a {
-    color: var(--primary);
+    color: var(--link);
     text-decoration: none;
     font-weight: 500;
 
     text-underline-offset: 3px;
 }
 
-a:hover {
-    color: var(--accent);
+a:visited {
+    color: var(--link);
+}
+
+a:hover,
+a:focus {
+    color: var(--link-hover);
     text-decoration: underline;
 }
 
@@ -152,40 +157,28 @@ a:hover {
    ---------------------------------------------------------- */
 
 /*
-   A paragraph immediately following an h3 containing a link
-   gets a button-like appearance.
+   Links immediately following Lecture headings remain
+   simple text links rather than buttons.
 */
 
 h3 + p a {
-    display: inline-block;
+    color: var(--link);
 
-    margin: 4px 0 12px;
-    padding: 9px 16px;
-
-    color: #ffffff;
-    background: var(--primary);
-
-    border-radius: 7px;
+    padding: 0;
+    margin: 0;
 
     font-weight: 600;
     text-decoration: none;
-
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
 }
 
-h3 + p a:hover {
-    color: #ffffff;
-    background: var(--primary-dark);
+h3 + p a:visited {
+    color: var(--link);
+}
 
-    text-decoration: none;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.12);
+h3 + p a:hover,
+h3 + p a:focus {
+    color: var(--link-hover);
+    text-decoration: underline;
 }
 
 
@@ -204,12 +197,25 @@ li {
 }
 
 li::marker {
-    color: var(--primary);
+    color: var(--text);
 }
 
 
 /* ----------------------------------------------------------
-   Code
+   Strong and emphasized text
+   ---------------------------------------------------------- */
+
+strong {
+    font-weight: 650;
+}
+
+em {
+    color: inherit;
+}
+
+
+/* ----------------------------------------------------------
+   Inline code
    ---------------------------------------------------------- */
 
 code {
@@ -224,11 +230,17 @@ code {
 
     font-size: 0.9em;
 
+    color: var(--text);
     background: var(--code-bg);
 
     border: 1px solid var(--border);
     border-radius: 4px;
 }
+
+
+/* ----------------------------------------------------------
+   Code blocks
+   ---------------------------------------------------------- */
 
 pre {
     margin: 24px 0;
@@ -236,10 +248,11 @@ pre {
 
     overflow-x: auto;
 
+    color: var(--text);
     background: var(--code-bg);
 
     border: 1px solid var(--border);
-    border-left: 4px solid var(--primary);
+    border-left: 4px solid var(--border);
 
     border-radius: 8px;
 
@@ -249,6 +262,7 @@ pre {
 pre code {
     padding: 0;
 
+    color: inherit;
     background: transparent;
 
     border: none;
@@ -266,7 +280,7 @@ blockquote {
     color: var(--muted);
     background: var(--bg-soft);
 
-    border-left: 4px solid var(--accent);
+    border-left: 4px solid var(--border);
 
     border-radius: 0 7px 7px 0;
 }
@@ -303,7 +317,7 @@ td {
 }
 
 th {
-    color: var(--primary-dark);
+    color: var(--text);
     background: var(--bg-soft);
 
     font-weight: 650;
@@ -347,6 +361,24 @@ img {
 
 
 /* ----------------------------------------------------------
+   Figures and captions
+   ---------------------------------------------------------- */
+
+figure {
+    margin: 32px 0;
+}
+
+figcaption {
+    margin-top: 10px;
+
+    color: var(--muted);
+
+    font-size: 0.92rem;
+    text-align: center;
+}
+
+
+/* ----------------------------------------------------------
    Contact section
    ---------------------------------------------------------- */
 
@@ -360,8 +392,8 @@ h2:last-of-type {
    ---------------------------------------------------------- */
 
 ::selection {
-    color: #ffffff;
-    background: var(--primary);
+    color: var(--text);
+    background: #e5e8eb;
 }
 
 
@@ -410,29 +442,19 @@ h2:last-of-type {
     :root {
         --bg: #11161c;
         --bg-soft: #182029;
+
         --text: #dce3ea;
         --muted: #aab5c0;
 
-        --primary: #76b7eb;
-        --primary-dark: #a7d4f5;
-        --accent: #58a6df;
+        --link: #76b7eb;
+        --link-hover: #a7d4f5;
 
         --border: #303b46;
         --code-bg: #161d24;
-
-        --shadow: none;
-    }
-
-    h3 + p a {
-        color: #ffffff;
-        background: #286da8;
-    }
-
-    h3 + p a:hover {
-        background: #347fba;
     }
 
     ::selection {
-        background: #347fba;
+        color: var(--text);
+        background: #303b46;
     }
 }
