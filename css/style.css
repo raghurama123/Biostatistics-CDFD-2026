@@ -63,3 +63,25 @@ blockquote {
 img {
     max-width: 100%;
 }
+
+/* ----------------------------------------------------------
+   Lecture navigation
+   ---------------------------------------------------------- */
+
+.lecture-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.lecture-nav .home {
+    justify-self: center;
+}
+
+.lecture-nav .next {
+    justify-self: end;
+}

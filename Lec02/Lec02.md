@@ -1,3 +1,21 @@
+<table style="width:100%; border:none;">
+<tr>
+
+<td style="width:33%; text-align:left; border:none;">
+<a href="../Lec01/Lec01.html"><strong>← Previous Lecture</strong></a>
+</td>
+
+<td style="width:34%; text-align:center; border:none;">
+<a href="../"><strong>Home</strong></a>
+</td>
+
+<td style="width:33%; text-align:right; border:none;">
+<a href="../Lec03/Lec03.html"><strong>Next Lecture →</strong></a>
+</td>
+
+</tr>
+</table>
+
 # Lecture 02 — Discrete Probability Distributions and Hypothesis Testing
 
 This lecture introduces two important probability distributions for **count data**: the **binomial distribution** and the **Poisson distribution**.

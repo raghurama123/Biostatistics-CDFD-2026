@@ -1,3 +1,17 @@
+<table style="width:100%; border:none;">
+<tr>
+<td style="width:33%; border:none;"></td>
+
+<td style="width:34%; text-align:center; border:none;">
+<a href="https://raghurama123.github.io/Biostatistics-CDFD-2026/"><strong>Home</strong></a>
+</td>
+
+<td style="width:33%; text-align:right; border:none;">
+<a href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html"><strong>Next Lecture →</strong></a>
+</td>
+</tr>
+</table>
+
 # Lecture 01 — Introduction to R for Biostatistics
 
 This lecture introduces the basic R workflow used in the course: working with R objects, reading data from files, visualizing data with `ggplot2`, and using a simple Bioconductor package for biological sequence analysis.
