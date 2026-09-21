@@ -54,10 +54,7 @@ The [`HowToR`](HowToR/) folder contains short manuals and examples explaining ho
 
 ## General reference
 
-The main general reference for the course is the online book:
-
-**[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)**
-Susan Holmes and Wolfgang Huber    
+The main general reference for the course is the online book: **[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)** by Susan Holmes and Wolfgang Huber    
 
 The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R.
 
