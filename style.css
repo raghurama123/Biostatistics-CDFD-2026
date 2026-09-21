@@ -152,11 +152,7 @@ a:hover {
    ---------------------------------------------------------- */
 
 /*
-   A paragraph consisting primarily of a bold link,
-   such as:
-
-   [**Lec01/Lec01.html**](...)
-
+   A paragraph immediately following an h3 containing a link
    gets a button-like appearance.
 */
 
@@ -347,42 +343,6 @@ img {
     margin: 28px auto;
 
     border-radius: 8px;
-}
-
-
-/* ----------------------------------------------------------
-   Pandoc table of contents
-   ---------------------------------------------------------- */
-
-nav#TOC {
-    margin: 35px 0 45px;
-    padding: 20px 26px;
-
-    background: var(--bg-soft);
-
-    border: 1px solid var(--border);
-    border-radius: 10px;
-}
-
-nav#TOC::before {
-    content: "Contents";
-
-    display: block;
-
-    margin-bottom: 8px;
-
-    color: var(--primary-dark);
-
-    font-size: 1.15rem;
-    font-weight: 700;
-}
-
-nav#TOC ul {
-    margin: 0;
-}
-
-nav#TOC a {
-    font-weight: 500;
 }
 
 
