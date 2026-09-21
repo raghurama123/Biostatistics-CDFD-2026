@@ -7,22 +7,18 @@ Read the lecture notes here: [**https://raghurama123.github.io/Biostatistics-CDF
 
 Additional content will be added as the course progresses.
 
-### Lecture 01
+### Lecture 01 [**Lec01.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
 
 Lecture 01 introduces R:
-
-[**Lec01/Lec01.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
 
 1. **R Basics** — basic syntax, variables, vectors, data frames, descriptive statistics, plots, statistical tests, correlation, and linear regression.
 2. **Reading data files** — reading CSV/TSV files, inspecting data, selecting rows and columns, modifying data, and saving results.
 3. **ggplot2** — introduction to plotting with `ggplot2`, including scatter plots and fitted regression lines.
 4. **Bioconductor** — a first example using `Biostrings` to work with DNA sequences.
 
-### Lecture 02
+### Lecture 02 [**Lec02.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html)
 
 Lecture 02 introduces discrete probability distributions and hypothesis testing using biological examples:
-
-[**Lec02/Lec02.html**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html)
 
 1. **Discrete random variables** — introduction to discrete data, probability distributions, and biological examples involving counts.
 2. **Binomial distribution** — modeling repeated independent trials with two possible outcomes, illustrated using coin tosses and implemented in R with `dbinom()` and `pbinom()`.
