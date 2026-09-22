@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Interactive Normal Distribution</title>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <!-- MathJax for equations -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      }
+    };
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    async>
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      max-width: 800px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .control {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    #plot {
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <h1>Interactive Normal Distribution</h1>
+
+  <h2>Normal distribution</h2>
+
+  <p>
+    For a normal random variable,
+  </p>
+
+  $$
+  X \sim N(\mu,\sigma^2)
+  $$
+
+  <p>
+    the probability density function is
+  </p>
+
+  $$
+  f(x)
+  =
+  \frac{1}{\sigma\sqrt{2\pi}}
+  \exp\left[
+    -\frac{(x-\mu)^2}{2\sigma^2}
+  \right].
+  $$
+
+  <p>
+    Use the sliders below to explore how the mean
+    $\mu$ and standard deviation $\sigma$
+    affect the probability density.
+  </p>
+
+
+  <!-- Controls -->
+
+  <div class="controls">
+
+    <div class="control">
+
+      <label for="mu-slider">
+        <strong>Mean (&mu;):</strong>
+        <span id="mu-value">0.0</span>
+      </label>
+
+      <input
+        id="mu-slider"
+        type="range"
+        min="-5"
+        max="5"
+        step="0.1"
+        value="0"
+      >
+
+    </div>
+
+
+    <div class="control">
+
+      <label for="sigma-slider">
+        <strong>Standard deviation (&sigma;):</strong>
+        <span id="sigma-value">1.0</span>
+      </label>
+
+      <input
+        id="sigma-slider"
+        type="range"
+        min="0.5"
+        max="3"
+        step="0.1"
+        value="1"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- Plot -->
+
+  <div id="plot"></div>
+
+
+  <script>
+
+    // -------------------------------------------------------
+    // Create x values
+    // -------------------------------------------------------
+
+    const x = [];
+
+    const xmin = -10;
+    const xmax = 10;
+    const n = 1000;
+
+    for (let i = 0; i < n; i++) {
+
+      x.push(
+        xmin +
+        (xmax - xmin) *
+        i / (n - 1)
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Normal probability density function
+    // -------------------------------------------------------
+
+    function normalDensity(x, mu, sigma) {
+
+      return (
+        Math.exp(
+          -0.5 *
+          Math.pow(
+            (x - mu) / sigma,
+            2
+          )
+        )
+        /
+        (
+          sigma *
+          Math.sqrt(2 * Math.PI)
+        )
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Initial values
+    // -------------------------------------------------------
+
+    let mu = 0;
+    let sigma = 1;
+
+    let y = x.map(
+      value => normalDensity(
+        value,
+        mu,
+        sigma
+      )
+    );
+
+
+    // -------------------------------------------------------
+    // Plotly trace
+    // -------------------------------------------------------
+
+    const trace = {
+
+      x: x,
+      y: y,
+
+      type: "scatter",
+      mode: "lines",
+
+      hovertemplate:
+        "x = %{x:.2f}" +
+        "<br>f(x) = %{y:.4f}" +
+        "<extra></extra>"
+
+    };
+
+
+    // -------------------------------------------------------
+    // Plot layout
+    // -------------------------------------------------------
+
+    const layout = {
+
+      title: {
+        text: "Normal Distribution"
+      },
+
+      xaxis: {
+        title: "x",
+        range: [-10, 10]
+      },
+
+      yaxis: {
+        title: "Probability density, f(x)",
+        range: [0, 0.85]
+      },
+
+      shapes: [
+
+        {
+          type: "line",
+
+          x0: mu,
+          x1: mu,
+
+          y0: 0,
+          y1: normalDensity(mu, mu, sigma),
+
+          line: {
+            dash: "dash",
+            width: 2
+          }
+        }
+
+      ],
+
+      annotations: [
+
+        {
+          x: 0.02,
+          y: 0.95,
+
+          xref: "paper",
+          yref: "paper",
+
+          text: "&mu; = 0.0, &sigma; = 1.0",
+
+          showarrow: false,
+
+          xanchor: "left",
+
+          font: {
+            size: 16
+          }
+        }
+
+      ],
+
+      margin: {
+        t: 70,
+        r: 30,
+        b: 60,
+        l: 70
+      }
+
+    };
+
+
+    // -------------------------------------------------------
+    // Draw initial plot
+    // -------------------------------------------------------
+
+    Plotly.newPlot(
+      "plot",
+      [trace],
+      layout,
+      {
+        responsive: true
+      }
+    );
+
+
+    // -------------------------------------------------------
+    // Slider elements
+    // -------------------------------------------------------
+
+    const muSlider =
+      document.getElementById("mu-slider");
+
+    const sigmaSlider =
+      document.getElementById("sigma-slider");
+
+    const muValue =
+      document.getElementById("mu-value");
+
+    const sigmaValue =
+      document.getElementById("sigma-value");
+
+
+    // -------------------------------------------------------
+    // Update plot when sliders move
+    // -------------------------------------------------------
+
+    function updatePlot() {
+
+      mu =
+        parseFloat(muSlider.value);
+
+      sigma =
+        parseFloat(sigmaSlider.value);
+
+
+      // Update labels
+
+      muValue.textContent =
+        mu.toFixed(1);
+
+      sigmaValue.textContent =
+        sigma.toFixed(1);
+
+
+      // Recalculate density
+
+      y = x.map(
+        value => normalDensity(
+          value,
+          mu,
+          sigma
+        )
+      );
+
+
+      // Height of normal curve at the mean
+
+      const peak =
+        normalDensity(
+          mu,
+          mu,
+          sigma
+        );
+
+
+      // Update curve
+
+      Plotly.restyle(
+        "plot",
+        {
+          y: [y]
+        }
+      );
+
+
+      // Update mean line and annotation
+
+      Plotly.relayout(
+        "plot",
+        {
+
+          "shapes[0].x0": mu,
+          "shapes[0].x1": mu,
+          "shapes[0].y1": peak,
+
+          "annotations[0].text":
+            "&mu; = " +
+            mu.toFixed(1) +
+            ", &sigma; = " +
+            sigma.toFixed(1)
+
+        }
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Listen to sliders
+    // -------------------------------------------------------
+
+    muSlider.addEventListener(
+      "input",
+      updatePlot
+    );
+
+    sigmaSlider.addEventListener(
+      "input",
+      updatePlot
+    );
+
+  </script>
+
+</body>
+
+</html>

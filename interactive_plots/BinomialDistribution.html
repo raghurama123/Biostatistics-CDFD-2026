@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Interactive Binomial Distribution</title>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <!-- MathJax for equations -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      }
+    };
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    async>
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      max-width: 800px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .control {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="range"] {
+      width: 100%;
+    }
+
+    #plot {
+      width: 100%;
+      height: 500px;
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <h1>Interactive Binomial Distribution</h1>
+
+  <h2>Binomial distribution</h2>
+
+  <p>
+    For a binomial random variable,
+  </p>
+
+  $$
+  X \sim \operatorname{Binomial}(n,p)
+  $$
+
+  <p>
+    the probability of observing exactly $k$ successes is
+  </p>
+
+  $$
+  P(X=k)
+  =
+  {n \choose k}
+  p^k(1-p)^{n-k}.
+  $$
+
+  <p>
+    Use the sliders below to explore how the number of trials
+    $n$ and probability of success $p$ affect the distribution.
+  </p>
+
+
+  <!-- Controls -->
+
+  <div class="controls">
+
+    <div class="control">
+
+      <label for="n-slider">
+        <strong>Number of trials (n):</strong>
+        <span id="n-value">10</span>
+      </label>
+
+      <input
+        id="n-slider"
+        type="range"
+        min="1"
+        max="100"
+        step="1"
+        value="10"
+      >
+
+    </div>
+
+
+    <div class="control">
+
+      <label for="p-slider">
+        <strong>Probability of success (p):</strong>
+        <span id="p-value">0.50</span>
+      </label>
+
+      <input
+        id="p-slider"
+        type="range"
+        min="0.01"
+        max="0.99"
+        step="0.01"
+        value="0.50"
+      >
+
+    </div>
+
+  </div>
+
+
+  <!-- Plot -->
+
+  <div id="plot"></div>
+
+
+  <script>
+
+    // -------------------------------------------------------
+    // Binomial coefficient
+    // -------------------------------------------------------
+
+    function logBinomialCoefficient(n, k) {
+
+      if (k < 0 || k > n) {
+        return -Infinity;
+      }
+
+      k = Math.min(k, n - k);
+
+      let result = 0;
+
+      for (let i = 1; i <= k; i++) {
+
+        result +=
+          Math.log(n - k + i) -
+          Math.log(i);
+
+      }
+
+      return result;
+
+    }
+
+
+    // -------------------------------------------------------
+    // Binomial probability mass function
+    // -------------------------------------------------------
+
+    function binomialProbability(k, n, p) {
+
+      const logChoose =
+        logBinomialCoefficient(n, k);
+
+      const logProbability =
+        logChoose +
+        k * Math.log(p) +
+        (n - k) * Math.log(1 - p);
+
+      return Math.exp(logProbability);
+
+    }
+
+
+    // -------------------------------------------------------
+    // Generate distribution
+    // -------------------------------------------------------
+
+    function makeDistribution(n, p) {
+
+      const x = [];
+      const y = [];
+
+      for (let k = 0; k <= n; k++) {
+
+        x.push(k);
+
+        y.push(
+          binomialProbability(
+            k,
+            n,
+            p
+          )
+        );
+
+      }
+
+      return {
+        x: x,
+        y: y
+      };
+
+    }
+
+
+    // -------------------------------------------------------
+    // Initial values
+    // -------------------------------------------------------
+
+    let n = 10;
+    let p = 0.5;
+
+    let distribution =
+      makeDistribution(n, p);
+
+    let x =
+      distribution.x;
+
+    let y =
+      distribution.y;
+
+    let mean =
+      n * p;
+
+    let maxProbability =
+      Math.max(...y);
+
+
+    // -------------------------------------------------------
+    // Plotly trace
+    // -------------------------------------------------------
+
+    const trace = {
+
+      x: x,
+      y: y,
+
+      type: "bar",
+
+      hovertemplate:
+        "k = %{x}" +
+        "<br>P(X = k) = %{y:.4f}" +
+        "<extra></extra>"
+
+    };
+
+
+    // -------------------------------------------------------
+    // Plot layout
+    // -------------------------------------------------------
+
+    const layout = {
+
+      title: {
+        text: "Binomial Distribution"
+      },
+
+      xaxis: {
+        title: "Number of successes (k)",
+        dtick: 1
+      },
+
+      yaxis: {
+        title: "Probability",
+        range: [
+          0,
+          maxProbability * 1.20
+        ]
+      },
+
+      shapes: [
+
+        {
+          type: "line",
+
+          x0: mean,
+          x1: mean,
+
+          y0: 0,
+          y1: maxProbability,
+
+          line: {
+            dash: "dash",
+            width: 2
+          }
+        }
+
+      ],
+
+      annotations: [
+
+        {
+          x: 0.02,
+          y: 0.95,
+
+          xref: "paper",
+          yref: "paper",
+
+          text:
+            "n = 10, p = 0.50, E[X] = np = 5.00",
+
+          showarrow: false,
+
+          xanchor: "left",
+
+          font: {
+            size: 16
+          }
+        }
+
+      ],
+
+      margin: {
+        t: 70,
+        r: 30,
+        b: 60,
+        l: 70
+      },
+
+      bargap: 0.1
+    };
+
+
+    // -------------------------------------------------------
+    // Draw initial plot
+    // -------------------------------------------------------
+
+    Plotly.newPlot(
+      "plot",
+      [trace],
+      layout,
+      {
+        responsive: true
+      }
+    );
+
+
+    // -------------------------------------------------------
+    // Slider elements
+    // -------------------------------------------------------
+
+    const nSlider =
+      document.getElementById("n-slider");
+
+    const pSlider =
+      document.getElementById("p-slider");
+
+    const nValue =
+      document.getElementById("n-value");
+
+    const pValue =
+      document.getElementById("p-value");
+
+
+    // -------------------------------------------------------
+    // Update plot when sliders move
+    // -------------------------------------------------------
+
+    function updatePlot() {
+
+      n =
+        parseInt(nSlider.value);
+
+      p =
+        parseFloat(pSlider.value);
+
+
+      // Update labels
+
+      nValue.textContent =
+        n;
+
+      pValue.textContent =
+        p.toFixed(2);
+
+
+      // Recalculate distribution
+
+      distribution =
+        makeDistribution(n, p);
+
+      x =
+        distribution.x;
+
+      y =
+        distribution.y;
+
+
+      // Mean of binomial distribution
+
+      mean =
+        n * p;
+
+
+      // Maximum probability
+
+      maxProbability =
+        Math.max(...y);
+
+
+      // Update bars
+
+      Plotly.restyle(
+        "plot",
+        {
+          x: [x],
+          y: [y]
+        }
+      );
+
+
+      // Update axes, mean line and annotation
+
+      Plotly.relayout(
+        "plot",
+        {
+
+          "xaxis.range": [
+            -0.5,
+            n + 0.5
+          ],
+
+          "yaxis.range": [
+            0,
+            maxProbability * 1.20
+          ],
+
+          "shapes[0].x0": mean,
+          "shapes[0].x1": mean,
+          "shapes[0].y1": maxProbability,
+
+          "annotations[0].text":
+            "n = " +
+            n +
+            ", p = " +
+            p.toFixed(2) +
+            ", E[X] = np = " +
+            mean.toFixed(2)
+
+        }
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Listen to sliders
+    // -------------------------------------------------------
+
+    nSlider.addEventListener(
+      "input",
+      updatePlot
+    );
+
+    pSlider.addEventListener(
+      "input",
+      updatePlot
+    );
+
+  </script>
+
+</body>
+
+</html>
