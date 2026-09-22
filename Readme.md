@@ -47,6 +47,12 @@ Biostatistics-CDFD-2026/
 |   ├── ...
 ```
 
+
+## Interactive plots
+
+- [Normal distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/NormalDistribution.html)
+- [Binomial distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html)
+
 ## How to do various things in R programming? 
 
 The [`HowToR`](HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. 
