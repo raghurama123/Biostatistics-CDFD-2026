@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lec03</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#lecture-03-exact-binomial-tests-in-biostatistics"
+id="toc-lecture-03-exact-binomial-tests-in-biostatistics">Lecture 03 —
+Exact Binomial Tests in Biostatistics</a>
+<ul>
+<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
+objectives</a></li>
+</ul></li>
+<li><a href="#review-of-the-exact-binomial-test"
+id="toc-review-of-the-exact-binomial-test">1. Review of the Exact
+Binomial Test</a>
+<ul>
+<li><a href="#when-is-a-binomial-distribution-suitable"
+id="toc-when-is-a-binomial-distribution-suitable">When is a binomial
+distribution suitable?</a></li>
+<li><a href="#from-a-binomial-model-to-a-hypothesis-test"
+id="toc-from-a-binomial-model-to-a-hypothesis-test">From a binomial
+model to a hypothesis test</a></li>
+<li><a href="#the-observed-success-count-and-proportion"
+id="toc-the-observed-success-count-and-proportion">The observed success
+count and proportion</a></li>
+<li><a href="#expected-number-of-successes-under-h_0"
+id="toc-expected-number-of-successes-under-h_0">Expected number of
+successes under <span class="math inline">\(H_0\)</span></a></li>
+<li><a href="#the-95-out-of-100-interpretation"
+id="toc-the-95-out-of-100-interpretation">The 95-out-of-100
+interpretation</a></li>
+<li><a href="#choosing-the-alternative-hypothesis"
+id="toc-choosing-the-alternative-hypothesis">Choosing the alternative
+hypothesis</a></li>
+<li><a href="#p-value-and-the-cumulative-distribution-function"
+id="toc-p-value-and-the-cumulative-distribution-function">P-value and
+the cumulative distribution function</a></li>
+<li><a href="#left-tailed-test" id="toc-left-tailed-test">Left-tailed
+test</a></li>
+<li><a href="#right-tailed-test" id="toc-right-tailed-test">Right-tailed
+test</a></li>
+<li><a href="#calculating-the-p-value-using-binom.test"
+id="toc-calculating-the-p-value-using-binom.test">Calculating the
+p-value using <code>binom.test()</code></a></li>
+<li><a href="#two-sided-test" id="toc-two-sided-test">Two-sided
+test</a></li>
+<li><a href="#summary" id="toc-summary">Summary</a></li>
+<li><a href="#significance-level-and-statistical-decision"
+id="toc-significance-level-and-statistical-decision">Significance level
+and statistical decision</a></li>
+</ul></li>
+<li><a href="#exact-binomial-test-in-r"
+id="toc-exact-binomial-test-in-r">2. Exact Binomial Test in R</a></li>
+<li><a href="#problem-1-mendels-pea-experiments"
+id="toc-problem-1-mendels-pea-experiments">3. Problem 1: Mendel’s Pea
+Experiments</a>
+<ul>
+<li><a href="#step-1-identify-the-quantities"
+id="toc-step-1-identify-the-quantities">Step 1: Identify the
+quantities</a></li>
+<li><a href="#step-2-state-the-hypotheses"
+id="toc-step-2-state-the-hypotheses">Step 2: State the
+hypotheses</a></li>
+<li><a href="#step-3-compare-the-observed-and-expected-counts"
+id="toc-step-3-compare-the-observed-and-expected-counts">Step 3: Compare
+the observed and expected counts</a></li>
+<li><a href="#step-4-perform-the-exact-binomial-test"
+id="toc-step-4-perform-the-exact-binomial-test">Step 4: Perform the
+exact binomial test</a></li>
+<li><a href="#step-5-make-the-statistical-decision"
+id="toc-step-5-make-the-statistical-decision">Step 5: Make the
+statistical decision</a></li>
+<li><a href="#biological-interpretation"
+id="toc-biological-interpretation">Biological interpretation</a></li>
+<li><a href="#why-is-comparing-5474-with-5493-not-enough"
+id="toc-why-is-comparing-5474-with-5493-not-enough">Why is comparing
+5474 with 5493 not enough?</a></li>
+<li><a href="#questions" id="toc-questions">Questions</a></li>
+</ul></li>
+<li><a href="#problem-2-allele-specific-expression"
+id="toc-problem-2-allele-specific-expression">4. Problem 2:
+Allele-Specific Expression</a>
+<ul>
+<li><a href="#step-1-identify-the-quantities-1"
+id="toc-step-1-identify-the-quantities-1">Step 1: Identify the
+quantities</a></li>
+<li><a href="#step-2-state-the-hypotheses-1"
+id="toc-step-2-state-the-hypotheses-1">Step 2: State the
+hypotheses</a></li>
+<li><a href="#step-3-expected-count-under-h_0"
+id="toc-step-3-expected-count-under-h_0">Step 3: Expected count under
+<span class="math inline">\(H_0\)</span></a></li>
+<li><a href="#step-4-perform-the-exact-binomial-test-1"
+id="toc-step-4-perform-the-exact-binomial-test-1">Step 4: Perform the
+exact binomial test</a></li>
+<li><a href="#step-5-make-the-statistical-decision-1"
+id="toc-step-5-make-the-statistical-decision-1">Step 5: Make the
+statistical decision</a></li>
+<li><a href="#biological-interpretation-1"
+id="toc-biological-interpretation-1">Biological interpretation</a></li>
+<li><a href="#questions-1" id="toc-questions-1">Questions</a></li>
+</ul></li>
+<li><a href="#problem-3-precision-oncology-the-exact-trial"
+id="toc-problem-3-precision-oncology-the-exact-trial">5. Problem 3:
+Precision Oncology — The EXACT Trial</a>
+<ul>
+<li><a href="#step-1-identify-the-quantities-2"
+id="toc-step-1-identify-the-quantities-2">Step 1: Identify the
+quantities</a></li>
+<li><a href="#step-2-state-the-hypotheses-2"
+id="toc-step-2-state-the-hypotheses-2">Step 2: State the
+hypotheses</a></li>
+<li><a href="#step-3-expected-number-of-successes-under-h_0"
+id="toc-step-3-expected-number-of-successes-under-h_0">Step 3: Expected
+number of successes under <span
+class="math inline">\(H_0\)</span></a></li>
+<li><a href="#step-4-perform-the-exact-binomial-test-2"
+id="toc-step-4-perform-the-exact-binomial-test-2">Step 4: Perform the
+exact binomial test</a></li>
+<li><a href="#step-5-make-the-statistical-decision-2"
+id="toc-step-5-make-the-statistical-decision-2">Step 5: Make the
+statistical decision</a></li>
+<li><a href="#interpretation"
+id="toc-interpretation">Interpretation</a></li>
+<li><a href="#critical-region" id="toc-critical-region">Critical
+region</a></li>
+<li><a href="#why-is-30-the-critical-value"
+id="toc-why-is-30-the-critical-value">Why is 30 the critical
+value?</a></li>
+<li><a href="#observed-p-value-versus-critical-region"
+id="toc-observed-p-value-versus-critical-region">Observed p-value versus
+critical region</a></li>
+<li><a href="#questions-2" id="toc-questions-2">Questions</a></li>
+</ul></li>
+<li><a href="#comparing-the-three-problems"
+id="toc-comparing-the-three-problems">6. Comparing the Three
+Problems</a></li>
+</ul>
+</nav>
+<table style="width:100%; border:none;">
+<tr>
+<td style="width:33%; text-align:left; border:none;">
+<a href="../Lec02/Lec02.html"><strong>← Previous Lecture</strong></a>
+</td>
+<td style="width:34%; text-align:center; border:none;">
+<a href="../"><strong>Home</strong></a>
+</td>
+<td style="width:33%; text-align:right; border:none;">
+<a href="../Lec04/Lec04.html"><strong>Next Lecture →</strong></a>
+</td>
+</tr>
+</table>
+<h1 id="lecture-03-exact-binomial-tests-in-biostatistics">Lecture 03 —
+Exact Binomial Tests in Biostatistics</h1>
+<p>Lecture 02 introduced the binomial distribution, cumulative
+probabilities, significance levels, rejection regions, p-values, and an
+exact binomial hypothesis test using the HIV mutation example.</p>
+<p>In this lecture we first summarize the general logic of an
+<strong>exact binomial test</strong> and then apply it to three
+biological examples:</p>
+<ol type="1">
+<li>Mendel’s pea experiments;</li>
+<li>allele-specific expression;</li>
+<li>the EXACT precision-oncology trial.</li>
+</ol>
+<p>The same statistical framework is used in all three problems. What
+changes from problem to problem is the scientific question, the null
+probability <span class="math inline">\(p_0\)</span>, the direction of
+the alternative hypothesis, and sometimes the significance level <span
+class="math inline">\(\alpha\)</span>.</p>
+<p><a href="#1-review-of-the-exact-binomial-test">1. Review of the Exact
+Binomial Test</a><br />
+<a href="#2-exact-binomial-test-in-r">2. Exact Binomial Test in
+R</a><br />
+<a href="#3-problem-1-mendels-pea-experiments">3. Problem 1: Mendel’s
+Pea Experiments</a><br />
+<a href="#4-problem-2-allele-specific-expression">4. Problem 2:
+Allele-Specific Expression</a><br />
+<a href="#5-problem-3-precision-oncology--the-exact-trial">5. Problem 3:
+Precision Oncology — The EXACT Trial</a><br />
+<a href="#6-comparing-the-three-problems">6. Comparing the Three
+Problems</a><br />
+<a href="#7-discussion-questions">7. Discussion Questions</a><br />
+<a href="#8-r-functions-used-in-this-lecture">8. R Functions Used in
+This Lecture</a><br />
+<a href="#references">References</a></p>
+<hr />
+<h2 id="learning-objectives">Learning objectives</h2>
+<p>By the end of this lecture, you should be able to:</p>
+<ul>
+<li>recognize situations in which a binomial distribution is an
+appropriate model;</li>
+<li>identify the two possible outcomes that define each trial;</li>
+<li>identify <span class="math inline">\(n\)</span>, <span
+class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
+class="math inline">\(p_0\)</span> in a binomial hypothesis-testing
+problem;</li>
+<li>interpret a hypothesis test as asking whether an observed result is
+compatible with the distribution expected under <span
+class="math inline">\(H_0\)</span>;</li>
+<li>write the null and alternative hypotheses;</li>
+<li>distinguish between left-tailed, right-tailed, and two-sided
+tests;</li>
+<li>perform an exact binomial test using <code>binom.test()</code>;</li>
+<li>interpret the p-value;</li>
+<li>compare the p-value with the significance level <span
+class="math inline">\(\alpha\)</span>;</li>
+<li>state the statistical conclusion using <strong>reject <span
+class="math inline">\(H_0\)</span></strong> or <strong>do not reject
+<span class="math inline">\(H_0\)</span></strong>;</li>
+<li>distinguish between the null probability <span
+class="math inline">\(p_0\)</span>, the observed proportion <span
+class="math inline">\(\hat p\)</span>, and the p-value;</li>
+<li>connect a p-value with a rejection region.</li>
+</ul>
+<hr />
+<h1 id="review-of-the-exact-binomial-test">1. Review of the Exact
+Binomial Test</h1>
+<h2 id="when-is-a-binomial-distribution-suitable">When is a binomial
+distribution suitable?</h2>
+<p>A binomial distribution is suitable when the same type of trial is
+repeated and each trial has only <strong>two possible
+outcomes</strong>.</p>
+<p>Examples include:</p>
+<pre class="text"><code>round seed       / wrinkled seed
+
+allele A read    / allele B read
+
+benefit          / no benefit
+
+mutation         / no mutation
+
+positive         / negative
+
+survived         / did not survive</code></pre>
+<p>The two outcomes are often called</p>
+<pre class="text"><code>success
+failure</code></pre>
+<p>For example, in Mendel’s experiment:</p>
+<pre class="text"><code>success = round seed
+failure = wrinkled seed</code></pre>
+<p>A binomial model requires four main conditions:</p>
+<ol type="1">
+<li>there is a fixed number of trials, <span
+class="math inline">\(n\)</span>;</li>
+<li>each trial has two possible outcomes;</li>
+<li>each trial has the same probability of success, <span
+class="math inline">\(p\)</span>;</li>
+<li>the trials are independent.</li>
+</ol>
+<p>Under these conditions, if <span class="math display">\[
+X=\text{number of successes among the }n\text{ trials},
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p).
+\]</span></p>
+<hr />
+<h2 id="from-a-binomial-model-to-a-hypothesis-test">From a binomial
+model to a hypothesis test</h2>
+<p>Suppose we observe the number of successes among <span
+class="math inline">\(n\)</span> independent trials.</p>
+<p>Let</p>
+<p><span class="math display">\[
+X=\text{number of successes}.
+\]</span></p>
+<p>If each trial has the same probability of success <span
+class="math inline">\(p\)</span>, then</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p).
+\]</span></p>
+<p>This probability <span class="math inline">\(p\)</span> is generally
+unknown.</p>
+<p>A hypothesis test compares the data with a specified reference
+value</p>
+<p><span class="math display">\[
+p_0.
+\]</span></p>
+<p>The null hypothesis is usually written as</p>
+<p><span class="math display">\[
+H_0:p=p_0.
+\]</span></p>
+<p>Under <span class="math inline">\(H_0\)</span>,</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p_0).
+\]</span></p>
+<p>This distribution describes the counts that could occur because of
+random variation if the null hypothesis were true.</p>
+<hr />
+<h2 id="the-observed-success-count-and-proportion">The observed success
+count and proportion</h2>
+<p>If we observe</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}
+\]</span></p>
+<p>successes among</p>
+<p><span class="math display">\[
+n
+\]</span></p>
+<p>trials, the observed proportion is</p>
+<p><span class="math display">\[
+\hat p=\frac{x_{\mathrm{obs}}}{n}.
+\]</span></p>
+<p>The observed proportion is an estimate calculated from the
+sample.</p>
+<p>It is different from</p>
+<p><span class="math display">\[
+p_0,
+\]</span></p>
+<p>which is the probability specified by the null hypothesis.</p>
+<p>Thus:</p>
+<pre class="text"><code>p0        probability specified by H0
+
+p-hat     proportion observed in the sample
+
+p-value   probability calculated under H0</code></pre>
+<p>These are three different quantities.</p>
+<hr />
+<h2 id="expected-number-of-successes-under-h_0">Expected number of
+successes under <span class="math inline">\(H_0\)</span></h2>
+<p>Under the null hypothesis,</p>
+<p><span class="math display">\[
+E[X]=np_0.
+\]</span></p>
+<p>The observed count can be compared with this expected value.</p>
+<p>However, simply finding that</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}\ne np_0
+\]</span></p>
+<p>does not show that the null hypothesis is wrong.</p>
+<p>Even when <span class="math inline">\(H_0\)</span> is true, random
+sampling variation causes the observed number of successes to vary from
+experiment to experiment.</p>
+<p>The hypothesis test therefore asks a different question:</p>
+<blockquote>
+<p><strong>How unusual is the observed result, or a result still more
+extreme, if <span class="math inline">\(H_0\)</span> is
+true?</strong></p>
+</blockquote>
+<p>Another useful way to think about the same question is:</p>
+<blockquote>
+<p><strong>Does the new observation fall within the range of results
+that we would commonly expect if <span
+class="math inline">\(H_0\)</span> were true, or does it fall in an
+unusually extreme part of the distribution?</strong></p>
+</blockquote>
+<hr />
+<h2 id="the-95-out-of-100-interpretation">The 95-out-of-100
+interpretation</h2>
+<p>Suppose we use a two-sided test with</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<p>Imagine that the null hypothesis is true and that we could repeat the
+same experiment many times.</p>
+<p>Because of random variation, each repetition would give a slightly
+different number of successes.</p>
+<p>Conceptually, the null distribution can be divided into:</p>
+<pre class="text"><code>unusually low          results compatible          unusually high
+   results                  with H0                    results
+
+     tail               central region                  tail
+      |                       |                          |
+      v                       v                          v
+
+   about 2.5%             about 95%                 about 2.5%</code></pre>
+<p>So, approximately:</p>
+<blockquote>
+<p><strong>If <span class="math inline">\(H_0\)</span> is true, about 95
+out of 100 repeated experiments would give results in the central,
+non-rejection region, while about 5 out of 100 would give results
+sufficiently extreme to fall in the tails.</strong></p>
+</blockquote>
+<p>The central region can therefore be thought of informally as a
+<strong>compatibility window</strong> for the null model.</p>
+<pre class="text"><code>inside the compatibility window
+        -&gt; result is not unusually different from H0
+        -&gt; do not reject H0
+
+outside the compatibility window
+        -&gt; result is unusually extreme under H0
+        -&gt; reject H0</code></pre>
+<p>However, this idea needs two important qualifications.</p>
+<p>First, the test is about the <strong>observed count</strong></p>
+<p><span class="math display">\[
+X
+\]</span></p>
+<p>or equivalently the observed proportion</p>
+<p><span class="math display">\[
+\hat p=\frac{X}{n}.
+\]</span></p>
+<p>It is not saying that there is a 95% probability that <span
+class="math inline">\(H_0\)</span> is true.</p>
+<p>Second, the binomial distribution is discrete. Therefore, the
+probability in the central region cannot always be exactly 95%, because
+the boundaries must occur at integer counts. The actual non-rejection
+probability may be slightly greater than 95%.</p>
+<p>Thus, instead of asking</p>
+<blockquote>
+<p>“Is the new observed proportion exactly equal to <span
+class="math inline">\(p_0\)</span>?”</p>
+</blockquote>
+<p>we ask</p>
+<blockquote>
+<p><strong>“Is the observed count or observed proportion within the
+range of random variation that we would normally expect if <span
+class="math inline">\(p=p_0\)</span>?”</strong></p>
+</blockquote>
+<p>This is the basic logic used in all three examples in this
+lecture.</p>
+<hr />
+<h2 id="choosing-the-alternative-hypothesis">Choosing the alternative
+hypothesis</h2>
+<p>The scientific question determines the alternative hypothesis.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scientific question</th>
+<th>Alternative hypothesis</th>
+<th>Type of test</th>
+<th>R</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Is <span class="math inline">\(p\)</span> smaller than <span
+class="math inline">\(p_0\)</span>?</td>
+<td><span class="math inline">\(H_A:p&lt;p_0\)</span></td>
+<td>left-tailed</td>
+<td><code>"less"</code></td>
+</tr>
+<tr>
+<td>Is <span class="math inline">\(p\)</span> larger than <span
+class="math inline">\(p_0\)</span>?</td>
+<td><span class="math inline">\(H_A:p&gt;p_0\)</span></td>
+<td>right-tailed</td>
+<td><code>"greater"</code></td>
+</tr>
+<tr>
+<td>Is <span class="math inline">\(p\)</span> different from <span
+class="math inline">\(p_0\)</span>?</td>
+<td><span class="math inline">\(H_A:p\ne p_0\)</span></td>
+<td>two-sided</td>
+<td><code>"two.sided"</code></td>
+</tr>
+</tbody>
+</table>
+<p>The alternative hypothesis should be chosen from the scientific
+question, not from the direction seen in the data after the
+experiment.</p>
+<hr />
+<h2 id="p-value-and-the-cumulative-distribution-function">P-value and
+the cumulative distribution function</h2>
+<p>Under the null hypothesis,</p>
+<p><span class="math display">\[
+H_0:p=p_0,
+\]</span></p>
+<p>the number of successes follows</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p_0).
+\]</span></p>
+<p>The <strong>cumulative distribution function (CDF)</strong> of this
+null distribution is</p>
+<p><span class="math display">\[
+F(x)=P(X\le x\mid H_0).
+\]</span></p>
+<p>It gives the probability, assuming <span
+class="math inline">\(H_0\)</span> is true, of obtaining <span
+class="math inline">\(x\)</span> successes or fewer.</p>
+<p>A <strong>p-value</strong> measures how probable the observed result,
+or a result still more extreme in the direction of the alternative
+hypothesis, would be under <span class="math inline">\(H_0\)</span>.</p>
+<p>Thus, the p-value is calculated from the probability distribution
+specified by the null hypothesis.</p>
+<p>The direction of the alternative hypothesis determines which part of
+the distribution is considered more extreme.</p>
+<hr />
+<h2 id="left-tailed-test">Left-tailed test</h2>
+<p>For</p>
+<p><span class="math display">\[
+H_A:p&lt;p_0,
+\]</span></p>
+<p>small values of <span class="math inline">\(X\)</span> provide
+evidence against <span class="math inline">\(H_0\)</span>.</p>
+<p>If we observe</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}},
+\]</span></p>
+<p>then the p-value is the probability of obtaining the observed value
+or an even smaller value:</p>
+<p><span class="math display">\[
+p\text{-value}
+=
+P(X\le x_{\mathrm{obs}}\mid H_0).
+\]</span></p>
+<p>Using the CDF,</p>
+<p><span class="math display">\[
+\boxed{
+p\text{-value}=F(x_{\mathrm{obs}})
+}
+\]</span></p>
+<p>In R, <code>pbinom()</code> calculates the binomial CDF:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  x_obs,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> n,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p0</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>For example, if</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=3,
+\]</span></p>
+<p>the p-value is</p>
+<p><span class="math display">\[
+P(X\le3\mid H_0)
+=
+P(X=0)+P(X=1)+P(X=2)+P(X=3).
+\]</span></p>
+<p>So the p-value includes the observed result and all results that are
+still more extreme in the direction</p>
+<p><span class="math display">\[
+p&lt;p_0.
+\]</span></p>
+<hr />
+<h2 id="right-tailed-test">Right-tailed test</h2>
+<p>For</p>
+<p><span class="math display">\[
+H_A:p&gt;p_0,
+\]</span></p>
+<p>large values of <span class="math inline">\(X\)</span> provide
+evidence against <span class="math inline">\(H_0\)</span>.</p>
+<p>The p-value is therefore</p>
+<p><span class="math display">\[
+p\text{-value}
+=
+P(X\ge x_{\mathrm{obs}}\mid H_0).
+\]</span></p>
+<p>The CDF gives</p>
+<p><span class="math display">\[
+F(x)=P(X\le x).
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+P(X\ge x_{\mathrm{obs}})
+=
+1-P(X\le x_{\mathrm{obs}}-1).
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+\boxed{
+p\text{-value}
+=
+1-F(x_{\mathrm{obs}}-1)
+}
+\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  x_obs <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> n,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p0</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>or equivalently,</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  x_obs <span class="sc">-</span> <span class="dv">1</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> n,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p0,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>The subtraction of 1 is needed because <span
+class="math inline">\(X\)</span> is a discrete integer count.</p>
+<p>For example, if</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=34,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+P(X\ge34)
+=
+1-P(X\le33).
+\]</span></p>
+<p>This is because</p>
+<p><span class="math display">\[
+P(X\le33) + P(X\ge34)
+=
+1.
+\]</span></p>
+<hr />
+<h2 id="calculating-the-p-value-using-binom.test">Calculating the
+p-value using <code>binom.test()</code></h2>
+<p>Instead of calculating the tail probability directly with
+<code>pbinom()</code>, R can perform the complete exact binomial test
+using</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Here:</p>
+<pre class="text"><code>x             observed number of successes
+
+n             total number of trials
+
+p             probability specified by H0
+
+alternative   direction of the alternative hypothesis</code></pre>
+<p>The <code>alternative</code> argument determines which results are
+considered more extreme:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;less&quot;</span></span></code></pre></div>
+<p>corresponds to</p>
+<p><span class="math display">\[
+H_A:p&lt;p_0,
+\]</span></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;greater&quot;</span></span></code></pre></div>
+<p>corresponds to</p>
+<p><span class="math display">\[
+H_A:p&gt;p_0,
+\]</span></p>
+<p>and</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;two.sided&quot;</span></span></code></pre></div>
+<p>corresponds to</p>
+<p><span class="math display">\[
+H_A:p\ne p_0.
+\]</span></p>
+<p><code>binom.test()</code> calculates the exact p-value and stores the
+result in the object <code>result</code>.</p>
+<p>The p-value can then be extracted using</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span></code></pre></div>
+<p>and displayed using</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span></code></pre></div>
+<p>Thus, for a left-tailed test,</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span></code></pre></div>
+<p>gives the same tail probability as</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  x_obs,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> n,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p0</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>Similarly, for a right-tailed test,</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span></code></pre></div>
+<p>gives</p>
+<p><span class="math display">\[
+P(X\ge x_{\mathrm{obs}}\mid H_0).
+\]</span></p>
+<p>So:</p>
+<pre class="text"><code>pbinom()      calculates the required cumulative/tail probability directly
+
+binom.test()  performs the complete exact binomial hypothesis test
+
+result$p.value
+               extracts the p-value calculated by binom.test()</code></pre>
+<hr />
+<h2 id="two-sided-test">Two-sided test</h2>
+<p>For</p>
+<p><span class="math display">\[
+H_A:p\ne p_0,
+\]</span></p>
+<p>results that are either unusually small <strong>or</strong> unusually
+large can provide evidence against <span
+class="math inline">\(H_0\)</span>.</p>
+<p>In R, use</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span></code></pre></div>
+<p>For an exact two-sided binomial test, the p-value is not generally
+obtained by simply doubling one tail probability.</p>
+<p>Therefore, rather than manually combining CDF values, it is
+preferable to let</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">binom.test</span>()</span></code></pre></div>
+<p>perform the exact two-sided calculation.</p>
+<hr />
+<h2 id="summary">Summary</h2>
+<p>For a binomial random variable under <span
+class="math inline">\(H_0\)</span>,</p>
+<p><span class="math display">\[
+F(x)=P(X\le x\mid H_0).
+\]</span></p>
+<p>Therefore:</p>
+<p><span class="math display">\[
+\boxed{
+\begin{aligned}
+H_A:p&lt;p_0
+&amp;\quad\Rightarrow\quad
+p\text{-value}=F(x_{\mathrm{obs}}),\\[4pt]
+H_A:p&gt;p_0
+&amp;\quad\Rightarrow\quad
+p\text{-value}=1-F(x_{\mathrm{obs}}-1).
+\end{aligned}
+}
+\]</span></p>
+<p>In practice, the complete exact test can be performed using</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>   <span class="co"># or &quot;greater&quot; or &quot;two.sided&quot;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>and the p-value obtained using</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span></code></pre></div>
+<p>The p-value therefore answers the question:</p>
+<blockquote>
+<p><strong>Assuming <span class="math inline">\(H_0\)</span> were true,
+<span class="math inline">\(p\)</span>-value is the probability of
+observing the observed result or a result farther in the direction of
+<span class="math inline">\(H_A\)</span>.</strong></p>
+</blockquote>
+<hr />
+<h2 id="significance-level-and-statistical-decision">Significance level
+and statistical decision</h2>
+<p>Before performing the test, choose a significance level</p>
+<p><span class="math display">\[
+\alpha.
+\]</span></p>
+<p>A commonly used value is</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<p>For a two-sided test, this means that approximately the most extreme
+5% of outcomes under <span class="math inline">\(H_0\)</span> form the
+rejection regions, while approximately 95% form the central
+<strong>compatibility region</strong>.</p>
+<p>Because the binomial distribution is discrete, these probabilities
+are not always exactly 5% and 95%.</p>
+<p>The decision rule is</p>
+<p><span class="math display">\[
+\boxed{
+p\text{-value}&lt;\alpha
+\quad\Longrightarrow\quad
+\text{Reject }H_0
+}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\boxed{
+p\text{-value}\ge\alpha
+\quad\Longrightarrow\quad
+\text{Do not reject }H_0
+}
+\]</span></p>
+<p>A p-value is <strong>not</strong> the probability that the null
+hypothesis is true.</p>
+<p>It is a probability calculated <strong>assuming that <span
+class="math inline">\(H_0\)</span> is true</strong>.</p>
+<hr />
+<h1 id="exact-binomial-test-in-r">2. Exact Binomial Test in R</h1>
+<p>The general R template is:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;less&quot;</span>   <span class="co"># or &quot;greater&quot; or &quot;two.sided&quot;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<p>The p-value can be extracted using</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
+<p>The observed proportion is</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> x_obs <span class="sc">/</span> n</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>p_hat</span></code></pre></div>
+<p>Choose the significance level:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span></code></pre></div>
+<p>Then make the decision:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (p_value <span class="sc">&lt;</span> alpha) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Reject H0&quot;</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Do not reject H0&quot;</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>For every problem, follow the same sequence:</p>
+<ol type="1">
+<li>identify <span class="math inline">\(n\)</span>, <span
+class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
+class="math inline">\(p_0\)</span>;</li>
+<li>write <span class="math inline">\(H_0\)</span>;</li>
+<li>write <span class="math inline">\(H_A\)</span>;</li>
+<li>determine the direction of the test;</li>
+<li>calculate <span class="math inline">\(\hat p\)</span> and, when
+useful, <span class="math inline">\(E[X]=np_0\)</span>;</li>
+<li>perform <code>binom.test()</code>;</li>
+<li>report the p-value;</li>
+<li>compare the p-value with <span
+class="math inline">\(\alpha\)</span>;</li>
+<li>state the statistical conclusion in words.</li>
+</ol>
+<hr />
+<h1 id="problem-1-mendels-pea-experiments">3. Problem 1: Mendel’s Pea
+Experiments</h1>
+<p><strong>Mendel, G.</strong> <em>Versuche über Pflanzen-Hybriden</em>.
+Verhandlungen des naturforschenden Vereines in Brünn <strong>4</strong>,
+3–47 (1866).<br />
+English translation and original numerical results:<br />
+<a href="https://www.mendelweb.org/Mendel.html"
+class="uri">https://www.mendelweb.org/Mendel.html</a></p>
+<p>Gregor Mendel studied inheritance in pea plants.</p>
+<p>In one experiment involving seed shape, he obtained</p>
+<p><span class="math display">\[
+n=7324
+\]</span></p>
+<p>seeds.</p>
+<p>Of these,</p>
+<p><span class="math display">\[
+5474
+\]</span></p>
+<p>were round or roundish and</p>
+<p><span class="math display">\[
+1850
+\]</span></p>
+<p>were wrinkled.</p>
+<p>According to the Mendelian model, the expected ratio of dominant to
+recessive phenotypes is</p>
+<p><span class="math display">\[
+3:1.
+\]</span></p>
+<p>Therefore, the expected probability of a round seed is</p>
+<p><span class="math display">\[
+p_0=\frac{3}{4}=0.75.
+\]</span></p>
+<p>We want to test whether the observed proportion of round seeds is
+<strong>different from</strong> the expected Mendelian probability.</p>
+<p>Use</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<hr />
+<h2 id="step-1-identify-the-quantities">Step 1: Identify the
+quantities</h2>
+<p>A success will be defined as a <strong>round seed</strong>.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+n=7324,
+\]</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=5474,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+p_0=0.75.
+\]</span></p>
+<p>The observed proportion is</p>
+<p><span class="math display">\[
+\hat p=
+\frac{5474}{7324}
+\approx0.7474.
+\]</span></p>
+<hr />
+<h2 id="step-2-state-the-hypotheses">Step 2: State the hypotheses</h2>
+<p>The null hypothesis is</p>
+<p><span class="math display">\[
+H_0:p=0.75.
+\]</span></p>
+<p>The scientific question asks whether the observed probability is
+<strong>different from</strong> 0.75.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+H_A:p\ne0.75.
+\]</span></p>
+<p>This is a <strong>two-sided test</strong>.</p>
+<hr />
+<h2 id="step-3-compare-the-observed-and-expected-counts">Step 3: Compare
+the observed and expected counts</h2>
+<p>Under <span class="math inline">\(H_0\)</span>,</p>
+<p><span class="math display">\[
+E[X]=np_0.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+E[X]
+=
+7324\times0.75
+=
+5493.
+\]</span></p>
+<p>We observed</p>
+<p><span class="math display">\[
+5474
+\]</span></p>
+<p>round seeds.</p>
+<p>Thus the observed count is</p>
+<p><span class="math display">\[
+5493-5474=19
+\]</span></p>
+<p>below the expected count.</p>
+<p>But this difference by itself does not tell us whether the deviation
+is statistically unusual.</p>
+<p>We must compare the observation with the complete binomial
+distribution expected under <span
+class="math inline">\(H_0\)</span>.</p>
+<hr />
+<h2 id="step-4-perform-the-exact-binomial-test">Step 4: Perform the
+exact binomial test</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mendel&#39;s pea experiment</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">7324</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="dv">5474</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fl">0.75</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<p>Extract the quantities of interest:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> x_obs <span class="sc">/</span> n</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>p_hat</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
+<p>The observed proportion is approximately</p>
+<p><span class="math display">\[
+\hat p\approx0.7474.
+\]</span></p>
+<p>The exact two-sided p-value is approximately</p>
+<p><span class="math display">\[
+p\text{-value}\approx0.608.
+\]</span></p>
+<hr />
+<h2 id="step-5-make-the-statistical-decision">Step 5: Make the
+statistical decision</h2>
+<p>We compare</p>
+<p><span class="math display">\[
+0.608
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+0.608&gt;0.05,
+\]</span></p>
+<p>we</p>
+<p><span class="math display">\[
+\boxed{\text{Do not reject }H_0.}
+\]</span></p>
+<hr />
+<h2 id="biological-interpretation">Biological interpretation</h2>
+<p>The observed proportion of round seeds is slightly smaller than 0.75,
+but the deviation is not statistically unusual under the Mendelian
+model.</p>
+<p>The data therefore do not provide evidence, at the 5% significance
+level, that the probability of a round seed differs from</p>
+<p><span class="math display">\[
+0.75.
+\]</span></p>
+<p>This does <strong>not</strong> prove that the probability is exactly
+0.75. It means that the observed data are compatible with that value at
+the chosen significance level.</p>
+<p>Using the repeated-sampling interpretation, if</p>
+<p><span class="math display">\[
+p_0=0.75
+\]</span></p>
+<p>were correct and experiments of this size were repeated many times,
+the number of round seeds would vary from experiment to experiment.</p>
+<p>The observed value</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=5474
+\]</span></p>
+<p>falls within the range of outcomes that are not unusual under the
+null model.</p>
+<p>In the informal language introduced above, it lies inside the
+<strong>compatibility window</strong> of the Mendelian model rather than
+in an extreme rejection region.</p>
+<hr />
+<h2 id="why-is-comparing-5474-with-5493-not-enough">Why is comparing
+5474 with 5493 not enough?</h2>
+<p>The expected value</p>
+<p><span class="math display">\[
+E[X]=5493
+\]</span></p>
+<p>is the mean of the null distribution.</p>
+<p>It is not the count that must occur in every experiment.</p>
+<p>Even if</p>
+<p><span class="math display">\[
+p=0.75,
+\]</span></p>
+<p>repeated experiments would produce counts both below and above
+5493.</p>
+<p>A hypothesis test therefore measures how unusual the observed
+deviation is relative to the random variation expected under <span
+class="math inline">\(H_0\)</span>.</p>
+<hr />
+<h2 id="questions">Questions</h2>
+<ol type="1">
+<li>What are <span class="math inline">\(n\)</span>, <span
+class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
+class="math inline">\(p_0\)</span>?</li>
+<li>Why is the test two-sided?</li>
+<li>What is <span class="math inline">\(\hat p\)</span>?</li>
+<li>What is <span class="math inline">\(E[X]\)</span> under <span
+class="math inline">\(H_0\)</span>?</li>
+<li>Why is the difference between 5474 and 5493 not by itself sufficient
+for a hypothesis test?</li>
+<li>What is the p-value?</li>
+<li>What is the statistical decision at <span
+class="math inline">\(\alpha=0.05\)</span>?</li>
+<li>How would you state the conclusion without saying that <span
+class="math inline">\(H_0\)</span> has been “proved”?</li>
+</ol>
+<hr />
+<h1 id="problem-2-allele-specific-expression">4. Problem 2:
+Allele-Specific Expression</h1>
+<p>Zhou <em>et al.</em> used an exact binomial test for allele-specific
+expression in a haplotype-resolved diploid potato genome.</p>
+<p><strong>Zhou, Q., Tang, D., Huang, W., et al.</strong>
+Haplotype-resolved genome analyses of a heterozygous diploid potato.
+<em>Nature Genetics</em> <strong>52</strong>, 1018–1023 (2020).<br />
+<a href="https://doi.org/10.1038/s41588-020-0699-x"
+class="uri">https://doi.org/10.1038/s41588-020-0699-x</a></p>
+<hr />
+<p>In a <strong>diploid</strong> organism, most genes are present in two
+copies, one on each homologous chromosome. Different versions of the
+same gene are called <strong>alleles</strong>. If the two copies differ
+at one or more positions, the organism is <strong>heterozygous</strong>
+at those positions. During <strong>gene expression</strong>, RNA is
+produced from the gene, and RNA sequencing generates short sequence
+fragments called <strong>reads</strong>. If a read overlaps a
+heterozygous position, it may be possible to determine whether that read
+originated from <strong>allele A</strong> or <strong>allele B</strong>.
+Such reads are called <strong>allele-specific reads</strong>. By
+comparing the numbers of reads assigned to the two alleles, we can test
+for <strong>allele-specific expression</strong>, that is, whether the
+two alleles are expressed equally or whether one allele contributes more
+RNA than the other.</p>
+<p>Consider a heterozygous diploid organism with two alleles of a
+gene:</p>
+<pre class="text"><code>allele A
+allele B</code></pre>
+<p>If the two alleles are expressed equally, an allele-specific
+sequencing read is expected to originate from allele A with
+probability</p>
+<p><span class="math display">\[
+p_0=0.5.
+\]</span></p>
+<p>Suppose that 100 allele-specific reads are obtained:</p>
+<pre class="text"><code>allele A    68 reads
+
+allele B    32 reads</code></pre>
+<p>We want to test whether expression of the two alleles is
+different.</p>
+<p>Use</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<hr />
+<h2 id="step-1-identify-the-quantities-1">Step 1: Identify the
+quantities</h2>
+<p>Define a success as</p>
+<blockquote>
+<p>a read originating from allele A.</p>
+</blockquote>
+<p>Then</p>
+<p><span class="math display">\[
+n=100,
+\]</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=68,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+p_0=0.5.
+\]</span></p>
+<p>The observed proportion is</p>
+<p><span class="math display">\[
+\hat p=
+\frac{68}{100}
+=
+0.68.
+\]</span></p>
+<hr />
+<h2 id="step-2-state-the-hypotheses-1">Step 2: State the hypotheses</h2>
+<p>Equal expression corresponds to</p>
+<p><span class="math display">\[
+H_0:p=0.5.
+\]</span></p>
+<p>We are interested in any departure from equal expression, whether
+allele A is more highly represented or less highly represented.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+H_A:p\ne0.5.
+\]</span></p>
+<p>This is a <strong>two-sided test</strong>.</p>
+<hr />
+<h2 id="step-3-expected-count-under-h_0">Step 3: Expected count under
+<span class="math inline">\(H_0\)</span></h2>
+<p>Under equal expression,</p>
+<p><span class="math display">\[
+E[X]=np_0.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+E[X]
+=
+100\times0.5
+=
+50.
+\]</span></p>
+<p>We observed</p>
+<p><span class="math display">\[
+68
+\]</span></p>
+<p>reads from allele A.</p>
+<p>The observed count is therefore well above the expected count of 50,
+but the hypothesis test is needed to determine whether such a difference
+could reasonably arise from random variation.</p>
+<hr />
+<h2 id="step-4-perform-the-exact-binomial-test-1">Step 4: Perform the
+exact binomial test</h2>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Allele-specific expression</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="dv">68</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<p>Extract the observed proportion and p-value:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> x_obs <span class="sc">/</span> n</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>p_hat</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
+<p>The estimated probability is</p>
+<p><span class="math display">\[
+\hat p=0.68.
+\]</span></p>
+<p>The exact two-sided p-value is approximately</p>
+<p><span class="math display">\[
+p\text{-value}\approx0.000409.
+\]</span></p>
+<hr />
+<h2 id="step-5-make-the-statistical-decision-1">Step 5: Make the
+statistical decision</h2>
+<p>Since</p>
+<p><span class="math display">\[
+0.000409&lt;0.05,
+\]</span></p>
+<p>we</p>
+<p><span class="math display">\[
+\boxed{\text{Reject }H_0.}
+\]</span></p>
+<hr />
+<h2 id="biological-interpretation-1">Biological interpretation</h2>
+<p>The data provide evidence that the two alleles are not equally
+represented among the allele-specific reads.</p>
+<p>Because the observed proportion is</p>
+<p><span class="math display">\[
+\hat p=0.68,
+\]</span></p>
+<p>allele A is over-represented in this sample relative to the</p>
+<p><span class="math display">\[
+50:50
+\]</span></p>
+<p>expectation.</p>
+<p>The statistical test provides evidence of unequal allele-specific
+representation.</p>
+<p>In the repeated-sampling picture, if the true probability were
+really</p>
+<p><span class="math display">\[
+p_0=0.5,
+\]</span></p>
+<p>most repeated samples of 100 reads would produce counts in the
+central compatibility region around the 50:50 expectation.</p>
+<p>An observation of</p>
+<p><span class="math display">\[
+68
+\]</span></p>
+<p>allele-A reads is sufficiently far from the null expectation that it
+falls in the rejection region at</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<p>Thus, this result is outside the range that we would usually expect
+from random variation alone under equal allele representation.</p>
+<p>Interpreting this as a biological difference in allele-specific
+expression also requires the assumptions of the analysis to be
+reasonable. For example, sequencing reads should provide an appropriate
+measure of expression and systematic mapping or technical biases should
+not create an artificial imbalance.</p>
+<hr />
+<h2 id="questions-1">Questions</h2>
+<ol type="1">
+<li>What are <span class="math inline">\(n\)</span>, <span
+class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
+class="math inline">\(p_0\)</span>?</li>
+<li>Why is <span class="math inline">\(p_0=0.5\)</span> under equal
+allele expression?</li>
+<li>Why is the test two-sided?</li>
+<li>What is <span class="math inline">\(\hat p\)</span>?</li>
+<li>What is the expected number of allele-A reads under <span
+class="math inline">\(H_0\)</span>?</li>
+<li>What is the p-value?</li>
+<li>What is the statistical decision at <span
+class="math inline">\(\alpha=0.05\)</span>?</li>
+<li>What biological and technical assumptions are needed before
+interpreting the read imbalance as allele-specific expression?</li>
+</ol>
+<hr />
+<h1 id="problem-3-precision-oncology-the-exact-trial">5. Problem 3:
+Precision Oncology — The EXACT Trial</h1>
+<p><strong>Prager, G. W., Unseld, M., Waneck, F., et al.</strong>
+Results of the extended analysis for cancer treatment (EXACT) trial: a
+prospective translational study evaluating individualized treatment
+regimens in oncology. <em>Oncotarget</em> <strong>10</strong>, 942–952
+(2019).<br />
+<a href="https://doi.org/10.18632/oncotarget.26604"
+class="uri">https://doi.org/10.18632/oncotarget.26604</a></p>
+<p>The Extended Analysis for Cancer Treatment (<strong>EXACT</strong>)
+trial investigated individualized cancer treatments selected using
+molecular profiling.</p>
+<p>For each patient, the investigators compared progression-free
+survival under the individualized treatment,</p>
+<p><span class="math display">\[
+\mathrm{PFS}_1,
+\]</span></p>
+<p>with progression-free survival under the previous treatment,</p>
+<p><span class="math display">\[
+\mathrm{PFS}_0.
+\]</span></p>
+<p>A patient was considered to show benefit when</p>
+<p><span class="math display">\[
+\frac{\mathrm{PFS}_1}{\mathrm{PFS}_0}&gt;1.
+\]</span></p>
+<p>The study tested whether the probability of such a benefit was
+greater than</p>
+<p><span class="math display">\[
+p_0=0.40.
+\]</span></p>
+<p>Among</p>
+<p><span class="math display">\[
+55
+\]</span></p>
+<p>treated patients,</p>
+<p><span class="math display">\[
+34
+\]</span></p>
+<p>had a progression-free-survival ratio greater than 1.</p>
+<p>The study used a one-sided exact binomial test with</p>
+<p><span class="math display">\[
+\alpha=0.025.
+\]</span></p>
+<hr />
+<h2 id="step-1-identify-the-quantities-2">Step 1: Identify the
+quantities</h2>
+<p>Define a success as</p>
+<p><span class="math display">\[
+\frac{\mathrm{PFS}_1}{\mathrm{PFS}_0}&gt;1.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+n=55,
+\]</span></p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=34,
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+p_0=0.40.
+\]</span></p>
+<p>The observed proportion is</p>
+<p><span class="math display">\[
+\hat p=
+\frac{34}{55}
+\approx0.618.
+\]</span></p>
+<hr />
+<h2 id="step-2-state-the-hypotheses-2">Step 2: State the hypotheses</h2>
+<p>The null hypothesis is</p>
+<p><span class="math display">\[
+H_0:p=0.40.
+\]</span></p>
+<p>The scientific question asks whether the probability of benefit is
+<strong>greater than</strong> 0.40.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+H_A:p&gt;0.40.
+\]</span></p>
+<p>This is a <strong>right-tailed test</strong>.</p>
+<p>In R:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>alternative <span class="ot">=</span> <span class="st">&quot;greater&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="step-3-expected-number-of-successes-under-h_0">Step 3: Expected
+number of successes under <span class="math inline">\(H_0\)</span></h2>
+<p>Under the null hypothesis,</p>
+<p><span class="math display">\[
+E[X]=np_0.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+E[X]
+=
+55\times0.40
+=
+22.
+\]</span></p>
+<p>The observed number of patients showing benefit was</p>
+<p><span class="math display">\[
+34,
+\]</span></p>
+<p>which is considerably larger than the expected value of 22.</p>
+<p>Again, the hypothesis test determines whether this difference is
+sufficiently unusual under <span class="math inline">\(H_0\)</span>.</p>
+<hr />
+<h2 id="step-4-perform-the-exact-binomial-test-2">Step 4: Perform the
+exact binomial test</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EXACT trial</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">55</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>x_obs <span class="ot">&lt;-</span> <span class="dv">34</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fl">0.40</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.025</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">binom.test</span>(</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x_obs,</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> n,</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> p0,</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;greater&quot;</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div>
+<p>Extract the relevant quantities:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>p_hat <span class="ot">&lt;-</span> x_obs <span class="sc">/</span> n</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>p_hat</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
+<p>The observed proportion is approximately</p>
+<p><span class="math display">\[
+\hat p\approx0.618.
+\]</span></p>
+<p>The one-sided exact p-value is approximately</p>
+<p><span class="math display">\[
+p\text{-value}\approx0.000884.
+\]</span></p>
+<hr />
+<h2 id="step-5-make-the-statistical-decision-2">Step 5: Make the
+statistical decision</h2>
+<p>The significance level is</p>
+<p><span class="math display">\[
+\alpha=0.025.
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+0.000884&lt;0.025,
+\]</span></p>
+<p>we</p>
+<p><span class="math display">\[
+\boxed{\text{Reject }H_0.}
+\]</span></p>
+<hr />
+<h2 id="interpretation">Interpretation</h2>
+<p>The data provide evidence, at the one-sided 2.5% significance level,
+that the probability of obtaining</p>
+<p><span class="math display">\[
+\frac{\mathrm{PFS}_1}{\mathrm{PFS}_0}&gt;1
+\]</span></p>
+<p>is greater than</p>
+<p><span class="math display">\[
+0.40.
+\]</span></p>
+<p>Notice that the statistical conclusion concerns the population
+probability <span class="math inline">\(p\)</span>. It is not simply a
+statement that</p>
+<p><span class="math display">\[
+34&gt;22.
+\]</span></p>
+<p>The p-value measures how unusual the observed result is under the
+null distribution.</p>
+<p>Here the test is <strong>one-sided</strong> and</p>
+<p><span class="math display">\[
+\alpha=0.025.
+\]</span></p>
+<p>Therefore, the rejection region is placed only in the upper tail.</p>
+<p>Conceptually, if <span class="math inline">\(H_0\)</span> were true,
+approximately 97.5% of repeated results would remain below the rejection
+boundary, while at most about 2.5% would be sufficiently large to enter
+the rejection region.</p>
+<p>Because the binomial distribution is discrete, the actual rejection
+probability is slightly smaller than 0.025.</p>
+<p>The observed value</p>
+<p><span class="math display">\[
+X=34
+\]</span></p>
+<p>lies in that upper-tail rejection region.</p>
+<hr />
+<h2 id="critical-region">Critical region</h2>
+<p>The investigators specified that the null hypothesis would be
+rejected if at least 30 of the 55 patients showed a
+progression-free-survival ratio greater than 1.</p>
+<p>That rejection region is</p>
+<p><span class="math display">\[
+X\ge30.
+\]</span></p>
+<p>To calculate its probability under <span
+class="math inline">\(H_0\)</span>:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.40</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>This calculates</p>
+<p><span class="math display">\[
+P(X\ge30\mid n=55,p_0=0.40).
+\]</span></p>
+<p>The probability is approximately</p>
+<p><span class="math display">\[
+0.0204.
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+0.0204&lt;0.025,
+\]</span></p>
+<p>the region</p>
+<p><span class="math display">\[
+X\ge30
+\]</span></p>
+<p>has probability less than the chosen significance level under <span
+class="math inline">\(H_0\)</span>.</p>
+<hr />
+<h2 id="why-is-30-the-critical-value">Why is 30 the critical value?</h2>
+<p>Now consider one count lower:</p>
+<p><span class="math display">\[
+X\ge29.
+\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">28</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.40</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>This probability is approximately</p>
+<p><span class="math display">\[
+0.0379.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+P(X\ge29\mid H_0)
+&gt;
+0.025,
+\]</span></p>
+<p>whereas</p>
+<p><span class="math display">\[
+P(X\ge30\mid H_0)
+&lt;
+0.025.
+\]</span></p>
+<p>Thus the smallest integer count that gives a right-tail probability
+no larger than the significance level is</p>
+<p><span class="math display">\[
+\boxed{30}.
+\]</span></p>
+<p>The rejection region is therefore</p>
+<p><span class="math display">\[
+\boxed{X\ge30}.
+\]</span></p>
+<p>This also illustrates the discreteness of the binomial
+distribution.</p>
+<p>We cannot choose a fractional number of patients to make the
+rejection probability exactly</p>
+<p><span class="math display">\[
+0.025.
+\]</span></p>
+<p>The actual probability of the rejection region is therefore slightly
+smaller than the nominal significance level.</p>
+<hr />
+<h2 id="observed-p-value-versus-critical-region">Observed p-value versus
+critical region</h2>
+<p>The rejection region asks:</p>
+<blockquote>
+<p>Which observations would cause us to reject <span
+class="math inline">\(H_0\)</span> at the chosen significance level?</p>
+</blockquote>
+<p>For this test,</p>
+<p><span class="math display">\[
+X\ge30.
+\]</span></p>
+<p>The p-value asks:</p>
+<blockquote>
+<p>Starting from the observed result, how much probability is in the
+null distribution at least this extreme in the direction of <span
+class="math inline">\(H_A\)</span>?</p>
+</blockquote>
+<p>Since we observed</p>
+<p><span class="math display">\[
+X=34,
+\]</span></p>
+<p>the p-value is</p>
+<p><span class="math display">\[
+P(X\ge34\mid H_0).
+\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">33</span>,</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.40</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>This is approximately</p>
+<p><span class="math display">\[
+0.000884.
+\]</span></p>
+<p>Since</p>
+<p><span class="math display">\[
+34\ge30,
+\]</span></p>
+<p>the observation lies inside the rejection region.</p>
+<p>Equivalently,</p>
+<p><span class="math display">\[
+0.000884&lt;0.025.
+\]</span></p>
+<p>Both approaches give the same statistical decision.</p>
+<hr />
+<h2 id="questions-2">Questions</h2>
+<ol type="1">
+<li>What are <span class="math inline">\(n\)</span>, <span
+class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
+class="math inline">\(p_0\)</span>?</li>
+<li>What constitutes a success in this problem?</li>
+<li>Why is the alternative hypothesis <span
+class="math inline">\(H_A:p&gt;0.40\)</span>?</li>
+<li>Why is this a right-tailed test?</li>
+<li>Why is <span class="math inline">\(\alpha=0.025\)</span> used
+instead of 0.05?</li>
+<li>What is <span class="math inline">\(\hat p\)</span>?</li>
+<li>What is the p-value?</li>
+<li>What is the statistical decision?</li>
+<li>What is <span class="math inline">\(P(X\ge30\mid H_0)\)</span>?</li>
+<li>Why is <span class="math inline">\(X\ge30\)</span> a valid rejection
+region while <span class="math inline">\(X\ge29\)</span> is not at <span
+class="math inline">\(\alpha=0.025\)</span>?</li>
+<li>How are the rejection-region and p-value approaches connected?</li>
+</ol>
+<hr />
+<h1 id="comparing-the-three-problems">6. Comparing the Three
+Problems</h1>
+<p>All three problems use the same basic statistical model:</p>
+<p><span class="math display">\[
+X\sim\mathrm{Binomial}(n,p).
+\]</span></p>
+<p>But their scientific questions are different.</p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 13%" />
+<col style="width: 13%" />
+</colgroup>
+<thead>
+<tr>
+<th>Example</th>
+<th style="text-align: right;"><span
+class="math inline">\(n\)</span></th>
+<th style="text-align: right;"><span
+class="math inline">\(x_{\mathrm{obs}}\)</span></th>
+<th style="text-align: right;"><span
+class="math inline">\(p_0\)</span></th>
+<th><span class="math inline">\(H_A\)</span></th>
+<th>Test</th>
+<th style="text-align: right;"><span
+class="math inline">\(\alpha\)</span></th>
+<th style="text-align: right;">Approx. p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mendel</td>
+<td style="text-align: right;">7324</td>
+<td style="text-align: right;">5474</td>
+<td style="text-align: right;">0.75</td>
+<td><span class="math inline">\(p\ne0.75\)</span></td>
+<td>two-sided</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">0.608</td>
+</tr>
+<tr>
+<td>Allele-specific expression</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">68</td>
+<td style="text-align: right;">0.50</td>
+<td><span class="math inline">\(p\ne0.50\)</span></td>
+<td>two-sided</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">0.000409</td>
+</tr>
+<tr>
+<td>EXACT trial</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">34</td>
+<td style="text-align: right;">0.40</td>
+<td><span class="math inline">\(p&gt;0.40\)</span></td>
+<td>right-tailed</td>
+<td style="text-align: right;">0.025</td>
+<td style="text-align: right;">0.000884</td>
+</tr>
+</tbody>
+</table>
+<p>The important point is that the direction of the test comes from the
+<strong>scientific question</strong>.</p>
+<pre class="text"><code>different from     -&gt; two-sided
+
+smaller than       -&gt; left-tailed
+
+greater than       -&gt; right-tailed</code></pre>
+<p>The same observed count could lead to different p-values if a
+different alternative hypothesis were specified.</p>
+<hr />
+</body>
+</html>
