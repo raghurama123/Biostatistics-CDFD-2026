@@ -25,6 +25,20 @@ Lecture 02 introduces discrete probability distributions and hypothesis testing 
 6. **Hypothesis testing** — introducing the null and alternative hypotheses, p-values, significance levels, rejection regions, and left-tailed tests using the HIV mutation example.
 7. **Confidence and significance levels** — connecting $\alpha=0.05$ with a corresponding 95% probability level and interpreting significance thresholds in discrete probability distributions.
 
+### [**Lecture 03**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec03/Lec03.html)
+
+Lecture 03 develops exact binomial hypothesis testing using biological examples:
+
+1. **When to use the binomial distribution** — recognizing situations with a fixed number of independent trials, two possible outcomes per trial, and a constant probability of success.
+2. **Null model and observed proportion** — distinguishing between the null probability $p_0$, the unknown underlying probability $p$, the observed proportion $\hat p$, and the expected count $np_0$.
+3. **Hypothesis testing and compatibility regions** — interpreting $\alpha=0.05$ as defining an approximately 95% central region of outcomes expected under $H_0$ and rejection regions in the tails.
+4. **p-values and the CDF** — calculating left- and right-tailed p-values using cumulative probabilities with `pbinom()` and understanding the connection between the CDF and hypothesis testing.
+5. **Exact binomial test in R** — using `binom.test()` for left-tailed, right-tailed, and two-sided tests and extracting the p-value using `result$p.value`.
+6. **Mendel's pea experiment** — testing whether the observed proportion of round seeds differs from the Mendelian expectation of $p_0=0.75$.
+7. **Allele-specific expression** — testing whether allele-specific sequencing reads deviate from the 50:50 expectation using a two-sided exact binomial test.
+8. **EXACT precision-oncology trial** — performing a right-tailed exact binomial test with $\alpha=0.025$ and connecting the p-value with the critical rejection region.
+
+
 _Additional content will be added as the course progresses._
 
 ## Repository 
