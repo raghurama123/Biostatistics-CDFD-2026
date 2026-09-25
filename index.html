@@ -88,6 +88,50 @@ regions, and left-tailed tests using the HIV mutation example.</li>
 with a corresponding 95% probability level and interpreting significance
 thresholds in discrete probability distributions.</li>
 </ol>
+<h3 id="lecture-03"><a
+href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec03/Lec03.html"><strong>Lecture
+03</strong></a></h3>
+<p>Lecture 03 develops exact binomial hypothesis testing using
+biological examples:</p>
+<ol type="1">
+<li><strong>When to use the binomial distribution</strong> — recognizing
+situations with a fixed number of independent trials, two possible
+outcomes per trial, and a constant probability of success.</li>
+<li><strong>Null model and observed proportion</strong> — distinguishing
+between the null probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>,
+the unknown underlying probability
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>,
+the observed proportion
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat p</annotation></semantics></math>,
+and the expected count
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><msub><mi>p</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">np_0</annotation></semantics></math>.</li>
+<li><strong>Hypothesis testing and compatibility regions</strong> —
+interpreting
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha=0.05</annotation></semantics></math>
+as defining an approximately 95% central region of outcomes expected
+under
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>0</mn></msub><annotation encoding="application/x-tex">H_0</annotation></semantics></math>
+and rejection regions in the tails.</li>
+<li><strong>p-values and the CDF</strong> — calculating left- and
+right-tailed p-values using cumulative probabilities with
+<code>pbinom()</code> and understanding the connection between the CDF
+and hypothesis testing.</li>
+<li><strong>Exact binomial test in R</strong> — using
+<code>binom.test()</code> for left-tailed, right-tailed, and two-sided
+tests and extracting the p-value using <code>result$p.value</code>.</li>
+<li><strong>Mendel’s pea experiment</strong> — testing whether the
+observed proportion of round seeds differs from the Mendelian
+expectation of
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mn>0</mn></msub><mo>=</mo><mn>0.75</mn></mrow><annotation encoding="application/x-tex">p_0=0.75</annotation></semantics></math>.</li>
+<li><strong>Allele-specific expression</strong> — testing whether
+allele-specific sequencing reads deviate from the 50:50 expectation
+using a two-sided exact binomial test.</li>
+<li><strong>EXACT precision-oncology trial</strong> — performing a
+right-tailed exact binomial test with
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.025</mn></mrow><annotation encoding="application/x-tex">\alpha=0.025</annotation></semantics></math>
+and connecting the p-value with the critical rejection region.</li>
+</ol>
 <p><em>Additional content will be added as the course
 progresses.</em></p>
 <h2 id="repository">Repository</h2>
