@@ -597,6 +597,26 @@ result$p.value
                extracts the p-value calculated by binom.test()
 ```
 
+**Useful values stored in `result`:**
+
+| R expression | Meaning |
+|---|---|
+| `result$p.value` | p-value of the hypothesis test |
+| `result$estimate` | estimated success probability, $\hat p=x_{\mathrm{obs}}/n$ |
+| `result$conf.int` | confidence interval for the underlying probability $p$ |
+| `result$null.value` | probability specified by the null hypothesis, $p_0$ |
+
+Example:
+
+```r
+p_value <- result$p.value
+p_hat <- result$estimate
+conf_int <- result$conf.int
+p0_used <- result$null.value
+````
+
+
+
 ---
 
 ## Two-sided test
@@ -1359,6 +1379,26 @@ The study used a one-sided exact binomial test with
 $$
 \alpha=0.025.
 $$
+
+> **Note:** A one-sided test does not always use $\alpha=0.025$.
+>
+> The significance level $\alpha$ is chosen as part of the study design.
+>
+> In the earlier left-tailed example we used
+>
+> $$
+> \alpha=0.05,
+> $$
+>
+> so the full 5% rejection probability was placed in one tail.
+>
+> In the EXACT clinical trial, the investigators instead specified a more stringent one-sided level,
+>
+> $$
+> \alpha=0.025.
+> $$
+>
+> Thus, the direction of the test and the choice of $\alpha$ are separate decisions.
 
 ---
 

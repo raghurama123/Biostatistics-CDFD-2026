@@ -50,6 +50,13 @@ result <- binom.test(
 
 print(result)
 
+print( result$p.value )
+
+print( result$estimate )
+
+print( result$conf.int )
+
+print( result$null.value )
 
 # ------------------------------------------------------------
 # Extract p-value
