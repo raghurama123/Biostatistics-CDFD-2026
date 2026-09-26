@@ -102,11 +102,7 @@
 <ul>
 <li><a href="#lecture-03-exact-binomial-tests-in-biostatistics"
 id="toc-lecture-03-exact-binomial-tests-in-biostatistics">Lecture 03 —
-Exact Binomial Tests in Biostatistics</a>
-<ul>
-<li><a href="#learning-objectives" id="toc-learning-objectives">Learning
-objectives</a></li>
-</ul></li>
+Exact Binomial Tests in Biostatistics</a></li>
 <li><a href="#review-of-the-exact-binomial-test"
 id="toc-review-of-the-exact-binomial-test">1. Review of the Exact
 Binomial Test</a>
@@ -130,8 +126,9 @@ interpretation</a></li>
 id="toc-choosing-the-alternative-hypothesis">Choosing the alternative
 hypothesis</a></li>
 <li><a href="#p-value-and-the-cumulative-distribution-function"
-id="toc-p-value-and-the-cumulative-distribution-function">P-value and
-the cumulative distribution function</a></li>
+id="toc-p-value-and-the-cumulative-distribution-function"><span
+class="math inline">\(p\)</span>-value and the cumulative distribution
+function</a></li>
 <li><a href="#left-tailed-test" id="toc-left-tailed-test">Left-tailed
 test</a></li>
 <li><a href="#right-tailed-test" id="toc-right-tailed-test">Right-tailed
@@ -172,7 +169,6 @@ id="toc-biological-interpretation">Biological interpretation</a></li>
 <li><a href="#why-is-comparing-5474-with-5493-not-enough"
 id="toc-why-is-comparing-5474-with-5493-not-enough">Why is comparing
 5474 with 5493 not enough?</a></li>
-<li><a href="#questions" id="toc-questions">Questions</a></li>
 </ul></li>
 <li><a href="#problem-2-allele-specific-expression"
 id="toc-problem-2-allele-specific-expression">4. Problem 2:
@@ -195,7 +191,6 @@ id="toc-step-5-make-the-statistical-decision-1">Step 5: Make the
 statistical decision</a></li>
 <li><a href="#biological-interpretation-1"
 id="toc-biological-interpretation-1">Biological interpretation</a></li>
-<li><a href="#questions-1" id="toc-questions-1">Questions</a></li>
 </ul></li>
 <li><a href="#problem-3-precision-oncology-the-exact-trial"
 id="toc-problem-3-precision-oncology-the-exact-trial">5. Problem 3:
@@ -227,7 +222,6 @@ value?</a></li>
 <li><a href="#observed-p-value-versus-critical-region"
 id="toc-observed-p-value-versus-critical-region">Observed p-value versus
 critical region</a></li>
-<li><a href="#questions-2" id="toc-questions-2">Questions</a></li>
 </ul></li>
 <li><a href="#comparing-the-three-problems"
 id="toc-comparing-the-three-problems">6. Comparing the Three
@@ -249,9 +243,6 @@ Problems</a></li>
 </table>
 <h1 id="lecture-03-exact-binomial-tests-in-biostatistics">Lecture 03 —
 Exact Binomial Tests in Biostatistics</h1>
-<p>Lecture 02 introduced the binomial distribution, cumulative
-probabilities, significance levels, rejection regions, p-values, and an
-exact binomial hypothesis test using the HIV mutation example.</p>
 <p>In this lecture we first summarize the general logic of an
 <strong>exact binomial test</strong> and then apply it to three
 biological examples:</p>
@@ -260,11 +251,6 @@ biological examples:</p>
 <li>allele-specific expression;</li>
 <li>the EXACT precision-oncology trial.</li>
 </ol>
-<p>The same statistical framework is used in all three problems. What
-changes from problem to problem is the scientific question, the null
-probability <span class="math inline">\(p_0\)</span>, the direction of
-the alternative hypothesis, and sometimes the significance level <span
-class="math inline">\(\alpha\)</span>.</p>
 <p><a href="#1-review-of-the-exact-binomial-test">1. Review of the Exact
 Binomial Test</a><br />
 <a href="#2-exact-binomial-test-in-r">2. Exact Binomial Test in
@@ -276,40 +262,7 @@ Allele-Specific Expression</a><br />
 <a href="#5-problem-3-precision-oncology--the-exact-trial">5. Problem 3:
 Precision Oncology — The EXACT Trial</a><br />
 <a href="#6-comparing-the-three-problems">6. Comparing the Three
-Problems</a><br />
-<a href="#7-discussion-questions">7. Discussion Questions</a><br />
-<a href="#8-r-functions-used-in-this-lecture">8. R Functions Used in
-This Lecture</a><br />
-<a href="#references">References</a></p>
-<hr />
-<h2 id="learning-objectives">Learning objectives</h2>
-<p>By the end of this lecture, you should be able to:</p>
-<ul>
-<li>recognize situations in which a binomial distribution is an
-appropriate model;</li>
-<li>identify the two possible outcomes that define each trial;</li>
-<li>identify <span class="math inline">\(n\)</span>, <span
-class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
-class="math inline">\(p_0\)</span> in a binomial hypothesis-testing
-problem;</li>
-<li>interpret a hypothesis test as asking whether an observed result is
-compatible with the distribution expected under <span
-class="math inline">\(H_0\)</span>;</li>
-<li>write the null and alternative hypotheses;</li>
-<li>distinguish between left-tailed, right-tailed, and two-sided
-tests;</li>
-<li>perform an exact binomial test using <code>binom.test()</code>;</li>
-<li>interpret the p-value;</li>
-<li>compare the p-value with the significance level <span
-class="math inline">\(\alpha\)</span>;</li>
-<li>state the statistical conclusion using <strong>reject <span
-class="math inline">\(H_0\)</span></strong> or <strong>do not reject
-<span class="math inline">\(H_0\)</span></strong>;</li>
-<li>distinguish between the null probability <span
-class="math inline">\(p_0\)</span>, the observed proportion <span
-class="math inline">\(\hat p\)</span>, and the p-value;</li>
-<li>connect a p-value with a rejection region.</li>
-</ul>
+Problems</a></p>
 <hr />
 <h1 id="review-of-the-exact-binomial-test">1. Review of the Exact
 Binomial Test</h1>
@@ -339,11 +292,11 @@ failure = wrinkled seed</code></pre>
 <p>A binomial model requires four main conditions:</p>
 <ol type="1">
 <li>there is a fixed number of trials, <span
-class="math inline">\(n\)</span>;</li>
-<li>each trial has two possible outcomes;</li>
+class="math inline">\(n\)</span></li>
+<li>each trial has two possible outcomes</li>
 <li>each trial has the same probability of success, <span
-class="math inline">\(p\)</span>;</li>
-<li>the trials are independent.</li>
+class="math inline">\(p\)</span></li>
+<li>the trials are independent</li>
 </ol>
 <p>Under these conditions, if <span class="math display">\[
 X=\text{number of successes among the }n\text{ trials},
@@ -552,8 +505,9 @@ class="math inline">\(p_0\)</span>?</td>
 question, not from the direction seen in the data after the
 experiment.</p>
 <hr />
-<h2 id="p-value-and-the-cumulative-distribution-function">P-value and
-the cumulative distribution function</h2>
+<h2 id="p-value-and-the-cumulative-distribution-function"><span
+class="math inline">\(p\)</span>-value and the cumulative distribution
+function</h2>
 <p>Under the null hypothesis,</p>
 <p><span class="math display">\[
 H_0:p=p_0,
@@ -637,15 +591,33 @@ p\text{-value}
 =
 P(X\ge x_{\mathrm{obs}}\mid H_0).
 \]</span></p>
-<p>The CDF gives</p>
-<p><span class="math display">\[
-F(x)=P(X\le x).
-\]</span></p>
 <p>Therefore,</p>
 <p><span class="math display">\[
 P(X\ge x_{\mathrm{obs}})
 =
 1-P(X\le x_{\mathrm{obs}}-1).
+\]</span></p>
+<p>The subtraction of 1 is needed because <span
+class="math inline">\(X\)</span> is a discrete integer count.</p>
+<p>For example, if</p>
+<p><span class="math display">\[
+x_{\mathrm{obs}}=34,
+\]</span></p>
+<p>then</p>
+<p><span class="math display">\[
+P(X\ge34)
+=
+1-P(X\le33).
+\]</span></p>
+<p>This is because</p>
+<p><span class="math display">\[
+P(X\le33) + P(X\ge34)
+=
+1.
+\]</span></p>
+<p>The CDF gives</p>
+<p><span class="math display">\[
+F(x)=P(X\le x).
 \]</span></p>
 <p>Thus,</p>
 <p><span class="math display">\[
@@ -668,24 +640,6 @@ p\text{-value}
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p0,</span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>The subtraction of 1 is needed because <span
-class="math inline">\(X\)</span> is a discrete integer count.</p>
-<p>For example, if</p>
-<p><span class="math display">\[
-x_{\mathrm{obs}}=34,
-\]</span></p>
-<p>then</p>
-<p><span class="math display">\[
-P(X\ge34)
-=
-1-P(X\le33).
-\]</span></p>
-<p>This is because</p>
-<p><span class="math display">\[
-P(X\le33) + P(X\ge34)
-=
-1.
-\]</span></p>
 <hr />
 <h2 id="calculating-the-p-value-using-binom.test">Calculating the
 p-value using <code>binom.test()</code></h2>
@@ -914,6 +868,7 @@ Verhandlungen des naturforschenden Vereines in Brünn <strong>4</strong>,
 English translation and original numerical results:<br />
 <a href="https://www.mendelweb.org/Mendel.html"
 class="uri">https://www.mendelweb.org/Mendel.html</a></p>
+<hr />
 <p>Gregor Mendel studied inheritance in pea plants.</p>
 <p>In one experiment involving seed shape, he obtained</p>
 <p><span class="math display">\[
@@ -1106,24 +1061,6 @@ p=0.75,
 deviation is relative to the random variation expected under <span
 class="math inline">\(H_0\)</span>.</p>
 <hr />
-<h2 id="questions">Questions</h2>
-<ol type="1">
-<li>What are <span class="math inline">\(n\)</span>, <span
-class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
-class="math inline">\(p_0\)</span>?</li>
-<li>Why is the test two-sided?</li>
-<li>What is <span class="math inline">\(\hat p\)</span>?</li>
-<li>What is <span class="math inline">\(E[X]\)</span> under <span
-class="math inline">\(H_0\)</span>?</li>
-<li>Why is the difference between 5474 and 5493 not by itself sufficient
-for a hypothesis test?</li>
-<li>What is the p-value?</li>
-<li>What is the statistical decision at <span
-class="math inline">\(\alpha=0.05\)</span>?</li>
-<li>How would you state the conclusion without saying that <span
-class="math inline">\(H_0\)</span> has been “proved”?</li>
-</ol>
-<hr />
 <h1 id="problem-2-allele-specific-expression">4. Problem 2:
 Allele-Specific Expression</h1>
 <p>Zhou <em>et al.</em> used an exact binomial test for allele-specific
@@ -1311,24 +1248,6 @@ reasonable. For example, sequencing reads should provide an appropriate
 measure of expression and systematic mapping or technical biases should
 not create an artificial imbalance.</p>
 <hr />
-<h2 id="questions-1">Questions</h2>
-<ol type="1">
-<li>What are <span class="math inline">\(n\)</span>, <span
-class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
-class="math inline">\(p_0\)</span>?</li>
-<li>Why is <span class="math inline">\(p_0=0.5\)</span> under equal
-allele expression?</li>
-<li>Why is the test two-sided?</li>
-<li>What is <span class="math inline">\(\hat p\)</span>?</li>
-<li>What is the expected number of allele-A reads under <span
-class="math inline">\(H_0\)</span>?</li>
-<li>What is the p-value?</li>
-<li>What is the statistical decision at <span
-class="math inline">\(\alpha=0.05\)</span>?</li>
-<li>What biological and technical assumptions are needed before
-interpreting the read imbalance as allele-specific expression?</li>
-</ol>
-<hr />
 <h1 id="problem-3-precision-oncology-the-exact-trial">5. Problem 3:
 Precision Oncology — The EXACT Trial</h1>
 <p><strong>Prager, G. W., Unseld, M., Waneck, F., et al.</strong>
@@ -1338,6 +1257,30 @@ regimens in oncology. <em>Oncotarget</em> <strong>10</strong>, 942–952
 (2019).<br />
 <a href="https://doi.org/10.18632/oncotarget.26604"
 class="uri">https://doi.org/10.18632/oncotarget.26604</a></p>
+<hr />
+<p><strong>Precision oncology</strong> aims to select cancer treatments
+based on the molecular characteristics of an individual patient’s tumor.
+In the EXACT trial, treatment decisions were guided by molecular
+profiling, and the effectiveness of the individualized treatment was
+compared with that of the patient’s previous treatment. Treatment
+benefit was assessed using <strong>progression-free survival
+(PFS)</strong>, the length of time during which the disease does not
+progress. For each patient, <span
+class="math inline">\(\mathrm{PFS}_1\)</span> denotes progression-free
+survival under the individualized treatment, while <span
+class="math inline">\(\mathrm{PFS}_0\)</span> denotes progression-free
+survival under the previous treatment.</p>
+<p>A patient was considered to have benefited from this treatment
+when</p>
+<p><span class="math display">\[
+\frac{\mathrm{PFS}_1}{\mathrm{PFS}_0}&gt;1,
+\]</span></p>
+<p>meaning that progression-free survival was longer under the
+individualized treatment.</p>
+<p>Each patient can therefore be classified into one of two outcomes:
+<strong>benefit</strong> or <strong>no benefit</strong>, making the
+number of patients who benefit suitable for analysis with a binomial
+model.</p>
 <p>The Extended Analysis for Cancer Treatment (<strong>EXACT</strong>)
 trial investigated individualized cancer treatments selected using
 molecular profiling.</p>
@@ -1641,27 +1584,6 @@ P(X\ge34\mid H_0).
 0.000884&lt;0.025.
 \]</span></p>
 <p>Both approaches give the same statistical decision.</p>
-<hr />
-<h2 id="questions-2">Questions</h2>
-<ol type="1">
-<li>What are <span class="math inline">\(n\)</span>, <span
-class="math inline">\(x_{\mathrm{obs}}\)</span>, and <span
-class="math inline">\(p_0\)</span>?</li>
-<li>What constitutes a success in this problem?</li>
-<li>Why is the alternative hypothesis <span
-class="math inline">\(H_A:p&gt;0.40\)</span>?</li>
-<li>Why is this a right-tailed test?</li>
-<li>Why is <span class="math inline">\(\alpha=0.025\)</span> used
-instead of 0.05?</li>
-<li>What is <span class="math inline">\(\hat p\)</span>?</li>
-<li>What is the p-value?</li>
-<li>What is the statistical decision?</li>
-<li>What is <span class="math inline">\(P(X\ge30\mid H_0)\)</span>?</li>
-<li>Why is <span class="math inline">\(X\ge30\)</span> a valid rejection
-region while <span class="math inline">\(X\ge29\)</span> is not at <span
-class="math inline">\(\alpha=0.025\)</span>?</li>
-<li>How are the rejection-region and p-value approaches connected?</li>
-</ol>
 <hr />
 <h1 id="comparing-the-three-problems">6. Comparing the Three
 Problems</h1>

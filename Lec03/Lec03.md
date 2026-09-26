@@ -18,15 +18,11 @@
 
 # Lecture 03 — Exact Binomial Tests in Biostatistics
 
-Lecture 02 introduced the binomial distribution, cumulative probabilities, significance levels, rejection regions, p-values, and an exact binomial hypothesis test using the HIV mutation example.
-
 In this lecture we first summarize the general logic of an **exact binomial test** and then apply it to three biological examples:
 
 1. Mendel's pea experiments;
 2. allele-specific expression;
 3. the EXACT precision-oncology trial.
-
-The same statistical framework is used in all three problems. What changes from problem to problem is the scientific question, the null probability $p_0$, the direction of the alternative hypothesis, and sometimes the significance level $\alpha$.
 
 [1. Review of the Exact Binomial Test](#1-review-of-the-exact-binomial-test)  
 [2. Exact Binomial Test in R](#2-exact-binomial-test-in-r)  
@@ -34,28 +30,6 @@ The same statistical framework is used in all three problems. What changes from 
 [4. Problem 2: Allele-Specific Expression](#4-problem-2-allele-specific-expression)  
 [5. Problem 3: Precision Oncology — The EXACT Trial](#5-problem-3-precision-oncology--the-exact-trial)  
 [6. Comparing the Three Problems](#6-comparing-the-three-problems)  
-[7. Discussion Questions](#7-discussion-questions)  
-[8. R Functions Used in This Lecture](#8-r-functions-used-in-this-lecture)  
-[References](#references)
-
----
-
-## Learning objectives
-
-By the end of this lecture, you should be able to:
-
-* recognize situations in which a binomial distribution is an appropriate model;
-* identify the two possible outcomes that define each trial;
-* identify $n$, $x_{\mathrm{obs}}$, and $p_0$ in a binomial hypothesis-testing problem;
-* interpret a hypothesis test as asking whether an observed result is compatible with the distribution expected under $H_0$;
-* write the null and alternative hypotheses;
-* distinguish between left-tailed, right-tailed, and two-sided tests;
-* perform an exact binomial test using `binom.test()`;
-* interpret the p-value;
-* compare the p-value with the significance level $\alpha$;
-* state the statistical conclusion using **reject $H_0$** or **do not reject $H_0$**;
-* distinguish between the null probability $p_0$, the observed proportion $\hat p$, and the p-value;
-* connect a p-value with a rejection region.
 
 ---
 
@@ -97,10 +71,10 @@ failure = wrinkled seed
 
 A binomial model requires four main conditions:
 
-1. there is a fixed number of trials, $n$;
-2. each trial has two possible outcomes;
-3. each trial has the same probability of success, $p$;
-4. the trials are independent.
+1. there is a fixed number of trials, $n$
+2. each trial has two possible outcomes
+3. each trial has the same probability of success, $p$
+4. the trials are independent
 
 Under these conditions, if 
 $$
@@ -314,7 +288,7 @@ The alternative hypothesis should be chosen from the scientific question, not fr
 
 ---
 
-## P-value and the cumulative distribution function
+## $p$-value and the cumulative distribution function
 
 Under the null hypothesis,
 
@@ -426,18 +400,42 @@ p\text{-value}
 P(X\ge x_{\mathrm{obs}}\mid H_0).
 $$
 
-The CDF gives
-
-$$
-F(x)=P(X\le x).
-$$
-
 Therefore,
 
 $$
 P(X\ge x_{\mathrm{obs}})
 =
 1-P(X\le x_{\mathrm{obs}}-1).
+$$
+
+The subtraction of 1 is needed because $X$ is a discrete integer count.
+
+For example, if
+
+$$
+x_{\mathrm{obs}}=34,
+$$
+
+then
+
+$$
+P(X\ge34)
+=
+1-P(X\le33).
+$$
+
+This is because
+
+$$ 
+P(X\le33) + P(X\ge34)
+=
+1.
+$$
+
+The CDF gives
+
+$$
+F(x)=P(X\le x).
 $$
 
 Thus,
@@ -470,30 +468,6 @@ pbinom(
   lower.tail = FALSE
 )
 ```
-
-The subtraction of 1 is needed because $X$ is a discrete integer count.
-
-For example, if
-
-$$
-x_{\mathrm{obs}}=34,
-$$
-
-then
-
-$$
-P(X\ge34)
-=
-1-P(X\le33).
-$$
-
-This is because
-
-$$ 
-P(X\le33) + P(X\ge34)
-=
-1.
-$$
 
 ---
 
@@ -818,6 +792,8 @@ For every problem, follow the same sequence:
    English translation and original numerical results:  
    <https://www.mendelweb.org/Mendel.html>
 
+---
+
 Gregor Mendel studied inheritance in pea plants.
 
 In one experiment involving seed shape, he obtained
@@ -1082,19 +1058,6 @@ A hypothesis test therefore measures how unusual the observed deviation is relat
 
 ---
 
-## Questions
-
-1. What are $n$, $x_{\mathrm{obs}}$, and $p_0$?
-2. Why is the test two-sided?
-3. What is $\hat p$?
-4. What is $E[X]$ under $H_0$?
-5. Why is the difference between 5474 and 5493 not by itself sufficient for a hypothesis test?
-6. What is the p-value?
-7. What is the statistical decision at $\alpha=0.05$?
-8. How would you state the conclusion without saying that $H_0$ has been "proved"?
-
----
-
 # 4. Problem 2: Allele-Specific Expression
 
 Zhou *et al.* used an exact binomial test for allele-specific expression in a haplotype-resolved diploid potato genome.
@@ -1329,23 +1292,25 @@ Interpreting this as a biological difference in allele-specific expression also 
 
 ---
 
-## Questions
-
-1. What are $n$, $x_{\mathrm{obs}}$, and $p_0$?
-2. Why is $p_0=0.5$ under equal allele expression?
-3. Why is the test two-sided?
-4. What is $\hat p$?
-5. What is the expected number of allele-A reads under $H_0$?
-6. What is the p-value?
-7. What is the statistical decision at $\alpha=0.05$?
-8. What biological and technical assumptions are needed before interpreting the read imbalance as allele-specific expression?
-
----
-
 # 5. Problem 3: Precision Oncology — The EXACT Trial
 
 **Prager, G. W., Unseld, M., Waneck, F., et al.** Results of the extended analysis for cancer treatment (EXACT) trial: a prospective translational study evaluating individualized treatment regimens in oncology. *Oncotarget* **10**, 942–952 (2019).  
 <https://doi.org/10.18632/oncotarget.26604>
+
+---
+
+**Precision oncology** aims to select cancer treatments based on the molecular characteristics of an individual patient's tumor. In the EXACT trial, treatment decisions were guided by molecular profiling, and the effectiveness of the individualized treatment was compared with that of the patient's previous treatment. Treatment benefit was assessed using **progression-free survival (PFS)**, the length of time during which the disease does not progress. For each patient, $\mathrm{PFS}_1$ denotes progression-free survival under the individualized treatment, while $\mathrm{PFS}_0$ denotes progression-free survival under the previous treatment. 
+
+A patient was considered to have benefited from this treatment when
+
+$$
+\frac{\mathrm{PFS}_1}{\mathrm{PFS}_0}>1,
+$$
+
+meaning that progression-free survival was longer under the individualized treatment. 
+
+Each patient can therefore be classified into one of two outcomes: **benefit** or **no benefit**, making the number of patients who benefit suitable for analysis with a binomial model.
+
 
 The Extended Analysis for Cancer Treatment (**EXACT**) trial investigated individualized cancer treatments selected using molecular profiling.
 
@@ -1766,22 +1731,6 @@ $$
 $$
 
 Both approaches give the same statistical decision.
-
----
-
-## Questions
-
-1. What are $n$, $x_{\mathrm{obs}}$, and $p_0$?
-2. What constitutes a success in this problem?
-3. Why is the alternative hypothesis $H_A:p>0.40$?
-4. Why is this a right-tailed test?
-5. Why is $\alpha=0.025$ used instead of 0.05?
-6. What is $\hat p$?
-7. What is the p-value?
-8. What is the statistical decision?
-9. What is $P(X\ge30\mid H_0)$?
-10. Why is $X\ge30$ a valid rejection region while $X\ge29$ is not at $\alpha=0.025$?
-11. How are the rejection-region and p-value approaches connected?
 
 ---
 
