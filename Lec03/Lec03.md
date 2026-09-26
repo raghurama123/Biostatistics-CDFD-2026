@@ -71,7 +71,7 @@ failure = wrinkled seed
 
 A binomial model requires four main conditions:
 
-1. there is a fixed number of trials, $n$
+1. the experiment consists of a known number of trials, $n$
 2. each trial has two possible outcomes
 3. each trial has the same probability of success, $p$
 4. the trials are independent
@@ -112,6 +112,65 @@ A hypothesis test compares the data with a specified reference value
 $$
 p_0.
 $$
+
+The value $p_0$ is the probability specified by the null hypothesis. It is **not necessarily estimated from the current data**, and it does **not** have to come from an earlier experiment with the same sample size $n$.
+
+Depending on the problem, $p_0$ may come from:
+
+* a theoretical model;
+* previous experiments or published evidence;
+* prior scientific knowledge;
+* a predefined benchmark used in the study design.
+
+For example, in Mendel's pea experiment,
+
+$$
+p_0=0.75
+$$
+
+comes from the Mendelian $3:1$ model, not from the 7324 observed seeds.
+
+The current experiment supplies
+
+$$
+n
+$$
+
+and
+
+$$
+x_{\mathrm{obs}},
+$$
+
+while $p_0$ specifies the probability to be tested.
+
+Thus:
+
+```text
+p0        reference probability specified by H0
+
+n         number of trials in the current experiment
+
+x_obs     observed number of successes in the current experiment
+```
+
+The null distribution is then constructed by combining the current sample size $n$ with the null probability $p_0$:
+
+$$
+\boxed{
+X\sim\mathrm{Binomial}(n,p_0)
+}
+$$
+
+So $n$ and $p_0$ play different roles:
+
+```text
+p0        specifies the success probability under H0
+
+n         determines how many trials are in the binomial experiment
+
+n + p0    together determine the null binomial distribution
+```
 
 The null hypothesis is usually written as
 
@@ -310,11 +369,28 @@ $$
 
 It gives the probability, assuming $H_0$ is true, of obtaining $x$ successes or fewer.
 
-A **p-value** measures how probable the observed result, or a result still more extreme in the direction of the alternative hypothesis, would be under $H_0$.
+A **p-value** is calculated from the probability distribution specified by the null hypothesis. For a binomial test,
 
-Thus, the p-value is calculated from the probability distribution specified by the null hypothesis.
+$$
+X\sim\mathrm{Binomial}(n,p_0),
+$$
 
-The direction of the alternative hypothesis determines which part of the distribution is considered more extreme.
+so the null distribution is determined by the **current experiment's sample size** $n$ together with the probability $p_0$ specified by $H_0$.
+
+Importantly, `binom.test()` does not calculate $p_0$ from $x_{\mathrm{obs}}$ and $n$. The value $p_0$ is supplied by the user through the argument
+
+```r
+p = p0
+```
+
+whereas the observed sample proportion is calculated from the data as
+
+$$
+\hat p=\frac{x_{\mathrm{obs}}}{n}.
+$$
+
+The p-value then measures the probability, under this null distribution, of obtaining the observed result $x_{\mathrm{obs}}$ or a result farther in the direction specified by the alternative hypothesis $H_A$.
+
 
 ---
 
@@ -495,6 +571,22 @@ p             probability specified by H0
 
 alternative   direction of the alternative hypothesis
 ```
+
+Here, the arguments come from two different sources:
+
+```text
+x, n          observed data from the current experiment
+
+p = p0        reference probability specified by H0
+```
+
+Thus, `binom.test()` uses $n$ and $p_0$ to construct the null distribution
+
+$$
+X\sim\mathrm{Binomial}(n,p_0),
+$$
+
+and then evaluates the observed value $x_{\mathrm{obs}}$ within that distribution.
 
 The `alternative` argument determines which results are considered more extreme:
 
@@ -815,6 +907,90 @@ For every problem, follow the same sequence:
 ---
 
 Gregor Mendel studied inheritance in pea plants.
+
+Mendel's seed-shape experiment can be understood using a simple monohybrid cross. Suppose the allele
+
+$$
+A
+$$
+
+produces the dominant **round** phenotype and
+
+$$
+a
+$$
+
+produces the recessive **wrinkled** phenotype. If two heterozygous plants are crossed,
+
+$$
+Aa \times Aa,
+$$
+
+the possible offspring genotypes are
+
+$$
+AA,\quad Aa,\quad Aa,\quad aa.
+$$
+
+Thus, the expected genotype ratio is
+
+$$
+1:2:1.
+$$
+
+Because both
+
+$$
+AA
+$$
+
+and
+
+$$
+Aa
+$$
+
+have the dominant round phenotype, three of the four possible offspring are expected to be round, while only
+
+$$
+aa
+$$
+
+is expected to be wrinkled. Therefore, the expected phenotype ratio is
+
+$$
+3:1,
+$$
+
+and the expected probability of a round seed is
+
+$$
+p_0=\frac{3}{4}=0.75.
+$$
+
+Here,
+
+$$
+p_0=0.75
+$$
+
+comes from the **Mendelian genetic model**. It is not calculated from the 7324 seeds observed in the experiment.
+
+The experiment instead provides the sample size and observed number of round seeds:
+
+$$
+n=7324,
+\qquad
+x_{\mathrm{obs}}=5474.
+$$
+
+These quantities are then combined with $p_0=0.75$ to define the null distribution
+
+$$
+X\sim\mathrm{Binomial}(7324,0.75).
+$$
+
+---
 
 In one experiment involving seed shape, he obtained
 
@@ -1358,7 +1534,7 @@ $$
 p_0=0.40.
 $$
 
-> The value $p_0=0.40$ could in principle have come from previous studies or prior clinical experience
+> **Note:** The value $p_0=0.40$ is the pre-specified reference probability used in the null hypothesis. It is not calculated from the current observation of 34 successes among 55 patients. In general, a value such as $p_0$ may come from prior evidence, previous studies, a theoretical model, or a predefined study-design benchmark.
 
 Among
 
@@ -1777,6 +1953,32 @@ Both approaches give the same statistical decision.
 ---
 
 # 6. Comparing the Three Problems
+
+Before comparing the examples, it is useful to keep the three main quantities separate:
+
+```text
+p0        reference probability specified by H0
+
+n         number of trials in the current experiment
+
+x_obs     observed number of successes
+```
+
+The null model is
+
+$$
+X\sim\mathrm{Binomial}(n,p_0).
+$$
+
+The value $p_0$ does not need to come from an earlier experiment with the same $n$. For example:
+
+```text
+Mendel             p0 = 0.75 comes from a genetic model
+
+Allele expression  p0 = 0.50 represents equal allelic contribution
+
+EXACT trial         p0 = 0.40 is a pre-specified study benchmark
+```
 
 All three problems use the same basic statistical model:
 
