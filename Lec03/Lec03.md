@@ -1084,7 +1084,7 @@ $$
 p_0=0.5.
 $$
 
-Suppose that 100 allele-specific reads are obtained:
+For illustration, suppose that 100 allele-specific reads are obtained:
 
 ```text
 allele A    68 reads
@@ -1299,7 +1299,7 @@ Interpreting this as a biological difference in allele-specific expression also 
 
 ---
 
-**Precision oncology** aims to select cancer treatments based on the molecular characteristics of an individual patient's tumor. In the EXACT trial, treatment decisions were guided by molecular profiling, and the effectiveness of the individualized treatment was compared with that of the patient's previous treatment. Treatment benefit was assessed using **progression-free survival (PFS)**, the length of time during which the disease does not progress. For each patient, $\mathrm{PFS}_1$ denotes progression-free survival under the individualized treatment, while $\mathrm{PFS}_0$ denotes progression-free survival under the previous treatment. 
+**Precision oncology** aims to select cancer treatments based on the molecular characteristics of an individual patient's tumor. In the EXACT trial, treatment decisions were guided by molecular profiling, and the effectiveness of the individualized treatment was compared with that of the patient's previous treatment. Treatment benefit was assessed using **progression-free survival (PFS)**, <u>the length of time during which the disease does not progress</u>. For each patient, $\mathrm{PFS}_1$ denotes progression-free survival under the individualized treatment (for example, 7 months), while $\mathrm{PFS}_0$ denotes progression-free survival under the previous treatment (for example 4 months). 
 
 A patient was considered to have benefited from this treatment when
 
@@ -1337,6 +1337,8 @@ The study tested whether the probability of such a benefit was greater than
 $$
 p_0=0.40.
 $$
+
+> The value $p_0=0.40$ could in principle have come from previous studies or prior clinical experience
 
 Among
 
