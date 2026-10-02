@@ -38,6 +38,17 @@ Lecture 03 develops exact binomial hypothesis testing using biological examples:
 7. **Allele-specific expression** — testing whether allele-specific sequencing reads deviate from the 50:50 expectation using a two-sided exact binomial test.
 8. **EXACT precision-oncology trial** — performing a right-tailed exact binomial test with $\alpha=0.025$ and connecting the p-value with the critical rejection region.
 
+### [**Lecture 04**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec04/Lec04.html)
+
+Lecture 04 extends discrete probability models and introduces statistical errors and power:
+
+1. **Epitope detection and Poisson approximation** — modeling rare epitope-detection events using binomial and Poisson distributions.
+2. **Multinomial distribution** — extending the binomial distribution to more than two categories, with die-roll and nucleotide examples.
+3. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ in terms of incorrect statistical decisions.
+4. **EXACT trial and rejection region** — revisiting the critical value and using the same example to explain Type II error.
+5. **Statistical power** — defining power as $1-\beta$ and showing how it changes with the true alternative.
+6. **Factors affecting power** — examining the effects of effect size, sample size, and significance level.
+
 
 _Additional content will be added as the course progresses._
 
