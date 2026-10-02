@@ -66,6 +66,7 @@ Biostatistics-CDFD-2026/
 
 - [Normal distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/NormalDistribution.html)
 - [Binomial distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html)
+- [Hypothesis test simulator](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html)
 
 ## How to do various things in R programming? 
 

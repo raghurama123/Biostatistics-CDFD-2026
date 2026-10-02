@@ -24,12 +24,17 @@ In this lecture we first summarize the general logic of an **exact binomial test
 2. allele-specific expression;
 3. the EXACT precision-oncology trial.
 
-[1. Review of the Exact Binomial Test](#1-review-of-the-exact-binomial-test)  
-[2. Exact Binomial Test in R](#2-exact-binomial-test-in-r)  
-[3. Problem 1: Mendel's Pea Experiments](#3-problem-1-mendels-pea-experiments)  
-[4. Problem 2: Allele-Specific Expression](#4-problem-2-allele-specific-expression)  
-[5. Problem 3: Precision Oncology — The EXACT Trial](#5-problem-3-precision-oncology--the-exact-trial)  
-[6. Comparing the Three Problems](#6-comparing-the-three-problems)  
+[1. Review of the Exact Binomial Test](#review-of-the-exact-binomial-test)
+
+[2. Exact Binomial Test in R](#exact-binomial-test-in-r)
+
+[3. Problem 1: Mendel's Pea Experiments](#problem-1-mendels-pea-experiments)
+
+[4. Problem 2: Allele-Specific Expression](#problem-2-allele-specific-expression)
+
+[5. Problem 3: Precision Oncology — The EXACT Trial](#problem-3-precision-oncology--the-exact-trial)
+
+[6. Comparing the Three Problems](#comparing-the-three-problems)
 
 ---
 
