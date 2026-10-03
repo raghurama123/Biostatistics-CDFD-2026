@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hypothesis Testing: Z-Test, Errors, Power, and Sample Size</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script>
+window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;max-width:980px;margin:40px auto;padding:0 22px 60px;line-height:1.6;color:#222}
+h1{margin-bottom:10px}h2{margin-top:46px}.toc,.note,.box,.controls{border:1px solid #d8dee4;border-radius:7px;padding:14px 18px;margin:20px 0}.toc,.note{background:#f6f8fa}.note{border-left:4px solid #888}.box{background:#fafbfc}.controls{background:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 22px}.full{grid-column:1/-1}.control{min-width:0}label{display:block;font-weight:bold;margin-bottom:5px}input[type=number],input[type=range],select{width:100%;font-size:16px}input[type=number],select{padding:7px 9px}button{font-size:16px;padding:9px 15px;cursor:pointer}.plot{width:100%;height:500px}.results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}.result{border:1px solid #d8dee4;border-radius:6px;padding:12px;text-align:center;background:#fafafa}.value{font-size:23px;font-weight:bold}.decision{padding:16px 20px;margin-top:18px;border:1px solid #ccc;border-radius:6px;font-size:18px}.reject{background:#ffecec;border-color:#c62828}.notreject{background:#eef7ee;border-color:#2e7d32}.outcome{margin-top:10px;font-weight:bold}.error{color:#b00020;font-weight:bold;margin-top:10px}table{border-collapse:collapse;width:100%;margin:18px 0}th,td{border:1px solid #d8dee4;padding:10px 12px;text-align:left;vertical-align:top}th{background:#f6f8fa}hr{border:0;border-top:1px solid #d8dee4;margin:44px 0}.toc a{color:#174a7e;text-decoration:none}.toc a:hover{text-decoration:underline}
+@media(max-width:720px){.grid,.results{grid-template-columns:1fr}.plot{height:450px}}
+</style>
+</head>
+<body>
+<h1>Hypothesis Testing, Errors, Power, and Sample Size</h1>
+<p>This page connects the main ideas used in a one-sample z-test: the test statistic, p-value, Type I and Type II errors, significance level, power, and confidence-interval sample-size planning.</p>
+<div class="toc"><strong>Interactive sections</strong><ol><li><a href="#ztest">One-sample z-test</a></li><li><a href="#errors">Decisions and errors</a></li><li><a href="#power">Alpha, beta, and power</a></li><li><a href="#cisize">Sample size for a fixed confidence interval</a></li></ol></div>
+
+<section id="ztest">
+<h2>1. One-sample z-test</h2>
+<p>Use this test when the population standard deviation $\sigma$ is known.</p>
+$$H_0:\mu=\mu_0$$
+$$\boxed{z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}}$$
+<div class="note">Enter the null mean $\mu_0$, observed sample mean $\bar X$, known population standard deviation $\sigma$, and sample size $n$. If $X$ is a single observation rather than a sample mean, set $n=1$.</div>
+<div class="controls"><div class="grid">
+<div class="control full"><label for="zExample">Built-in example:</label><select id="zExample"><option value="custom">Custom values</option><option value="lr">Left-tailed — Reject H₀</option><option value="ln">Left-tailed — Do not reject H₀</option><option value="rr">Right-tailed — Reject H₀</option><option value="rn">Right-tailed — Do not reject H₀</option><option value="tr">Two-tailed — Reject H₀</option><option value="tn">Two-tailed — Do not reject H₀</option></select></div>
+<div class="control"><label>Type of test:</label><select id="zType"><option value="left">Left-tailed</option><option value="right">Right-tailed</option><option value="two">Two-tailed</option></select></div>
+<div class="control"><label>Significance level (α):</label><select id="zAlpha"><option value="0.10">0.10</option><option value="0.05" selected>0.05</option><option value="0.01">0.01</option></select></div>
+<div class="control"><label>Null mean (μ₀):</label><input id="zMu0" type="number" step="any" value="100"></div>
+<div class="control"><label>Observed sample mean (X̄):</label><input id="zXbar" type="number" step="any" value="96"></div>
+<div class="control"><label>Known population SD (σ):</label><input id="zSigma" type="number" min="0.000001" step="any" value="10"></div>
+<div class="control"><label>Sample size (n):</label><input id="zN" type="number" min="1" step="1" value="25"></div>
+<div class="control full"><button id="zCalc">Calculate z-test</button><div id="zErr" class="error"></div></div>
+</div></div>
+<div id="zHyp" class="box"></div>
+<div class="results"><div class="result"><div>Standard error</div><div id="zSE" class="value">—</div></div><div class="result"><div>z statistic</div><div id="zStat" class="value">—</div></div><div class="result"><div>p-value</div><div id="zP" class="value">—</div></div><div class="result"><div>α</div><div id="zA" class="value">—</div></div></div>
+<div id="zPlot" class="plot"></div><div id="zDecision" class="decision"></div>
+</section>
+
+<hr>
+<section id="errors">
+<h2>2. Decisions, Type I error, and Type II error</h2>
+$$p\le\alpha\Rightarrow\text{Reject }H_0$$
+$$p>\alpha\Rightarrow\text{Do not reject }H_0$$
+<div class="note">In a real study the p-value is calculated from the observed data. Here it can be moved manually to explore the logic of decisions and errors.</div>
+<div class="controls"><div class="grid">
+<div class="control"><label>Type of test:</label><select id="eType"><option value="two">Two-tailed</option><option value="left">Left-tailed</option><option value="right">Right-tailed</option></select></div>
+<div class="control"><label>Suppose in reality:</label><select id="eReality"><option value="H0">H₀ is actually true</option><option value="H1">H₁ is actually true</option></select></div>
+<div class="control"><label>Significance level α: <span id="eAlphaVal">0.05</span></label><input id="eAlpha" type="range" min="0.01" max="0.10" step="0.01" value="0.05"></div>
+<div class="control"><label>Observed p-value: <span id="ePVal">0.050</span></label><input id="eP" type="range" min="0.001" max="0.500" step="0.001" value="0.050"></div>
+</div></div>
+<div id="eHyp" class="box"></div><div id="ePlot" class="plot"></div><div id="eDecision" class="decision"></div>
+<table><thead><tr><th>Reality</th><th>Decision</th><th>Outcome</th></tr></thead><tbody><tr><td>$H_0$ true</td><td>Do not reject $H_0$</td><td>Correct decision</td></tr><tr><td>$H_0$ true</td><td>Reject $H_0$</td><td><strong>Type I error</strong></td></tr><tr><td>$H_1$ true</td><td>Do not reject $H_0$</td><td><strong>Type II error</strong></td></tr><tr><td>$H_1$ true</td><td>Reject $H_0$</td><td>Correct decision</td></tr></tbody></table>
+</section>
+
+<hr>
+<section id="power">
+<h2>3. Alpha, beta, and statistical power</h2>
+$$P(\text{Type I error}\mid H_0)=\alpha,\qquad P(\text{correctly do not reject }H_0\mid H_0)=1-\alpha$$
+$$P(\text{Type II error}\mid H_1)=\beta,\qquad P(\text{correctly reject }H_0\mid H_1)=1-\beta$$
+$$\boxed{\text{Power}=1-\beta}$$
+<div class="note">This simulator uses a standardized effect size $d$. Under $H_1$, the z-statistic distribution is shifted by $$\lambda=d\sqrt n.$$</div>
+<div class="controls"><div class="grid">
+<div class="control"><label>Type of test:</label><select id="pType"><option value="right">Right-tailed</option><option value="left">Left-tailed</option><option value="two">Two-tailed</option></select></div>
+<div class="control"><label>Significance level α: <span id="pAlphaVal">0.05</span></label><input id="pAlpha" type="range" min="0.01" max="0.10" step="0.01" value="0.05"></div>
+<div class="control"><label>Standardized effect size d: <span id="pDVal">0.30</span></label><input id="pD" type="range" min="0" max="1" step="0.05" value="0.30"></div>
+<div class="control"><label>Sample size n: <span id="pNVal">30</span></label><input id="pN" type="range" min="5" max="200" step="1" value="30"></div>
+</div></div>
+<div class="results"><div class="result"><div>α</div><div id="rAlpha" class="value">—</div></div><div class="result"><div>1 − α</div><div id="r1Alpha" class="value">—</div></div><div class="result"><div>β</div><div id="rBeta" class="value">—</div></div><div class="result"><div>Power = 1 − β</div><div id="rPower" class="value">—</div></div></div>
+<div id="pPlot" class="plot"></div>
+<h3>Four possible outcomes</h3>
+<table><thead><tr><th>Reality</th><th>Do not reject $H_0$</th><th>Reject $H_0$</th></tr></thead><tbody><tr><th>$H_0$ true</th><td>Correct decision<br>Probability = <strong id="t1a">1 − α</strong></td><td>Type I error<br>Probability = <strong id="ta">α</strong></td></tr><tr><th>$H_1$ true</th><td>Type II error<br>Probability = <strong id="tb">β</strong></td><td>Correct decision / Power<br>Probability = <strong id="tp">1 − β</strong></td></tr></tbody></table>
+<div class="note"><strong>Reducing Type I error:</strong> use a smaller $\alpha$, correct for multiple testing when appropriate, and pre-specify hypotheses and analysis decisions.<br><br><strong>Reducing Type II error:</strong> increase $n$, reduce measurement variability, and use an efficient design.<br><br><strong>Trade-off:</strong> for fixed $n$ and effect size, lowering $\alpha$ usually increases $\beta$. Increasing $n$ can recover power while keeping $\alpha$ small.</div>
+</section>
+
+<hr>
+<section id="cisize">
+<h2>4. Sample size for a fixed confidence interval</h2>
+<p>For a confidence interval for a population mean with known $\sigma$:</p>
+$$\bar X\pm z_{1-\alpha/2}\frac{\sigma}{\sqrt n}$$
+<p>If the desired margin of error is $E$:</p>
+$$E=z_{1-\alpha/2}\frac{\sigma}{\sqrt n}$$
+$$\boxed{n=\left(\frac{z_{1-\alpha/2}\sigma}{E}\right)^2}$$
+<div class="note">Always round $n$ <strong>up</strong>. If the desired total interval width is $W$, then $E=W/2$.</div>
+<div class="controls"><div class="grid">
+<div class="control"><label>Confidence level:</label><select id="cLevel"><option value="0.90">90%</option><option value="0.95" selected>95%</option><option value="0.99">99%</option></select></div>
+<div class="control"><label>Known population SD (σ):</label><input id="cSigma" type="number" min="0.000001" step="any" value="10"></div>
+<div class="control"><label>Specify precision as:</label><select id="cMode"><option value="margin">Margin of error E</option><option value="width">Total interval width W</option></select></div>
+<div class="control"><label id="cPrecLabel">Desired margin of error (E):</label><input id="cPrec" type="number" min="0.000001" step="any" value="2"></div>
+<div class="control"><label>Example observed mean (X̄) for plotting:</label><input id="cXbar" type="number" step="any" value="100"></div>
+<div class="control full"><button id="cCalc">Estimate sample size</button><div id="cErr" class="error"></div></div>
+</div></div>
+<div class="results"><div class="result"><div>Critical z*</div><div id="cZ" class="value">—</div></div><div class="result"><div>Unrounded n</div><div id="cNraw" class="value">—</div></div><div class="result"><div>Required n</div><div id="cN" class="value">—</div></div><div class="result"><div>Actual margin</div><div id="cM" class="value">—</div></div></div>
+<div id="cSummary" class="box"></div><div id="cPlot" class="plot"></div>
+</section>
+
+<script>
+function pdf(x,m=0){return Math.exp(-0.5*Math.pow(x-m,2))/Math.sqrt(2*Math.PI)}
+function erf(x){const s=x>=0?1:-1;x=Math.abs(x);const a1=.254829592,a2=-.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=.3275911,t=1/(1+p*x);const y=1-(((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t)*Math.exp(-x*x);return s*y}
+function cdf(x,m=0){return .5*(1+erf((x-m)/Math.sqrt(2)))}
+function inv(p){if(p<=0||p>=1)return NaN;const a1=-39.6968302866538,a2=220.946098424521,a3=-275.928510446969,a4=138.357751867269,a5=-30.6647980661472,a6=2.50662827745924,b1=-54.4760987982241,b2=161.585836858041,b3=-155.698979859887,b4=66.8013118877197,b5=-13.2806815528857,c1=-.00778489400243029,c2=-.322396458041136,c3=-2.40075827716184,c4=-2.54973253934373,c5=4.37466414146497,c6=2.93816398269878,d1=.00778469570904146,d2=.32246712907004,d3=2.445134137143,d4=3.75440866190742,pl=.02425,ph=1-pl;let q,r;if(p<pl){q=Math.sqrt(-2*Math.log(p));return (((((c1*q+c2)*q+c3)*q+c4)*q+c5)*q+c6)/((((d1*q+d2)*q+d3)*q+d4)*q+1)}if(p>ph){q=Math.sqrt(-2*Math.log(1-p));return -(((((c1*q+c2)*q+c3)*q+c4)*q+c5)*q+c6)/((((d1*q+d2)*q+d3)*q+d4)*q+1)}q=p-.5;r=q*q;return (((((a1*r+a2)*r+a3)*r+a4)*r+a5)*r+a6)*q/(((((b1*r+b2)*r+b3)*r+b4)*r+b5)*r+1)}
+function typeset(el){if(window.MathJax&&MathJax.typesetPromise)MathJax.typesetPromise([el])}
+const zx=[],zy=[];for(let i=0;i<1400;i++){const v=-4.5+9*i/1399;zx.push(v);zy.push(pdf(v))}
+
+// Z-test
+const ex={lr:{t:'left',mu:100,x:96,s:10,n:25,a:.05},ln:{t:'left',mu:100,x:98,s:10,n:25,a:.05},rr:{t:'right',mu:100,x:104,s:10,n:25,a:.05},rn:{t:'right',mu:100,x:102,s:10,n:25,a:.05},tr:{t:'two',mu:100,x:104,s:10,n:25,a:.05},tn:{t:'two',mu:100,x:103,s:10,n:25,a:.05}};
+function applyEx(){const k=zExample.value;if(k==='custom')return;const e=ex[k];zType.value=e.t;zAlpha.value=e.a.toFixed(2);zMu0.value=e.mu;zXbar.value=e.x;zSigma.value=e.s;zN.value=e.n;calcZ()}
+function calcZ(){zErr.textContent='';const t=zType.value,a=+zAlpha.value,mu=+zMu0.value,x=+zXbar.value,s=+zSigma.value,n=parseInt(zN.value);if(![mu,x,s,n].every(Number.isFinite)){zErr.textContent='Please enter valid numerical values.';return}if(s<=0){zErr.textContent='σ must be greater than 0.';return}if(n<1){zErr.textContent='n must be at least 1.';return}const se=s/Math.sqrt(n),z=(x-mu)/se;let p=t==='left'?cdf(z):t==='right'?1-cdf(z):2*(1-cdf(Math.abs(z)));p=Math.max(0,Math.min(1,p));let lc=null,rc=null;if(t==='left')lc=inv(a);else if(t==='right')rc=inv(1-a);else{const c=inv(1-a/2);lc=-c;rc=c}let alt=t==='left'?`H_1:\\mu<${mu}`:t==='right'?`H_1:\\mu>${mu}`:`H_1:\\mu\\ne${mu}`;zHyp.innerHTML=`$$H_0:\\mu=${mu}$$$$${alt}$$`;typeset(zHyp);zSE.textContent=se.toFixed(3);zStat.textContent=z.toFixed(3);zP.textContent=p.toFixed(4);zA.textContent=a.toFixed(2);const lx=[],ly=[],rx=[],ry=[];for(let i=0;i<zx.length;i++){if(lc!==null&&zx[i]<=lc){lx.push(zx[i]);ly.push(zy[i])}if(rc!==null&&zx[i]>=rc){rx.push(zx[i]);ry.push(zy[i])}}const sh=[],an=[];if(lc!==null){sh.push({type:'line',x0:lc,x1:lc,y0:0,y1:.43,line:{dash:'dash',width:2}});an.push({x:lc,y:.025,text:'critical z = '+lc.toFixed(2),showarrow:false,xanchor:'right'})}if(rc!==null){sh.push({type:'line',x0:rc,x1:rc,y0:0,y1:.43,line:{dash:'dash',width:2}});an.push({x:rc,y:.025,text:'critical z = '+rc.toFixed(2),showarrow:false,xanchor:'left'})}const zp=Math.max(-4.4,Math.min(4.4,z));sh.push({type:'line',x0:zp,x1:zp,y0:0,y1:Math.max(pdf(zp),.06),line:{width:4}});an.push({x:zp,y:Math.max(pdf(zp)+.08,.13),text:'observed z = '+z.toFixed(2)+'<br>p = '+p.toFixed(4),showarrow:true,arrowhead:2});Plotly.react('zPlot',[{x:zx,y:zy,type:'scatter',mode:'lines',name:'H₀ distribution',line:{width:3}},{x:lx,y:ly,type:'scatter',mode:'lines',fill:'tozeroy',name:'Rejection region',hoverinfo:'skip'},{x:rx,y:ry,type:'scatter',mode:'lines',fill:'tozeroy',name:'Rejection region',showlegend:false,hoverinfo:'skip'}],{title:{text:t==='left'?'Left-Tailed One-Sample Z-Test':t==='right'?'Right-Tailed One-Sample Z-Test':'Two-Tailed One-Sample Z-Test'},xaxis:{title:'z statistic',range:[-4.5,4.5],zeroline:true},yaxis:{title:'Probability density',range:[0,.46]},shapes:sh,annotations:an,margin:{t:80,r:30,b:60,l:70}},{responsive:true});const rej=p<=a;zDecision.className='decision '+(rej?'reject':'notreject');zDecision.innerHTML=rej?`<strong>Decision: Reject H₀.</strong><br>p = ${p.toFixed(4)} ≤ α = ${a.toFixed(2)}.<br>There is sufficient evidence in favor of the alternative hypothesis.`:`<strong>Decision: Do not reject H₀.</strong><br>p = ${p.toFixed(4)} > α = ${a.toFixed(2)}.<br>There is not enough evidence to reject H₀.`}
+zExample.onchange=applyEx;zCalc.onclick=()=>{zExample.value='custom';calcZ()};zType.onchange=()=>{zExample.value='custom';calcZ()};zAlpha.onchange=()=>{zExample.value='custom';calcZ()};
+
+// Error simulator
+function updateE(){const t=eType.value,r=eReality.value,a=+eAlpha.value,p=+eP.value;eAlphaVal.textContent=a.toFixed(2);ePVal.textContent=p.toFixed(3);let lc=null,rc=null,z,alt;if(t==='left'){alt='H_1:\\text{effect}<0';lc=inv(a);z=inv(p)}else if(t==='right'){alt='H_1:\\text{effect}>0';rc=inv(1-a);z=inv(1-p)}else{alt='H_1:\\text{effect}\\ne0';const c=inv(1-a/2);lc=-c;rc=c;z=inv(1-p/2)}eHyp.innerHTML='$$H_0:\\text{effect}=0$$'+`$$${alt}$$`;typeset(eHyp);const lx=[],ly=[],rx=[],ry=[];for(let i=0;i<zx.length;i++){if(lc!==null&&zx[i]<=lc){lx.push(zx[i]);ly.push(zy[i])}if(rc!==null&&zx[i]>=rc){rx.push(zx[i]);ry.push(zy[i])}}const zp=Math.max(-4.4,Math.min(4.4,z)),sh=[{type:'line',x0:zp,x1:zp,y0:0,y1:Math.max(pdf(zp),.06),line:{width:4}}],an=[{x:zp,y:Math.max(pdf(zp)+.08,.13),text:'observed z = '+z.toFixed(2)+'<br>p = '+p.toFixed(3),showarrow:true,arrowhead:2}];if(lc!==null){sh.push({type:'line',x0:lc,x1:lc,y0:0,y1:.43,line:{dash:'dash',width:2}});an.push({x:lc,y:.025,text:'critical z = '+lc.toFixed(2),showarrow:false,xanchor:'right'})}if(rc!==null){sh.push({type:'line',x0:rc,x1:rc,y0:0,y1:.43,line:{dash:'dash',width:2}});an.push({x:rc,y:.025,text:'critical z = '+rc.toFixed(2),showarrow:false,xanchor:'left'})}Plotly.react('ePlot',[{x:zx,y:zy,type:'scatter',mode:'lines',name:'Null distribution',line:{width:3}},{x:lx,y:ly,type:'scatter',mode:'lines',fill:'tozeroy',name:'Rejection region',hoverinfo:'skip'},{x:rx,y:ry,type:'scatter',mode:'lines',fill:'tozeroy',name:'Rejection region',showlegend:false,hoverinfo:'skip'}],{title:{text:t==='left'?'Left-Tailed Test under H₀':t==='right'?'Right-Tailed Test under H₀':'Two-Tailed Test under H₀'},xaxis:{title:'z statistic',range:[-4.5,4.5]},yaxis:{title:'Probability density',range:[0,.46]},shapes:sh,annotations:an,margin:{t:80,r:30,b:60,l:70}},{responsive:true});const rej=p<=a;let d=rej?`<strong>Decision: Reject H₀.</strong><br>p = ${p.toFixed(3)} ≤ α = ${a.toFixed(2)}.`:`<strong>Decision: Do not reject H₀.</strong><br>There is not enough evidence to reject H₀ because p = ${p.toFixed(3)} > α = ${a.toFixed(2)}.`;let o;if(r==='H0'&&rej)o="<div class='outcome'>Type I error</div>H₀ is actually true, but it was rejected.";else if(r==='H0'&&!rej)o="<div class='outcome'>Correct decision</div>H₀ is actually true, and it was not rejected.";else if(r==='H1'&&rej)o="<div class='outcome'>Correct decision</div>H₁ is actually true, and H₀ was rejected.";else o="<div class='outcome'>Type II error</div>H₁ is actually true, but H₀ was not rejected.";eDecision.className='decision '+(rej?'reject':'notreject');eDecision.innerHTML=d+o}
+eType.onchange=updateE;eReality.onchange=updateE;eAlpha.oninput=updateE;eP.oninput=updateE;
+
+// Power
+function updateP(){const t=pType.value,a=+pAlpha.value,d=+pD.value,n=parseInt(pN.value);pAlphaVal.textContent=a.toFixed(2);pDVal.textContent=d.toFixed(2);pNVal.textContent=n;let lam=d*Math.sqrt(n);if(t==='left')lam=-lam;let lc=null,rc=null;if(t==='right')rc=inv(1-a);else if(t==='left')lc=inv(a);else{const c=inv(1-a/2);lc=-c;rc=c}let b=t==='right'?cdf(rc,lam):t==='left'?1-cdf(lc,lam):cdf(rc,lam)-cdf(lc,lam);b=Math.max(0,Math.min(1,b));const pow=1-b,oa=1-a;rAlpha.textContent=a.toFixed(3);r1Alpha.textContent=oa.toFixed(3);rBeta.textContent=b.toFixed(3);rPower.textContent=pow.toFixed(3);ta.textContent=a.toFixed(3);t1a.textContent=oa.toFixed(3);tb.textContent=b.toFixed(3);tp.textContent=pow.toFixed(3);const min=Math.min(-5,lam-4),max=Math.max(5,lam+4),x=[],h0=[],h1=[],bx=[],by=[],plx=[],ply=[],prx=[],pry=[];for(let i=0;i<1800;i++){const v=min+(max-min)*i/1799;x.push(v);h0.push(pdf(v));h1.push(pdf(v,lam));const den=h1[i];if(t==='right'){if(v<=rc){bx.push(v);by.push(den)}else{prx.push(v);pry.push(den)}}else if(t==='left'){if(v>=lc){bx.push(v);by.push(den)}else{plx.push(v);ply.push(den)}}else{if(v>lc&&v<rc){bx.push(v);by.push(den)}else if(v<=lc){plx.push(v);ply.push(den)}else{prx.push(v);pry.push(den)}}}const sh=[];if(lc!==null)sh.push({type:'line',x0:lc,x1:lc,y0:0,y1:.43,line:{dash:'dash',width:2}});if(rc!==null)sh.push({type:'line',x0:rc,x1:rc,y0:0,y1:.43,line:{dash:'dash',width:2}});Plotly.react('pPlot',[{x,y:h0,type:'scatter',mode:'lines',name:'H₀ distribution',line:{width:3}},{x,y:h1,type:'scatter',mode:'lines',name:'H₁ distribution',line:{width:3,dash:'dash'}},{x:bx,y:by,type:'scatter',mode:'lines',fill:'tozeroy',name:'β: Type II error',hoverinfo:'skip'},{x:plx,y:ply,type:'scatter',mode:'lines',fill:'tozeroy',name:'Power = 1 − β',hoverinfo:'skip'},{x:prx,y:pry,type:'scatter',mode:'lines',fill:'tozeroy',name:'Power = 1 − β',showlegend:false,hoverinfo:'skip'}],{title:{text:t==='left'?'Left-Tailed Test: β and Power':t==='right'?'Right-Tailed Test: β and Power':'Two-Tailed Test: β and Power'},xaxis:{title:'Test statistic, z',range:[min,max]},yaxis:{title:'Probability density',range:[0,.46]},shapes:sh,annotations:[{x:0,y:.41,text:'H₀',showarrow:false},{x:lam,y:.41,text:'H₁',showarrow:false}],margin:{t:80,r:30,b:60,l:70}},{responsive:true})}
+pType.onchange=updateP;pAlpha.oninput=updateP;pD.oninput=updateP;pN.oninput=updateP;
+
+// CI sample size
+function updateLabel(){cPrecLabel.textContent=cMode.value==='margin'?'Desired margin of error (E):':'Desired total interval width (W):'}
+function calcC(){cErr.textContent='';const conf=+cLevel.value,s=+cSigma.value,prec=+cPrec.value,xbar=+cXbar.value;if(![conf,s,prec,xbar].every(Number.isFinite)){cErr.textContent='Please enter valid numerical values.';return}if(s<=0||prec<=0){cErr.textContent='σ and the desired precision must be greater than 0.';return}const a=1-conf,z=inv(1-a/2),E=cMode.value==='margin'?prec:prec/2,nraw=Math.pow(z*s/E,2),n=Math.ceil(nraw),M=z*s/Math.sqrt(n),lo=xbar-M,hi=xbar+M;cZ.textContent=z.toFixed(3);cNraw.textContent=nraw.toFixed(2);cN.textContent=n;cM.textContent=M.toFixed(3);cSummary.innerHTML=`<strong>Planned interval</strong><br><br>Confidence level = ${(conf*100).toFixed(0)}%, so α = ${a.toFixed(2)}.<br>Desired margin of error = ${E.toFixed(3)}.<br>Required sample size = <strong>${n}</strong>.<br>Using the rounded sample size, the actual margin of error is ${M.toFixed(3)} and the total interval width is ${(2*M).toFixed(3)}.<br><br>For the example mean X̄ = ${xbar.toFixed(3)}, the interval is approximately [${lo.toFixed(3)}, ${hi.toFixed(3)}].`;const pad=Math.max(M*1.8,1);Plotly.react('cPlot',[{x:[lo,hi],y:[0,0],type:'scatter',mode:'lines+markers',name:(conf*100).toFixed(0)+'% confidence interval',line:{width:6},marker:{size:10}},{x:[xbar],y:[0],type:'scatter',mode:'markers',name:'Sample mean',marker:{size:14,symbol:'diamond'}}],{title:{text:'Planned Confidence Interval'},xaxis:{title:'Population mean scale',range:[lo-pad,hi+pad]},yaxis:{visible:false,range:[-.5,.5]},annotations:[{x:lo,y:.15,text:'Lower = '+lo.toFixed(3),showarrow:false},{x:xbar,y:.15,text:'X̄ = '+xbar.toFixed(3),showarrow:false},{x:hi,y:.15,text:'Upper = '+hi.toFixed(3),showarrow:false}],margin:{t:80,r:30,b:60,l:40}},{responsive:true})}
+cMode.onchange=()=>{updateLabel();calcC()};cLevel.onchange=calcC;cCalc.onclick=calcC;
+
+zExample.value='lr';applyEx();updateE();updateP();updateLabel();calcC();
+</script>
+</body>
+</html>
