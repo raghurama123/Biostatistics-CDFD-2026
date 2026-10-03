@@ -35,6 +35,29 @@ We begin with the **Central Limit Theorem**, which explains why the sample mean 
 
 ---
 
+> **Coding instructions for this lecture**
+>
+> Create a separate folder for this lecture, for example:
+>
+> ```text
+> Lec04_R/
+> ```
+>
+> Inside this folder, create a separate R script for each section or example, such as:
+>
+> ```text
+> 01_CLT.R
+> 02_StandardNormal.R
+> 03_ConfidenceIntervals.R
+> 04_SampleSize.R
+> 05_ZTest.R
+> 06_TypeI_TypeII.R
+> 07_Power.R
+> ```
+>
+
+---
+
 # 1. Central Limit Theorem
 
 Suppose a population has mean
