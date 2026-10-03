@@ -101,75 +101,115 @@
 <nav id="TOC" role="doc-toc">
 <ul>
 <li><a
-href="#lecture-04-multinomial-models-errors-and-statistical-power"
-id="toc-lecture-04-multinomial-models-errors-and-statistical-power">Lecture
-04 — Multinomial Models, Errors, and Statistical Power</a></li>
-<li><a href="#epitope-detection-and-the-poisson-distribution"
-id="toc-epitope-detection-and-the-poisson-distribution">1. Epitope
-Detection and the Poisson Distribution</a>
+href="#lecture-04-central-limit-theorem-z-tests-errors-and-statistical-power"
+id="toc-lecture-04-central-limit-theorem-z-tests-errors-and-statistical-power">Lecture
+04 — Central Limit Theorem, Z-Tests, Errors, and Statistical
+Power</a></li>
+<li><a href="#central-limit-theorem" id="toc-central-limit-theorem">1.
+Central Limit Theorem</a>
 <ul>
-<li><a href="#example" id="toc-example">Example</a></li>
-<li><a href="#probability-of-exactly-3-detected-epitopes"
-id="toc-probability-of-exactly-3-detected-epitopes">Probability of
-exactly 3 detected epitopes</a></li>
-<li><a href="#probability-of-at-least-one-detected-epitope"
-id="toc-probability-of-at-least-one-detected-epitope">Probability of at
-least one detected epitope</a></li>
-<li><a href="#comparing-the-binomial-and-poisson-models"
-id="toc-comparing-the-binomial-and-poisson-models">Comparing the
-binomial and Poisson models</a></li>
+<li><a
+href="#population-distribution-and-sampling-distribution-are-different"
+id="toc-population-distribution-and-sampling-distribution-are-different">Population
+distribution and sampling distribution are different</a></li>
+<li><a href="#if-the-population-is-already-normal"
+id="toc-if-the-population-is-already-normal">If the population is
+already normal</a></li>
+<li><a href="#example-mean-length-of-birds"
+id="toc-example-mean-length-of-birds">Example: mean length of
+birds</a></li>
+<li><a href="#what-happens-if-the-sample-size-increases"
+id="toc-what-happens-if-the-sample-size-increases">What happens if the
+sample size increases?</a></li>
 </ul></li>
-<li><a href="#multinomial-distribution"
-id="toc-multinomial-distribution">2. Multinomial Distribution</a>
+<li><a href="#standardizing-the-sample-mean"
+id="toc-standardizing-the-sample-mean">2. Standardizing the Sample
+Mean</a>
 <ul>
-<li><a href="#simple-example-rolling-a-die"
-id="toc-simple-example-rolling-a-die">Simple example: rolling a
-die</a></li>
-<li><a href="#multinomial-model" id="toc-multinomial-model">Multinomial
-model</a></li>
-<li><a href="#example-dna-nucleotide-counts"
-id="toc-example-dna-nucleotide-counts">Example: DNA nucleotide
-counts</a></li>
-<li><a href="#multinomial-probability"
-id="toc-multinomial-probability">Multinomial probability</a></li>
-<li><a href="#binomial-as-a-special-case"
-id="toc-binomial-as-a-special-case">Binomial as a special case</a></li>
+<li><a href="#standard-normal-distribution"
+id="toc-standard-normal-distribution">Standard normal
+distribution</a></li>
 </ul></li>
-<li><a href="#statistical-decisions-and-errors"
-id="toc-statistical-decisions-and-errors">3. Statistical Decisions and
-Errors</a></li>
-<li><a href="#type-i-error-and-alpha" id="toc-type-i-error-and-alpha">4.
-Type I Error and Alpha</a></li>
-<li><a href="#type-ii-error" id="toc-type-ii-error">5. Type II Error</a>
+<li><a href="#critical-values-and-confidence-intervals"
+id="toc-critical-values-and-confidence-intervals">3. Critical Values and
+Confidence Intervals</a>
 <ul>
-<li><a href="#why-beta-is-not-fixed-by-alpha"
-id="toc-why-beta-is-not-fixed-by-alpha">Why <span
-class="math inline">\(\beta\)</span> is not fixed by <span
-class="math inline">\(\alpha\)</span></a></li>
+<li><a href="#common-critical-values"
+id="toc-common-critical-values">Common critical values</a></li>
+<li><a href="#example-confidence-interval-for-mean-weight-change"
+id="toc-example-confidence-interval-for-mean-weight-change">Example:
+confidence interval for mean weight change</a></li>
 </ul></li>
-<li><a href="#statistical-power" id="toc-statistical-power">6.
+<li><a href="#one-sample-z-test" id="toc-one-sample-z-test">4.
+One-Sample Z-Test</a>
+<ul>
+<li><a href="#three-forms-of-the-alternative-hypothesis"
+id="toc-three-forms-of-the-alternative-hypothesis">Three forms of the
+alternative hypothesis</a>
+<ul>
+<li><a href="#two-tailed-test" id="toc-two-tailed-test">Two-tailed
+test</a></li>
+<li><a href="#right-tailed-test" id="toc-right-tailed-test">Right-tailed
+test</a></li>
+<li><a href="#left-tailed-test" id="toc-left-tailed-test">Left-tailed
+test</a></li>
+</ul></li>
+<li><a href="#critical-region-approach-and-p-value-approach"
+id="toc-critical-region-approach-and-p-value-approach">Critical-region
+approach and p-value approach</a>
+<ul>
+<li><a href="#critical-region-approach"
+id="toc-critical-region-approach">Critical-region approach</a></li>
+<li><a href="#p-value-approach" id="toc-p-value-approach">p-value
+approach</a></li>
+</ul></li>
+<li><a href="#example-testing-mean-weight-change"
+id="toc-example-testing-mean-weight-change">Example: testing mean weight
+change</a></li>
+<li><a href="#the-same-test-in-r-from-the-summary-statistics"
+id="toc-the-same-test-in-r-from-the-summary-statistics">The same test in
+R from the summary statistics</a></li>
+</ul></li>
+<li><a href="#statistical-decisions-tp-tn-fp-and-fn"
+id="toc-statistical-decisions-tp-tn-fp-and-fn">5. Statistical Decisions:
+TP, TN, FP, and FN</a></li>
+<li><a href="#type-i-error-and-alpha" id="toc-type-i-error-and-alpha">6.
+Type I Error and Alpha</a>
+<ul>
+<li><a href="#why-alpha-defines-the-rejection-region"
+id="toc-why-alpha-defines-the-rejection-region">Why <span
+class="math inline">\(\alpha\)</span> defines the rejection
+region</a></li>
+<li><a href="#repeated-sampling-interpretation"
+id="toc-repeated-sampling-interpretation">Repeated-sampling
+interpretation</a></li>
+</ul></li>
+<li><a href="#type-ii-error-and-beta" id="toc-type-ii-error-and-beta">7.
+Type II Error and Beta</a>
+<ul>
+<li><a href="#example-using-a-right-tailed-z-test"
+id="toc-example-using-a-right-tailed-z-test">Example using a
+right-tailed Z-test</a></li>
+<li><a href="#suppose-the-true-mean-is-2-kg"
+id="toc-suppose-the-true-mean-is-2-kg">Suppose the true mean is 2
+kg</a></li>
+</ul></li>
+<li><a href="#statistical-power" id="toc-statistical-power">8.
 Statistical Power</a>
 <ul>
-<li><a href="#example-using-the-exact-trial"
-id="toc-example-using-the-exact-trial">Example using the EXACT
-trial</a></li>
-<li><a href="#power-depends-on-the-true-alternative"
-id="toc-power-depends-on-the-true-alternative">Power depends on the true
-alternative</a></li>
-<li><a href="#power-curve" id="toc-power-curve">Power curve</a></li>
+<li><a href="#the-four-probabilities"
+id="toc-the-four-probabilities">The four probabilities</a></li>
 </ul></li>
-<li><a href="#what-determines-power" id="toc-what-determines-power">7.
+<li><a href="#what-determines-power" id="toc-what-determines-power">9.
 What Determines Power?</a>
 <ul>
 <li><a href="#effect-size" id="toc-effect-size">1. Effect size</a></li>
 <li><a href="#sample-size" id="toc-sample-size">2. Sample size</a></li>
-<li><a href="#significance-level" id="toc-significance-level">3.
+<li><a href="#population-variability" id="toc-population-variability">3.
+Population variability</a></li>
+<li><a href="#significance-level" id="toc-significance-level">4.
 Significance level</a></li>
 </ul></li>
-<li><a href="#connecting-alpha-beta-and-power"
-id="toc-connecting-alpha-beta-and-power">8. Connecting <span
-class="math inline">\(\alpha\)</span>, <span
-class="math inline">\(\beta\)</span>, and Power</a></li>
 </ul>
 </nav>
 <table style="width:100%; border:none;">
@@ -186,402 +226,622 @@ class="math inline">\(\beta\)</span>, and Power</a></li>
 </tr>
 </table>
 <h1
-id="lecture-04-multinomial-models-errors-and-statistical-power">Lecture
-04 — Multinomial Models, Errors, and Statistical Power</h1>
-<p>This lecture has two parts.</p>
-<p>In the first part, we continue working with discrete probability
-models and introduce:</p>
-<ol type="1">
-<li>a biological example involving epitope detection;</li>
-<li>the multinomial distribution.</li>
-</ol>
-<p>In the second part, we return to hypothesis testing and examine what
-can happen when a statistical decision is made:</p>
-<ol start="3" type="1">
-<li>Type I error;</li>
-<li>Type II error;</li>
-<li>statistical power;</li>
-<li>the connection between power, sample size, effect size, and the
-significance level <span class="math inline">\(\alpha\)</span>.</li>
-</ol>
-<p><a href="#epitope-detection-and-the-poisson-distribution">1. Epitope
-Detection and the Poisson Distribution</a><br />
-<a href="#multinomial-distribution">2. Multinomial
-Distribution</a><br />
-<a href="#statistical-decisions-and-errors">3. Statistical Decisions and
-Errors</a><br />
-<a href="#type-i-error-and-alpha">4. Type I Error and Alpha</a><br />
-<a href="#type-ii-error">5. Type II Error</a><br />
-<a href="#statistical-power">6. Statistical Power</a><br />
-<a href="#what-determines-power">7. What Determines Power?</a></p>
+id="lecture-04-central-limit-theorem-z-tests-errors-and-statistical-power">Lecture
+04 — Central Limit Theorem, Z-Tests, Errors, and Statistical Power</h1>
+<p>This lecture develops hypothesis testing for a population mean using
+the normal distribution.</p>
+<p>We begin with the <strong>Central Limit Theorem</strong>, which
+explains why the sample mean has an approximately normal sampling
+distribution. We then use this result to construct a <strong>one-sample
+Z-test</strong>, define rejection regions and p-values, and examine the
+possible errors that can arise from a statistical decision.</p>
+<p><a href="#1-central-limit-theorem">1. Central Limit Theorem</a><br />
+<a href="#2-standardizing-the-sample-mean">2. Standardizing the Sample
+Mean</a><br />
+<a href="#3-critical-values-and-confidence-intervals">3. Critical Values
+and Confidence Intervals</a><br />
+<a href="#4-one-sample-z-test">4. One-Sample Z-Test</a><br />
+<a href="#5-statistical-decisions-tp-tn-fp-and-fn">5. Statistical
+Decisions: TP, TN, FP, and FN</a><br />
+<a href="#6-type-i-error-and-alpha">6. Type I Error and Alpha</a><br />
+<a href="#7-type-ii-error-and-beta">7. Type II Error and Beta</a><br />
+<a href="#8-statistical-power">8. Statistical Power</a><br />
+<a href="#9-what-determines-power">9. What Determines Power?</a><br />
+<a href="#10-summary">10. Summary</a></p>
 <hr />
-<h1 id="epitope-detection-and-the-poisson-distribution">1. Epitope
-Detection and the Poisson Distribution</h1>
-<p>File: <a
-href="EpitopeDetection.R"><code>EpitopeDetection.R</code></a></p>
-<p>An <strong>epitope</strong> is a small part of an antigen, such as a
-short region of a protein, that can be recognized by the immune system.
-If we examine <span class="math display">\[ n \]</span> candidate
-peptide regions and classify each one as either <strong>detected as an
-epitope</strong> or <strong>not detected</strong>, the number of
-detected epitopes can be modeled using a <strong>binomial
-distribution</strong>. When the number of candidate regions is large and
-the probability of detecting an epitope at any one region is small, this
-binomial distribution can be approximated by a <strong>Poisson
-distribution</strong> with <span class="math display">\[ \lambda = np
-\]</span>.</p>
-<p>A useful application of the Poisson distribution arises when we count
-relatively rare events.</p>
-<p>Suppose a protein contains</p>
+<h1 id="central-limit-theorem">1. Central Limit Theorem</h1>
+<p>Suppose a population has mean</p>
+<p><span class="math display">\[
+\mu
+\]</span></p>
+<p>and standard deviation</p>
+<p><span class="math display">\[
+\sigma.
+\]</span></p>
+<p>If we repeatedly take random samples of size</p>
 <p><span class="math display">\[
 n
 \]</span></p>
-<p>possible peptide positions that could produce an epitope recognized
-by the immune system.</p>
-<p>If each position has a small probability</p>
+<p>and calculate the mean of each sample,</p>
 <p><span class="math display">\[
-p
+\bar X,
 \]</span></p>
-<p>of producing a detectable epitope, and the positions can be treated
-as approximately independent, then the number of detected epitopes can
-be modeled initially as</p>
+<p>the sample means form a <strong>sampling distribution</strong>.</p>
+<p>The Central Limit Theorem tells us that, for a sufficiently large
+sample size,</p>
 <p><span class="math display">\[
-X\sim\mathrm{Binomial}(n,p).
+\boxed{
+\bar X
+\approx
+N\left(
+\mu,
+\frac{\sigma}{\sqrt n}
+\right)
+}
 \]</span></p>
-<p>The probability <span class="math display">\[ p \]</span> is a model
-parameter. In a real study, it would need to be estimated from prior
-data or specified from previous knowledge; it is not usually known
-exactly.</p>
-<p>When</p>
+<p>even when the original population itself is not normally
+distributed.</p>
+<p>More precisely,</p>
 <p><span class="math display">\[
-n
+E[\bar X]=\mu
 \]</span></p>
-<p>is large and</p>
+<p>and</p>
 <p><span class="math display">\[
-p
+\mathrm{SD}(\bar X)
+=
+\frac{\sigma}{\sqrt n}.
 \]</span></p>
-<p>is small, the binomial distribution can be approximated by a Poisson
-distribution with</p>
+<p>The quantity</p>
 <p><span class="math display">\[
-\lambda=np.
+\boxed{
+\frac{\sigma}{\sqrt n}
+}
 \]</span></p>
-<p>Thus,</p>
-<p><span class="math display">\[
-X\approx\mathrm{Poisson}(\lambda).
-\]</span></p>
+<p>is called the <strong>standard error of the mean</strong>.</p>
 <hr />
-<h2 id="example">Example</h2>
-<p>Suppose a protein contains</p>
+<h2
+id="population-distribution-and-sampling-distribution-are-different">Population
+distribution and sampling distribution are different</h2>
+<p>The population describes the values of individual observations.</p>
+<p>For example, individual body lengths in a bird population may
+have</p>
 <p><span class="math display">\[
-n=500
+\mu=47\text{ cm}
 \]</span></p>
-<p>candidate peptide positions, and assume the probability that any one
-position produces a detectable epitope is</p>
+<p>and</p>
 <p><span class="math display">\[
-p=0.004.
+\sigma=12\text{ cm}.
 \]</span></p>
-<p>Then the expected number of detected epitopes is</p>
+<p>The sampling distribution describes the means obtained from repeated
+samples.</p>
+<p>For samples of size <span class="math inline">\(n\)</span>,</p>
 <p><span class="math display">\[
-E[X]=np
-\]</span></p>
-<p>so</p>
-<p><span class="math display">\[
-E[X]=500\times0.004=2.
-\]</span></p>
-<p>Thus,</p>
-<p><span class="math display">\[
-\lambda=2.
-\]</span></p>
-<p>The Poisson model is therefore</p>
-<p><span class="math display">\[
-X\sim\mathrm{Poisson}(2).
-\]</span></p>
-<hr />
-<h2 id="probability-of-exactly-3-detected-epitopes">Probability of
-exactly 3 detected epitopes</h2>
-<p>For a Poisson random variable,</p>
-<p><span class="math display">\[
-P(X=x)=\frac{e^{-\lambda}\lambda^x}{x!}.
-\]</span></p>
-<p>In R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>This calculates</p>
-<p><span class="math display">\[
-P(X=3).
-\]</span></p>
-<hr />
-<h2 id="probability-of-at-least-one-detected-epitope">Probability of at
-least one detected epitope</h2>
-<p>We can calculate</p>
-<p><span class="math display">\[
-P(X\ge1)
-\]</span></p>
-<p>using</p>
-<p><span class="math display">\[
-P(X\ge1)=1-P(X=0).
-\]</span></p>
-<p>In R:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">dpois</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">0</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">2</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>or equivalently:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ppois</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">0</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">2</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<hr />
-<h2 id="comparing-the-binomial-and-poisson-models">Comparing the
-binomial and Poisson models</h2>
-<p>The exact binomial model is</p>
-<p><span class="math display">\[
-X\sim\mathrm{Binomial}(500,0.004).
-\]</span></p>
-<p>The Poisson approximation is</p>
-<p><span class="math display">\[
-X\sim\mathrm{Poisson}(2).
-\]</span></p>
-<p>For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dbinom</span>(</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">500</span>,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.004</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dpois</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">lambda =</span> <span class="dv">2</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>The two probabilities should be very similar.</p>
-<p>This is another example of the relationship</p>
-<p><span class="math display">\[
-\mathrm{Binomial}(n,p)
-\longrightarrow
-\mathrm{Poisson}(\lambda)
-\]</span></p>
-<p>when</p>
-<p><span class="math display">\[
-n\text{ is large},\qquad
-p\text{ is small},\qquad
-np=\lambda.
-\]</span></p>
-<hr />
-<h1 id="multinomial-distribution">2. Multinomial Distribution</h1>
-<p>File: <a
-href="MultinomialDistribution.R"><code>MultinomialDistribution.R</code></a></p>
-<p>The binomial distribution applies when each trial has only two
-possible outcomes.</p>
-<p>For example:</p>
-<pre class="text"><code>mutation / no mutation
-
-allele A / allele B
-
-success / failure</code></pre>
-<p>But many biological variables have more than two possible
-outcomes.</p>
-<p>For example, a nucleotide can be</p>
-<pre class="text"><code>A
-C
-G
-T</code></pre>
-<p>A genotype may have several categories, and a microbial sample may
-contain many different species.</p>
-<p>The <strong>multinomial distribution</strong> extends the binomial
-distribution to more than two categories.</p>
-<hr />
-<h2 id="simple-example-rolling-a-die">Simple example: rolling a die</h2>
-<p>A fair six-sided die has six possible outcomes:</p>
-<pre class="text"><code>1
-2
-3
-4
-5
-6</code></pre>
-<p>For one roll,</p>
-<p><span class="math display">\[
-P(1)=P(2)=\cdots=P(6)=\frac{1}{6}.
-\]</span></p>
-<p>Suppose the die is rolled</p>
-<p><span class="math display">\[
-n=60
-\]</span></p>
-<p>times.</p>
-<p>Let</p>
-<p><span class="math display">\[
-X_1,X_2,\ldots,X_6
-\]</span></p>
-<p>be the numbers of times that faces 1 through 6 occur.</p>
-<p>Then</p>
-<p><span class="math display">\[
-(X_1,X_2,\ldots,X_6)
-\sim
-\mathrm{Multinomial}
-\left(
-60;
-\frac16,\frac16,\frac16,\frac16,\frac16,\frac16
+\bar X
+\approx
+N\left(
+47,
+\frac{12}{\sqrt n}
 \right).
 \]</span></p>
-<p>The six counts must add to 60:</p>
+<p>The center remains</p>
 <p><span class="math display">\[
-X_1+X_2+\cdots+X_6=60.
+47,
 \]</span></p>
-<p>The expected count for each face is</p>
+<p>but the standard deviation of the sample mean is smaller than the
+standard deviation of individual birds.</p>
+<pre class="text"><code>Individual observations:
+
+mean = mu
+SD   = sigma
+
+Sample means:
+
+mean = mu
+SD   = sigma / sqrt(n)</code></pre>
+<p>As <span class="math inline">\(n\)</span> increases,</p>
 <p><span class="math display">\[
-E[X_i]=np_i
-=
-60\times\frac16
-=
-10.
+\frac{\sigma}{\sqrt n}
 \]</span></p>
-<p>This does <strong>not</strong> mean that every set of 60 rolls will
-give exactly 10 occurrences of each face. The observed counts vary
-because of random variation.</p>
-<p>For example, one experiment might produce:</p>
-<pre class="text"><code>Face      1   2   3   4   5   6
-Count     8  11   9  12  10  10</code></pre>
-<p>The important idea is that each trial has <strong>more than two
-possible categories</strong>, and we record the count in each
-category.</p>
+<p>decreases.</p>
+<p>Therefore, sample means become more tightly concentrated around the
+population mean.</p>
 <hr />
-<h2 id="multinomial-model">Multinomial model</h2>
-<p>Suppose each observation can fall into one of</p>
+<h2 id="if-the-population-is-already-normal">If the population is
+already normal</h2>
+<p>If the population itself is normally distributed, then the sampling
+distribution of <span class="math inline">\(\bar X\)</span> is normal
+for <strong>any</strong> sample size:</p>
 <p><span class="math display">\[
-k
+\bar X
+\sim
+N\left(
+\mu,
+\frac{\sigma}{\sqrt n}
+\right).
 \]</span></p>
-<p>categories with probabilities</p>
+<p>If the population is not normal, the Central Limit Theorem gives an
+approximately normal sampling distribution when <span
+class="math inline">\(n\)</span> is sufficiently large.</p>
+<p>A commonly used rule of thumb is that</p>
 <p><span class="math display">\[
-p_1,p_2,\ldots,p_k
+n\ge30
+\]</span></p>
+<p>is often large enough, although the required sample size depends on
+the shape of the population distribution.</p>
+<hr />
+<h2 id="example-mean-length-of-birds">Example: mean length of birds</h2>
+<p>Suppose a bird population has</p>
+<p><span class="math display">\[
+\mu=47\text{ cm}
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\sigma=12\text{ cm}.
+\]</span></p>
+<p>We take samples of</p>
+<p><span class="math display">\[
+n=9
+\]</span></p>
+<p>birds.</p>
+<p>The standard error of the sample mean is</p>
+<p><span class="math display">\[
+\mathrm{SE}
+=
+\frac{12}{\sqrt9}
+=
+4.
+\]</span></p>
+<p>What is the probability that the sample mean is greater than 50
+cm?</p>
+<p>We standardize:</p>
+<p><span class="math display">\[
+Z
+=
+\frac{\bar X-\mu}
+{\sigma/\sqrt n}
+=
+\frac{50-47}{4}
+=
+0.75.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+P(\bar X&gt;50)
+=
+P(Z&gt;0.75).
+\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.75</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>which gives approximately</p>
+<p><span class="math display">\[
+0.2266.
+\]</span></p>
+<p>So about 22.7% of samples of size 9 would have a sample mean greater
+than 50 cm.</p>
+<hr />
+<h2 id="what-happens-if-the-sample-size-increases">What happens if the
+sample size increases?</h2>
+<p>Now suppose</p>
+<p><span class="math display">\[
+n=25.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+\mathrm{SE}
+=
+\frac{12}{\sqrt{25}}
+=
+2.4.
+\]</span></p>
+<p>The corresponding Z value is</p>
+<p><span class="math display">\[
+Z
+=
+\frac{50-47}{2.4}
+=
+1.25.
+\]</span></p>
+<p>Therefore,</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.25</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>gives approximately</p>
+<p><span class="math display">\[
+0.1056.
+\]</span></p>
+<p>Thus:</p>
+<pre class="text"><code>n = 9     -&gt; SE = 4.0     -&gt; P(Xbar &gt; 50) ≈ 0.227
+
+n = 25    -&gt; SE = 2.4     -&gt; P(Xbar &gt; 50) ≈ 0.106</code></pre>
+<p>As the sample size increases, the sampling distribution becomes
+narrower.</p>
+<p>This is an important reason why larger samples provide more precise
+estimates of a population mean.</p>
+<hr />
+<h1 id="standardizing-the-sample-mean">2. Standardizing the Sample
+Mean</h1>
+<p>For a normally distributed variable,</p>
+<p><span class="math display">\[
+X\sim N(\mu,\sigma),
+\]</span></p>
+<p>an individual observation can be standardized using</p>
+<p><span class="math display">\[
+Z
+=
+\frac{X-\mu}{\sigma}.
+\]</span></p>
+<p>This converts the observation into units of standard deviation.</p>
+<p>For a <strong>sample mean</strong>, however, the relevant standard
+deviation is the standard error:</p>
+<p><span class="math display">\[
+\frac{\sigma}{\sqrt n}.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{
+Z
+=
+\frac{\bar X-\mu}
+{\sigma/\sqrt n}
+}
+\]</span></p>
+<p>for probabilities involving a sample mean.</p>
+<hr />
+<h2 id="standard-normal-distribution">Standard normal distribution</h2>
+<p>The standardized variable follows the standard normal
+distribution:</p>
+<p><span class="math display">\[
+Z\sim N(0,1).
+\]</span></p>
+<p>Its probability density function is</p>
+<p><span class="math display">\[
+\phi(z)
+=
+\frac{1}{\sqrt{2\pi}}
+\exp\left(
+-\frac{z^2}{2}
+\right).
+\]</span></p>
+<p>The standard normal distribution has</p>
+<p><span class="math display">\[
+\text{mean}=0
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\text{standard deviation}=1.
+\]</span></p>
+<p>Some useful central areas are approximately:</p>
+<table>
+<thead>
+<tr>
+<th>Range</th>
+<th style="text-align: right;">Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(-1\le Z\le1\)</span></td>
+<td style="text-align: right;">0.6827</td>
+</tr>
+<tr>
+<td><span class="math inline">\(-1.645\le Z\le1.645\)</span></td>
+<td style="text-align: right;">0.9000</td>
+</tr>
+<tr>
+<td><span class="math inline">\(-1.96\le Z\le1.96\)</span></td>
+<td style="text-align: right;">0.9500</td>
+</tr>
+<tr>
+<td><span class="math inline">\(-2.576\le Z\le2.576\)</span></td>
+<td style="text-align: right;">0.9900</td>
+</tr>
+<tr>
+<td><span class="math inline">\(-3\le Z\le3\)</span></td>
+<td style="text-align: right;">0.9973</td>
+</tr>
+</tbody>
+</table>
+<p>In R, probabilities are calculated using <code>pnorm()</code>.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># P(Z &lt;= 1)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># P(Z &gt; 1)</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># P(-1 &lt;= Z &lt;= 1)</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">pnorm</span>(<span class="dv">1</span>) <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Critical Z values can be obtained using <code>qnorm()</code>.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 95th percentile</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.95</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 97.5th percentile</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 99.5th percentile</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.995</span>)</span></code></pre></div>
+<hr />
+<h1 id="critical-values-and-confidence-intervals">3. Critical Values and
+Confidence Intervals</h1>
+<p>The standard normal distribution allows us to identify regions
+containing a specified probability.</p>
+<p>For example, approximately 95% of the standard normal distribution
+lies between</p>
+<p><span class="math display">\[
+-1.96
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
++1.96.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+P(-1.96\le Z\le1.96)
+\approx0.95.
+\]</span></p>
+<p>For the sample mean,</p>
+<p><span class="math display">\[
+Z
+=
+\frac{\bar X-\mu}
+{\sigma/\sqrt n}.
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+P\left(
+-1.96
+\le
+\frac{\bar X-\mu}
+{\sigma/\sqrt n}
+\le
+1.96
+\right)
+\approx0.95.
+\]</span></p>
+<p>Rearranging gives the 95% confidence interval for the population
+mean:</p>
+<p><span class="math display">\[
+\boxed{
+\bar X
+\pm
+1.96
+\frac{\sigma}{\sqrt n}
+}
+\]</span></p>
+<p>when <span class="math inline">\(\sigma\)</span> is known.</p>
+<p>More generally, a two-sided</p>
+<p><span class="math display">\[
+100(1-\alpha)\%
+\]</span></p>
+<p>confidence interval is</p>
+<p><span class="math display">\[
+\boxed{
+\bar X
+\pm
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}
+}
 \]</span></p>
 <p>where</p>
 <p><span class="math display">\[
-p_1+p_2+\cdots+p_k=1.
+z_{1-\alpha/2}
 \]</span></p>
-<p>After</p>
-<p><span class="math display">\[
-n
-\]</span></p>
-<p>independent observations, let</p>
-<p><span class="math display">\[
-X_1,X_2,\ldots,X_k
-\]</span></p>
-<p>be the counts in the different categories.</p>
-<p>Then</p>
-<p><span class="math display">\[
-(X_1,X_2,\ldots,X_k)
-\sim
-\mathrm{Multinomial}(n;p_1,p_2,\ldots,p_k).
-\]</span></p>
-<p>The counts must satisfy</p>
-<p><span class="math display">\[
-X_1+X_2+\cdots+X_k=n.
-\]</span></p>
+<p>is the corresponding standard normal critical value.</p>
 <hr />
-<h2 id="example-dna-nucleotide-counts">Example: DNA nucleotide
-counts</h2>
-<p>Suppose the nucleotide probabilities are</p>
+<h2 id="common-critical-values">Common critical values</h2>
+<p>For</p>
 <p><span class="math display">\[
-P(A)=0.30,
+\alpha=0.05,
 \]</span></p>
+<p>a two-sided 95% interval uses</p>
 <p><span class="math display">\[
-P(C)=0.20,
-\]</span></p>
-<p><span class="math display">\[
-P(G)=0.20,
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-P(T)=0.30.
-\]</span></p>
-<p>Thus,</p>
-<p><span class="math display">\[
-0.30+0.20+0.20+0.30=1.
-\]</span></p>
-<p>For a DNA sequence of length</p>
-<p><span class="math display">\[
-n=100,
-\]</span></p>
-<p>the expected counts are</p>
-<p><span class="math display">\[
-E[X_A]=100\times0.30=30,
-\]</span></p>
-<p><span class="math display">\[
-E[X_C]=100\times0.20=20,
-\]</span></p>
-<p><span class="math display">\[
-E[X_G]=100\times0.20=20,
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-E[X_T]=100\times0.30=30.
-\]</span></p>
-<p>These are expected values, not counts that must occur in every
-simulated sequence.</p>
-<hr />
-<h2 id="multinomial-probability">Multinomial probability</h2>
-<p>For counts</p>
-<p><span class="math display">\[
-x_1,x_2,\ldots,x_k
-\]</span></p>
-<p>with</p>
-<p><span class="math display">\[
-x_1+x_2+\cdots+x_k=n,
-\]</span></p>
-<p>the multinomial probability is</p>
-<p><span class="math display">\[
-P(X_1=x_1,\ldots,X_k=x_k)
+z_{1-\alpha/2}
 =
-\frac{n!}{x_1!x_2!\cdots x_k!}
-p_1^{x_1}p_2^{x_2}\cdots p_k^{x_k}.
+z_{0.975}
+\approx1.96.
 \]</span></p>
-<p>In R, <code>dmultinom()</code> calculates this probability.</p>
-<p>For example, suppose that among 10 DNA bases we observe:</p>
-<pre class="text"><code>A    3
-C    2
-G    2
-T    3</code></pre>
-<p>Using the probabilities</p>
+<p>For</p>
 <p><span class="math display">\[
-(0.30,0.20,0.20,0.30),
+\alpha=0.01,
 \]</span></p>
-<p>the probability of obtaining exactly these counts is:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dmultinom</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.30</span>, <span class="fl">0.20</span>, <span class="fl">0.20</span>, <span class="fl">0.30</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>This is the multinomial analogue of using <code>dbinom()</code> for
-the probability of an exact binomial count.</p>
+<p>a two-sided 99% interval uses</p>
+<p><span class="math display">\[
+z_{0.995}
+\approx2.576.
+\]</span></p>
+<p>For a one-sided test with</p>
+<p><span class="math display">\[
+\alpha=0.05,
+\]</span></p>
+<p>the critical value is</p>
+<p><span class="math display">\[
+z_{0.95}
+\approx1.645.
+\]</span></p>
+<p>Thus:</p>
+<pre class="text"><code>right-tailed, alpha = 0.05:
+    reject in Z &gt;= 1.645
+
+left-tailed, alpha = 0.05:
+    reject in Z &lt;= -1.645
+
+two-tailed, alpha = 0.05:
+    reject in Z &lt;= -1.96 or Z &gt;= 1.96</code></pre>
+<p>These critical regions lead directly to hypothesis testing.</p>
 <hr />
-<h2 id="binomial-as-a-special-case">Binomial as a special case</h2>
-<p>The multinomial distribution becomes a binomial distribution when
-there are only two categories.</p>
-<p>For example,</p>
+<h2 id="example-confidence-interval-for-mean-weight-change">Example:
+confidence interval for mean weight change</h2>
+<p>Suppose a study measures change in body weight after a treatment.</p>
+<p>Assume:</p>
 <p><span class="math display">\[
-p_1=p
+\bar X=1.29\text{ kg},
 \]</span></p>
-<p>and</p>
 <p><span class="math display">\[
-p_2=1-p.
+n=17,
+\]</span></p>
+<p>and the known population variance is</p>
+<p><span class="math display">\[
+\sigma^2=13.4621\text{ kg}^2.
 \]</span></p>
 <p>Then</p>
 <p><span class="math display">\[
-(X_1,X_2)
+\sigma
+=
+\sqrt{13.4621}
+\approx3.669\text{ kg}.
 \]</span></p>
-<p>contains the numbers of successes and failures, and knowing one count
-automatically determines the other.</p>
-<p>Thus:</p>
-<pre class="text"><code>2 categories     -&gt; binomial
-
-3 or more categories -&gt; multinomial</code></pre>
+<p>The standard error is</p>
+<p><span class="math display">\[
+\mathrm{SE}
+=
+\frac{3.669}{\sqrt{17}}
+\approx0.890\text{ kg}.
+\]</span></p>
+<p>The 95% confidence interval is</p>
+<p><span class="math display">\[
+1.29
+\pm
+1.96(0.890),
+\]</span></p>
+<p>which is approximately</p>
+<p><span class="math display">\[
+\boxed{
+[-0.45,\;3.03]\text{ kg}
+}
+\]</span></p>
+<p>The 99% confidence interval is</p>
+<p><span class="math display">\[
+1.29
+\pm
+2.576(0.890),
+\]</span></p>
+<p>which is approximately</p>
+<p><span class="math display">\[
+\boxed{
+[-1.00,\;3.58]\text{ kg}
+}
+\]</span></p>
+<p>Notice that the 99% confidence interval is wider than the 95%
+confidence interval.</p>
+<p>Greater confidence requires a wider interval.</p>
 <hr />
-<h1 id="statistical-decisions-and-errors">3. Statistical Decisions and
-Errors</h1>
-<p>In Lecture 03, we used hypothesis testing to make a statistical
-decision.</p>
-<p>The decision rule was:</p>
+<h1 id="one-sample-z-test">4. One-Sample Z-Test</h1>
+<p>Interactive plot: <a
+href="../interactive_plots/ZTestSimulator.html"><code>ZTestSimulator.html</code></a></p>
+<p>The same normal distribution can be used to test a hypothesis about a
+population mean.</p>
+<p>For the one-sample Z-test considered here, we assume that the
+population standard deviation</p>
+<p><span class="math display">\[
+\sigma
+\]</span></p>
+<p>is known.</p>
+<p>Suppose we want to test</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0.
+\]</span></p>
+<p>The Z statistic is</p>
+<p><span class="math display">\[
+\boxed{
+Z
+=
+\frac{\bar X-\mu_0}
+{\sigma/\sqrt n}
+}
+\]</span></p>
+<p>Under the null hypothesis,</p>
+<p><span class="math display">\[
+Z\sim N(0,1).
+\]</span></p>
+<p>The observed value of <span class="math inline">\(Z\)</span> tells us
+how far the sample mean lies from the null value <span
+class="math inline">\(\mu_0\)</span>, measured in standard errors.</p>
+<hr />
+<h2 id="three-forms-of-the-alternative-hypothesis">Three forms of the
+alternative hypothesis</h2>
+<h3 id="two-tailed-test">Two-tailed test</h3>
+<p>Use when departures in either direction are scientifically
+relevant:</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0
+\]</span></p>
+<p><span class="math display">\[
+H_A:\mu\ne\mu_0.
+\]</span></p>
+<p>For</p>
+<p><span class="math display">\[
+\alpha=0.05,
+\]</span></p>
+<p>reject <span class="math inline">\(H_0\)</span> when</p>
+<p><span class="math display">\[
+|Z|\ge1.96.
+\]</span></p>
+<hr />
+<h3 id="right-tailed-test">Right-tailed test</h3>
+<p>Use when only values larger than <span
+class="math inline">\(\mu_0\)</span> provide evidence for the
+alternative:</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0
+\]</span></p>
+<p><span class="math display">\[
+H_A:\mu&gt;\mu_0.
+\]</span></p>
+<p>For</p>
+<p><span class="math display">\[
+\alpha=0.05,
+\]</span></p>
+<p>reject <span class="math inline">\(H_0\)</span> when</p>
+<p><span class="math display">\[
+Z\ge1.645.
+\]</span></p>
+<hr />
+<h3 id="left-tailed-test">Left-tailed test</h3>
+<p>Use when only values smaller than <span
+class="math inline">\(\mu_0\)</span> provide evidence for the
+alternative:</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0
+\]</span></p>
+<p><span class="math display">\[
+H_A:\mu&lt;\mu_0.
+\]</span></p>
+<p>For</p>
+<p><span class="math display">\[
+\alpha=0.05,
+\]</span></p>
+<p>reject <span class="math inline">\(H_0\)</span> when</p>
+<p><span class="math display">\[
+Z\le-1.645.
+\]</span></p>
+<hr />
+<h2 id="critical-region-approach-and-p-value-approach">Critical-region
+approach and p-value approach</h2>
+<p>There are two equivalent ways to make the statistical decision.</p>
+<h3 id="critical-region-approach">Critical-region approach</h3>
+<p>Calculate <span class="math inline">\(Z\)</span> and ask whether it
+lies in the rejection region.</p>
+<p>For example, in a two-tailed test with</p>
+<p><span class="math display">\[
+\alpha=0.05,
+\]</span></p>
+<p>reject <span class="math inline">\(H_0\)</span> if</p>
+<p><span class="math display">\[
+|Z|\ge1.96.
+\]</span></p>
+<h3 id="p-value-approach">p-value approach</h3>
+<p>Calculate the probability of obtaining the observed result, or
+something more extreme, assuming <span
+class="math inline">\(H_0\)</span> is true.</p>
+<p>Then:</p>
 <p><span class="math display">\[
 p\text{-value}&lt;\alpha
 \quad\Rightarrow\quad
@@ -593,59 +853,193 @@ p\text{-value}\ge\alpha
 \quad\Rightarrow\quad
 \text{do not reject }H_0.
 \]</span></p>
-<p>However, a statistical decision can be correct or incorrect.</p>
-<p>There are two possible realities:</p>
-<pre class="text"><code>H0 is true
-
-H0 is false</code></pre>
-<p>and two possible decisions:</p>
+<hr />
+<h2 id="example-testing-mean-weight-change">Example: testing mean weight
+change</h2>
+<p>Continue with the weight-change example:</p>
+<p><span class="math display">\[
+\bar X=1.29\text{ kg},
+\]</span></p>
+<p><span class="math display">\[
+\sigma=3.669\text{ kg},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+n=17.
+\]</span></p>
+<p>Suppose the null hypothesis is</p>
+<p><span class="math display">\[
+H_0:\mu=0,
+\]</span></p>
+<p>meaning that the population mean weight change is zero.</p>
+<p>For a two-tailed test,</p>
+<p><span class="math display">\[
+H_A:\mu\ne0.
+\]</span></p>
+<p>The standard error is</p>
+<p><span class="math display">\[
+\frac{3.669}{\sqrt{17}}
+\approx0.890.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+Z
+=
+\frac{1.29-0}{0.890}
+\approx1.45.
+\]</span></p>
+<p>The two-tailed p-value is</p>
+<p><span class="math display">\[
+2P(Z\ge1.45).
+\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fl">1.29</span> <span class="sc">/</span> <span class="fl">0.890</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">abs</span>(z)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
+<p>This gives approximately</p>
+<p><span class="math display">\[
+p=0.147.
+\]</span></p>
+<p>At</p>
+<p><span class="math display">\[
+\alpha=0.05,
+\]</span></p>
+<p>we therefore <strong>do not reject</strong></p>
+<p><span class="math display">\[
+H_0.
+\]</span></p>
+<p>There is not enough evidence to conclude that the population mean
+weight change differs from zero.</p>
+<p>This is consistent with the 95% confidence interval</p>
+<p><span class="math display">\[
+[-0.45,\;3.03],
+\]</span></p>
+<p>which contains the null value</p>
+<p><span class="math display">\[
+0.
+\]</span></p>
+<hr />
+<h2 id="the-same-test-in-r-from-the-summary-statistics">The same test in
+R from the summary statistics</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fl">1.29</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">13.4621</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">17</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>p_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">abs</span>(z)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>se</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>p_two</span></code></pre></div>
+<p>For a right-tailed alternative:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p_right <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  z,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>For a left-tailed alternative:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p_left <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z)</span></code></pre></div>
+<hr />
+<h1 id="statistical-decisions-tp-tn-fp-and-fn">5. Statistical Decisions:
+TP, TN, FP, and FN</h1>
+<p>Interactive plot: <a
+href="../interactive_plots/HypothesisTestSimulator.html"><code>HypothesisTestSimulator.html</code></a></p>
+<p>A hypothesis test produces one of two decisions:</p>
 <pre class="text"><code>reject H0
 
 do not reject H0</code></pre>
-<p>This gives four possibilities.</p>
+<p>But in reality, there are also two possibilities:</p>
+<pre class="text"><code>H0 is true
+
+H0 is false</code></pre>
+<p>Combining these gives four possible outcomes.</p>
+<p>If we use <strong>positive</strong> to mean “reject <span
+class="math inline">\(H_0\)</span>” and <strong>negative</strong> to
+mean “do not reject <span class="math inline">\(H_0\)</span>”, the four
+outcomes can be written as:</p>
 <table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
 <tr>
 <th>Reality</th>
 <th>Decision</th>
-<th>Result</th>
+<th>Outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><span class="math inline">\(H_0\)</span> true</td>
 <td>Do not reject <span class="math inline">\(H_0\)</span></td>
-<td>Correct decision</td>
+<td>True negative (TN)</td>
 </tr>
 <tr>
 <td><span class="math inline">\(H_0\)</span> true</td>
 <td>Reject <span class="math inline">\(H_0\)</span></td>
-<td>Type I error</td>
+<td>False positive (FP) = Type I error</td>
 </tr>
 <tr>
 <td><span class="math inline">\(H_0\)</span> false</td>
 <td>Do not reject <span class="math inline">\(H_0\)</span></td>
-<td>Type II error</td>
+<td>False negative (FN) = Type II error</td>
 </tr>
 <tr>
 <td><span class="math inline">\(H_0\)</span> false</td>
 <td>Reject <span class="math inline">\(H_0\)</span></td>
-<td>Correct detection</td>
+<td>True positive (TP)</td>
 </tr>
 </tbody>
 </table>
+<p>Thus:</p>
+<pre class="text"><code>TRUE POSITIVE
+H0 is false
+and we reject H0
+-&gt; correct detection
+
+TRUE NEGATIVE
+H0 is true
+and we do not reject H0
+-&gt; correct decision
+
+FALSE POSITIVE
+H0 is true
+but we reject H0
+-&gt; Type I error
+
+FALSE NEGATIVE
+H0 is false
+but we do not reject H0
+-&gt; Type II error</code></pre>
+<p>The true-positive / false-positive terminology is especially common
+in diagnostic testing and classification. In hypothesis testing, the
+more standard terms are <strong>Type I error</strong>, <strong>Type II
+error</strong>, and <strong>power</strong>.</p>
 <hr />
-<h1 id="type-i-error-and-alpha">4. Type I Error and Alpha</h1>
-<p>File: <a href="Type1Error.R"><code>Type1Error.R</code></a></p>
+<h1 id="type-i-error-and-alpha">6. Type I Error and Alpha</h1>
 <p>A <strong>Type I error</strong> occurs when</p>
 <p><span class="math display">\[
 H_0
 \]</span></p>
-<p>is actually true but we reject it.</p>
+<p>is actually true, but we reject it.</p>
 <p>Thus,</p>
 <p><span class="math display">\[
 \boxed{
 \text{Type I error}
+=
+\text{false positive}
 =
 \text{rejecting a true }H_0
 }
@@ -659,53 +1053,73 @@ H_0
 \boxed{
 \alpha
 =
-P(\text{reject }H_0\mid H_0\text{ is true})
+P(\text{reject }H_0
+\mid
+H_0\text{ is true})
 }
 \]</span></p>
-<p>This gives the significance level a direct interpretation.</p>
-<p>This interpretation also helps explain how we choose <span
-class="math inline">\(\alpha\)</span>.</p>
-<p>Suppose that <span class="math inline">\(H_0\)</span> is actually
-true and that we could repeat the same experiment many times. We then
-ask:</p>
-<blockquote>
-<p><strong>Out of 100 such experiments, in how many are we willing to
-reject <span class="math inline">\(H_0\)</span> by mistake?</strong></p>
-</blockquote>
-<p>If we choose</p>
+<hr />
+<h2 id="why-alpha-defines-the-rejection-region">Why <span
+class="math inline">\(\alpha\)</span> defines the rejection region</h2>
+<p>Suppose we use a right-tailed Z-test with</p>
+<p><span class="math display">\[
+\alpha=0.05.
+\]</span></p>
+<p>Under <span class="math inline">\(H_0\)</span>,</p>
+<p><span class="math display">\[
+Z\sim N(0,1).
+\]</span></p>
+<p>We choose the critical value so that only 5% of the null distribution
+lies above it.</p>
+<p>Thus,</p>
+<p><span class="math display">\[
+P(Z\ge1.645\mid H_0)=0.05.
+\]</span></p>
+<p>The rejection region is therefore</p>
+<p><span class="math display">\[
+Z\ge1.645.
+\]</span></p>
+<p>If <span class="math inline">\(H_0\)</span> is actually true, about
+5% of repeated experiments will nevertheless fall in this rejection
+region.</p>
+<p>That is the Type I error rate.</p>
+<hr />
+<h2 id="repeated-sampling-interpretation">Repeated-sampling
+interpretation</h2>
+<p>Suppose <span class="math inline">\(H_0\)</span> is actually true and
+we could repeat the same experiment 100 times.</p>
+<p>If</p>
 <p><span class="math display">\[
 \alpha=0.05,
 \]</span></p>
-<p>we are allowing a Type I error in about</p>
+<p>then we are willing to tolerate about</p>
 <p><span class="math display">\[
-5\text{ out of }100
+5\text{ false rejections out of 100 experiments}.
 \]</span></p>
-<p>repeated experiments when <span class="math inline">\(H_0\)</span> is
-true.</p>
 <p>Similarly,</p>
 <p><span class="math display">\[
 \alpha=0.01
 \]</span></p>
-<p>means allowing a Type I error in about</p>
+<p>corresponds to about</p>
 <p><span class="math display">\[
-1\text{ out of }100
+1\text{ false rejection out of 100 experiments}.
 \]</span></p>
-<p>such experiments.</p>
 <p>Thus, choosing <span class="math inline">\(\alpha\)</span> means
-deciding how much risk of a false rejection we are willing to
+deciding how much risk of a false-positive conclusion we are willing to
 tolerate.</p>
 <hr />
-<h1 id="type-ii-error">5. Type II Error</h1>
-<p>File: <a href="Type2Error.R"><code>Type2Error.R</code></a></p>
+<h1 id="type-ii-error-and-beta">7. Type II Error and Beta</h1>
 <p>A <strong>Type II error</strong> occurs when</p>
 <p><span class="math display">\[
 H_0
 \]</span></p>
-<p>is false but we do not reject it.</p>
+<p>is false, but we do not reject it.</p>
 <p>Thus,</p>
 <p><span class="math display">\[
 \boxed{
 \text{Type II error}
+=
+\text{false negative}
 =
 \text{failing to reject a false }H_0
 }
@@ -714,163 +1128,7 @@ H_0
 <p><span class="math display">\[
 \beta.
 \]</span></p>
-<hr />
-<h2 id="why-beta-is-not-fixed-by-alpha">Why <span
-class="math inline">\(\beta\)</span> is not fixed by <span
-class="math inline">\(\alpha\)</span></h2>
-<p>Before discussing <span class="math inline">\(\beta\)</span>, recall
-how we defined the <strong>rejection region</strong> in Lecture 03.</p>
-<p>In the EXACT trial, we tested</p>
-<p><span class="math display">\[
-H_0:p=0.40
-\]</span></p>
-<p>against</p>
-<p><span class="math display">\[
-H_A:p&gt;0.40.
-\]</span></p>
-<p>There were</p>
-<p><span class="math display">\[
-n=55
-\]</span></p>
-<p>patients, and the significance level was</p>
-<p><span class="math display">\[
-\alpha=0.025.
-\]</span></p>
-<p>Under the null hypothesis,</p>
-<p><span class="math display">\[
-X\sim\mathrm{Binomial}(55,0.40).
-\]</span></p>
-<p>Because this was a right-tailed test, we needed to find a
-sufficiently large value of <span class="math inline">\(X\)</span> such
-that the probability of obtaining that value or something still larger
-under <span class="math inline">\(H_0\)</span> was no greater than <span
-class="math inline">\(\alpha\)</span>.</p>
-<p>For</p>
-<p><span class="math display">\[
-X\ge30,
-\]</span></p>
-<p>the probability under <span class="math inline">\(H_0\)</span> is</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.40</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>which gives approximately</p>
-<p><span class="math display">\[
-P(X\ge30\mid H_0)=0.0204.
-\]</span></p>
-<p>Since</p>
-<p><span class="math display">\[
-0.0204&lt;0.025,
-\]</span></p>
-<p><span class="math inline">\(X\ge30\)</span> could be used as the
-rejection region.</p>
-<p>Why not use</p>
-<p><span class="math display">\[
-X\ge29?
-\]</span></p>
-<p>For this region,</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pbinom</span>(</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">28</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.40</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>gives approximately</p>
-<p><span class="math display">\[
-P(X\ge29\mid H_0)=0.0379.
-\]</span></p>
-<p>Since</p>
-<p><span class="math display">\[
-0.0379&gt;0.025,
-\]</span></p>
-<p>using <span class="math inline">\(X\ge29\)</span> would make the
-probability of a Type I error larger than the chosen significance
-level.</p>
-<p>Therefore, the critical value is</p>
-<p><span class="math display">\[
-\boxed{30}
-\]</span></p>
-<p>and the statistical decision rule is</p>
-<pre class="text"><code>X &gt;= 30    -&gt; reject H0
-
-X &lt;= 29    -&gt; do not reject H0</code></pre>
-<p>Thus, <span class="math inline">\(\alpha\)</span> is determined by
-probabilities calculated under the null model</p>
-<p><span class="math display">\[
-p=p_0=0.40.
-\]</span></p>
-<p>Now consider a <strong>Type II error</strong>.</p>
-<p>A Type II error occurs when <span class="math inline">\(H_0\)</span>
-is false but the observation still falls in the do-not-reject
-region,</p>
-<p><span class="math display">\[
-X\le29.
-\]</span></p>
-<p>To calculate the probability of this happening, however, we must
-specify what the true value of <span class="math inline">\(p\)</span> is
-when <span class="math inline">\(H_0\)</span> is false.</p>
-<p>For example, suppose the true probability of benefit is</p>
-<p><span class="math display">\[
-p=0.50.
-\]</span></p>
-<p>Then</p>
-<p><span class="math display">\[
-X\sim\mathrm{Binomial}(55,0.50),
-\]</span></p>
-<p>and the Type II error probability is</p>
-<p><span class="math display">\[
-\beta
-=
-P(X\le29\mid p=0.50).
-\]</span></p>
-<p>In R:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.50</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>If instead the true probability is</p>
-<p><span class="math display">\[
-p=0.60,
-\]</span></p>
-<p>then</p>
-<p><span class="math display">\[
-\beta
-=
-P(X\le29\mid p=0.60),
-\]</span></p>
-<p>which is calculated using</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.60</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>If the true probability is even larger, for example</p>
-<p><span class="math display">\[
-p=0.70,
-\]</span></p>
-<p>then</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.70</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>gives an even smaller probability of remaining in the do-not-reject
-region.</p>
-<p>The reason is:</p>
-<pre class="text"><code>true p close to p0 = 0.40
-        -&gt; alternative distribution overlaps strongly with H0
-        -&gt; often X &lt;= 29
-        -&gt; larger beta
-
-true p farther above p0 = 0.40
-        -&gt; observations tend to be larger
-        -&gt; more often X &gt;= 30
-        -&gt; smaller beta</code></pre>
-<p>Therefore, unlike <span class="math inline">\(\alpha\)</span>, there
-is <strong>not one value of <span class="math inline">\(\beta\)</span>
-determined only by the test</strong>.</p>
-<p>Instead,</p>
+<p>Therefore,</p>
 <p><span class="math display">\[
 \boxed{
 \beta
@@ -880,424 +1138,327 @@ P(\text{do not reject }H_0
 \text{a particular alternative is true})
 }
 \]</span></p>
-<p>The value of <span class="math inline">\(\beta\)</span> therefore
-depends on the particular true value of <span
-class="math inline">\(p\)</span> that we consider.</p>
+<p>The phrase <strong>a particular alternative</strong> is
+important.</p>
+<p>Unlike <span class="math inline">\(\alpha\)</span>, <span
+class="math inline">\(\beta\)</span> cannot be calculated merely by
+saying that <span class="math inline">\(H_0\)</span> is false.</p>
+<p>We must specify what the true population mean actually is.</p>
 <hr />
-<h1 id="statistical-power">6. Statistical Power</h1>
-<p>File: <a href="PowerBinomial.R"><code>PowerBinomial.R</code></a></p>
-<p>Statistical <strong>power</strong> is the probability of correctly
-rejecting the null hypothesis when a specified alternative is true.</p>
-<p>Because</p>
+<h2 id="example-using-a-right-tailed-z-test">Example using a
+right-tailed Z-test</h2>
+<p>Suppose we test</p>
 <p><span class="math display">\[
-\beta
-\]</span></p>
-<p>is the probability of failing to reject a false null hypothesis,</p>
-<p><span class="math display">\[
-\boxed{
-\mathrm{Power}=1-\beta
-}
-\]</span></p>
-<p>Equivalently,</p>
-<p><span class="math display">\[
-\boxed{
-\mathrm{Power}
-=
-P(\text{reject }H_0\mid \text{a particular alternative is true})
-}
-\]</span></p>
-<hr />
-<h2 id="example-using-the-exact-trial">Example using the EXACT
-trial</h2>
-<p>Continue with the EXACT trial.</p>
-<p>We tested</p>
-<p><span class="math display">\[
-H_0:p=0.40
+H_0:\mu=0
 \]</span></p>
 <p>against</p>
 <p><span class="math display">\[
-H_A:p&gt;0.40,
+H_A:\mu&gt;0.
 \]</span></p>
-<p>with</p>
+<p>Assume</p>
 <p><span class="math display">\[
-n=55
+\sigma=3.669,
+\]</span></p>
+<p><span class="math display">\[
+n=17,
 \]</span></p>
 <p>and</p>
 <p><span class="math display">\[
-\alpha=0.025.
+\alpha=0.05.
 \]</span></p>
-<p>The rejection region was</p>
+<p>The standard error is</p>
 <p><span class="math display">\[
-X\ge30.
+\mathrm{SE}
+=
+\frac{3.669}{\sqrt{17}}
+\approx0.890.
 \]</span></p>
-<p>Therefore:</p>
-<pre class="text"><code>X &gt;= 30    -&gt; reject H0
+<p>For a right-tailed test,</p>
+<p><span class="math display">\[
+z_{\text{critical}}
+=
+1.645.
+\]</span></p>
+<p>Therefore, the critical sample mean is</p>
+<p><span class="math display">\[
+\bar X_{\text{critical}}
+=
+0
++
+1.645(0.890)
+\approx1.464.
+\]</span></p>
+<p>Our decision rule is therefore approximately:</p>
+<pre class="text"><code>Xbar &gt;= 1.464     -&gt; reject H0
 
-X &lt;= 29    -&gt; do not reject H0</code></pre>
-<p>Now suppose that the null hypothesis is false and that the true
-probability of benefit is</p>
+Xbar &lt; 1.464      -&gt; do not reject H0</code></pre>
+<hr />
+<h2 id="suppose-the-true-mean-is-2-kg">Suppose the true mean is 2
+kg</h2>
+<p>Now suppose <span class="math inline">\(H_0\)</span> is false and the
+true population mean is actually</p>
 <p><span class="math display">\[
-p=0.60.
+\mu=2\text{ kg}.
 \]</span></p>
-<p>Then</p>
+<p>A Type II error occurs if the sample mean nevertheless falls below
+the critical value:</p>
 <p><span class="math display">\[
-X\sim\mathrm{Binomial}(55,0.60).
+\bar X&lt;1.464.
 \]</span></p>
-<p>The Type II error probability is</p>
+<p>Under the alternative,</p>
+<p><span class="math display">\[
+\bar X
+\sim
+N\left(
+2,
+0.890
+\right).
+\]</span></p>
+<p>Therefore,</p>
 <p><span class="math display">\[
 \beta
 =
-P(X\le29\mid p=0.60).
+P(\bar X&lt;1.464\mid\mu=2).
 \]</span></p>
-<p>In R:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.60</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>beta</span></code></pre></div>
-<p>Power is the probability of entering the rejection region when this
-alternative is true:</p>
+<p>Standardizing relative to the alternative distribution:</p>
+<p><span class="math display">\[
+Z
+=
+\frac{1.464-2}{0.890}
+\approx-0.60.
+\]</span></p>
+<p>Thus,</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.60</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>beta</span></code></pre></div>
+<p>which is approximately</p>
+<p><span class="math display">\[
+\boxed{
+\beta\approx0.27
+}
+\]</span></p>
+<p>So if the true mean were 2 kg, this test would fail to reject <span
+class="math inline">\(H_0\)</span> in about 27% of repeated
+experiments.</p>
+<hr />
+<h1 id="statistical-power">8. Statistical Power</h1>
+<p>Interactive plot: <a
+href="../interactive_plots/PowerBetaSimulator.html"><code>PowerBetaSimulator.html</code></a></p>
+<p>Statistical <strong>power</strong> is the probability of correctly
+rejecting the null hypothesis when a specified alternative is true.</p>
+<p>In the previous example,</p>
+<p><span class="math display">\[
+\beta
+\]</span></p>
+<p>is the probability of a false negative.</p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{
+\mathrm{Power}
+=
+1-\beta
+}
+\]</span></p>
+<p>or equivalently,</p>
+<p><span class="math display">\[
+\boxed{
+\mathrm{Power}
+=
+P(\text{reject }H_0
+\mid
+\text{a particular alternative is true})
+}
+\]</span></p>
+<p>For the example with</p>
+<p><span class="math display">\[
+\mu=2,
+\]</span></p>
+<p>we found approximately</p>
+<p><span class="math display">\[
+\beta=0.27.
+\]</span></p>
+<p>Therefore,</p>
 <p><span class="math display">\[
 \mathrm{Power}
 =
-P(X\ge30\mid p=0.60).
+1-0.27
+=
+0.73.
 \]</span></p>
-<p>In R:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.60</span>,</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>power</span></code></pre></div>
-<p>or equivalently:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> beta</span></code></pre></div>
+<p>So the test has about</p>
+<p><span class="math display">\[
+73\%
+\]</span></p>
+<p>power to detect a true population mean of 2 kg under this particular
+design.</p>
+<hr />
+<h2 id="the-four-probabilities">The four probabilities</h2>
+<p>The four possible outcomes can now be connected directly with <span
+class="math inline">\(\alpha\)</span>, <span
+class="math inline">\(\beta\)</span>, and power.</p>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 30%" />
+</colgroup>
+<thead>
+<tr>
+<th>Reality</th>
+<th>Decision</th>
+<th>Outcome</th>
+<th style="text-align: right;">Probability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(H_0\)</span> true</td>
+<td>Reject <span class="math inline">\(H_0\)</span></td>
+<td>False positive / Type I error</td>
+<td style="text-align: right;"><span
+class="math inline">\(\alpha\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(H_0\)</span> true</td>
+<td>Do not reject <span class="math inline">\(H_0\)</span></td>
+<td>True negative</td>
+<td style="text-align: right;"><span
+class="math inline">\(1-\alpha\)</span></td>
+</tr>
+<tr>
+<td>Particular <span class="math inline">\(H_A\)</span> true</td>
+<td>Do not reject <span class="math inline">\(H_0\)</span></td>
+<td>False negative / Type II error</td>
+<td style="text-align: right;"><span
+class="math inline">\(\beta\)</span></td>
+</tr>
+<tr>
+<td>Particular <span class="math inline">\(H_A\)</span> true</td>
+<td>Reject <span class="math inline">\(H_0\)</span></td>
+<td>True positive</td>
+<td style="text-align: right;"><span
+class="math inline">\(1-\beta\)</span></td>
+</tr>
+</tbody>
+</table>
 <p>Thus,</p>
 <p><span class="math display">\[
 \boxed{
-\beta+\mathrm{Power}=1
+\text{true-positive probability}
+=
+\text{power}
+=
+1-\beta
 }
 \]</span></p>
-<p>for the same specified alternative.</p>
+<p>and, for a fixed continuous Z-test,</p>
+<p><span class="math display">\[
+\boxed{
+\text{true-negative probability}
+=
+1-\alpha.
+}
+\]</span></p>
 <hr />
-<h2 id="power-depends-on-the-true-alternative">Power depends on the true
-alternative</h2>
-<p>Just as <span class="math inline">\(\beta\)</span> depends on the
-true value of <span class="math inline">\(p\)</span>, power also depends
-on the true value of <span class="math inline">\(p\)</span>.</p>
-<p>For example:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Power if the true probability is 0.50</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.50</span>,</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Power if the true probability is 0.60</span></span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.60</span>,</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Power if the true probability is 0.70</span></span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">pbinom</span>(</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> <span class="fl">0.70</span>,</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>If the true probability is close to</p>
-<p><span class="math display">\[
-p_0=0.40,
-\]</span></p>
-<p>the alternative distribution overlaps strongly with the null
-distribution, so it is difficult to reach the rejection region.</p>
-<p>Therefore, power is relatively low.</p>
-<p>If the true probability is much larger than</p>
-<p><span class="math display">\[
-0.40,
-\]</span></p>
-<p>larger values of <span class="math inline">\(X\)</span> become more
-common and the probability of reaching</p>
-<p><span class="math display">\[
-X\ge30
-\]</span></p>
-<p>increases.</p>
-<p>Therefore:</p>
-<pre class="text"><code>true p close to p0
-        -&gt; harder to distinguish from H0
-        -&gt; larger beta
-        -&gt; lower power
-
-true p farther from p0
-        -&gt; easier to distinguish from H0
-        -&gt; smaller beta
-        -&gt; higher power</code></pre>
-<hr />
-<h2 id="power-curve">Power curve</h2>
-<p>Power can be calculated over a range of possible true values of <span
-class="math inline">\(p\)</span>.</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>p_true <span class="ot">&lt;-</span> <span class="fu">seq</span>(</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.40</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.80</span>,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fl">0.01</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>power <span class="ot">&lt;-</span> <span class="fu">pbinom</span>(</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">29</span>,</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">size =</span> <span class="dv">55</span>,</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob =</span> p_true,</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>Plot:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  p_true,</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  power,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd =</span> <span class="dv">2</span>,</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;True probability of benefit, p&quot;</span>,</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Power&quot;</span>,</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Power Curve for the EXACT Trial&quot;</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p>At</p>
-<p><span class="math display">\[
-p=0.40,
-\]</span></p>
-<p>we are back at the null model.</p>
-<p>The probability of rejection is then</p>
-<p><span class="math display">\[
-P(X\ge30\mid p=0.40)
-\approx0.0204,
-\]</span></p>
-<p>which is the actual Type I error probability for this discrete
-rejection region.</p>
-<p>As the true value of <span class="math inline">\(p\)</span> increases
-above 0.40, the power increases.</p>
-<hr />
-<h1 id="what-determines-power">7. What Determines Power?</h1>
-<p>Several factors influence statistical power.</p>
+<h1 id="what-determines-power">9. What Determines Power?</h1>
+<p>Power is not a fixed property of a statistical test alone.</p>
+<p>It depends on the true effect and on the design of the
+experiment.</p>
 <hr />
 <h2 id="effect-size">1. Effect size</h2>
-<p>For the EXACT trial, the null hypothesis is</p>
+<p>Suppose</p>
 <p><span class="math display">\[
-H_0:p=0.40.
+H_0:\mu=0.
 \]</span></p>
-<p>Suppose the true probability is</p>
+<p>If the true mean is only slightly different from zero, for
+example</p>
 <p><span class="math display">\[
-p=0.45.
+\mu=0.2,
 \]</span></p>
-<p>This value is close to the null value, so the distributions under</p>
+<p>the null and alternative sampling distributions overlap strongly.</p>
+<p>It is therefore difficult to distinguish the alternative from <span
+class="math inline">\(H_0\)</span>.</p>
+<p>If the true mean is much farther away, for example</p>
 <p><span class="math display">\[
-p=0.40
+\mu=2,
 \]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-p=0.45
-\]</span></p>
-<p>overlap strongly.</p>
-<p>It is therefore difficult to distinguish the alternative from the
-null model.</p>
-<p>Now suppose the true probability is</p>
-<p><span class="math display">\[
-p=0.70.
-\]</span></p>
-<p>This is much farther from the null value.</p>
-<p>Large values of <span class="math inline">\(X\)</span> are then much
-more common, making it easier to enter the rejection region</p>
-<p><span class="math display">\[
-X\ge30.
-\]</span></p>
+<p>the distributions overlap less.</p>
 <p>Therefore:</p>
 <p><span class="math display">\[
 \boxed{
-\text{larger effect size}
+\text{larger effect}
 \Rightarrow
 \text{higher power}
 }
 \]</span></p>
-<p>Here, the effect size can be thought of simply as how far the true
-value of <span class="math inline">\(p\)</span> is from the null
-value</p>
-<p><span class="math display">\[
-p_0=0.40.
-\]</span></p>
 <hr />
 <h2 id="sample-size">2. Sample size</h2>
-<p>The EXACT trial used</p>
+<p>The standard error is</p>
 <p><span class="math display">\[
-n=55
+\frac{\sigma}{\sqrt n}.
 \]</span></p>
-<p>patients.</p>
-<p>Suppose we want to detect the same difference between</p>
-<p><span class="math display">\[
-p_0=0.40
-\]</span></p>
-<p>and a true value such as</p>
-<p><span class="math display">\[
-p=0.60.
-\]</span></p>
-<p>With a small sample, random variation is relatively large, so the
-null and alternative distributions overlap more strongly.</p>
-<p>With a larger sample, the observed proportion tends to be more
-tightly concentrated around the true value of <span
-class="math inline">\(p\)</span>.</p>
-<p>The null and alternative distributions therefore become easier to
-distinguish.</p>
-<p>Thus:</p>
+<p>As <span class="math inline">\(n\)</span> increases, the standard
+error decreases.</p>
+<p>The sampling distributions become narrower, making different
+population means easier to distinguish.</p>
+<p>Therefore:</p>
 <p><span class="math display">\[
 \boxed{
 \text{larger }n
 \Rightarrow
+\text{smaller standard error}
+\Rightarrow
 \text{higher power}
 }
 \]</span></p>
-<p>This is one reason why sample size is an important part of study
-design.</p>
+<p>This is the same phenomenon seen earlier in the bird-length
+example.</p>
 <hr />
-<h2 id="significance-level">3. Significance level</h2>
-<p>In the EXACT trial,</p>
+<h2 id="population-variability">3. Population variability</h2>
+<p>For fixed <span class="math inline">\(n\)</span>,</p>
 <p><span class="math display">\[
-\alpha=0.025.
+\mathrm{SE}
+=
+\frac{\sigma}{\sqrt n}.
 \]</span></p>
-<p>The rejection region was chosen so that the probability of a Type I
-error under</p>
-<p><span class="math display">\[
-H_0:p=0.40
-\]</span></p>
-<p>was no greater than this level.</p>
-<p>If we choose a smaller value of <span
-class="math inline">\(\alpha\)</span>, we require stronger evidence
-before rejecting <span class="math inline">\(H_0\)</span>.</p>
-<p>The rejection region therefore moves farther into the tail of the
-null distribution.</p>
-<p>This reduces the probability of a Type I error, but it also makes it
-harder to reject <span class="math inline">\(H_0\)</span> when an
-alternative is actually true.</p>
-<p>Therefore, holding the sample size and true effect fixed:</p>
+<p>A larger population standard deviation produces a larger standard
+error and greater overlap between the null and alternative
+distributions.</p>
+<p>Therefore:</p>
 <p><span class="math display">\[
 \boxed{
-\text{smaller }\alpha
-\Rightarrow
-\text{smaller Type I error probability}
-}
-\]</span></p>
-<p>but generally also</p>
-<p><span class="math display">\[
-\boxed{
-\text{smaller }\alpha
+\text{larger }\sigma
 \Rightarrow
 \text{lower power}
 }
 \]</span></p>
-<p>Conversely, a larger <span class="math inline">\(\alpha\)</span>
-makes rejection easier and generally increases power, but at the cost of
-a higher probability of Type I error.</p>
-<p>Thus, choosing <span class="math inline">\(\alpha\)</span> involves a
-balance between:</p>
-<pre class="text"><code>avoiding false rejection of H0</code></pre>
-<p>and</p>
-<pre class="text"><code>having enough power to detect a real effect</code></pre>
+<p>Precise measurements and well-controlled experiments can therefore
+improve power.</p>
 <hr />
-<h1 id="connecting-alpha-beta-and-power">8. Connecting <span
-class="math inline">\(\alpha\)</span>, <span
-class="math inline">\(\beta\)</span>, and Power</h1>
-<p>The EXACT trial now gives one consistent example of all three
-quantities.</p>
-<p>Under the null hypothesis,</p>
+<h2 id="significance-level">4. Significance level</h2>
+<p>If we reduce</p>
 <p><span class="math display">\[
-H_0:p=0.40,
+\alpha,
 \]</span></p>
-<p>with rejection region</p>
-<p><span class="math display">\[
-X\ge30,
-\]</span></p>
-<p>the Type I error probability is</p>
-<p><span class="math display">\[
-P(X\ge30\mid p=0.40)
-\approx0.0204.
-\]</span></p>
-<p>For a particular alternative, for example</p>
-<p><span class="math display">\[
-p=0.60,
-\]</span></p>
-<p>the Type II error probability is</p>
-<p><span class="math display">\[
-\beta
-=
-P(X\le29\mid p=0.60),
-\]</span></p>
-<p>and the power is</p>
-<p><span class="math display">\[
-1-\beta
-=
-P(X\ge30\mid p=0.60).
-\]</span></p>
-<p>So the same critical value divides the possible observations into two
-regions:</p>
-<pre class="text"><code>                     critical value
-                          30
-                           |
-                           v
-
-X &lt;= 29                    |      X &gt;= 30
-do not reject H0           |      reject H0
----------------------------|----------------------------&gt;</code></pre>
-<p>What the two regions mean depends on which model is actually
-true.</p>
-<p>If</p>
-<p><span class="math display">\[
-p=0.40,
-\]</span></p>
-<p>then falling in</p>
-<p><span class="math display">\[
-X\ge30
-\]</span></p>
-<p>is a Type I error.</p>
-<p>If instead</p>
-<p><span class="math display">\[
-p=0.60,
-\]</span></p>
-<p>then falling in</p>
-<p><span class="math display">\[
-X\le29
-\]</span></p>
-<p>is a Type II error, while falling in</p>
-<p><span class="math display">\[
-X\ge30
-\]</span></p>
-<p>is a correct detection.</p>
-<p>Thus:</p>
+<p>the rejection region moves farther into the tail of the null
+distribution.</p>
+<p>This reduces false positives, but it also makes rejecting <span
+class="math inline">\(H_0\)</span> more difficult.</p>
+<p>For fixed sample size and effect size:</p>
 <p><span class="math display">\[
 \boxed{
-\alpha
-=
-P(\text{reject }H_0\mid H_0\text{ is true})
+\alpha\downarrow
+\quad\Rightarrow\quad
+\beta\uparrow
+\quad\Rightarrow\quad
+\text{power}\downarrow
 }
 \]</span></p>
-<p><span class="math display">\[
-\boxed{
-\beta
-=
-P(\text{do not reject }H_0\mid \text{a particular alternative is true})
-}
-\]</span></p>
-<p>and</p>
-<p><span class="math display">\[
-\boxed{
-\mathrm{Power}=1-\beta
-}
-\]</span></p>
-<p>The critical value is fixed by the test design, but the values of
-<span class="math inline">\(\beta\)</span> and power change depending on
-which alternative value of <span class="math inline">\(p\)</span> is
-considered.</p>
+<p>Conversely, increasing <span class="math inline">\(\alpha\)</span>
+generally increases power but also increases the probability of a Type I
+error.</p>
+<p>This is an important trade-off in study design.</p>
 <hr />
 </body>
 </html>

@@ -288,8 +288,74 @@
 
     <br><br>
 
-    For a test performed at significance level $\alpha$,
-    the probability of a Type I error is $\alpha$.
+    For this test, the significance level $\alpha$ controls the
+    Type I error rate under $H_0$.
+
+  </div>
+
+
+  <h2>How can we reduce Type I and Type II errors?</h2>
+
+  <div class="note">
+
+    <strong>To reduce Type I error (false positive):</strong>
+
+    <ul>
+      <li>
+        Use a smaller significance level, for example
+        $\alpha=0.01$ instead of $0.05$.
+      </li>
+      <li>
+        If many hypotheses are tested, use an appropriate
+        multiple-testing correction.
+      </li>
+      <li>
+        Specify the hypothesis, test direction, and analysis plan
+        before examining the data rather than choosing them
+        because they give a smaller p-value.
+      </li>
+    </ul>
+
+    <strong>To reduce Type II error (false negative):</strong>
+
+    <ul>
+      <li>
+        Increase the sample size.
+      </li>
+      <li>
+        Reduce measurement error and unnecessary variability.
+      </li>
+      <li>
+        Use an efficient study design, such as paired or repeated
+        measurements when scientifically appropriate.
+      </li>
+      <li>
+        A one-tailed test can have greater power in the specified
+        direction, but it should be used only when the direction
+        was justified and specified in advance.
+      </li>
+    </ul>
+
+    <strong>Important trade-off:</strong>
+
+    <p>
+      For a fixed sample size and effect size, lowering $\alpha$
+      reduces Type I error but usually increases $\beta$,
+      the probability of a Type II error.
+    </p>
+
+    $$
+    \alpha \downarrow
+    \quad\Rightarrow\quad
+    \beta \uparrow
+    \quad\text{(if everything else is unchanged)}
+    $$
+
+    <p>
+      A common way to obtain both stronger Type I error control
+      and good power is to use a suitably small $\alpha$ together
+      with a sufficiently large sample size and precise measurements.
+    </p>
 
   </div>
 

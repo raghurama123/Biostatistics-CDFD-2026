@@ -38,17 +38,18 @@ Lecture 03 develops exact binomial hypothesis testing using biological examples:
 7. **Allele-specific expression** — testing whether allele-specific sequencing reads deviate from the 50:50 expectation using a two-sided exact binomial test.
 8. **EXACT precision-oncology trial** — performing a right-tailed exact binomial test with $\alpha=0.025$ and connecting the p-value with the critical rejection region.
 
+
 ### [**Lecture 04**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec04/Lec04.html)
 
-Lecture 04 extends discrete probability models and introduces statistical errors and power:
+Lecture 04 introduces hypothesis testing for a population mean using the normal distribution:
 
-1. **Epitope detection and Poisson approximation** — modeling rare epitope-detection events using binomial and Poisson distributions.
-2. **Multinomial distribution** — extending the binomial distribution to more than two categories, with die-roll and nucleotide examples.
-3. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ in terms of incorrect statistical decisions.
-4. **EXACT trial and rejection region** — revisiting the critical value and using the same example to explain Type II error.
-5. **Statistical power** — defining power as $1-\beta$ and showing how it changes with the true alternative.
-6. **Factors affecting power** — examining the effects of effect size, sample size, and significance level.
-
+1. **Central Limit Theorem** — understanding the sampling distribution of the sample mean and the standard error $\sigma/\sqrt{n}$.
+2. **Standard normal distribution** — standardizing sample means using the Z-score and calculating probabilities with `pnorm()`.
+3. **Confidence intervals and critical values** — using standard normal critical values to construct confidence intervals for a population mean.
+4. **One-sample Z-test** — testing a population mean when the population standard deviation is known, including left-tailed, right-tailed, and two-tailed tests.
+5. **Statistical decisions and errors** — relating true positives, true negatives, false positives, and false negatives to hypothesis-testing decisions.
+6. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ as the probabilities of false-positive and false-negative decisions.
+7. **Statistical power** — defining power as $1-\beta$ and examining how effect size, sample size, variability, and significance level affect power.
 
 _Additional content will be added as the course progresses._
 
@@ -77,17 +78,18 @@ Biostatistics-CDFD-2026/
 
 - [Normal distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/NormalDistribution.html)
 - [Binomial distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html)
-- [Hypothesis test simulator](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html)
+- [Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/ZTestSimulator.html)
+- [Hypothesis test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html)
+- [Power of a Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/PowerBetaSimulator.html)
 
 ## How to do various things in R programming? 
 
 The [`HowToR`](HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. 
 
-## General reference
+## General references
 
-The main general reference for the course is the online book: **[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)** by Susan Holmes and Wolfgang Huber    
-
-The book provides a modern introduction to statistical thinking and data analysis for biological applications, with extensive use of R.
+1. Biostatistical Analysis, Jerrold H. Zar, Pearson Education India (2014)  
+2. **[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)** by Susan Holmes and Wolfgang Huber   
 
 ## Contact
 Raghunathan Ramakrishnan     

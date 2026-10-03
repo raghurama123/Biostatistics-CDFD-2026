@@ -135,27 +135,34 @@ and connecting the p-value with the critical rejection region.</li>
 <h3 id="lecture-04"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec04/Lec04.html"><strong>Lecture
 04</strong></a></h3>
-<p>Lecture 04 extends discrete probability models and introduces
-statistical errors and power:</p>
+<p>Lecture 04 introduces hypothesis testing for a population mean using
+the normal distribution:</p>
 <ol type="1">
-<li><strong>Epitope detection and Poisson approximation</strong> —
-modeling rare epitope-detection events using binomial and Poisson
-distributions.</li>
-<li><strong>Multinomial distribution</strong> — extending the binomial
-distribution to more than two categories, with die-roll and nucleotide
-examples.</li>
+<li><strong>Central Limit Theorem</strong> — understanding the sampling
+distribution of the sample mean and the standard error
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mi>/</mi><msqrt><mi>n</mi></msqrt></mrow><annotation encoding="application/x-tex">\sigma/\sqrt{n}</annotation></semantics></math>.</li>
+<li><strong>Standard normal distribution</strong> — standardizing sample
+means using the Z-score and calculating probabilities with
+<code>pnorm()</code>.</li>
+<li><strong>Confidence intervals and critical values</strong> — using
+standard normal critical values to construct confidence intervals for a
+population mean.</li>
+<li><strong>One-sample Z-test</strong> — testing a population mean when
+the population standard deviation is known, including left-tailed,
+right-tailed, and two-tailed tests.</li>
+<li><strong>Statistical decisions and errors</strong> — relating true
+positives, true negatives, false positives, and false negatives to
+hypothesis-testing decisions.</li>
 <li><strong>Type I and Type II errors</strong> — interpreting
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 and
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-in terms of incorrect statistical decisions.</li>
-<li><strong>EXACT trial and rejection region</strong> — revisiting the
-critical value and using the same example to explain Type II error.</li>
+as the probabilities of false-positive and false-negative
+decisions.</li>
 <li><strong>Statistical power</strong> — defining power as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">1-\beta</annotation></semantics></math>
-and showing how it changes with the true alternative.</li>
-<li><strong>Factors affecting power</strong> — examining the effects of
-effect size, sample size, and significance level.</li>
+and examining how effect size, sample size, variability, and
+significance level affect power.</li>
 </ol>
 <p><em>Additional content will be added as the course
 progresses.</em></p>
@@ -185,20 +192,27 @@ distribution</a></li>
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html">Binomial
 distribution</a></li>
 <li><a
+href="https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/ZTestSimulator.html">Z-test</a></li>
+<li><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html">Hypothesis
-test simulator</a></li>
+test</a></li>
+<li><a
+href="https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/PowerBetaSimulator.html">Power
+of a Z-test</a></li>
 </ul>
 <h2 id="how-to-do-various-things-in-r-programming">How to do various
 things in R programming?</h2>
 <p>The <a href="HowToR/"><code>HowToR</code></a> folder contains short
 manuals and examples explaining how to perform various tasks in
 <strong>R</strong>.</p>
-<h2 id="general-reference">General reference</h2>
-<p>The main general reference for the course is the online book:
-<strong><a href="https://www.huber.embl.de/msmb/">Modern Statistics for
-Modern Biology</a></strong> by Susan Holmes and Wolfgang Huber</p>
-<p>The book provides a modern introduction to statistical thinking and
-data analysis for biological applications, with extensive use of R.</p>
+<h2 id="general-references">General references</h2>
+<ol type="1">
+<li>Biostatistical Analysis, Jerrold H. Zar, Pearson Education India
+(2014)<br />
+</li>
+<li><strong><a href="https://www.huber.embl.de/msmb/">Modern Statistics
+for Modern Biology</a></strong> by Susan Holmes and Wolfgang Huber</li>
+</ol>
 <h2 id="contact">Contact</h2>
 <p>Raghunathan Ramakrishnan<br />
 Tata Institute of Fundamental Research Hyderabad, India<br />
