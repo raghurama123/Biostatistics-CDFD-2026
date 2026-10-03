@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Interactive Z-Test Simulator</title>
+
+  <!-- Plotly -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$']],
+        displayMath: [['$$', '$$']]
+      }
+    };
+  </script>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    async>
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+      color: #222;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .controls {
+      max-width: 800px;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .control {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="number"],
+    select {
+      font-size: 16px;
+      padding: 7px 9px;
+      width: 100%;
+      max-width: 360px;
+      box-sizing: border-box;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    #plot {
+      width: 100%;
+      height: 520px;
+    }
+
+    .note {
+      background: #f6f8fa;
+      border-left: 4px solid #888;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+
+    .formula-box {
+      background: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 20px 0;
+    }
+
+    .decision {
+      margin-top: 20px;
+      padding: 16px 20px;
+      border-radius: 6px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+    }
+
+    .reject {
+      background: #ffecec;
+      border-color: #c62828;
+    }
+
+    .not-reject {
+      background: #eef7ee;
+      border-color: #2e7d32;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .result-item {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+      background: #fafafa;
+    }
+
+    .result-value {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .error {
+      color: #b00020;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 650px) {
+      .results {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <h1>Interactive Z-Test Simulator</h1>
+
+  <h2>One-sample z-test for a population mean</h2>
+
+  <p>
+    Use this simulator when the population standard deviation
+    $\sigma$ is known.
+  </p>
+
+  <p>
+    The null hypothesis is
+  </p>
+
+  $$
+  H_0:\mu=\mu_0
+  $$
+
+  <p>
+    and the z statistic is
+  </p>
+
+  $$
+  \boxed{
+  z=
+  \frac{\bar X-\mu_0}
+       {\sigma/\sqrt{n}}
+  }
+  $$
+
+  <div class="note">
+    <strong>What should be entered?</strong>
+    Enter the hypothesized mean $\mu_0$, the observed sample mean
+    $\bar X$, the known population standard deviation $\sigma$, and
+    the sample size $n$.
+    If $X$ is a single observation rather than a sample mean, use
+    $n=1$.
+  </div>
+
+
+  <!-- Controls -->
+
+  <div class="controls">
+
+    <div class="control">
+      <label for="example-select">Built-in example:</label>
+
+      <select id="example-select">
+        <option value="custom">Custom values</option>
+        <option value="left-reject">Left-tailed — Reject H₀</option>
+        <option value="left-not">Left-tailed — Do not reject H₀</option>
+        <option value="right-reject">Right-tailed — Reject H₀</option>
+        <option value="right-not">Right-tailed — Do not reject H₀</option>
+        <option value="two-reject">Two-tailed — Reject H₀</option>
+        <option value="two-not">Two-tailed — Do not reject H₀</option>
+      </select>
+    </div>
+
+
+    <div class="control">
+      <label for="test-select">Type of test:</label>
+
+      <select id="test-select">
+        <option value="left">Left-tailed</option>
+        <option value="right">Right-tailed</option>
+        <option value="two">Two-tailed</option>
+      </select>
+    </div>
+
+
+    <div class="control">
+      <label for="mu0-input">
+        Null mean (&mu;<sub>0</sub>):
+      </label>
+
+      <input
+        id="mu0-input"
+        type="number"
+        step="any"
+        value="100"
+      >
+    </div>
+
+
+    <div class="control">
+      <label for="xbar-input">
+        Observed sample mean (X&#772;):
+      </label>
+
+      <input
+        id="xbar-input"
+        type="number"
+        step="any"
+        value="96"
+      >
+    </div>
+
+
+    <div class="control">
+      <label for="sigma-input">
+        Known population standard deviation (&sigma;):
+      </label>
+
+      <input
+        id="sigma-input"
+        type="number"
+        min="0.000001"
+        step="any"
+        value="10"
+      >
+    </div>
+
+
+    <div class="control">
+      <label for="n-input">
+        Sample size (n):
+      </label>
+
+      <input
+        id="n-input"
+        type="number"
+        min="1"
+        step="1"
+        value="25"
+      >
+    </div>
+
+
+    <div class="control">
+      <label for="alpha-select">
+        Significance level (&alpha;):
+      </label>
+
+      <select id="alpha-select">
+        <option value="0.10">0.10</option>
+        <option value="0.05" selected>0.05</option>
+        <option value="0.01">0.01</option>
+      </select>
+    </div>
+
+    <button id="calculate-button" type="button">
+      Calculate z-test
+    </button>
+
+    <div id="validation-message" class="error"></div>
+
+  </div>
+
+
+  <!-- Dynamic hypothesis -->
+
+  <div class="formula-box">
+
+    <strong>Hypotheses</strong>
+
+    <div id="hypothesis-display">
+      $$H_0:\mu=\mu_0$$
+      $$H_1:\mu<\mu_0$$
+    </div>
+
+  </div>
+
+
+  <!-- Results -->
+
+  <div class="results">
+
+    <div class="result-item">
+      <div>Standard error</div>
+      <div class="result-value" id="se-result">2.000</div>
+    </div>
+
+    <div class="result-item">
+      <div>z statistic</div>
+      <div class="result-value" id="z-result">-2.000</div>
+    </div>
+
+    <div class="result-item">
+      <div>p-value</div>
+      <div class="result-value" id="p-result">0.0228</div>
+    </div>
+
+  </div>
+
+
+  <!-- Plot -->
+
+  <div id="plot"></div>
+
+
+  <!-- Decision -->
+
+  <div
+    id="decision-box"
+    class="decision">
+  </div>
+
+
+  <div class="note">
+
+    <strong>Interpretation of the three tests</strong>
+
+    <br><br>
+
+    <strong>Left-tailed:</strong>
+    $H_1:\mu<\mu_0$.
+    Small negative z values provide evidence against $H_0$.
+
+    <br><br>
+
+    <strong>Right-tailed:</strong>
+    $H_1:\mu>\mu_0$.
+    Large positive z values provide evidence against $H_0$.
+
+    <br><br>
+
+    <strong>Two-tailed:</strong>
+    $H_1:\mu\ne\mu_0$.
+    Large positive or negative z values provide evidence against $H_0$.
+
+  </div>
+
+
+  <script>
+
+    // -------------------------------------------------------
+    // Standard normal density
+    // -------------------------------------------------------
+
+    function normalDensity(z) {
+
+      return (
+        Math.exp(-0.5 * z * z) /
+        Math.sqrt(2 * Math.PI)
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Error function approximation
+    // -------------------------------------------------------
+
+    function erf(x) {
+
+      const sign =
+        x >= 0 ? 1 : -1;
+
+      x =
+        Math.abs(x);
+
+      const a1 = 0.254829592;
+      const a2 = -0.284496736;
+      const a3 = 1.421413741;
+      const a4 = -1.453152027;
+      const a5 = 1.061405429;
+      const p = 0.3275911;
+
+      const t =
+        1 /
+        (1 + p * x);
+
+      const y =
+        1 -
+        (
+          (
+            (
+              (
+                (
+                  a5 * t + a4
+                ) * t + a3
+              ) * t + a2
+            ) * t + a1
+          ) * t
+        ) *
+        Math.exp(-x * x);
+
+      return sign * y;
+
+    }
+
+
+    // -------------------------------------------------------
+    // Standard normal CDF
+    // -------------------------------------------------------
+
+    function normalCDF(z) {
+
+      return (
+        0.5 *
+        (
+          1 +
+          erf(
+            z / Math.sqrt(2)
+          )
+        )
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Inverse standard normal CDF
+    // -------------------------------------------------------
+
+    function inverseNormalCDF(p) {
+
+      if (p <= 0 || p >= 1) {
+        return NaN;
+      }
+
+      const a1 = -39.6968302866538;
+      const a2 = 220.946098424521;
+      const a3 = -275.928510446969;
+      const a4 = 138.357751867269;
+      const a5 = -30.6647980661472;
+      const a6 = 2.50662827745924;
+
+      const b1 = -54.4760987982241;
+      const b2 = 161.585836858041;
+      const b3 = -155.698979859887;
+      const b4 = 66.8013118877197;
+      const b5 = -13.2806815528857;
+
+      const c1 = -0.00778489400243029;
+      const c2 = -0.322396458041136;
+      const c3 = -2.40075827716184;
+      const c4 = -2.54973253934373;
+      const c5 = 4.37466414146497;
+      const c6 = 2.93816398269878;
+
+      const d1 = 0.00778469570904146;
+      const d2 = 0.32246712907004;
+      const d3 = 2.445134137143;
+      const d4 = 3.75440866190742;
+
+      const plow = 0.02425;
+      const phigh = 1 - plow;
+
+      let q;
+      let r;
+
+
+      if (p < plow) {
+
+        q =
+          Math.sqrt(
+            -2 * Math.log(p)
+          );
+
+        return (
+          (((((c1 * q + c2) * q + c3) * q + c4)
+          * q + c5) * q + c6)
+          /
+          ((((d1 * q + d2) * q + d3) * q + d4)
+          * q + 1)
+        );
+
+      }
+
+
+      if (p > phigh) {
+
+        q =
+          Math.sqrt(
+            -2 * Math.log(1 - p)
+          );
+
+        return -(
+          (((((c1 * q + c2) * q + c3) * q + c4)
+          * q + c5) * q + c6)
+          /
+          ((((d1 * q + d2) * q + d3) * q + d4)
+          * q + 1)
+        );
+
+      }
+
+
+      q =
+        p - 0.5;
+
+      r =
+        q * q;
+
+      return (
+        (((((a1 * r + a2) * r + a3) * r + a4)
+        * r + a5) * r + a6) * q
+        /
+        (((((b1 * r + b2) * r + b3) * r + b4)
+        * r + b5) * r + 1)
+      );
+
+    }
+
+
+    // -------------------------------------------------------
+    // Plot x values
+    // -------------------------------------------------------
+
+    const plotX = [];
+
+    const xmin = -4.5;
+    const xmax = 4.5;
+    const points = 1400;
+
+    for (let i = 0; i < points; i++) {
+
+      plotX.push(
+        xmin +
+        (xmax - xmin) *
+        i /
+        (points - 1)
+      );
+
+    }
+
+    const plotY =
+      plotX.map(normalDensity);
+
+
+    // -------------------------------------------------------
+    // Elements
+    // -------------------------------------------------------
+
+    const exampleSelect =
+      document.getElementById(
+        "example-select"
+      );
+
+    const testSelect =
+      document.getElementById(
+        "test-select"
+      );
+
+    const mu0Input =
+      document.getElementById(
+        "mu0-input"
+      );
+
+    const xbarInput =
+      document.getElementById(
+        "xbar-input"
+      );
+
+    const sigmaInput =
+      document.getElementById(
+        "sigma-input"
+      );
+
+    const nInput =
+      document.getElementById(
+        "n-input"
+      );
+
+    const alphaSelect =
+      document.getElementById(
+        "alpha-select"
+      );
+
+    const calculateButton =
+      document.getElementById(
+        "calculate-button"
+      );
+
+    const validationMessage =
+      document.getElementById(
+        "validation-message"
+      );
+
+    const hypothesisDisplay =
+      document.getElementById(
+        "hypothesis-display"
+      );
+
+    const seResult =
+      document.getElementById(
+        "se-result"
+      );
+
+    const zResult =
+      document.getElementById(
+        "z-result"
+      );
+
+    const pResult =
+      document.getElementById(
+        "p-result"
+      );
+
+    const decisionBox =
+      document.getElementById(
+        "decision-box"
+      );
+
+
+    // -------------------------------------------------------
+    // Built-in examples
+    //
+    // All use:
+    // mu0 = 100
+    // sigma = 10
+    // n = 25
+    // alpha = 0.05
+    //
+    // SE = 10 / sqrt(25) = 2
+    // -------------------------------------------------------
+
+    const examples = {
+
+      "left-reject": {
+        test: "left",
+        mu0: 100,
+        xbar: 96,
+        sigma: 10,
+        n: 25,
+        alpha: 0.05
+      },
+
+      "left-not": {
+        test: "left",
+        mu0: 100,
+        xbar: 98,
+        sigma: 10,
+        n: 25,
+        alpha: 0.05
+      },
+
+      "right-reject": {
+        test: "right",
+        mu0: 100,
+        xbar: 104,
+        sigma: 10,
+        n: 25,
+        alpha: 0.05
+      },
+
+      "right-not": {
+        test: "right",
+        mu0: 100,
+        xbar: 102,
+        sigma: 10,
+        n: 25,
+        alpha: 0.05
+      },
+
+      "two-reject": {
+        test: "two",
+        mu0: 100,
+        xbar: 104,
+        sigma: 10,
+        n: 25,
+        alpha: 0.05
+      },
+
+      "two-not": {
+        test: "two",
+        mu0: 100,
+        xbar: 103,
+        sigma: 10,
+        n: 25,
+        alpha: 0.05
+      }
+
+    };
+
+
+    // -------------------------------------------------------
+    // Update hypothesis text
+    // -------------------------------------------------------
+
+    function updateHypothesisText(
+      testType,
+      mu0
+    ) {
+
+      let alternative;
+
+      if (testType === "left") {
+
+        alternative =
+          `$$H_1:\\mu<${mu0}$$`;
+
+      }
+
+      else if (testType === "right") {
+
+        alternative =
+          `$$H_1:\\mu>${mu0}$$`;
+
+      }
+
+      else {
+
+        alternative =
+          `$$H_1:\\mu\\ne${mu0}$$`;
+
+      }
+
+
+      hypothesisDisplay.innerHTML =
+        `$$H_0:\\mu=${mu0}$$` +
+        alternative;
+
+
+      if (
+        window.MathJax &&
+        MathJax.typesetPromise
+      ) {
+
+        MathJax.typesetPromise(
+          [hypothesisDisplay]
+        );
+
+      }
+
+    }
+
+
+    // -------------------------------------------------------
+    // Apply built-in example
+    // -------------------------------------------------------
+
+    function applyExample() {
+
+      const key =
+        exampleSelect.value;
+
+      if (key === "custom") {
+        return;
+      }
+
+      const example =
+        examples[key];
+
+      testSelect.value =
+        example.test;
+
+      mu0Input.value =
+        example.mu0;
+
+      xbarInput.value =
+        example.xbar;
+
+      sigmaInput.value =
+        example.sigma;
+
+      nInput.value =
+        example.n;
+
+      alphaSelect.value =
+        example.alpha.toFixed(2);
+
+      calculateTest();
+
+    }
+
+
+    // -------------------------------------------------------
+    // Calculate test
+    // -------------------------------------------------------
+
+    function calculateTest() {
+
+      validationMessage.textContent =
+        "";
+
+      const testType =
+        testSelect.value;
+
+      const mu0 =
+        parseFloat(
+          mu0Input.value
+        );
+
+      const xbar =
+        parseFloat(
+          xbarInput.value
+        );
+
+      const sigma =
+        parseFloat(
+          sigmaInput.value
+        );
+
+      const sampleSize =
+        parseInt(
+          nInput.value
+        );
+
+      const alpha =
+        parseFloat(
+          alphaSelect.value
+        );
+
+
+      // Validate
+
+      if (
+        !Number.isFinite(mu0) ||
+        !Number.isFinite(xbar) ||
+        !Number.isFinite(sigma) ||
+        !Number.isFinite(sampleSize)
+      ) {
+
+        validationMessage.textContent =
+          "Please enter valid numerical values.";
+
+        return;
+
+      }
+
+
+      if (sigma <= 0) {
+
+        validationMessage.textContent =
+          "σ must be greater than 0.";
+
+        return;
+
+      }
+
+
+      if (sampleSize < 1) {
+
+        validationMessage.textContent =
+          "n must be at least 1.";
+
+        return;
+
+      }
+
+
+      // -----------------------------------------------------
+      // Standard error and z
+      // -----------------------------------------------------
+
+      const standardError =
+        sigma /
+        Math.sqrt(
+          sampleSize
+        );
+
+      const z =
+        (xbar - mu0) /
+        standardError;
+
+
+      // -----------------------------------------------------
+      // p-value
+      // -----------------------------------------------------
+
+      let pValue;
+
+      if (testType === "left") {
+
+        pValue =
+          normalCDF(z);
+
+      }
+
+      else if (
+        testType === "right"
+      ) {
+
+        pValue =
+          1 -
+          normalCDF(z);
+
+      }
+
+      else {
+
+        pValue =
+          2 *
+          (
+            1 -
+            normalCDF(
+              Math.abs(z)
+            )
+          );
+
+      }
+
+
+      pValue =
+        Math.max(
+          0,
+          Math.min(
+            1,
+            pValue
+          )
+        );
+
+
+      // -----------------------------------------------------
+      // Critical values
+      // -----------------------------------------------------
+
+      let leftCritical =
+        null;
+
+      let rightCritical =
+        null;
+
+
+      if (testType === "left") {
+
+        leftCritical =
+          inverseNormalCDF(
+            alpha
+          );
+
+      }
+
+      else if (
+        testType === "right"
+      ) {
+
+        rightCritical =
+          inverseNormalCDF(
+            1 - alpha
+          );
+
+      }
+
+      else {
+
+        const critical =
+          inverseNormalCDF(
+            1 - alpha / 2
+          );
+
+        leftCritical =
+          -critical;
+
+        rightCritical =
+          critical;
+
+      }
+
+
+      // -----------------------------------------------------
+      // Update hypotheses and numerical results
+      // -----------------------------------------------------
+
+      updateHypothesisText(
+        testType,
+        mu0
+      );
+
+      seResult.textContent =
+        standardError.toFixed(3);
+
+      zResult.textContent =
+        z.toFixed(3);
+
+      pResult.textContent =
+        pValue.toFixed(4);
+
+
+      // -----------------------------------------------------
+      // Rejection regions
+      // -----------------------------------------------------
+
+      const leftX = [];
+      const leftY = [];
+
+      const rightX = [];
+      const rightY = [];
+
+
+      for (
+        let i = 0;
+        i < plotX.length;
+        i++
+      ) {
+
+        if (
+          leftCritical !== null &&
+          plotX[i] <= leftCritical
+        ) {
+
+          leftX.push(
+            plotX[i]
+          );
+
+          leftY.push(
+            plotY[i]
+          );
+
+        }
+
+
+        if (
+          rightCritical !== null &&
+          plotX[i] >= rightCritical
+        ) {
+
+          rightX.push(
+            plotX[i]
+          );
+
+          rightY.push(
+            plotY[i]
+          );
+
+        }
+
+      }
+
+
+      // -----------------------------------------------------
+      // Traces
+      // -----------------------------------------------------
+
+      const traces = [
+
+        {
+          x: plotX,
+          y: plotY,
+
+          type: "scatter",
+          mode: "lines",
+
+          name: "H₀ distribution",
+
+          line: {
+            width: 3
+          },
+
+          hovertemplate:
+            "z = %{x:.2f}" +
+            "<br>density = %{y:.4f}" +
+            "<extra></extra>"
+        },
+
+
+        {
+          x: leftX,
+          y: leftY,
+
+          type: "scatter",
+          mode: "lines",
+
+          fill: "tozeroy",
+
+          name: "Rejection region",
+
+          hoverinfo: "skip"
+        },
+
+
+        {
+          x: rightX,
+          y: rightY,
+
+          type: "scatter",
+          mode: "lines",
+
+          fill: "tozeroy",
+
+          name: "Rejection region",
+
+          showlegend: false,
+
+          hoverinfo: "skip"
+        }
+
+      ];
+
+
+      // -----------------------------------------------------
+      // Critical-value lines and observed z
+      // -----------------------------------------------------
+
+      const shapes = [];
+
+      const annotations = [];
+
+
+      if (
+        leftCritical !== null
+      ) {
+
+        shapes.push({
+
+          type: "line",
+
+          x0: leftCritical,
+          x1: leftCritical,
+
+          y0: 0,
+          y1: 0.43,
+
+          line: {
+            dash: "dash",
+            width: 2
+          }
+
+        });
+
+
+        annotations.push({
+
+          x: leftCritical,
+          y: 0.025,
+
+          text:
+            "critical z = " +
+            leftCritical.toFixed(2),
+
+          showarrow: false,
+
+          xanchor: "right"
+
+        });
+
+      }
+
+
+      if (
+        rightCritical !== null
+      ) {
+
+        shapes.push({
+
+          type: "line",
+
+          x0: rightCritical,
+          x1: rightCritical,
+
+          y0: 0,
+          y1: 0.43,
+
+          line: {
+            dash: "dash",
+            width: 2
+          }
+
+        });
+
+
+        annotations.push({
+
+          x: rightCritical,
+          y: 0.025,
+
+          text:
+            "critical z = " +
+            rightCritical.toFixed(2),
+
+          showarrow: false,
+
+          xanchor: "left"
+
+        });
+
+      }
+
+
+      const plottedZ =
+        Math.max(
+          -4.4,
+          Math.min(
+            4.4,
+            z
+          )
+        );
+
+
+      shapes.push({
+
+        type: "line",
+
+        x0: plottedZ,
+        x1: plottedZ,
+
+        y0: 0,
+        y1: Math.max(
+          normalDensity(
+            plottedZ
+          ),
+          0.06
+        ),
+
+        line: {
+          width: 4
+        }
+
+      });
+
+
+      annotations.push({
+
+        x: plottedZ,
+
+        y: Math.max(
+          normalDensity(
+            plottedZ
+          ) + 0.08,
+          0.13
+        ),
+
+        text:
+          "observed z = " +
+          z.toFixed(2) +
+          "<br>p = " +
+          pValue.toFixed(4),
+
+        showarrow: true,
+
+        arrowhead: 2
+
+      });
+
+
+      // -----------------------------------------------------
+      // Title
+      // -----------------------------------------------------
+
+      let title;
+
+      if (testType === "left") {
+
+        title =
+          "Left-Tailed One-Sample Z-Test";
+
+      }
+
+      else if (
+        testType === "right"
+      ) {
+
+        title =
+          "Right-Tailed One-Sample Z-Test";
+
+      }
+
+      else {
+
+        title =
+          "Two-Tailed One-Sample Z-Test";
+
+      }
+
+
+      const layout = {
+
+        title: {
+          text: title
+        },
+
+        xaxis: {
+          title: "z statistic",
+          range: [-4.5, 4.5],
+          zeroline: true
+        },
+
+        yaxis: {
+          title: "Probability density",
+          range: [0, 0.46]
+        },
+
+        shapes:
+          shapes,
+
+        annotations:
+          annotations,
+
+        margin: {
+          t: 80,
+          r: 30,
+          b: 60,
+          l: 70
+        },
+
+        legend: {
+          x: 0.01,
+          y: 0.98
+        }
+
+      };
+
+
+      Plotly.react(
+        "plot",
+        traces,
+        layout,
+        {
+          responsive: true
+        }
+      );
+
+
+      // -----------------------------------------------------
+      // Decision
+      // -----------------------------------------------------
+
+      const reject =
+        pValue <= alpha;
+
+
+      if (reject) {
+
+        decisionBox.className =
+          "decision reject";
+
+        decisionBox.innerHTML =
+          "<strong>Decision: Reject H₀.</strong>" +
+          "<br>" +
+          "p = " +
+          pValue.toFixed(4) +
+          " ≤ α = " +
+          alpha.toFixed(2) +
+          "." +
+          "<br>" +
+          "There is sufficient evidence in favor of the alternative hypothesis.";
+
+      }
+
+      else {
+
+        decisionBox.className =
+          "decision not-reject";
+
+        decisionBox.innerHTML =
+          "<strong>Decision: Do not reject H₀.</strong>" +
+          "<br>" +
+          "p = " +
+          pValue.toFixed(4) +
+          " > α = " +
+          alpha.toFixed(2) +
+          "." +
+          "<br>" +
+          "There is not enough evidence to reject H₀.";
+
+      }
+
+    }
+
+
+    // -------------------------------------------------------
+    // Event listeners
+    // -------------------------------------------------------
+
+    exampleSelect.addEventListener(
+      "change",
+      applyExample
+    );
+
+    calculateButton.addEventListener(
+      "click",
+      function () {
+        exampleSelect.value =
+          "custom";
+
+        calculateTest();
+      }
+    );
+
+    testSelect.addEventListener(
+      "change",
+      function () {
+        exampleSelect.value =
+          "custom";
+
+        calculateTest();
+      }
+    );
+
+    alphaSelect.addEventListener(
+      "change",
+      function () {
+        exampleSelect.value =
+          "custom";
+
+        calculateTest();
+      }
+    );
+
+
+    // -------------------------------------------------------
+    // Initial example
+    // -------------------------------------------------------
+
+    exampleSelect.value =
+      "left-reject";
+
+    applyExample();
+
+  </script>
+
+</body>
+
+</html>
