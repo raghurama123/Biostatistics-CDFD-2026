@@ -542,6 +542,50 @@ $$
 
 is the corresponding standard normal critical value.
 
+## Confidence interval in R
+
+Suppose
+
+$$
+\bar X=1.29,\qquad
+\sigma=3.669,\qquad
+n=17,
+$$
+
+and we want a 95% confidence interval.
+
+```r
+# Sample mean
+xbar <- 1.29
+
+# Known population standard deviation
+sigma <- 3.669
+
+# Sample size
+n <- 17
+
+# Significance level
+alpha <- 0.05
+
+# Standard error
+se <- sigma / sqrt(n)
+
+# Critical Z value
+zcrit <- qnorm(1 - alpha / 2)
+
+# Margin of error
+margin <- zcrit * se
+
+# Confidence interval
+lower <- xbar - margin
+upper <- xbar + margin
+
+se
+zcrit
+lower
+upper
+```
+
 ---
 
 ## Common critical values
