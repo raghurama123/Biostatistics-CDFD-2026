@@ -1033,6 +1033,22 @@ Use prior information or a pilot study to estimate variability
 Calculate the required sample size
 ```
 
+> **When $\sigma$ is unknown:**  
+> For inference about a population mean, we usually use the **t distribution** instead of the standard normal distribution.  
+> Thus, a **t-test** can be used in place of a Z-test, with the sample standard deviation $s$ replacing the unknown population standard deviation $\sigma$.
+>
+> $$
+> T=
+> \frac{\bar X-\mu_0}
+> {s/\sqrt n}
+> $$
+>
+> For a one-sample t-test, the degrees of freedom are
+>
+> $$
+> df=n-1.
+> $$
+
 ---
 
 # 5. One-Sample Z-Test
