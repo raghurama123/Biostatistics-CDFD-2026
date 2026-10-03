@@ -38,18 +38,18 @@ Lecture 03 develops exact binomial hypothesis testing using biological examples:
 7. **Allele-specific expression** — testing whether allele-specific sequencing reads deviate from the 50:50 expectation using a two-sided exact binomial test.
 8. **EXACT precision-oncology trial** — performing a right-tailed exact binomial test with $\alpha=0.025$ and connecting the p-value with the critical rejection region.
 
-
 ### [**Lecture 04**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec04/Lec04.html)
 
-Lecture 04 introduces hypothesis testing for a population mean using the normal distribution:
+Lecture 04 introduces inference for a population mean using the normal distribution:
 
 1. **Central Limit Theorem** — understanding the sampling distribution of the sample mean and the standard error $\sigma/\sqrt{n}$.
 2. **Standard normal distribution** — standardizing sample means using the Z-score and calculating probabilities with `pnorm()`.
 3. **Confidence intervals and critical values** — using standard normal critical values to construct confidence intervals for a population mean.
-4. **One-sample Z-test** — testing a population mean when the population standard deviation is known, including left-tailed, right-tailed, and two-tailed tests.
-5. **Statistical decisions and errors** — relating true positives, true negatives, false positives, and false negatives to hypothesis-testing decisions.
-6. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ as the probabilities of false-positive and false-negative decisions.
-7. **Statistical power** — defining power as $1-\beta$ and examining how effect size, sample size, variability, and significance level affect power.
+4. **Sample size for a fixed confidence interval** — estimating the sample size required for a chosen confidence level and margin of error, including the use of prior or pilot estimates of variability.
+5. **One-sample Z-test** — testing a population mean when the population standard deviation is known, including left-tailed, right-tailed, and two-tailed tests.
+6. **Statistical decisions and errors** — relating true positives, true negatives, false positives, and false negatives to hypothesis-testing decisions.
+7. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ as the probabilities of false-positive and false-negative decisions.
+8. **Statistical power** — defining power as $1-\beta$ and examining how effect size, sample size, variability, and significance level affect power.
 
 _Additional content will be added as the course progresses._
 
@@ -78,9 +78,7 @@ Biostatistics-CDFD-2026/
 
 - [Normal distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/NormalDistribution.html)
 - [Binomial distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html)
-- [Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/ZTestSimulator.html)
-- [Type-I, Type-II errors](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html)
-- [Power of a Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/PowerBetaSimulator.html)
+- [Hypothesis testing, Type-I/Type-II errors, power  using Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestingZtest.html)
 
 ## How to do various things in R programming? 
 

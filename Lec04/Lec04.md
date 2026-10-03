@@ -25,13 +25,13 @@ We begin with the **Central Limit Theorem**, which explains why the sample mean 
 [1. Central Limit Theorem](#1-central-limit-theorem)  
 [2. Standardizing the Sample Mean](#2-standardizing-the-sample-mean)  
 [3. Critical Values and Confidence Intervals](#3-critical-values-and-confidence-intervals)  
-[4. One-Sample Z-Test](#4-one-sample-z-test)  
-[5. Statistical Decisions: TP, TN, FP, and FN](#5-statistical-decisions-tp-tn-fp-and-fn)  
-[6. Type I Error and Alpha](#6-type-i-error-and-alpha)  
-[7. Type II Error and Beta](#7-type-ii-error-and-beta)  
-[8. Statistical Power](#8-statistical-power)  
-[9. What Determines Power?](#9-what-determines-power)  
-[10. Summary](#10-summary)  
+[4. Estimating Sample Size for a Fixed Confidence Interval](#4-estimating-sample-size-for-a-fixed-confidence-interval)  
+[5. One-Sample Z-Test](#5-one-sample-z-test)  
+[6. Statistical Decisions: TP, TN, FP, and FN](#6-statistical-decisions-tp-tn-fp-and-fn)  
+[7. Type I Error and Alpha](#7-type-i-error-and-alpha)  
+[8. Type II Error and Beta](#8-type-ii-error-and-beta)  
+[9. Statistical Power](#9-statistical-power)  
+[10. What Determines Power?](#10-what-determines-power)  
 
 ---
 
@@ -658,9 +658,318 @@ Greater confidence requires a wider interval.
 
 ---
 
-# 4. One-Sample Z-Test
+# 4. Estimating Sample Size for a Fixed Confidence Interval
 
-Interactive plot: [`ZTestSimulator.html`](../interactive_plots/ZTestSimulator.html)
+A confidence interval becomes narrower as the sample size increases.
+
+For a population mean with known population standard deviation $\sigma$, a two-sided
+
+$$
+100(1-\alpha)\%
+$$
+
+confidence interval is
+
+$$
+\bar X
+\pm
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}.
+$$
+
+The quantity
+
+$$
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}
+$$
+
+is the **margin of error**, or the **half-width** of the confidence interval.
+
+Suppose we want the confidence interval to have a specified margin of error
+
+$$
+d.
+$$
+
+Then we require
+
+$$
+d
+=
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}.
+$$
+
+Solving for $n$,
+
+$$
+\sqrt n
+=
+\frac{z_{1-\alpha/2}\sigma}{d},
+$$
+
+so
+
+$$
+\boxed{
+n
+=
+\left(
+\frac{z_{1-\alpha/2}\sigma}{d}
+\right)^2
+}
+$$
+
+Because the sample size must be an integer, we **round up** to the next whole number.
+
+Thus, before collecting the data, we can choose a desired confidence level and a desired precision, and then estimate how many observations are required.
+
+---
+
+## Example
+
+Suppose we want to estimate the mean weight of a rare variety of grain.
+
+From a previous study, assume that the population standard deviation is approximately
+
+$$
+\sigma=0.020\text{ g}.
+$$
+
+We want a 95% confidence interval with margin of error
+
+$$
+d=0.005\text{ g}.
+$$
+
+For a 95% confidence interval,
+
+$$
+\alpha=0.05
+$$
+
+and
+
+$$
+z_{1-\alpha/2}
+=
+z_{0.975}
+\approx1.96.
+$$
+
+Therefore,
+
+$$
+n
+=
+\left(
+\frac{1.96(0.020)}{0.005}
+\right)^2
+\approx61.47.
+$$
+
+We round up:
+
+$$
+\boxed{n=62}
+$$
+
+So at least 62 observations are required to obtain a 95% confidence interval with a margin of error of approximately 0.005 g, assuming $\sigma=0.020$ g.
+
+Using the rough approximation
+
+$$
+z_{0.975}\approx2,
+$$
+
+we obtain
+
+$$
+n
+\approx
+\left(
+\frac{2(0.020)}{0.005}
+\right)^2
+=64.
+$$
+
+This reproduces the convenient approximate result of about 64 observations.
+
+---
+
+## A narrower confidence interval requires a much larger sample
+
+Suppose instead that we want the margin of error to be only
+
+$$
+d=0.001\text{ g}.
+$$
+
+Then
+
+$$
+n
+=
+\left(
+\frac{1.96(0.020)}{0.001}
+\right)^2
+\approx1536.64.
+$$
+
+Therefore,
+
+$$
+\boxed{n=1537}
+$$
+
+observations are required.
+
+Using the rough approximation $z\approx2$ gives
+
+$$
+n
+\approx
+\left(
+\frac{2(0.020)}{0.001}
+\right)^2
+=1600.
+$$
+
+This illustrates an important point:
+
+$$
+\boxed{
+\text{smaller margin of error}
+\Rightarrow
+\text{much larger sample size}
+}
+$$
+
+Because
+
+$$
+n\propto\frac{1}{d^2},
+$$
+
+cutting the margin of error in half requires approximately four times as many observations.
+
+---
+
+## Calculation in R
+
+```r
+# Desired confidence level
+alpha <- 0.05
+
+# Known population standard deviation
+sigma <- 0.020
+
+# Desired margin of error
+d <- 0.005
+
+# Critical z value
+zcrit <- qnorm(
+  1 - alpha / 2
+)
+
+# Required sample size
+n <- ceiling(
+  (zcrit * sigma / d)^2
+)
+
+zcrit
+n
+```
+
+For
+
+$$
+d=0.001,
+$$
+
+use:
+
+```r
+d <- 0.001
+
+n <- ceiling(
+  (zcrit * sigma / d)^2
+)
+
+n
+```
+
+---
+
+## What if $\sigma$ is not known?
+
+In practice, the population standard deviation
+
+$$
+\sigma
+$$
+
+is usually not known before the study begins.
+
+A common approach is to conduct a **pilot study** and use its sample standard deviation
+
+$$
+s
+$$
+
+as an estimate of $\sigma$.
+
+We can then obtain an initial sample-size estimate using
+
+$$
+\boxed{
+n
+\approx
+\left(
+\frac{z_{1-\alpha/2}s}{d}
+\right)^2
+}
+$$
+
+For example:
+
+```r
+alpha <- 0.05
+s <- 0.020
+d <- 0.005
+
+zcrit <- qnorm(
+  1 - alpha / 2
+)
+
+n0 <- ceiling(
+  (zcrit * s / d)^2
+)
+
+n0
+```
+
+This provides a practical starting value for planning the study.
+
+The important planning idea is:
+
+```text
+Choose the desired confidence level
+        |
+        v
+Choose the desired margin of error d
+        |
+        v
+Use prior information or a pilot study to estimate variability
+        |
+        v
+Calculate the required sample size
+```
+
+---
+
+# 5. One-Sample Z-Test
 
 The same normal distribution can be used to test a hypothesis about a population mean.
 
@@ -960,9 +1269,7 @@ p_left <- pnorm(z)
 
 ---
 
-# 5. Statistical Decisions: TP, TN, FP, and FN
-
-Interactive plot: [`HypothesisTestSimulator.html`](../interactive_plots/HypothesisTestSimulator.html)
+# 6. Statistical Decisions: TP, TN, FP, and FN
 
 A hypothesis test produces one of two decisions:
 
@@ -982,44 +1289,39 @@ H0 is false
 
 Combining these gives four possible outcomes.
 
-If we use **positive** to mean "reject $H_0$" and **negative** to mean "do not reject $H_0$", the four outcomes can be written as:
+In the language of **true positives, false positives, true negatives, and false negatives**, we treat the effect described by the alternative hypothesis $H_A$ as the **positive** condition.
 
-| Reality | Decision | Outcome |
-|---|---|---|
-| $H_0$ true | Do not reject $H_0$ | True negative (TN) |
-| $H_0$ true | Reject $H_0$ | False positive (FP) = Type I error |
-| $H_0$ false | Do not reject $H_0$ | False negative (FN) = Type II error |
-| $H_0$ false | Reject $H_0$ | True positive (TP) |
+For example, consider a right-tailed test:
 
-Thus:
+$$
+H_0:\mu\le\mu_0
+$$
 
-```text
-TRUE POSITIVE
-H0 is false
-and we reject H0
--> correct detection
+and
 
-TRUE NEGATIVE
-H0 is true
-and we do not reject H0
--> correct decision
+$$
+H_A:\mu>\mu_0.
+$$
 
-FALSE POSITIVE
-H0 is true
-but we reject H0
--> Type I error
+then:
 
-FALSE NEGATIVE
-H0 is false
-but we do not reject H0
--> Type II error
-```
+- **positive** means that the effect described by $H_A$ is truly present, i.e. $\mu>\mu_0$;
+- **negative** means that this effect is not present, corresponding to $H_0$ being true.
+
+The statistical test then tells us whether there is enough evidence to support $H_A$.
+
+| Reality | Decision about $H_0$ | Conclusion about $H_A$ | Outcome |
+|---|---|---|---|
+| $H_0$ true; effect in $H_A$ absent | Do not reject $H_0$ | Not enough evidence for $H_A$ | True negative (TN) |
+| $H_0$ true; effect in $H_A$ absent | Reject $H_0$ | Evidence in favor of $H_A$ | False positive (FP) = Type I error |
+| $H_A$ true; effect is present | Do not reject $H_0$ | Not enough evidence for $H_A$ | False negative (FN) = Type II error |
+| $H_A$ true; effect is present | Reject $H_0$ | Evidence in favor of $H_A$ | True positive (TP) |
 
 The true-positive / false-positive terminology is especially common in diagnostic testing and classification. In hypothesis testing, the more standard terms are **Type I error**, **Type II error**, and **power**.
 
 ---
 
-# 6. Type I Error and Alpha
+# 7. Type I Error and Alpha
 
 A **Type I error** occurs when
 
@@ -1127,7 +1429,7 @@ Thus, choosing $\alpha$ means deciding how much risk of a false-positive conclus
 
 ---
 
-# 7. Type II Error and Beta
+# 8. Type II Error and Beta
 
 A **Type II error** occurs when
 
@@ -1235,11 +1537,9 @@ $$
 
 Our decision rule is therefore approximately:
 
-```text
 Xbar >= 1.464     -> reject H0
 
 Xbar < 1.464      -> do not reject H0
-```
 
 ---
 
@@ -1305,9 +1605,7 @@ So if the true mean were 2 kg, this test would fail to reject $H_0$ in about 27%
 
 ---
 
-# 8. Statistical Power
-
-Interactive plot: [`PowerBetaSimulator.html`](../interactive_plots/PowerBetaSimulator.html)
+# 9. Statistical Power
 
 Statistical **power** is the probability of correctly rejecting the null hypothesis when a specified alternative is true.
 
@@ -1408,7 +1706,7 @@ $$
 
 ---
 
-# 9. What Determines Power?
+# 10. What Determines Power?
 
 Power is not a fixed property of a statistical test alone.
 
@@ -1532,7 +1830,7 @@ $$
 }
 $$
 
-Conversely, increasing $\alpha$ generally increases power but also increases the probability of a Type I error.
+In contrast, increasing $\alpha$ generally increases power but also increases the probability of a Type I error.
 
 This is an important trade-off in study design.
 

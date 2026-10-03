@@ -140,7 +140,22 @@ id="toc-common-critical-values">Common critical values</a></li>
 id="toc-example-confidence-interval-for-mean-weight-change">Example:
 confidence interval for mean weight change</a></li>
 </ul></li>
-<li><a href="#one-sample-z-test" id="toc-one-sample-z-test">4.
+<li><a href="#estimating-sample-size-for-a-fixed-confidence-interval"
+id="toc-estimating-sample-size-for-a-fixed-confidence-interval">4.
+Estimating Sample Size for a Fixed Confidence Interval</a>
+<ul>
+<li><a href="#example" id="toc-example">Example</a></li>
+<li><a
+href="#a-narrower-confidence-interval-requires-a-much-larger-sample"
+id="toc-a-narrower-confidence-interval-requires-a-much-larger-sample">A
+narrower confidence interval requires a much larger sample</a></li>
+<li><a href="#calculation-in-r" id="toc-calculation-in-r">Calculation in
+R</a></li>
+<li><a href="#what-if-sigma-is-not-known"
+id="toc-what-if-sigma-is-not-known">What if <span
+class="math inline">\(\sigma\)</span> is not known?</a></li>
+</ul></li>
+<li><a href="#one-sample-z-test" id="toc-one-sample-z-test">5.
 One-Sample Z-Test</a>
 <ul>
 <li><a href="#three-forms-of-the-alternative-hypothesis"
@@ -171,9 +186,9 @@ id="toc-the-same-test-in-r-from-the-summary-statistics">The same test in
 R from the summary statistics</a></li>
 </ul></li>
 <li><a href="#statistical-decisions-tp-tn-fp-and-fn"
-id="toc-statistical-decisions-tp-tn-fp-and-fn">5. Statistical Decisions:
+id="toc-statistical-decisions-tp-tn-fp-and-fn">6. Statistical Decisions:
 TP, TN, FP, and FN</a></li>
-<li><a href="#type-i-error-and-alpha" id="toc-type-i-error-and-alpha">6.
+<li><a href="#type-i-error-and-alpha" id="toc-type-i-error-and-alpha">7.
 Type I Error and Alpha</a>
 <ul>
 <li><a href="#why-alpha-defines-the-rejection-region"
@@ -184,7 +199,7 @@ region</a></li>
 id="toc-repeated-sampling-interpretation">Repeated-sampling
 interpretation</a></li>
 </ul></li>
-<li><a href="#type-ii-error-and-beta" id="toc-type-ii-error-and-beta">7.
+<li><a href="#type-ii-error-and-beta" id="toc-type-ii-error-and-beta">8.
 Type II Error and Beta</a>
 <ul>
 <li><a href="#example-using-a-right-tailed-z-test"
@@ -194,13 +209,13 @@ right-tailed Z-test</a></li>
 id="toc-suppose-the-true-mean-is-2-kg">Suppose the true mean is 2
 kg</a></li>
 </ul></li>
-<li><a href="#statistical-power" id="toc-statistical-power">8.
+<li><a href="#statistical-power" id="toc-statistical-power">9.
 Statistical Power</a>
 <ul>
 <li><a href="#the-four-probabilities"
 id="toc-the-four-probabilities">The four probabilities</a></li>
 </ul></li>
-<li><a href="#what-determines-power" id="toc-what-determines-power">9.
+<li><a href="#what-determines-power" id="toc-what-determines-power">10.
 What Determines Power?</a>
 <ul>
 <li><a href="#effect-size" id="toc-effect-size">1. Effect size</a></li>
@@ -240,14 +255,15 @@ possible errors that can arise from a statistical decision.</p>
 Mean</a><br />
 <a href="#3-critical-values-and-confidence-intervals">3. Critical Values
 and Confidence Intervals</a><br />
-<a href="#4-one-sample-z-test">4. One-Sample Z-Test</a><br />
-<a href="#5-statistical-decisions-tp-tn-fp-and-fn">5. Statistical
+<a href="#4-estimating-sample-size-for-a-fixed-confidence-interval">4.
+Estimating Sample Size for a Fixed Confidence Interval</a><br />
+<a href="#5-one-sample-z-test">5. One-Sample Z-Test</a><br />
+<a href="#6-statistical-decisions-tp-tn-fp-and-fn">6. Statistical
 Decisions: TP, TN, FP, and FN</a><br />
-<a href="#6-type-i-error-and-alpha">6. Type I Error and Alpha</a><br />
-<a href="#7-type-ii-error-and-beta">7. Type II Error and Beta</a><br />
-<a href="#8-statistical-power">8. Statistical Power</a><br />
-<a href="#9-what-determines-power">9. What Determines Power?</a><br />
-<a href="#10-summary">10. Summary</a></p>
+<a href="#7-type-i-error-and-alpha">7. Type I Error and Alpha</a><br />
+<a href="#8-type-ii-error-and-beta">8. Type II Error and Beta</a><br />
+<a href="#9-statistical-power">9. Statistical Power</a><br />
+<a href="#10-what-determines-power">10. What Determines Power?</a></p>
 <hr />
 <h1 id="central-limit-theorem">1. Central Limit Theorem</h1>
 <p>Suppose a population has mean</p>
@@ -733,9 +749,249 @@ n=17,
 confidence interval.</p>
 <p>Greater confidence requires a wider interval.</p>
 <hr />
-<h1 id="one-sample-z-test">4. One-Sample Z-Test</h1>
-<p>Interactive plot: <a
-href="../interactive_plots/ZTestSimulator.html"><code>ZTestSimulator.html</code></a></p>
+<h1 id="estimating-sample-size-for-a-fixed-confidence-interval">4.
+Estimating Sample Size for a Fixed Confidence Interval</h1>
+<p>A confidence interval becomes narrower as the sample size
+increases.</p>
+<p>For a population mean with known population standard deviation <span
+class="math inline">\(\sigma\)</span>, a two-sided</p>
+<p><span class="math display">\[
+100(1-\alpha)\%
+\]</span></p>
+<p>confidence interval is</p>
+<p><span class="math display">\[
+\bar X
+\pm
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}.
+\]</span></p>
+<p>The quantity</p>
+<p><span class="math display">\[
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}
+\]</span></p>
+<p>is the <strong>margin of error</strong>, or the
+<strong>half-width</strong> of the confidence interval.</p>
+<p>Suppose we want the confidence interval to have a specified margin of
+error</p>
+<p><span class="math display">\[
+d.
+\]</span></p>
+<p>Then we require</p>
+<p><span class="math display">\[
+d
+=
+z_{1-\alpha/2}
+\frac{\sigma}{\sqrt n}.
+\]</span></p>
+<p>Solving for <span class="math inline">\(n\)</span>,</p>
+<p><span class="math display">\[
+\sqrt n
+=
+\frac{z_{1-\alpha/2}\sigma}{d},
+\]</span></p>
+<p>so</p>
+<p><span class="math display">\[
+\boxed{
+n
+=
+\left(
+\frac{z_{1-\alpha/2}\sigma}{d}
+\right)^2
+}
+\]</span></p>
+<p>Because the sample size must be an integer, we <strong>round
+up</strong> to the next whole number.</p>
+<p>Thus, before collecting the data, we can choose a desired confidence
+level and a desired precision, and then estimate how many observations
+are required.</p>
+<hr />
+<h2 id="example">Example</h2>
+<p>Suppose we want to estimate the mean weight of a rare variety of
+grain.</p>
+<p>From a previous study, assume that the population standard deviation
+is approximately</p>
+<p><span class="math display">\[
+\sigma=0.020\text{ g}.
+\]</span></p>
+<p>We want a 95% confidence interval with margin of error</p>
+<p><span class="math display">\[
+d=0.005\text{ g}.
+\]</span></p>
+<p>For a 95% confidence interval,</p>
+<p><span class="math display">\[
+\alpha=0.05
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+z_{1-\alpha/2}
+=
+z_{0.975}
+\approx1.96.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+n
+=
+\left(
+\frac{1.96(0.020)}{0.005}
+\right)^2
+\approx61.47.
+\]</span></p>
+<p>We round up:</p>
+<p><span class="math display">\[
+\boxed{n=62}
+\]</span></p>
+<p>So at least 62 observations are required to obtain a 95% confidence
+interval with a margin of error of approximately 0.005 g, assuming <span
+class="math inline">\(\sigma=0.020\)</span> g.</p>
+<p>Using the rough approximation</p>
+<p><span class="math display">\[
+z_{0.975}\approx2,
+\]</span></p>
+<p>we obtain</p>
+<p><span class="math display">\[
+n
+\approx
+\left(
+\frac{2(0.020)}{0.005}
+\right)^2
+=64.
+\]</span></p>
+<p>This reproduces the convenient approximate result of about 64
+observations.</p>
+<hr />
+<h2 id="a-narrower-confidence-interval-requires-a-much-larger-sample">A
+narrower confidence interval requires a much larger sample</h2>
+<p>Suppose instead that we want the margin of error to be only</p>
+<p><span class="math display">\[
+d=0.001\text{ g}.
+\]</span></p>
+<p>Then</p>
+<p><span class="math display">\[
+n
+=
+\left(
+\frac{1.96(0.020)}{0.001}
+\right)^2
+\approx1536.64.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\boxed{n=1537}
+\]</span></p>
+<p>observations are required.</p>
+<p>Using the rough approximation <span
+class="math inline">\(z\approx2\)</span> gives</p>
+<p><span class="math display">\[
+n
+\approx
+\left(
+\frac{2(0.020)}{0.001}
+\right)^2
+=1600.
+\]</span></p>
+<p>This illustrates an important point:</p>
+<p><span class="math display">\[
+\boxed{
+\text{smaller margin of error}
+\Rightarrow
+\text{much larger sample size}
+}
+\]</span></p>
+<p>Because</p>
+<p><span class="math display">\[
+n\propto\frac{1}{d^2},
+\]</span></p>
+<p>cutting the margin of error in half requires approximately four times
+as many observations.</p>
+<hr />
+<h2 id="calculation-in-r">Calculation in R</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Desired confidence level</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Known population standard deviation</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fl">0.020</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Desired margin of error</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fl">0.005</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Critical z value</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>zcrit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Required sample size</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  (zcrit <span class="sc">*</span> sigma <span class="sc">/</span> d)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>zcrit</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div>
+<p>For</p>
+<p><span class="math display">\[
+d=0.001,
+\]</span></p>
+<p>use:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fl">0.001</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  (zcrit <span class="sc">*</span> sigma <span class="sc">/</span> d)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>n</span></code></pre></div>
+<hr />
+<h2 id="what-if-sigma-is-not-known">What if <span
+class="math inline">\(\sigma\)</span> is not known?</h2>
+<p>In practice, the population standard deviation</p>
+<p><span class="math display">\[
+\sigma
+\]</span></p>
+<p>is usually not known before the study begins.</p>
+<p>A common approach is to conduct a <strong>pilot study</strong> and
+use its sample standard deviation</p>
+<p><span class="math display">\[
+s
+\]</span></p>
+<p>as an estimate of <span class="math inline">\(\sigma\)</span>.</p>
+<p>We can then obtain an initial sample-size estimate using</p>
+<p><span class="math display">\[
+\boxed{
+n
+\approx
+\left(
+\frac{z_{1-\alpha/2}s}{d}
+\right)^2
+}
+\]</span></p>
+<p>For example:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fl">0.020</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fl">0.005</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>zcrit <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>n0 <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  (zcrit <span class="sc">*</span> s <span class="sc">/</span> d)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>n0</span></code></pre></div>
+<p>This provides a practical starting value for planning the study.</p>
+<p>The important planning idea is:</p>
+<pre class="text"><code>Choose the desired confidence level
+        |
+        v
+Choose the desired margin of error d
+        |
+        v
+Use prior information or a pilot study to estimate variability
+        |
+        v
+Calculate the required sample size</code></pre>
+<hr />
+<h1 id="one-sample-z-test">5. One-Sample Z-Test</h1>
 <p>The same normal distribution can be used to test a hypothesis about a
 population mean.</p>
 <p>For the one-sample Z-test considered here, we assume that the
@@ -893,14 +1149,14 @@ Z
 2P(Z\ge1.45).
 \]</span></p>
 <p>In R:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fl">1.29</span> <span class="sc">/</span> <span class="fl">0.890</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">abs</span>(z)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>z</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fl">1.29</span> <span class="sc">/</span> <span class="fl">0.890</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">abs</span>(z)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>p_value</span></code></pre></div>
 <p>This gives approximately</p>
 <p><span class="math display">\[
 p=0.147.
@@ -926,34 +1182,32 @@ weight change differs from zero.</p>
 <hr />
 <h2 id="the-same-test-in-r-from-the-summary-statistics">The same test in
 R from the summary statistics</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fl">1.29</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">13.4621</span>)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">17</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>p_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">abs</span>(z)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>se</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>z</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>p_two</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fl">1.29</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fl">13.4621</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">17</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> se</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>p_two <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">-</span><span class="fu">abs</span>(z)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>se</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>p_two</span></code></pre></div>
 <p>For a right-tailed alternative:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>p_right <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  z,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p_right <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  z,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>For a left-tailed alternative:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>p_left <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>p_left <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(z)</span></code></pre></div>
 <hr />
-<h1 id="statistical-decisions-tp-tn-fp-and-fn">5. Statistical Decisions:
+<h1 id="statistical-decisions-tp-tn-fp-and-fn">6. Statistical Decisions:
 TP, TN, FP, and FN</h1>
-<p>Interactive plot: <a
-href="../interactive_plots/HypothesisTestSimulator.html"><code>HypothesisTestSimulator.html</code></a></p>
 <p>A hypothesis test produces one of two decisions:</p>
 <pre class="text"><code>reject H0
 
@@ -963,72 +1217,83 @@ do not reject H0</code></pre>
 
 H0 is false</code></pre>
 <p>Combining these gives four possible outcomes.</p>
-<p>If we use <strong>positive</strong> to mean “reject <span
-class="math inline">\(H_0\)</span>” and <strong>negative</strong> to
-mean “do not reject <span class="math inline">\(H_0\)</span>”, the four
-outcomes can be written as:</p>
+<p>In the language of <strong>true positives, false positives, true
+negatives, and false negatives</strong>, we treat the effect described
+by the alternative hypothesis <span class="math inline">\(H_A\)</span>
+as the <strong>positive</strong> condition.</p>
+<p>For example, consider a right-tailed test:</p>
+<p><span class="math display">\[
+H_0:\mu\le\mu_0
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+H_A:\mu&gt;\mu_0.
+\]</span></p>
+<p>then:</p>
+<ul>
+<li><strong>positive</strong> means that the effect described by <span
+class="math inline">\(H_A\)</span> is truly present, i.e. <span
+class="math inline">\(\mu&gt;\mu_0\)</span>;</li>
+<li><strong>negative</strong> means that this effect is not present,
+corresponding to <span class="math inline">\(H_0\)</span> being
+true.</li>
+</ul>
+<p>The statistical test then tells us whether there is enough evidence
+to support <span class="math inline">\(H_A\)</span>.</p>
 <table>
 <colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
 <thead>
 <tr>
 <th>Reality</th>
-<th>Decision</th>
+<th>Decision about <span class="math inline">\(H_0\)</span></th>
+<th>Conclusion about <span class="math inline">\(H_A\)</span></th>
 <th>Outcome</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span class="math inline">\(H_0\)</span> true</td>
+<td><span class="math inline">\(H_0\)</span> true; effect in <span
+class="math inline">\(H_A\)</span> absent</td>
 <td>Do not reject <span class="math inline">\(H_0\)</span></td>
+<td>Not enough evidence for <span
+class="math inline">\(H_A\)</span></td>
 <td>True negative (TN)</td>
 </tr>
 <tr>
-<td><span class="math inline">\(H_0\)</span> true</td>
+<td><span class="math inline">\(H_0\)</span> true; effect in <span
+class="math inline">\(H_A\)</span> absent</td>
 <td>Reject <span class="math inline">\(H_0\)</span></td>
+<td>Evidence in favor of <span class="math inline">\(H_A\)</span></td>
 <td>False positive (FP) = Type I error</td>
 </tr>
 <tr>
-<td><span class="math inline">\(H_0\)</span> false</td>
+<td><span class="math inline">\(H_A\)</span> true; effect is
+present</td>
 <td>Do not reject <span class="math inline">\(H_0\)</span></td>
+<td>Not enough evidence for <span
+class="math inline">\(H_A\)</span></td>
 <td>False negative (FN) = Type II error</td>
 </tr>
 <tr>
-<td><span class="math inline">\(H_0\)</span> false</td>
+<td><span class="math inline">\(H_A\)</span> true; effect is
+present</td>
 <td>Reject <span class="math inline">\(H_0\)</span></td>
+<td>Evidence in favor of <span class="math inline">\(H_A\)</span></td>
 <td>True positive (TP)</td>
 </tr>
 </tbody>
 </table>
-<p>Thus:</p>
-<pre class="text"><code>TRUE POSITIVE
-H0 is false
-and we reject H0
--&gt; correct detection
-
-TRUE NEGATIVE
-H0 is true
-and we do not reject H0
--&gt; correct decision
-
-FALSE POSITIVE
-H0 is true
-but we reject H0
--&gt; Type I error
-
-FALSE NEGATIVE
-H0 is false
-but we do not reject H0
--&gt; Type II error</code></pre>
 <p>The true-positive / false-positive terminology is especially common
 in diagnostic testing and classification. In hypothesis testing, the
 more standard terms are <strong>Type I error</strong>, <strong>Type II
 error</strong>, and <strong>power</strong>.</p>
 <hr />
-<h1 id="type-i-error-and-alpha">6. Type I Error and Alpha</h1>
+<h1 id="type-i-error-and-alpha">7. Type I Error and Alpha</h1>
 <p>A <strong>Type I error</strong> occurs when</p>
 <p><span class="math display">\[
 H_0
@@ -1108,7 +1373,7 @@ we could repeat the same experiment 100 times.</p>
 deciding how much risk of a false-positive conclusion we are willing to
 tolerate.</p>
 <hr />
-<h1 id="type-ii-error-and-beta">7. Type II Error and Beta</h1>
+<h1 id="type-ii-error-and-beta">8. Type II Error and Beta</h1>
 <p>A <strong>Type II error</strong> occurs when</p>
 <p><span class="math display">\[
 H_0
@@ -1189,9 +1454,8 @@ z_{\text{critical}}
 \approx1.464.
 \]</span></p>
 <p>Our decision rule is therefore approximately:</p>
-<pre class="text"><code>Xbar &gt;= 1.464     -&gt; reject H0
-
-Xbar &lt; 1.464      -&gt; do not reject H0</code></pre>
+<p>Xbar &gt;= 1.464 -&gt; reject H0</p>
+<p>Xbar &lt; 1.464 -&gt; do not reject H0</p>
 <hr />
 <h2 id="suppose-the-true-mean-is-2-kg">Suppose the true mean is 2
 kg</h2>
@@ -1228,9 +1492,9 @@ Z
 \approx-0.60.
 \]</span></p>
 <p>Thus,</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.60</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>beta</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fl">0.60</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>beta</span></code></pre></div>
 <p>which is approximately</p>
 <p><span class="math display">\[
 \boxed{
@@ -1241,9 +1505,7 @@ Z
 class="math inline">\(H_0\)</span> in about 27% of repeated
 experiments.</p>
 <hr />
-<h1 id="statistical-power">8. Statistical Power</h1>
-<p>Interactive plot: <a
-href="../interactive_plots/PowerBetaSimulator.html"><code>PowerBetaSimulator.html</code></a></p>
+<h1 id="statistical-power">9. Statistical Power</h1>
 <p>Statistical <strong>power</strong> is the probability of correctly
 rejecting the null hypothesis when a specified alternative is true.</p>
 <p>In the previous example,</p>
@@ -1361,7 +1623,7 @@ class="math inline">\(1-\beta\)</span></td>
 }
 \]</span></p>
 <hr />
-<h1 id="what-determines-power">9. What Determines Power?</h1>
+<h1 id="what-determines-power">10. What Determines Power?</h1>
 <p>Power is not a fixed property of a statistical test alone.</p>
 <p>It depends on the true effect and on the design of the
 experiment.</p>
@@ -1455,7 +1717,7 @@ class="math inline">\(H_0\)</span> more difficult.</p>
 \text{power}\downarrow
 }
 \]</span></p>
-<p>Conversely, increasing <span class="math inline">\(\alpha\)</span>
+<p>In contrast, increasing <span class="math inline">\(\alpha\)</span>
 generally increases power but also increases the probability of a Type I
 error.</p>
 <p>This is an important trade-off in study design.</p>
