@@ -79,7 +79,7 @@ Biostatistics-CDFD-2026/
 - [Normal distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/NormalDistribution.html)
 - [Binomial distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html)
 - [Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/ZTestSimulator.html)
-- [Hypothesis test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html)
+- [Type-I, Type-II errors](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestSimulator.html)
 - [Power of a Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/PowerBetaSimulator.html)
 
 ## How to do various things in R programming? 
