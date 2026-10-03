@@ -1146,7 +1146,7 @@ $$
 Use when only values larger than $\mu_0$ provide evidence for the alternative:
 
 $$
-H_0:\mu=\mu_0
+H_0:\mu \le \mu_0
 $$
 
 $$
@@ -1172,7 +1172,7 @@ $$
 Use when only values smaller than $\mu_0$ provide evidence for the alternative:
 
 $$
-H_0:\mu=\mu_0
+H_0:\mu \ge \mu_0
 $$
 
 $$
