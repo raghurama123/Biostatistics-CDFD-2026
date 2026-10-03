@@ -401,24 +401,6 @@ Some useful central areas are approximately:
 | $-2.576\le Z\le2.576$ | 0.9900 |
 | $-3\le Z\le3$ | 0.9973 |
 
-In R, probabilities are calculated using `pnorm()`.
-
-For example:
-
-```r
-# P(Z <= 1)
-pnorm(1)
-
-# P(Z > 1)
-pnorm(
-  1,
-  lower.tail = FALSE
-)
-
-# P(-1 <= Z <= 1)
-pnorm(1) - pnorm(-1)
-```
-
 Critical Z values can be obtained using `qnorm()`.
 
 For example:
@@ -432,6 +414,46 @@ qnorm(0.975)
 
 # 99.5th percentile
 qnorm(0.995)
+```
+
+Recall, that `qnorm(p)` always uses the left-tail cumulative probability \(p\) by default
+
+For confidence intervals and two-tailed tests, it is often more convenient to calculate the critical Z value directly from the significance level $\alpha$:
+
+```r
+qnorm(1 - alpha / 2)
+```
+
+## Getting the central areas in R
+
+For a symmetric interval
+
+$$
+-a \le Z \le a,
+$$
+
+the probability is
+
+$$
+P(-a \le Z \le a)
+=
+P(Z\le a)-P(Z\le -a).
+$$
+
+In R:
+
+```r
+# P(-1 <= Z <= 1)
+pnorm(1) - pnorm(-1)
+# 0.6827
+
+# P(-1.96 <= Z <= 1.96)
+pnorm(1.96) - pnorm(-1.96)
+# 0.9500
+
+# P(-2.576 <= Z <= 2.576)
+pnorm(2.576) - pnorm(-2.576)
+# approximately 0.9900
 ```
 
 ---
