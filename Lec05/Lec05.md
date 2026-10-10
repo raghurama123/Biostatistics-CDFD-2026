@@ -10,19 +10,6 @@
 
 ## Contents
 
-0. [Recap: What does rejecting the null hypothesis actually mean?](#0-recap-what-does-rejecting-the-null-hypothesis-actually-mean?)
-1. [Recap: Z-test for a population mean](#1-recap-z-test-for-a-population-mean)
-2. [Student's t-distribution](#2-students-t-distribution)
-3. [One-sample t-test](#3-one-sample-t-test)
-4. [Two-sample t-tests](#4-two-sample-t-tests)
-5. [One-way ANOVA: comparing more than two means](#5-one-way-anova-comparing-more-than-two-means)
-6. [Chi-square test for one population variance](#6-chi-square-test-for-one-population-variance)
-7. [F-test for comparing two variances](#7-f-test-for-comparing-two-variances)
-8. [Levene's test for comparing variances](#8-levenes-test-for-comparing-variances)
-9. [Chi-square goodness-of-fit test for categorical data](#9-chi-square-goodness-of-fit-test-for-categorical-data)
-10. [Chi-square test of independence](#10-chi-square-test-of-independence)
-11. [Choosing the appropriate test](#11-choosing-the-appropriate-test)
-12. [Practice problems](#12-practice-problems)
 
 > [!IMPORTANT]
 > **How to work through this lecture:** Create a separate folder for Lecture 05. For each test, first read the **data table**, **summary of quantities**, and **worked calculation**. Only then run the two R code blocks: **(A) manual calculation** and **(B) R test function**. Save these as **separate, independently runnable `.R` files** (for example, `03_OneSampleT_manual.R` and `03_OneSampleT_Rtest.R`). Do not rely on variables left over from running a different code block.
@@ -251,7 +238,14 @@ $$
 
 **Step 5 — decision:** $p>0.05$, so **do not reject $H_0$**. There is insufficient evidence that mean crab body temperature differs from 24°C. The approximate 95% confidence interval is **23.604°C to 24.336°C**, which contains 24°C. **This does not prove that the mean is exactly 24°C.**
 
-If lake temperature were estimated from sample measurements instead of treated as known, the appropriate test would depend on whether crab and water measurements were paired or independent.
+In this example, we assume that the lake water temperature is known and fixed at **24°C**. Therefore, we use a **one-sample t-test** to compare the mean crab body temperature with 24°C.
+
+However, if we also measure the lake water temperature at several locations or times, we must account for variation in those measurements.
+
+- **Paired t-test:** If each crab's body temperature is measured together with the water temperature at its location and time.
+- **Two-sample t-test:** If crab body temperatures and lake water temperatures are measured independently.
+
+Thus, **the choice of statistical test depends on how the data were collected**.
 
 ### A. Manual one-sample t-test
 

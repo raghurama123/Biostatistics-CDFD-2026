@@ -22,17 +22,6 @@ This lecture develops hypothesis testing for a population mean using the normal 
 
 We begin with the **Central Limit Theorem**, which explains why the sample mean has an approximately normal sampling distribution. We then use this result to construct a **one-sample Z-test**, define rejection regions and p-values, and examine the possible errors that can arise from a statistical decision.
 
-[1. Central Limit Theorem](#1-central-limit-theorem)  
-[2. Standardizing the Sample Mean](#2-standardizing-the-sample-mean)  
-[3. Critical Values and Confidence Intervals](#3-critical-values-and-confidence-intervals)  
-[4. Estimating Sample Size for a Fixed Confidence Interval](#4-estimating-sample-size-for-a-fixed-confidence-interval)  
-[5. One-Sample Z-Test](#5-one-sample-z-test)  
-[6. Statistical Decisions: TP, TN, FP, and FN](#6-statistical-decisions-tp-tn-fp-and-fn)  
-[7. Type I Error and Alpha](#7-type-i-error-and-alpha)  
-[8. Type II Error and Beta](#8-type-ii-error-and-beta)  
-[9. Statistical Power](#9-statistical-power)  
-[10. What Determines Power?](#10-what-determines-power)  
-
 ---
 
 > **Coding instructions for this lecture**

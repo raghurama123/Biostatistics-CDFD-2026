@@ -344,33 +344,6 @@ test</a></li>
 id="lecture-05-statistical-tests-for-means-variances-and-categorical-data">Lecture
 05 — Statistical Tests for Means, Variances, and Categorical Data</h1>
 <h2 id="contents">Contents</h2>
-<ol start="0" type="1">
-<li><a
-href="#0-recap-what-does-rejecting-the-null-hypothesis-actually-mean?">Recap:
-What does rejecting the null hypothesis actually mean?</a></li>
-<li><a href="#1-recap-z-test-for-a-population-mean">Recap: Z-test for a
-population mean</a></li>
-<li><a href="#2-students-t-distribution">Student’s
-t-distribution</a></li>
-<li><a href="#3-one-sample-t-test">One-sample t-test</a></li>
-<li><a href="#4-two-sample-t-tests">Two-sample t-tests</a></li>
-<li><a href="#5-one-way-anova-comparing-more-than-two-means">One-way
-ANOVA: comparing more than two means</a></li>
-<li><a href="#6-chi-square-test-for-one-population-variance">Chi-square
-test for one population variance</a></li>
-<li><a href="#7-f-test-for-comparing-two-variances">F-test for comparing
-two variances</a></li>
-<li><a href="#8-levenes-test-for-comparing-variances">Levene’s test for
-comparing variances</a></li>
-<li><a
-href="#9-chi-square-goodness-of-fit-test-for-categorical-data">Chi-square
-goodness-of-fit test for categorical data</a></li>
-<li><a href="#10-chi-square-test-of-independence">Chi-square test of
-independence</a></li>
-<li><a href="#11-choosing-the-appropriate-test">Choosing the appropriate
-test</a></li>
-<li><a href="#12-practice-problems">Practice problems</a></li>
-</ol>
 <blockquote>
 <p>[!IMPORTANT] <strong>How to work through this lecture:</strong>
 Create a separate folder for Lecture 05. For each test, first read the
@@ -756,9 +729,22 @@ evidence that mean crab body temperature differs from 24°C. The
 approximate 95% confidence interval is <strong>23.604°C to
 24.336°C</strong>, which contains 24°C. <strong>This does not prove that
 the mean is exactly 24°C.</strong></p>
-<p>If lake temperature were estimated from sample measurements instead
-of treated as known, the appropriate test would depend on whether crab
-and water measurements were paired or independent.</p>
+<p>In this example, we assume that the lake water temperature is known
+and fixed at <strong>24°C</strong>. Therefore, we use a
+<strong>one-sample t-test</strong> to compare the mean crab body
+temperature with 24°C.</p>
+<p>However, if we also measure the lake water temperature at several
+locations or times, we must account for variation in those
+measurements.</p>
+<ul>
+<li><strong>Paired t-test:</strong> If each crab’s body temperature is
+measured together with the water temperature at its location and
+time.</li>
+<li><strong>Two-sample t-test:</strong> If crab body temperatures and
+lake water temperatures are measured independently.</li>
+</ul>
+<p>Thus, <strong>the choice of statistical test depends on how the data
+were collected</strong>.</p>
 <h3 id="a.-manual-one-sample-t-test">A. Manual one-sample t-test</h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 03_OneSampleT_manual.R — base R only</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>crab_temp <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">23.1</span>, <span class="fl">23.4</span>, <span class="fl">24.2</span>, <span class="fl">24.7</span>, <span class="fl">23.9</span>,</span>
