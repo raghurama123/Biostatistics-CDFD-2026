@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lec05</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a
+href="#lecture-05-statistical-tests-for-means-variances-and-categorical-data"
+id="toc-lecture-05-statistical-tests-for-means-variances-and-categorical-data">Lecture
+05 — Statistical Tests for Means, Variances, and Categorical Data</a>
+<ul>
+<li><a href="#contents" id="toc-contents">Contents</a></li>
+</ul></li>
+<li><a href="#recap-z-test-for-a-population-mean"
+id="toc-recap-z-test-for-a-population-mean">1. Recap: Z-test for a
+population mean</a>
+<ul>
+<li><a href="#r-example-a-two-tailed-z-test"
+id="toc-r-example-a-two-tailed-z-test">R example: a two-tailed
+Z-test</a></li>
+</ul></li>
+<li><a href="#students-t-distribution"
+id="toc-students-t-distribution">2. Student’s t-distribution</a>
+<ul>
+<li><a href="#how-is-it-different-from-the-normal-distribution"
+id="toc-how-is-it-different-from-the-normal-distribution">How is it
+different from the normal distribution?</a></li>
+<li><a href="#r-compare-normal-and-t-distributions"
+id="toc-r-compare-normal-and-t-distributions">R: compare normal and
+t-distributions</a></li>
+</ul></li>
+<li><a href="#one-sample-t-test" id="toc-one-sample-t-test">3.
+One-sample t-test</a>
+<ul>
+<li><a href="#hypotheses-and-test-statistic"
+id="toc-hypotheses-and-test-statistic">Hypotheses and test
+statistic</a></li>
+<li><a href="#r-example-crab-body-temperatures"
+id="toc-r-example-crab-body-temperatures">R example: crab body
+temperatures</a>
+<ul>
+<li><a
+href="#problem-crab-body-temperature-versus-lake-water-temperature"
+id="toc-problem-crab-body-temperature-versus-lake-water-temperature">Problem:
+Crab body temperature versus lake water temperature</a></li>
+<li><a href="#connection-to-confidence-intervals"
+id="toc-connection-to-confidence-intervals">Connection to confidence
+intervals</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#two-sample-t-tests" id="toc-two-sample-t-tests">4.
+Two-sample t-tests</a>
+<ul>
+<li><a href="#independent-samples-welchs-t-test"
+id="toc-independent-samples-welchs-t-test">Independent samples: Welch’s
+t-test</a></li>
+<li><a href="#r-example-germination-measurements"
+id="toc-r-example-germination-measurements">R example: germination
+measurements</a></li>
+<li><a href="#pooled-two-sample-t-test"
+id="toc-pooled-two-sample-t-test">Pooled two-sample t-test</a></li>
+<li><a href="#paired-t-test" id="toc-paired-t-test">Paired
+t-test</a></li>
+</ul></li>
+<li><a href="#one-way-anova-comparing-more-than-two-means"
+id="toc-one-way-anova-comparing-more-than-two-means">5. One-way ANOVA:
+comparing more than two means</a>
+<ul>
+<li><a href="#hypotheses" id="toc-hypotheses">Hypotheses</a></li>
+<li><a href="#how-does-anova-work" id="toc-how-does-anova-work">How does
+ANOVA work?</a></li>
+<li><a href="#r-example-enzyme-activity-under-three-treatments"
+id="toc-r-example-enzyme-activity-under-three-treatments">R example:
+enzyme activity under three treatments</a></li>
+<li><a href="#which-groups-differ-tukeys-post-hoc-test"
+id="toc-which-groups-differ-tukeys-post-hoc-test">Which groups differ?
+Tukey’s post-hoc test</a></li>
+<li><a href="#assumptions-and-alternatives"
+id="toc-assumptions-and-alternatives">Assumptions and
+alternatives</a></li>
+</ul></li>
+<li><a href="#chi-square-test-for-one-population-variance"
+id="toc-chi-square-test-for-one-population-variance">6. Chi-square test
+for one population variance</a>
+<ul>
+<li><a href="#r-example" id="toc-r-example">R example</a></li>
+</ul></li>
+<li><a href="#f-test-for-comparing-two-variances"
+id="toc-f-test-for-comparing-two-variances">7. F-test for comparing two
+variances</a>
+<ul>
+<li><a href="#r-example-insects-captured-in-two-traps"
+id="toc-r-example-insects-captured-in-two-traps">R example: insects
+captured in two traps</a></li>
+</ul></li>
+<li><a href="#levenes-test-for-comparing-variances"
+id="toc-levenes-test-for-comparing-variances">8. Levene’s test for
+comparing variances</a>
+<ul>
+<li><a href="#r-example-greenhouse-and-garden-variability"
+id="toc-r-example-greenhouse-and-garden-variability">R example:
+greenhouse and garden variability</a></li>
+</ul></li>
+<li><a href="#chi-square-goodness-of-fit-test-for-categorical-data"
+id="toc-chi-square-goodness-of-fit-test-for-categorical-data">9.
+Chi-square goodness-of-fit test for categorical data</a>
+<ul>
+<li><a href="#r-example-unequal-habitat-counts"
+id="toc-r-example-unequal-habitat-counts">R example: unequal habitat
+counts</a>
+<ul>
+<li><a href="#when-is-the-chi-square-approximation-valid"
+id="toc-when-is-the-chi-square-approximation-valid">When is the
+chi-square approximation valid?</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#chi-square-test-of-independence"
+id="toc-chi-square-test-of-independence">10. Chi-square test of
+independence</a>
+<ul>
+<li><a href="#r-example-treatment-and-response"
+id="toc-r-example-treatment-and-response">R example: treatment and
+response</a></li>
+</ul></li>
+<li><a href="#choosing-the-appropriate-test"
+id="toc-choosing-the-appropriate-test">11. Choosing the appropriate
+test</a></li>
+</ul>
+</nav>
+<table style="width:100%; border:none;">
+<tr>
+<td style="width:33%; text-align:left; border:none;">
+<a href="../Lec04/Lec04.html"><strong>← Previous Lecture</strong></a>
+</td>
+<td style="width:34%; text-align:center; border:none;">
+<a href="../"><strong>Home</strong></a>
+</td>
+<td style="width:33%; text-align:right; border:none;">
+<a href="../Lec06/Lec06.html"><strong>Next Lecture →</strong></a>
+</td>
+</tr>
+</table>
+<h1
+id="lecture-05-statistical-tests-for-means-variances-and-categorical-data">Lecture
+05 — Statistical Tests for Means, Variances, and Categorical Data</h1>
+<h2 id="contents">Contents</h2>
+<ol type="1">
+<li><a href="#1-recap-z-test-for-a-population-mean">Recap: Z-test for a
+population mean</a></li>
+<li><a href="#2-students-t-distribution">Student’s
+t-distribution</a></li>
+<li><a href="#3-one-sample-t-test">One-sample t-test</a></li>
+<li><a href="#4-two-sample-t-tests">Two-sample t-tests</a></li>
+<li><a href="#5-one-way-anova-comparing-more-than-two-means">One-way
+ANOVA: comparing more than two means</a></li>
+<li><a href="#6-chi-square-test-for-one-population-variance">Chi-square
+test for one population variance</a></li>
+<li><a href="#7-f-test-for-comparing-two-variances">F-test for comparing
+two variances</a></li>
+<li><a href="#8-levenes-test-for-comparing-variances">Levene’s test for
+comparing variances</a></li>
+<li><a
+href="#9-chi-square-goodness-of-fit-test-for-categorical-data">Chi-square
+goodness-of-fit test for categorical data</a></li>
+<li><a href="#10-chi-square-test-of-independence">Chi-square test of
+independence</a></li>
+<li><a href="#11-choosing-the-appropriate-test">Choosing the appropriate
+test</a></li>
+<li><a href="#12-practice-problems">Practice problems</a></li>
+</ol>
+<hr />
+<h1 id="recap-z-test-for-a-population-mean">1. Recap: Z-test for a
+population mean</h1>
+<p>Suppose we want to test whether a population mean, <span
+class="math inline">\(\mu\)</span>, differs from a hypothesized value,
+<span class="math inline">\(\mu_0\)</span>.</p>
+<p>For a two-tailed test,</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0
+\qquad\text{and}\qquad
+H_A:\mu\ne\mu_0.
+\]</span></p>
+<p>When the <strong>population standard deviation is known</strong>, the
+Z-statistic is</p>
+<p><span class="math display">\[
+\boxed{Z=\frac{\bar X-\mu_0}{\sigma/\sqrt n}}.
+\]</span></p>
+<p>Here <span class="math inline">\(\bar X\)</span> is the sample mean
+and <span class="math inline">\(\sigma/\sqrt n\)</span> is the standard
+error of the sample mean. Under <span
+class="math inline">\(H_0\)</span>, <span
+class="math inline">\(Z\)</span> follows the standard normal
+distribution if the observations are independent and the population is
+normal, or approximately so for sufficiently large samples under
+appropriate conditions.</p>
+<p>For a significance level <span
+class="math inline">\(\alpha=0.05\)</span>, the rejection rules are:</p>
+<table>
+<thead>
+<tr>
+<th>Alternative hypothesis</th>
+<th>Reject <span class="math inline">\(H_0\)</span> when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(H_A:\mu\ne\mu_0\)</span></td>
+<td><span class="math inline">\(\lvert Z\rvert&gt;1.96\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(H_A:\mu&gt;\mu_0\)</span></td>
+<td><span class="math inline">\(Z&gt;1.645\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(H_A:\mu&lt;\mu_0\)</span></td>
+<td><span class="math inline">\(Z&lt;-1.645\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The critical values above are rounded values for <span
+class="math inline">\(\alpha=0.05\)</span>.</p>
+<h2 id="r-example-a-two-tailed-z-test">R example: a two-tailed
+Z-test</h2>
+<p>Suppose a sample of <span class="math inline">\(n=25\)</span>
+measurements has mean <span class="math inline">\(52\)</span>. We want
+to test whether the population mean is <span
+class="math inline">\(50\)</span>, knowing that the population standard
+deviation is <span class="math inline">\(4\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-test: known population standard deviation</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="dv">52</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> (xbar <span class="sc">-</span> mu0) <span class="sc">/</span> (sigma <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pnorm</span>(<span class="sc">-</span><span class="fu">abs</span>(z))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>z_critical <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>z</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>p_value</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>z_critical</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (p_value <span class="sc">&lt;</span> alpha) {</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Reject H0&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Do not reject H0&quot;</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Question:</strong> What changes if <span
+class="math inline">\(\sigma\)</span> is <em>not</em> known, and we
+calculate the standard deviation, <span
+class="math inline">\(s\)</span>, from the same sample?</p>
+<p>Simply replacing <span class="math inline">\(\sigma\)</span> with
+<span class="math inline">\(s\)</span> introduces additional
+uncertainty. This is why we need the
+<strong>t-distribution</strong>.</p>
+<hr />
+<h1 id="students-t-distribution">2. Student’s t-distribution</h1>
+<p>The <strong>Student’s t-distribution</strong> was developed by
+William Sealy Gosset, who published under the pseudonym <em>Student</em>
+while working at the Guinness brewery.</p>
+<p>When the population standard deviation <span
+class="math inline">\(\sigma\)</span> is unknown, we estimate it with
+the sample standard deviation,</p>
+<p><span class="math display">\[
+s=\sqrt{\frac{\sum_{i=1}^{n}(X_i-\bar X)^2}{n-1}}.
+\]</span></p>
+<p>The estimated standard error is</p>
+<p><span class="math display">\[
+SE=\frac{s}{\sqrt n}.
+\]</span></p>
+<p>For an independent random sample from a normal population, the
+statistic</p>
+<p><span class="math display">\[
+\boxed{T=\frac{\bar X-\mu}{s/\sqrt n}}
+\]</span></p>
+<p>follows a Student’s t-distribution with</p>
+<p><span class="math display">\[
+\boxed{\nu=n-1}
+\]</span></p>
+<p>degrees of freedom.</p>
+<h2 id="how-is-it-different-from-the-normal-distribution">How is it
+different from the normal distribution?</h2>
+<ul>
+<li>Both distributions are symmetric and centered at zero.</li>
+<li>The t-distribution has <strong>heavier tails</strong>, reflecting
+uncertainty from estimating <span
+class="math inline">\(\sigma\)</span>.</li>
+<li>Its shape depends on the degrees of freedom, <span
+class="math inline">\(\nu\)</span>.</li>
+<li>As <span class="math inline">\(\nu\)</span> increases, the
+t-distribution approaches the standard normal distribution.</li>
+</ul>
+<h2 id="r-compare-normal-and-t-distributions">R: compare normal and
+t-distributions</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length.out =</span> <span class="dv">500</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  x, <span class="fu">dnorm</span>(x), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Z or t&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Probability density&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Normal and Student&#39;s t-distributions&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">3</span>), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">dt</span>(x, <span class="at">df =</span> <span class="dv">20</span>), <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;topright&quot;</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;Normal&quot;</span>, <span class="st">&quot;t: df = 3&quot;</span>, <span class="st">&quot;t: df = 20&quot;</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">lwd =</span> <span class="dv">2</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare two-tailed critical values for alpha = 0.05</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="fu">qnorm</span>(<span class="fl">0.975</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">3</span>)</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> <span class="dv">20</span>)</span></code></pre></div>
+<hr />
+<h1 id="one-sample-t-test">3. One-sample t-test</h1>
+<p>A one-sample t-test asks whether a population mean differs from a
+specified value when <span class="math inline">\(\sigma\)</span> is
+<strong>unknown</strong>.</p>
+<p>For example: <em>Does the mean body temperature of a crab population
+differ from <span
+class="math inline">\(24^\circ\mathrm{C}\)</span>?</em></p>
+<h2 id="hypotheses-and-test-statistic">Hypotheses and test
+statistic</h2>
+<p>For a two-tailed test,</p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0,
+\qquad
+H_A:\mu\ne\mu_0.
+\]</span></p>
+<p>The test statistic is</p>
+<p><span class="math display">\[
+\boxed{t=\frac{\bar x-\mu_0}{s/\sqrt n}},
+\qquad \nu=n-1.
+\]</span></p>
+<p>For significance level <span class="math inline">\(\alpha\)</span>,
+the rejection regions are:</p>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Alternative</th>
+<th>Reject <span class="math inline">\(H_0\)</span> if</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two-tailed</td>
+<td><span class="math inline">\(\mu\ne\mu_0\)</span></td>
+<td><span class="math inline">\(\lvert
+t\rvert&gt;t_{1-\alpha/2,\nu}\)</span></td>
+</tr>
+<tr>
+<td>Right-tailed</td>
+<td><span class="math inline">\(\mu&gt;\mu_0\)</span></td>
+<td><span class="math inline">\(t&gt;t_{1-\alpha,\nu}\)</span></td>
+</tr>
+<tr>
+<td>Left-tailed</td>
+<td><span class="math inline">\(\mu&lt;\mu_0\)</span></td>
+<td><span class="math inline">\(t&lt;t_{\alpha,\nu}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here <span class="math inline">\(t_{p,\nu}\)</span> means the <span
+class="math inline">\(p\)</span>th quantile of the t-distribution with
+<span class="math inline">\(\nu\)</span> degrees of freedom, obtained
+using <code>qt(p, df = nu)</code>.</p>
+<h2 id="r-example-crab-body-temperatures">R example: crab body
+temperatures</h2>
+<h3
+id="problem-crab-body-temperature-versus-lake-water-temperature">Problem:
+Crab body temperature versus lake water temperature</h3>
+<p>Crabs live in a lake where the water temperature is assumed to be
+<strong>24°C</strong>.</p>
+<p>We want to determine whether the <strong>mean body temperature of the
+crabs is different from the temperature of the surrounding lake
+water</strong>.</p>
+<p>To investigate this question, we measure the body temperatures of 10
+randomly selected crabs and perform a <strong>one-sample
+t-test</strong>, using 24°C as the reference temperature.</p>
+<p>The following crab body temperatures are <strong>illustrative
+data</strong>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-sample t-test: crab body temperature (degrees C)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>crab_temp <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">23.1</span>, <span class="fl">23.4</span>, <span class="fl">24.2</span>, <span class="fl">24.7</span>, <span class="fl">23.9</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">23.8</span>, <span class="fl">24.6</span>, <span class="fl">24.3</span>, <span class="fl">23.6</span>, <span class="fl">24.1</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mu0 <span class="ot">&lt;-</span> <span class="dv">24</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Manually calculate p-value</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(crab_temp)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the statistic manually</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>t_stat <span class="ot">&lt;-</span> (<span class="fu">mean</span>(crab_temp) <span class="sc">-</span> mu0) <span class="sc">/</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  (<span class="fu">sd</span>(crab_temp) <span class="sc">/</span> <span class="fu">sqrt</span>(n))</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> <span class="fu">pt</span>(<span class="sc">-</span><span class="fu">abs</span>(t_stat), <span class="at">df =</span> df)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_stat)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the built-in R test</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># H0: population mean is 24 degrees C</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># HA: population mean is different from 24 degrees C</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(crab_temp, <span class="at">mu =</span> mu0, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Other alternatives, if specified before inspecting the data:</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#t.test(crab_temp, mu = mu0, alternative = &quot;less&quot;)</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#t.test(crab_temp, mu = mu0, alternative = &quot;greater&quot;)</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> result<span class="sc">$</span>p.value</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p_value)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (p_value <span class="sc">&lt;</span> alpha) {</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Reject H0&quot;</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Do not reject H0&quot;</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>The two-tailed test does <strong>not</strong> provide evidence that
+the mean differs from <span
+class="math inline">\(24^\circ\mathrm{C}\)</span> at the 5% significance
+level. This does <strong>not</strong> establish that the true mean is
+exactly <span class="math inline">\(24^\circ\mathrm{C}\)</span>.</p>
+<h3 id="connection-to-confidence-intervals">Connection to confidence
+intervals</h3>
+<p>When <span class="math inline">\(\sigma\)</span> is unknown, the
+usual t-based confidence interval for the population mean is</p>
+<p><span class="math display">\[
+\boxed{
+\bar x\ \pm\ t_{1-\alpha/2,n-1}\frac{s}{\sqrt n}
+}.
+\]</span></p>
+<p>For a two-tailed test at <span
+class="math inline">\(\alpha=0.05\)</span>, we reject <span
+class="math inline">\(H_0:\mu=\mu_0\)</span> precisely when the
+corresponding <strong>95% two-sided t-confidence interval</strong>
+excludes <span class="math inline">\(\mu_0\)</span>.</p>
+<hr />
+<h1 id="two-sample-t-tests">4. Two-sample t-tests</h1>
+<p>Suppose we have two groups, such as germination measurements from
+plants grown <strong>in a greenhouse</strong> and <strong>in a
+garden</strong>.</p>
+<p>We want to test whether the population means differ:</p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=0,
+\qquad
+H_A:\mu_1-\mu_2\ne0.
+\]</span></p>
+<h2 id="independent-samples-welchs-t-test">Independent samples: Welch’s
+t-test</h2>
+<p>When the observations in the two groups are independent, the usual
+default is <strong>Welch’s t-test</strong>, which does <em>not</em>
+assume equal population variances.</p>
+<p>Its test statistic is</p>
+<p><span class="math display">\[
+\boxed{
+t=\frac{(\bar x_1-\bar x_2)-\Delta_0}
+{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+},
+\]</span></p>
+<p>where <span class="math inline">\(\Delta_0=0\)</span> when testing
+equality of means. Welch’s method uses an approximate degrees-of-freedom
+calculation, which R performs automatically.</p>
+<h2 id="r-example-germination-measurements">R example: germination
+measurements</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Measurements in two independent groups</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>greenhouse <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">69.3</span>, <span class="fl">75.5</span>, <span class="fl">81.0</span>, <span class="fl">74.7</span>, <span class="fl">72.3</span>, <span class="fl">70.7</span>, <span class="fl">76.9</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>garden <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">69.5</span>, <span class="fl">64.6</span>, <span class="fl">74.0</span>, <span class="fl">84.8</span>, <span class="fl">71.0</span>, <span class="fl">93.9</span>, <span class="fl">81.2</span>, <span class="fl">73.4</span>, <span class="fl">88.0</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(greenhouse)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(garden)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(greenhouse)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(garden)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  greenhouse, garden,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;Greenhouse&quot;</span>, <span class="st">&quot;Garden&quot;</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Germination measurement&quot;</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Comparison of two groups&quot;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Default: Welch&#39;s two-sample t-test</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(greenhouse, garden, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<h2 id="pooled-two-sample-t-test">Pooled two-sample t-test</h2>
+<p>If independent observations come from normal populations with the
+<strong>same population variance</strong>, the classical pooled
+two-sample t-test uses</p>
+<p><span class="math display">\[
+s_p^2=
+\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2},
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+t=\frac{(\bar x_1-\bar x_2)-\Delta_0}
+{s_p\sqrt{1/n_1+1/n_2}},
+\qquad \nu=n_1+n_2-2.
+\]</span></p>
+<p>In R, its command is
+<code>t.test(group1, group2, var.equal = TRUE)</code>.</p>
+<h2 id="paired-t-test">Paired t-test</h2>
+<p>What if the <em>same individuals</em> are measured before and after
+treatment? Those measurements are paired, not independent between
+conditions.</p>
+<p>Define a difference for each individual,</p>
+<p><span class="math display">\[
+D_i=X_{i,\mathrm{after}}-X_{i,\mathrm{before}}.
+\]</span></p>
+<p>A paired t-test is a one-sample t-test of <span
+class="math inline">\(H_0:\mu_D=0\)</span> applied to the
+differences.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>before <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.5</span>, <span class="fl">13.1</span>, <span class="fl">11.4</span>, <span class="fl">14.0</span>, <span class="fl">12.9</span>, <span class="fl">13.7</span>, <span class="fl">11.9</span>, <span class="fl">12.2</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>after  <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.4</span>, <span class="fl">13.5</span>, <span class="fl">11.7</span>, <span class="fl">15.0</span>, <span class="fl">13.2</span>, <span class="fl">14.0</span>, <span class="fl">12.6</span>, <span class="fl">13.1</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Same eight individuals measured twice</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(after, before, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Equivalent calculation</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(after <span class="sc">-</span> before, <span class="at">mu =</span> <span class="dv">0</span>)</span></code></pre></div>
+<hr />
+<h1 id="one-way-anova-comparing-more-than-two-means">5. One-way ANOVA:
+comparing more than two means</h1>
+<p>A t-test compares <strong>two means</strong>. What if we want to
+compare mean enzyme activity under <strong>three treatments</strong>:
+control, low dose, and high dose?</p>
+<p>Performing a separate t-test for every pair can increase the
+probability of at least one false-positive result. <strong>Analysis of
+variance (ANOVA)</strong> provides an overall test of whether the group
+means are the same.</p>
+<p>Despite its name, ANOVA is primarily a <strong>test of
+means</strong>. It tests for differences in means by comparing variation
+<strong>between groups</strong> with variation <strong>within
+groups</strong>.</p>
+<h2 id="hypotheses">Hypotheses</h2>
+<p>For <span class="math inline">\(k\)</span> independent groups with
+population means <span
+class="math inline">\(\mu_1,\ldots,\mu_k\)</span>,</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu_2=\cdots=\mu_k,
+\]</span></p>
+<p><span class="math display">\[
+H_A:\text{at least one population mean differs}.
+\]</span></p>
+<p>Rejecting <span class="math inline">\(H_0\)</span> does
+<strong>not</strong> mean that every pair of group means differs. ANOVA
+first answers the overall question; comparisons between particular
+groups are a separate step.</p>
+<h2 id="how-does-anova-work">How does ANOVA work?</h2>
+<p>Let <span class="math inline">\(X_{ij}\)</span> be observation <span
+class="math inline">\(i\)</span> in group <span
+class="math inline">\(j\)</span>, let <span class="math inline">\(\bar
+X_j\)</span> be the mean of group <span
+class="math inline">\(j\)</span>, and let <span
+class="math inline">\(\bar X\)</span> be the overall (grand) mean. If
+group <span class="math inline">\(j\)</span> has <span
+class="math inline">\(n_j\)</span> observations, define</p>
+<p><span class="math display">\[
+SS_{\mathrm{between}}=\sum_{j=1}^{k}n_j(\bar X_j-\bar X)^2
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+SS_{\mathrm{within}}=\sum_{j=1}^{k}\sum_{i=1}^{n_j}(X_{ij}-\bar X_j)^2.
+\]</span></p>
+<p>For <span class="math inline">\(N=\sum_j n_j\)</span> total
+observations, the mean squares are</p>
+<p><span class="math display">\[
+MS_{\mathrm{between}}=\frac{SS_{\mathrm{between}}}{k-1},
+\qquad
+MS_{\mathrm{within}}=\frac{SS_{\mathrm{within}}}{N-k}.
+\]</span></p>
+<p>The <strong>one-way ANOVA F-statistic</strong> is</p>
+<p><span class="math display">\[
+\boxed{F=\frac{MS_{\mathrm{between}}}{MS_{\mathrm{within}}}}.
+\]</span></p>
+<p>Under <span class="math inline">\(H_0\)</span>, assuming independent
+normal errors with a common variance, this follows an F-distribution
+with degrees of freedom</p>
+<p><span class="math display">\[
+\nu_1=k-1,\qquad \nu_2=N-k.
+\]</span></p>
+<p>A <strong>large F-statistic</strong> suggests that the differences
+among group means are large compared with the variation among
+observations within each group. ANOVA therefore has a
+<strong>right-tailed</strong> rejection region:</p>
+<p><span class="math display">\[
+F&gt;F_{1-\alpha,\,k-1,\,N-k}.
+\]</span></p>
+<blockquote>
+<p>[!NOTE] The F-statistic used in ANOVA compares <strong>mean
+squares</strong> (between-group variation versus within-group
+variation). The two-sample F-test later in this lecture compares
+<strong>two sample variances</strong>. Both use an F-distribution, but
+they answer different scientific questions.</p>
+</blockquote>
+<h2 id="r-example-enzyme-activity-under-three-treatments">R example:
+enzyme activity under three treatments</h2>
+<p>The following data are <strong>illustrative measurements</strong>,
+not results from a published experiment. Assume each measurement comes
+from a different independently assigned experimental unit.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-way ANOVA: enzyme activity under three treatments</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.2</span>, <span class="fl">11.4</span>, <span class="fl">10.9</span>, <span class="fl">12.0</span>, <span class="fl">11.3</span>, <span class="fl">10.7</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>low_dose <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">11.0</span>, <span class="fl">12.6</span>, <span class="fl">11.8</span>, <span class="fl">12.1</span>, <span class="fl">13.2</span>, <span class="fl">12.4</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>high_dose <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>, <span class="fl">14.3</span>, <span class="fl">13.8</span>, <span class="fl">14.9</span>, <span class="fl">12.9</span>, <span class="fl">14.1</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>experiment <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">activity =</span> <span class="fu">c</span>(control, low_dose, high_dose),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">factor</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Low dose&quot;</span>, <span class="st">&quot;High dose&quot;</span>), <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Low dose&quot;</span>, <span class="st">&quot;High dose&quot;</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine the observations and group means</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>experiment</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(activity <span class="sc">~</span> treatment, <span class="at">data =</span> experiment, <span class="at">FUN =</span> mean)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  activity <span class="sc">~</span> treatment, <span class="at">data =</span> experiment,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Treatment&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Enzyme activity&quot;</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Enzyme activity under three treatments&quot;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Standard one-way ANOVA</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(activity <span class="sc">~</span> treatment, <span class="at">data =</span> experiment)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Show how the F-statistic is calculated</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>k <span class="ot">&lt;-</span> <span class="fu">nlevels</span>(experiment<span class="sc">$</span>treatment)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(experiment)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>grand_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(experiment<span class="sc">$</span>activity)</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>ss_between <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">tapply</span>(</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>  experiment<span class="sc">$</span>activity, experiment<span class="sc">$</span>treatment,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">length</span>(x) <span class="sc">*</span> (<span class="fu">mean</span>(x) <span class="sc">-</span> grand_mean)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>ss_within <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">tapply</span>(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>  experiment<span class="sc">$</span>activity, experiment<span class="sc">$</span>treatment,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(x) <span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>ms_between <span class="ot">&lt;-</span> ss_between <span class="sc">/</span> (k <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>ms_within <span class="ot">&lt;-</span> ss_within <span class="sc">/</span> (N <span class="sc">-</span> k)</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>F_stat <span class="ot">&lt;-</span> ms_between <span class="sc">/</span> ms_within</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_stat, <span class="at">df1 =</span> k <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> N <span class="sc">-</span> k,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>              <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>F_stat</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>p_value</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="fu">qf</span>(<span class="fl">0.95</span>, <span class="at">df1 =</span> k <span class="sc">-</span> <span class="dv">1</span>, <span class="at">df2 =</span> N <span class="sc">-</span> k)</span></code></pre></div>
+<p>Compare the manually calculated F-statistic and p-value with the
+<code>summary(fit)</code> output. The ANOVA table reports the
+<strong>degrees of freedom</strong>, <strong>sum of squares</strong>,
+<strong>mean squares</strong>, <strong>F value</strong>, and
+<strong>p-value</strong>.</p>
+<h2 id="which-groups-differ-tukeys-post-hoc-test">Which groups differ?
+Tukey’s post-hoc test</h2>
+<p>If the overall ANOVA provides evidence of unequal means, we may want
+to know <em>which pairs</em> of treatments differ. <strong>Tukey’s
+honest significant difference (HSD) test</strong> makes pairwise
+comparisons while controlling the family-wise error rate under the
+standard one-way ANOVA assumptions.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continue in the same 05_ANOVA.R script</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">TukeyHSD</span>(fit)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize estimated pairwise differences and confidence intervals</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">TukeyHSD</span>(fit))</span></code></pre></div>
+<p>For each pair, examine the estimated difference, adjusted p-value
+(<code>p adj</code>), and confidence interval. A significant overall
+ANOVA does <strong>not</strong> imply that all pairs must differ.</p>
+<h2 id="assumptions-and-alternatives">Assumptions and alternatives</h2>
+<p>Standard one-way ANOVA assumes <strong>independent
+observations</strong>, approximately normal <strong>errors within
+groups</strong>, and approximately <strong>equal population
+variances</strong>. Extreme outliers can distort the result.
+Independence comes from the experimental design, not from a plot or a
+significance test.</p>
+<ul>
+<li><p>When the group variances differ substantially, <strong>Welch’s
+one-way ANOVA</strong> is a useful alternative:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Base R; does not assume equal group variances</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">oneway.test</span>(activity <span class="sc">~</span> treatment, <span class="at">data =</span> experiment,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">var.equal =</span> <span class="cn">FALSE</span>)</span></code></pre></div></li>
+<li><p>When the <strong>same subjects</strong> are measured under
+several conditions, observations are related. Use a repeated-measures
+ANOVA or an appropriate mixed-effects model, <strong>not</strong> this
+independent-groups analysis.</p></li>
+<li><p>Tukey’s HSD is for the standard equal-variance ANOVA framework;
+if you use Welch’s ANOVA, choose a suitable heteroscedastic post-hoc
+procedure rather than automatically applying
+<code>TukeyHSD()</code>.</p></li>
+</ul>
+<p><strong>Connection to the t-test:</strong> With exactly two
+independent groups and equal-variance assumptions, one-way ANOVA and the
+pooled two-sample t-test give equivalent tests; in fact, <span
+class="math inline">\(F=t^2\)</span>. ANOVA naturally extends the same
+logic to <strong>three or more groups</strong>.</p>
+<hr />
+<h1 id="chi-square-test-for-one-population-variance">6. Chi-square test
+for one population variance</h1>
+<p>So far, we have been testing population <strong>means</strong>. Now
+the question changes:</p>
+<p><em>Is the population variance equal to a specified value?</em></p>
+<p>For a random sample from a <strong>normal population</strong>, the
+statistic</p>
+<p><span class="math display">\[
+\boxed{\chi^2=\frac{(n-1)s^2}{\sigma_0^2}}
+\]</span></p>
+<p>follows a chi-square distribution with</p>
+<p><span class="math display">\[
+\nu=n-1
+\]</span></p>
+<p>degrees of freedom when</p>
+<p><span class="math display">\[
+H_0:\sigma^2=\sigma_0^2.
+\]</span></p>
+<p>For the two-tailed alternative <span
+class="math inline">\(H_A:\sigma^2\ne\sigma_0^2\)</span>, reject <span
+class="math inline">\(H_0\)</span> when</p>
+<p><span class="math display">\[
+\chi^2 &lt; \chi^2_{\alpha/2,\nu}
+\quad\text{or}\quad
+\chi^2 &gt; \chi^2_{1-\alpha/2,\nu}.
+\]</span></p>
+<p>The chi-square distribution is <strong>nonnegative and generally
+right-skewed</strong>. Unlike the Z- and t-distributions, it is not
+symmetric around zero.</p>
+<h2 id="r-example">R example</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># One-sample variance test (illustrative measurements)</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">39</span>, <span class="dv">43</span>, <span class="dv">38</span>, <span class="dv">44</span>, <span class="dv">41</span>, <span class="dv">40</span>, <span class="dv">45</span>, <span class="dv">37</span>, <span class="dv">42</span>, <span class="dv">41</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>sigma0 <span class="ot">&lt;-</span> <span class="dv">3</span>          <span class="co"># Hypothesized population SD</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(x)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> n <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>chi2_stat <span class="ot">&lt;-</span> df <span class="sc">*</span> <span class="fu">var</span>(x) <span class="sc">/</span> sigma0<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-tailed p-value</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>p_lower <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(chi2_stat, <span class="at">df =</span> df)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>p_upper <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(chi2_stat, <span class="at">df =</span> df, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="dv">1</span>, <span class="dv">2</span> <span class="sc">*</span> <span class="fu">min</span>(p_lower, p_upper))</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Critical values</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>lower_critical <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> df)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>upper_critical <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, <span class="at">df =</span> df)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>chi2_stat</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>p_value</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(lower_critical, upper_critical)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># A two-sided confidence interval for population variance</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>ci_variance <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower =</span> df <span class="sc">*</span> <span class="fu">var</span>(x) <span class="sc">/</span> <span class="fu">qchisq</span>(<span class="dv">1</span> <span class="sc">-</span> alpha <span class="sc">/</span> <span class="dv">2</span>, df),</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">upper =</span> df <span class="sc">*</span> <span class="fu">var</span>(x) <span class="sc">/</span> <span class="fu">qchisq</span>(alpha <span class="sc">/</span> <span class="dv">2</span>, df)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>ci_variance</span></code></pre></div>
+<p>For a right-tailed alternative <span
+class="math inline">\(\sigma^2&gt;\sigma_0^2\)</span>, use the
+<strong>upper-tail</strong> probability; for a left-tailed alternative
+<span class="math inline">\(\sigma^2&lt;\sigma_0^2\)</span>, use the
+<strong>lower-tail</strong> probability.</p>
+<blockquote>
+<p>[!NOTE] The chi-square test for a single population variance is
+particularly sensitive to violations of normality. Do not use it
+automatically for strongly skewed data or data with major outliers.</p>
+</blockquote>
+<hr />
+<h1 id="f-test-for-comparing-two-variances">7. F-test for comparing two
+variances</h1>
+<p>Suppose we have independent samples from two populations and want to
+know whether their <strong>variances</strong> differ.</p>
+<p><span class="math display">\[
+H_0:\sigma_1^2=\sigma_2^2,
+\qquad
+H_A:\sigma_1^2\ne\sigma_2^2.
+\]</span></p>
+<p>If both populations are normal, under <span
+class="math inline">\(H_0\)</span> the statistic</p>
+<p><span class="math display">\[
+\boxed{F=\frac{s_1^2}{s_2^2}}
+\]</span></p>
+<p>follows an F-distribution with degrees of freedom</p>
+<p><span class="math display">\[
+\nu_1=n_1-1,
+\qquad
+\nu_2=n_2-1.
+\]</span></p>
+<p>For a <strong>two-tailed</strong> F-test, reject for values of <span
+class="math inline">\(F\)</span> that are either unusually small or
+unusually large:</p>
+<p><span class="math display">\[
+F&lt;F_{\alpha/2,\nu_1,\nu_2}
+\quad\text{or}\quad
+F&gt;F_{1-\alpha/2,\nu_1,\nu_2}.
+\]</span></p>
+<p>It is common in handwritten calculations to put the larger sample
+variance in the numerator so that <span
+class="math inline">\(F\ge1\)</span>. If you do so, <strong>the
+corresponding numerator and denominator degrees of freedom must also be
+swapped</strong>. R’s <code>var.test()</code> handles the tails
+correctly without requiring this rearrangement.</p>
+<h2 id="r-example-insects-captured-in-two-traps">R example: insects
+captured in two traps</h2>
+<p>These data correspond to the two-trap example in the notes.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of insects captured on repeated sampling occasions</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>trap1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">41</span>, <span class="dv">35</span>, <span class="dv">33</span>, <span class="dv">36</span>, <span class="dv">40</span>, <span class="dv">46</span>, <span class="dv">31</span>, <span class="dv">37</span>, <span class="dv">34</span>, <span class="dv">30</span>, <span class="dv">38</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>trap2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">52</span>, <span class="dv">57</span>, <span class="dv">62</span>, <span class="dv">55</span>, <span class="dv">64</span>, <span class="dv">57</span>, <span class="dv">56</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">59</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare variability, not means</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(trap1)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(trap2)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate F manually</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>F_stat <span class="ot">&lt;-</span> <span class="fu">var</span>(trap1) <span class="sc">/</span> <span class="fu">var</span>(trap2)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">length</span>(trap1) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">length</span>(trap2) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>p_left <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_stat, df1, df2)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>p_right <span class="ot">&lt;-</span> <span class="fu">pf</span>(F_stat, df1, df2, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> <span class="fu">min</span>(<span class="dv">1</span>, <span class="dv">2</span> <span class="sc">*</span> <span class="fu">min</span>(p_left, p_right))</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>F_stat</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>p_value</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Built-in two-sided F-test</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(trap1, trap2)</span></code></pre></div>
+<p>For this example, <span class="math inline">\(F\approx1.70\)</span>
+and the two-sided p-value is approximately <span
+class="math inline">\(0.44\)</span>. There is insufficient evidence to
+conclude that the population variances differ.</p>
+<p><strong>Important limitation:</strong> An F-test for two variances
+assumes <em>independent samples from normal populations</em>. Its
+results can be strongly affected by outliers or non-normal data.</p>
+<hr />
+<h1 id="levenes-test-for-comparing-variances">8. Levene’s test for
+comparing variances</h1>
+<p>The F-test is appropriate when normality is reasonable. For
+biological data that may not be normally distributed, <strong>Levene’s
+test</strong> offers a less normality-sensitive approach to comparing
+variability between groups.</p>
+<p>A widely used variant is the <strong>Brown–Forsythe test</strong>,
+which centers observations around each group’s
+<strong>median</strong>.</p>
+<p>For each observation <span class="math inline">\(X_{ij}\)</span> in
+group <span class="math inline">\(j\)</span>, define</p>
+<p><span class="math display">\[
+D_{ij}=\left|X_{ij}-\widetilde X_j\right|,
+\]</span></p>
+<p>where <span class="math inline">\(\widetilde X_j\)</span> is that
+group’s sample median.</p>
+<p>We then compare the mean absolute deviations across groups using an
+analysis of variance (ANOVA) F-statistic.</p>
+<h2 id="r-example-greenhouse-and-garden-variability">R example:
+greenhouse and garden variability</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same independent groups used in Section 4</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>greenhouse <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">69.3</span>, <span class="fl">75.5</span>, <span class="fl">81.0</span>, <span class="fl">74.7</span>, <span class="fl">72.3</span>, <span class="fl">70.7</span>, <span class="fl">76.9</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>garden <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">69.5</span>, <span class="fl">64.6</span>, <span class="fl">74.0</span>, <span class="fl">84.8</span>, <span class="fl">71.0</span>, <span class="fl">93.9</span>, <span class="fl">81.2</span>, <span class="fl">73.4</span>, <span class="fl">88.0</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>measurement <span class="ot">&lt;-</span> <span class="fu">c</span>(greenhouse, garden)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;Greenhouse&quot;</span>, <span class="st">&quot;Garden&quot;</span>),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="fu">c</span>(<span class="fu">length</span>(greenhouse), <span class="fu">length</span>(garden))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Brown-Forsythe (median-centered Levene) test in base R</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>group_median <span class="ot">&lt;-</span> <span class="fu">ave</span>(measurement, group, <span class="at">FUN =</span> median)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>absolute_deviation <span class="ot">&lt;-</span> <span class="fu">abs</span>(measurement <span class="sc">-</span> group_median)</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">aov</span>(absolute_deviation <span class="sc">~</span> group))</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional alternative using the car package, if installed:</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># car::leveneTest(measurement ~ group, center = median)</span></span></code></pre></div>
+<p>The null hypothesis is that the population variances are equal. A
+small p-value provides evidence of differing variability. Levene’s test
+still assumes <strong>independent observations</strong> and is not a
+universal solution to every kind of non-normality.</p>
+<p><strong>Why both an F-test and Levene’s test?</strong> They address
+similar questions but have different assumptions. Do not switch between
+them only to obtain a smaller p-value.</p>
+<hr />
+<h1 id="chi-square-goodness-of-fit-test-for-categorical-data">9.
+Chi-square goodness-of-fit test for categorical data</h1>
+<p>The previous tests used <strong>numerical measurements</strong>. Now
+suppose each observation belongs to one of several
+<strong>categories</strong>.</p>
+<p>For example, suppose 20 bird sightings were recorded across four
+habitats. Under a simple null model, sightings are equally likely in
+each habitat.</p>
+<table>
+<thead>
+<tr>
+<th>Habitat</th>
+<th style="text-align: right;">Expected probability</th>
+<th style="text-align: right;">Expected count</th>
+<th style="text-align: right;">Observed count</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Forest</td>
+<td style="text-align: right;"><span
+class="math inline">\(1/4\)</span></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Tree canopy</td>
+<td style="text-align: right;"><span
+class="math inline">\(1/4\)</span></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr>
+<td>Lawn</td>
+<td style="text-align: right;"><span
+class="math inline">\(1/4\)</span></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1</td>
+</tr>
+<tr>
+<td>Pond</td>
+<td style="text-align: right;"><span
+class="math inline">\(1/4\)</span></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">18</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td style="text-align: right;"><strong>1</strong></td>
+<td style="text-align: right;"><strong>20</strong></td>
+<td style="text-align: right;"><strong>20</strong></td>
+</tr>
+</tbody>
+</table>
+<p>For <span class="math inline">\(k\)</span> mutually exclusive
+categories with pre-specified probabilities <span
+class="math inline">\(p_i\)</span>, under <span
+class="math inline">\(H_0\)</span> the expected counts are</p>
+<p><span class="math display">\[
+E_i=np_i.
+\]</span></p>
+<p>The <strong>Pearson chi-square goodness-of-fit statistic</strong>
+is</p>
+<p><span class="math display">\[
+\boxed{\chi^2=\sum_{i=1}^{k}\frac{(O_i-E_i)^2}{E_i}}.
+\]</span></p>
+<p>If the category probabilities are fully specified under <span
+class="math inline">\(H_0\)</span> and the approximation is adequate,
+the statistic approximately follows a chi-square distribution with <span
+class="math inline">\(k-1\)</span> degrees of freedom. We reject for
+sufficiently <strong>large</strong> values.</p>
+<p>Notice that this is a <strong>different use of the chi-square
+distribution</strong> from the variance test in Section 6.</p>
+<h2 id="r-example-unequal-habitat-counts">R example: unequal habitat
+counts</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed bird sightings across four habitats</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>observed <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Forest =</span> <span class="dv">1</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">TreeCanopy =</span> <span class="dv">0</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">Lawn =</span> <span class="dv">1</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Pond =</span> <span class="dv">18</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># H0: each habitat is equally likely</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>p0 <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fl">0.25</span>, <span class="dv">4</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>expected <span class="ot">&lt;-</span> <span class="fu">sum</span>(observed) <span class="sc">*</span> p0</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the statistic manually</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>chi2_stat <span class="ot">&lt;-</span> <span class="fu">sum</span>((observed <span class="sc">-</span> expected)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> expected)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>chi2_stat</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Chi-square goodness-of-fit test</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(observed, <span class="at">p =</span> p0)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare with the critical value (alpha = 0.05)</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="fu">qchisq</span>(<span class="fl">0.95</span>, <span class="at">df =</span> <span class="dv">3</span>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rbind</span>(<span class="at">Observed =</span> observed, <span class="at">Expected =</span> expected),</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">beside =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.text =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Count&quot;</span>,</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Bird sightings: observed versus expected&quot;</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p>The chi-square statistic is <span
+class="math inline">\(45.2\)</span>, which is much larger than the 5%
+critical value. Thus the observations provide strong evidence
+<strong>against the equal-probability model</strong>. This does not, by
+itself, explain <em>why</em> the habitats have different counts; for
+example, differences in sampling effort may also matter.</p>
+<h3 id="when-is-the-chi-square-approximation-valid">When is the
+chi-square approximation valid?</h3>
+<p>Observations should be independent, and categories should be mutually
+exclusive. Expected counts should not be too small; a common
+introductory guideline is that they should generally be at least 5. If
+the expected counts are small, an exact or simulation-based multinomial
+approach may be preferable.</p>
+<p>In this example, all four expected counts are 5, even though one
+<strong>observed</strong> count is zero. The rule concerns
+<strong>expected</strong>, not observed, counts.</p>
+<hr />
+<h1 id="chi-square-test-of-independence">10. Chi-square test of
+independence</h1>
+<p>Another use of Pearson’s chi-square statistic is to test whether
+<strong>two categorical variables are associated</strong>.</p>
+<p>For example: <em>Is treatment group associated with whether an
+individual responds to treatment?</em></p>
+<p>Unlike goodness of fit (one categorical variable with specified
+expected probabilities), a test of independence uses a
+<strong>contingency table</strong> containing counts classified by two
+variables.</p>
+<p>Under independence, the expected cell count is</p>
+<p><span class="math display">\[
+E_{ij}=\frac{(\text{row total}_i)(\text{column total}_j)}{\text{grand
+total}}.
+\]</span></p>
+<h2 id="r-example-treatment-and-response">R example: treatment and
+response</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">12</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>     <span class="dv">8</span>, <span class="dv">22</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="dv">2</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">dimnames =</span> <span class="fu">list</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Treatment =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Drug&quot;</span>),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Outcome =</span> <span class="fu">c</span>(<span class="st">&quot;Responder&quot;</span>, <span class="st">&quot;Nonresponder&quot;</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>counts</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Chi-square test of independence</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(counts, <span class="at">correct =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected counts under the null hypothesis</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(counts, <span class="at">correct =</span> <span class="cn">FALSE</span>)<span class="sc">$</span>expected</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="co"># For a 2 x 2 table with small expected cell counts:</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="co"># fisher.test(counts)</span></span></code></pre></div>
+<p>For a contingency table with <span class="math inline">\(r\)</span>
+rows and <span class="math inline">\(c\)</span> columns, the degrees of
+freedom are <span class="math inline">\((r-1)(c-1)\)</span>. With small
+expected counts in a <span class="math inline">\(2\times2\)</span>
+table, <strong>Fisher’s exact test</strong> is often preferred.</p>
+<hr />
+<h1 id="choosing-the-appropriate-test">11. Choosing the appropriate
+test</h1>
+<p>The first question is <strong>what you want to test</strong>: one
+mean, a comparison of two or more means, a variance, a categorical
+distribution, or an association. The second question is whether your
+data satisfy the assumptions.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scientific question</th>
+<th>Typical test</th>
+<th>Important condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Is one population mean equal to <span
+class="math inline">\(\mu_0\)</span>?</td>
+<td>One-sample Z-test</td>
+<td>Population <span class="math inline">\(\sigma\)</span> known</td>
+</tr>
+<tr>
+<td>Is one population mean equal to <span
+class="math inline">\(\mu_0\)</span>?</td>
+<td>One-sample t-test</td>
+<td>Population <span class="math inline">\(\sigma\)</span> unknown;
+independent observations</td>
+</tr>
+<tr>
+<td>Do two independent groups differ in mean?</td>
+<td>Welch’s two-sample t-test</td>
+<td>Independent groups</td>
+</tr>
+<tr>
+<td>Did the same individuals change between two measurements?</td>
+<td>Paired t-test</td>
+<td>Matched observations; appropriate differences</td>
+</tr>
+<tr>
+<td>Do three or more independent groups differ in mean?</td>
+<td>One-way ANOVA</td>
+<td>Independent observations; approximately normal errors; similar group
+variances</td>
+</tr>
+<tr>
+<td>Do three or more independent groups differ in mean with unequal
+variances?</td>
+<td>Welch’s one-way ANOVA</td>
+<td>Independent observations; allows unequal group variances</td>
+</tr>
+<tr>
+<td>Is one population variance equal to <span
+class="math inline">\(\sigma_0^2\)</span>?</td>
+<td>One-sample chi-square variance test</td>
+<td>Normally distributed population</td>
+</tr>
+<tr>
+<td>Do two population variances differ?</td>
+<td>F-test</td>
+<td>Independent, normally distributed groups</td>
+</tr>
+<tr>
+<td>Do group variances differ without relying strongly on
+normality?</td>
+<td>Levene / Brown–Forsythe test</td>
+<td>Independent observations</td>
+</tr>
+<tr>
+<td>Do observed category counts fit specified probabilities?</td>
+<td>Chi-square goodness-of-fit test</td>
+<td>Adequate expected counts</td>
+</tr>
+<tr>
+<td>Are two categorical variables associated?</td>
+<td>Chi-square test of independence</td>
+<td>Adequate expected cell counts</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A test of a mean is not a test of a variance.</strong> Two
+groups can have similar means but different variances, or different
+means but similar variances. Likewise, a categorical chi-square test is
+not the same procedure as a chi-square variance test.</p>
+<p>For every hypothesis test, report the <strong>test used</strong>,
+<strong>test statistic</strong>, <strong>degrees of freedom</strong>
+when applicable, <strong>p-value</strong>, and a conclusion in terms of
+the scientific question. Report confidence intervals and the size of the
+observed difference when relevant. Failure to reject <span
+class="math inline">\(H_0\)</span> is not proof that <span
+class="math inline">\(H_0\)</span> is true.</p>
+</body>
+</html>

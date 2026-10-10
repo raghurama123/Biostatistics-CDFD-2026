@@ -51,6 +51,22 @@ Lecture 04 introduces inference for a population mean using the normal distribut
 7. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ as the probabilities of false-positive and false-negative decisions.
 8. **Statistical power** — defining power as $1-\beta$ and examining how effect size, sample size, variability, and significance level affect power.
 
+### [**Lecture 05**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec05/Lec05.html)
+
+Lecture 05 extends hypothesis testing beyond the Z-test to compare population means, variances, and categorical data:
+
+1. **Recap of the Z-test** — reviewing hypothesis testing for a population mean when the population standard deviation $\sigma$ is known.
+2. **Student's t-distribution** — understanding why the t-distribution is used when $\sigma$ is unknown, how it differs from the normal distribution, and the role of degrees of freedom.
+3. **One-sample t-test** — testing whether a population mean differs from a specified value using `t.test()`, illustrated by comparing crab body temperature with lake water temperature.
+4. **Two-sample t-tests** — comparing means from independent samples using Welch's or pooled t-tests, and comparing paired observations using a paired t-test.
+5. **Analysis of Variance (ANOVA)** — comparing means across three or more groups using the F-statistic, performing one-way ANOVA with `aov()`, and identifying differences between groups using Tukey's post-hoc test.
+6. **Chi-square test for one variance** — testing whether a population variance differs from a specified value using the chi-square distribution.
+7. **F-test for two variances** — comparing variability between two populations using the F-distribution and `var.test()`.
+8. **Levene's test** — testing whether groups have equal variances using a method less sensitive to departures from normality.
+9. **Chi-square goodness-of-fit test** — comparing observed categorical counts with expected frequencies under a hypothesized probability distribution using `chisq.test()`.
+10. **Chi-square test of independence** — testing whether two categorical variables are associated using contingency tables and `chisq.test()`, with Fisher's exact test as an alternative for sparse tables.
+11. **Choosing the appropriate statistical test** — selecting a test based on the scientific question, data type, number of groups, study design, and statistical assumptions.
+
 _Additional content will be added as the course progresses._
 
 ## Repository 
