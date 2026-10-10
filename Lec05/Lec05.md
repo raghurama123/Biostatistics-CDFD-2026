@@ -10,6 +10,7 @@
 
 ## Contents
 
+0. [Recap: What does rejecting the null hypothesis actually mean?](#0-recap-what-does-rejecting-the-null-hypothesis-actually-mean?)
 1. [Recap: Z-test for a population mean](#1-recap-z-test-for-a-population-mean)
 2. [Student's t-distribution](#2-students-t-distribution)
 3. [One-sample t-test](#3-one-sample-t-test)
@@ -31,6 +32,7 @@
 **Common sequence for every test:** scientific question → **table of observed measurements or counts** → **table of calculated quantities** → hypotheses and hand calculation → p-value and decision → standalone manual R script → standalone R test-function script. Even when the same dataset is reused for a different test, its observed data are shown again before that test's calculation. For the Z-test, only summary information is available, so the input summary replaces a raw-data table. The two scripts should give the same test statistic (where available) and p-value, up to rounding.
 
 ---
+
 # 0. Recap: What does rejecting the null hypothesis actually mean?
 
 The null hypothesis is a statement about the **population**, not about a particular sample.
@@ -48,7 +50,8 @@ Importantly, rejecting $H_0$ does not prove that it is false. Even when $H_0$ is
 
 At a significance level of $\alpha=0.05$, a correctly calibrated test has a 5% probability of rejecting $H_0$ when it is actually true.
 
-Thus, a hypothesis test uses sample observations to evaluate a claim about the population, while acknowledging the uncertainty caused by random sampling.
+A hypothesis test evaluates whether the observed sample is consistent with the population model specified by the null hypothesis, taking random sampling variation into account.
+If the sample result is sufficiently unusual under this model, we reject the null hypothesis. This provides evidence against the hypothesized population model, but does not prove that the model is false or that the sample is incorrect.
 
 ---
 
