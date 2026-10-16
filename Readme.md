@@ -104,6 +104,7 @@ The [`HowToR`](HowToR/) folder contains short manuals and examples explaining ho
 
 1. Biostatistical Analysis, Jerrold H. Zar, Ed. 5, Pearson Education (2014)  
 2. **[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)** by Susan Holmes and Wolfgang Huber   
+3. Essential Statistics for the Pharmaceutical Sciences, Philip Rowe, Wiley (2016)
 
 ## Contact
 Raghunathan Ramakrishnan     
