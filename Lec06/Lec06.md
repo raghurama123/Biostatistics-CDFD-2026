@@ -96,11 +96,21 @@ X_{ij}=\bar X+(\bar X_j-\bar X)+(X_{ij}-\bar X_j)
 }
 $$
 
+
 where:
 
-- $\bar X$ is the sample grand mean.
-- $\bar X_j-\bar X$ is the deviation of group $j$'s mean from the grand mean (**between-group deviation**).
-- $X_{ij}-\bar X_j$ is the deviation of an observation from its group mean (**within-group deviation**, or observed residual).
+- $\bar X$ is the **sample grand mean**, an estimate of the overall population mean $\mu$.
+- $\bar X_j-\bar X$ is the **between-group deviation**, an estimate of the treatment effect $\alpha_j=\mu_j-\mu$.
+- $X_{ij}-\bar X_j$ is the **within-group deviation** (observed residual), which estimates the random error $\varepsilon_{ij}$.
+
+Thus, the sample-data decomposition corresponds to the statistical model
+
+$$
+X_{ij}=\mu+\alpha_j+\varepsilon_{ij}.
+$$
+
+The sample means and residuals provide estimates of the corresponding population quantities and random errors.
+
 
 This is an exact mathematical identity. Squaring and summing these deviations gives the familiar one-way ANOVA decomposition:
 

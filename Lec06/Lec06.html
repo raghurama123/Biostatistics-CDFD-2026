@@ -407,15 +407,24 @@ X_{ij}=\bar X+(\bar X_j-\bar X)+(X_{ij}-\bar X_j)
 \]</span></p>
 <p>where:</p>
 <ul>
-<li><span class="math inline">\(\bar X\)</span> is the sample grand
-mean.</li>
+<li><span class="math inline">\(\bar X\)</span> is the <strong>sample
+grand mean</strong>, an estimate of the overall population mean <span
+class="math inline">\(\mu\)</span>.</li>
 <li><span class="math inline">\(\bar X_j-\bar X\)</span> is the
-deviation of group <span class="math inline">\(j\)</span>’s mean from
-the grand mean (<strong>between-group deviation</strong>).</li>
+<strong>between-group deviation</strong>, an estimate of the treatment
+effect <span class="math inline">\(\alpha_j=\mu_j-\mu\)</span>.</li>
 <li><span class="math inline">\(X_{ij}-\bar X_j\)</span> is the
-deviation of an observation from its group mean (<strong>within-group
-deviation</strong>, or observed residual).</li>
+<strong>within-group deviation</strong> (observed residual), which
+estimates the random error <span
+class="math inline">\(\varepsilon_{ij}\)</span>.</li>
 </ul>
+<p>Thus, the sample-data decomposition corresponds to the statistical
+model</p>
+<p><span class="math display">\[
+X_{ij}=\mu+\alpha_j+\varepsilon_{ij}.
+\]</span></p>
+<p>The sample means and residuals provide estimates of the corresponding
+population quantities and random errors.</p>
 <p>This is an exact mathematical identity. Squaring and summing these
 deviations gives the familiar one-way ANOVA decomposition:</p>
 <p><span class="math display">\[
