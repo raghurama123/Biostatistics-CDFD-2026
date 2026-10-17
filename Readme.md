@@ -67,6 +67,22 @@ Lecture 05 extends hypothesis testing beyond the Z-test to compare population me
 10. **Chi-square test of independence** — testing whether two categorical variables are associated using contingency tables and `chisq.test()`, with Fisher's exact test as an alternative for sparse tables.
 11. **Choosing the appropriate statistical test** — selecting a test based on the scientific question, data type, number of groups, study design, and statistical assumptions.
 
+
+### [**Lecture 06**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec06/Lec06.html)
+
+Lecture 06 extends one-way ANOVA to factorial experiments involving two or more factors, with emphasis on main effects, interactions, and their interpretation using R:
+
+1. **Recall of one-way ANOVA** — revisiting the enzyme-activity experiment from Lecture 05, distinguishing factors from levels, and introducing the one-way ANOVA statistical model.
+2. **Factors, levels, and factorial experiments** — understanding experimental combinations, replication, and full factorial designs involving multiple factors.
+3. **Two-way ANOVA** — introducing the statistical model, partitioning variation into main effects, interaction, and residual error, and specifying models using R formula notation.
+4. **Catalyst and mixing method** — analyzing published drug-synthesis yield data using `aov()`, interpreting significant main effects and a nonsignificant interaction, and calculating mean yield differences.
+5. **Main effects and interactions** — distinguishing additive effects from interactions and visualizing them using interaction plots in R.
+6. **Tablet strength with interaction** — analyzing published tablet-strength data to demonstrate how the effect of compression force depends on punch design, including statistical interpretation and reporting.
+7. **Beyond two factors** — extending factorial ANOVA to three factors, interpreting higher-order interactions, and introducing fractional factorial designs.
+8. **ANOVA assumptions and diagnostics** — checking independence, residual normality, and equal variances using residual plots, Q-Q plots, and boxplots.
+9. **Choosing the appropriate ANOVA model** — selecting one-way, two-way, additive, or three-way ANOVA based on the experimental design and scientific question.
+
+
 _Additional content will be added as the course progresses._
 
 ## Repository 
