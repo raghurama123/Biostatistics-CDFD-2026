@@ -38,7 +38,7 @@ The scientific question is:
 
 One-way ANOVA compares the means of the three independent groups to test this question.
 
-Lecture 05 used **$X_{ij}$ for an individual measurement**, where **$i$ is the observation number** and **$j$ is the treatment-group number**. We keep exactly that convention in Lecture 06.
+Lecture 05 used **$X_{ij}$ for an individual measurement**, where **$i$ (row index) is the observation number** and **$j$ (column index) is the treatment-group number**. 
 
 Recall the enzyme-activity measurements from Lecture 05:
 
@@ -53,19 +53,11 @@ Recall the enzyme-activity measurements from Lecture 05:
 | **Group mean** | **11.0833** | **12.1833** | **13.8500** |
 
 Here $X_{ij}$ means **the measurement in row $i$, column $j$**:
+Thus $X_{32}=11.8$ is the third observation in the second treatment group.
 
-| Symbol | Where to look in the table | Value |
-|---|---|---:|
-| $X_{11}$ | Observation 1, Control | 10.2 |
-| $X_{21}$ | Observation 2, Control | 11.4 |
-| $X_{12}$ | Observation 1, Low dose | 11.0 |
-| $X_{32}$ | Observation 3, Low dose | 11.8 |
-| $X_{13}$ | Observation 1, High dose | 13.1 |
-| $X_{63}$ | Observation 6, High dose | 14.1 |
+Each group has its own mean, written $\bar X_j$. For example, $\bar X_1=11.0833$ is the Control mean. 
 
-**The subscripts are labels, not multiplication.** Thus $X_{32}=11.8$ is the third observation in the second treatment group.
-
-Each group has its own mean, written $\bar X_j$. For example, $\bar X_1=11.0833$ is the Control mean. The **grand mean** over all 18 measurements is $\bar X=12.3722$.
+The **grand mean** over all 18 measurements is $\bar X=12.3722$.
 
 A one-way ANOVA model describes each measurement as
 
@@ -78,19 +70,66 @@ $$
 - $\alpha_j$: the effect of treatment group $j$ relative to that baseline.
 - $\varepsilon_{ij}$: random error for observation $i$ in group $j$.
 
-**Worked decomposition:** For the first Control measurement, $X_{11}=10.2$:
+### Decomposing an observation into deviations
+
+Recall that ANOVA separates variation into **between-group** and **within-group** components.
+
+For the first Control measurement, $X_{11}=10.2$, we can obtain this decomposition by **adding and subtracting the Control group mean ($11.0833$) and the grand mean ($12.3722$)**:
 
 $$
 \begin{aligned}
-10.2
-&= \underbrace{12.3722}_{\text{sample grand mean}}
- + \underbrace{(11.0833-12.3722)}_{\text{estimated Control effect}}\\
-&\quad+\underbrace{(10.2-11.0833)}_{\text{observed residual}}\\
+X_{11}
+&=10.2\\
+&=10.2-11.0833+11.0833-12.3722+12.3722\\
+&=\underbrace{12.3722}_{\text{grand mean}}
++\underbrace{(11.0833-12.3722)}_{\text{between-group deviation}}\\
+&\quad+\underbrace{(10.2-11.0833)}_{\text{within-group deviation}}\\
 &=12.3722-1.2889-0.8833.
 \end{aligned}
 $$
 
-This is an **exact sample-data decomposition** using estimates of the unknown model parameters. It connects the model directly to the **between-group** and **within-group** deviations calculated in Lecture 05. In the model, random errors are assumed independent with mean zero and common variance; normality supports the classical small-sample F-test.
+Thus, every observation can be expressed as
+
+$$
+\boxed{
+X_{ij}=\bar X+(\bar X_j-\bar X)+(X_{ij}-\bar X_j)
+}
+$$
+
+where:
+
+- $\bar X$ is the sample grand mean.
+- $\bar X_j-\bar X$ is the deviation of group $j$'s mean from the grand mean (**between-group deviation**).
+- $X_{ij}-\bar X_j$ is the deviation of an observation from its group mean (**within-group deviation**, or observed residual).
+
+This is an exact mathematical identity. Squaring and summing these deviations gives the familiar one-way ANOVA decomposition:
+
+$$
+SS_{\mathrm{total}}=SS_{\mathrm{between}}+SS_{\mathrm{within}}.
+$$
+
+### Connection to the normality assumption
+
+The corresponding statistical model is
+
+$$
+X_{ij}=\mu+\alpha_j+\varepsilon_{ij},
+$$
+
+where $\mu+\alpha_j=\mu_j$ is the population mean of group $j$.
+
+For classical one-way ANOVA, we assume that the random errors are independent and follow
+
+$$
+\boxed{
+\varepsilon_{ij}\sim N(0,\sigma^2)
+}
+$$
+
+This means that observations fluctuate normally around **their respective population group means**, with the same variance $\sigma^2$.
+Normality is assumed for the errors within groups, not for differences between group means.
+
+The decomposition into deviations is an algebraic identity; the normality assumption is an additional condition used to justify the classical ANOVA F-test.
 
 The null hypothesis remains exactly the one used in Lecture 05:
 
@@ -98,13 +137,7 @@ $$
 H_0:\mu_1=\mu_2=\cdots=\mu_k.
 $$
 
-Equivalently, with the usual constraint that the group effects sum to zero, $H_0$ says that all $\alpha_j=0$. This new notation **describes the same one-way ANOVA**, rather than introducing a new statistical test.
-
-ANOVA partitions the total sum of squares:
-
-$$
-SS_{\mathrm{total}}=SS_{\mathrm{between}}+SS_{\mathrm{within}}.
-$$
+Equivalently, with the usual constraint that the group effects sum to zero, $H_0$ says that all $\alpha_j=0$. 
 
 The statistic is
 
@@ -132,7 +165,8 @@ print(summary(fit))
 print(TukeyHSD(fit))
 ```
 
-**Question:** What if enzyme activity also depends on genotype? Would the treatment have the same effect in every genotype? One-way ANOVA cannot directly answer that second question.
+**Question:** What if enzyme activity also depends on another factor such as genotype? 
+Would the treatment have the same effect in every genotype? One-way ANOVA cannot directly answer that second question.
 
 ---
 
@@ -185,7 +219,7 @@ print(table(design_50$catalyst, design_50$mixing))
 ```
 
 > [!NOTE]
-> Replication means **independent experimental units**, not repeatedly recording the same underlying unit as though the readings were independent. The experimental design determines what counts as a replicate.
+> For demonstration, we use `expand.grid()` and `rep()` to quickly create a table with five replicates for each factor combination. In a real experiment, replicates must represent independent experimental units.
 
 ---
 
@@ -203,12 +237,10 @@ $$
 | $j$ | Level of factor $A$ | Catalyst $j=1$: Platinum |
 | $k$ | Level of factor $B$ | Mixing $k=1$: Stirred |
 
-For example, in textbook Table 14.7:
+For example, when $X$ represents yield (%) in chemical synthesis:
 
 - $X_{111}=11.1$ is **replicate 1**, **Platinum**, **Stirred**.
-- $X_{211}=11.7$ is **replicate 2**, **Platinum**, **Stirred**.
 - $X_{121}=15.9$ is **replicate 1**, **Palladium**, **Stirred**.
-- $X_{112}=12.8$ is **replicate 1**, **Platinum**, **Ultrasonic**.
 
 The terms of the model are:
 
@@ -223,19 +255,6 @@ In plain language:
 > **Observed yield = overall mean + catalyst effect + mixing effect + interaction + replicate-to-replicate error.**
 
 An interaction means that the effect of changing the mixing method **depends on which catalyst is used**. Without an interaction, effects are additive.
-
-## Means and dot notation
-
-A bar indicates an average; a **dot** in a subscript means average over that index.
-
-| Symbol | Meaning |
-|---|---|
-| $\bar X_{\cdot jk}$ | Mean across replicates $i$ for catalyst $j$, mixing $k$ (cell mean) |
-| $\bar X_{\cdot j\cdot}$ | Mean across replicates and mixing methods for catalyst $j$ |
-| $\bar X_{\cdot\cdot k}$ | Mean across replicates and catalysts for mixing method $k$ |
-| $\bar X_{\cdot\cdot\cdot}$ | Grand mean across all observations |
-
-For example, $\bar X_{\cdot 11}=10.80$ averages the five Platinum–Stirred measurements, and $\bar X_{\cdot 1\cdot}=11.73$ averages all ten Platinum measurements across the two mixing methods. These are ordinary observation-weighted averages; the design is balanced here.
 
 With the usual constraints on the effects, ANOVA decomposes variation as
 
@@ -253,7 +272,17 @@ For a **balanced** $a\times b$ design with $r$ replicates per combination:
 | Residual/error | $ab(r-1)$ | $MS_E=SS_E/[ab(r-1)]$ | — |
 | Total | $abr-1$ | — | — |
 
-These F-tests use the standard **independent, equal-variance, fixed-effects** ANOVA assumptions. Designs with random factors or correlated measurements require different error structures.
+### Assumptions of two-way ANOVA
+
+As in one-way ANOVA, the classical two-way ANOVA assumes that the random errors $\varepsilon_{ijk}$ are **independent, normally distributed, and have the same variance** across all factor combinations:
+
+$$
+\boxed{\varepsilon_{ijk}\sim N(0,\sigma^2)}
+$$
+
+This means that observations are normally distributed around **their respective factor-combination (cell) means**, with a common variance $\sigma^2$.
+
+Normality is assumed for the **random errors within each cell**, not for the combined observations across all cells. These assumptions allow us to use the F-distribution for hypothesis testing in the standard fixed-effects ANOVA model.
 
 ## Formula notation in R
 
@@ -261,7 +290,7 @@ These F-tests use the standard **independent, equal-variance, fixed-effects** AN
 # Main effects only (additive model; assumes no interaction)
 yield ~ catalyst + mixing
 
-# Interaction term alone
+# Interaction term alone (not usually a complete ANOVA model)
 yield ~ catalyst:mixing
 
 # Main effects and interaction (full factorial model)
@@ -287,7 +316,7 @@ If interaction is important, the average main effect may conceal the scientifica
 
 # 4. Example 1: catalyst and mixing method
 
-**Source:** Rowe, Chapter 14, Table 14.7 (p. 190) and ANOVA Table 14.10 (p. 193).
+**Source:** Rowe, Chapter 14.
 
 **Scientific question:** Does drug-synthesis yield (%) depend on the catalyst, mixing method, or their interaction?
 
@@ -419,19 +448,18 @@ The F-statistics, degrees of freedom, and p-values come from `summary(fit)`; the
 
 ---
 
-# 5. Interpreting main effects and interaction
+# 5. Understanding main effects and interaction
 
-An **interaction** is present when changing one factor produces different effects at different levels of another factor.
+A **main effect** describes how the mean response changes with one factor, averaged across the levels of the other factor. An **interaction** occurs when the effect of one factor depends on the level of the other.
 
-For Example 1, the effect of changing from stirred to ultrasonic mixing is:
+In Example 1, ultrasonication increases mean yield by **1.86, 2.36, 2.72, 2.38, and 1.98 percentage points** for the five catalysts. These increases are similar, with an average of **2.26 percentage points**. This suggests an approximately **additive** effect: ultrasonication improves yield by roughly the same amount for each catalyst. The interaction F-test finds no statistically significant evidence that these increases differ.
 
-$$
-\Delta_j=\bar X_{\cdot j2}-\bar X_{\cdot j1}.
-$$
+An **interaction plot** helps visualize this pattern. It connects the two mixing-method means for each catalyst:
 
-Here $k=1$ means Stirred and $k=2$ means Ultrasonic. The differences (1.86, 2.36, 2.72, 2.38, 1.98) are similar, and the interaction F-test is non-significant. Thus, the experiment is **consistent with** an approximately common mixing effect of 2.26 yield percentage points.
+- **Approximately parallel lines** suggest similar mixing effects across catalysts (little interaction).
+- **Different slopes or crossing lines** suggest that the mixing effect depends on the catalyst (interaction).
 
-An **interaction plot** shows cell means. If the effect is additive, lines are approximately parallel. If the effect changes across factor levels, lines are not parallel. These plots are **descriptive**; statistical inference requires the appropriate test and assumptions.
+The plot describes the observed data; the ANOVA interaction test evaluates whether the differences provide statistical evidence of interaction.
 
 ### R: interaction plot for Example 1
 
@@ -457,14 +485,11 @@ print(data.frame(catalyst, increase))
 cat("Average improvement =", mean(increase), "percentage points\n")
 ```
 
-> [!IMPORTANT]
-> **Main effect vs interaction:** A main effect describes an average difference across the other factor's levels (for a balanced design). An interaction asks whether those **differences themselves differ**. When a meaningful interaction exists, report effects **within each level** rather than assuming there is one universal treatment effect.
-
 ---
 
 # 6. Example 2: tablet strength with interaction
 
-**Source:** Rowe, Chapter 14, Table 14.12 (p. 195) and Table 14.13 (p. 196).
+**Source:** Rowe, Chapter 14.
 
 **Scientific question:** How do punch design (A, B, C) and compression force (low, high) affect the tensile strength (MPa) of tablets?
 
@@ -620,11 +645,7 @@ For example, suppose gene expression depends on three factors:
 - Genotype: wild type vs mutant (**2 levels**)
 - Sex: female vs male (**2 levels**)
 
-There are $2\times2\times2=8$ cells. A full model is:
-
-$$
-X=\mu+A+B+C+A:B+A:C+B:C+A:B:C+\varepsilon.
-$$
+There are $2\times2\times2=8$ factor combinations (cells). The full model includes the three main effects, all three two-factor interactions, and the three-factor interaction.
 
 In R:
 
@@ -676,51 +697,163 @@ For the standard fixed-effects ANOVA models in this lecture, check:
 4. **Correct specification:** include scientifically important interactions; check whether all factor combinations were observed.
 5. **Balanced versus unbalanced data:** equal cell sizes make the traditional sums-of-squares decomposition simple. Unbalanced designs can still be analyzed with linear models, but the hypothesis tested by a reported ANOVA table depends on the sums-of-squares convention, factor coding, and design; sequential (Type I) tests can depend on term order.
 
-If assumptions are seriously violated, possible alternatives include transforming the response, heteroscedasticity-robust models, generalized linear models for counts/proportions, or mixed models for clustered/repeated observations. **Welch's one-way ANOVA** from Lecture 05 does not automatically provide a general solution for all two-way unequal-variance designs.
+If ANOVA assumptions are seriously violated, alternative statistical methods may be needed. **Welch's ANOVA**, introduced in Lecture 05, handles unequal variances in one-way ANOVA but is **not directly applicable to factorial ANOVA with two or more factors**. Such designs require other methods that account for unequal variances.
 
-### R: examine diagnostic plots for the tablet example
+### Observed values, fitted values, and residuals
+
+In two-way ANOVA, each observation belongs to a particular combination of factor levels (a **cell**).
+
+For example, Punch A at low compression force has six observed tablet strengths:
+
+$$
+4.00,\ 4.79,\ 5.50,\ 5.15,\ 5.26,\ 6.55.
+$$
+
+Their mean is
+
+$$
+\bar X=\frac{4.00+4.79+5.50+5.15+5.26+6.55}{6}
+=5.208\text{ MPa}.
+$$
+
+In our two-way ANOVA model with interaction, the **fitted value** for each observation is the mean of its corresponding cell.
+
+The **residual** is the difference between an observed value and its fitted value:
+
+$$
+\boxed{\text{Residual}=\text{Observed value}-\text{Fitted value}}
+$$
+
+For the first observation (4.00 MPa):
+
+$$
+\text{Residual}=4.00-5.208=-1.208\text{ MPa}.
+$$
+
+Thus, the fitted value represents the mean strength for that experimental condition, while the residual represents the variation of an individual observation around that mean.
+
+In R:
 
 ```r
-# 07_Diagnostics.R — standalone, base R
+# Fitted values (cell means)
+fitted(fit)
+
+# Residuals (observed - fitted)
+resid(fit)
+```
+
+We can now examine these residuals to check whether the ANOVA assumptions are reasonable.
+
+### R: Diagnostic plots for the tablet example
+
+We use three diagnostic plots to check whether the assumptions of two-way ANOVA are reasonable.
+
+First, prepare the data and fit the ANOVA model. Then run each diagnostic plot separately.
+
+#### 1. Prepare the data and fit the ANOVA model
+
+```r
+# 07_Diagnostics.R — base R
+
 low <- list(
   A = c(4.00, 4.79, 5.50, 5.15, 5.26, 6.55),
   B = c(6.49, 8.35, 6.40, 6.37, 6.86, 8.08),
   C = c(7.92, 8.15, 7.60, 9.64, 9.98, 9.23)
 )
+
 high <- list(
   A = c(4.90, 4.90, 5.04, 6.93, 7.13, 5.82),
   B = c(9.63, 9.67, 8.72, 8.08, 10.25, 8.10),
   C = c(14.60, 13.81, 13.20, 14.62, 13.77, 13.18)
 )
+
 make_rows <- function(group, force_label) {
-  data.frame(punch = rep(names(group), each = 6),
-             force = force_label, strength = unlist(group, use.names = FALSE))
+  data.frame(
+    punch = rep(names(group), each = 6),
+    force = force_label,
+    strength = unlist(group, use.names = FALSE)
+  )
 }
-df <- rbind(make_rows(low, "Low"), make_rows(high, "High"))
+
+df <- rbind(
+  make_rows(low, "Low"),
+  make_rows(high, "High")
+)
+
 df$punch <- factor(df$punch)
 df$force <- factor(df$force)
+
 fit <- aov(strength ~ punch * force, data = df)
-
-# Residuals against fitted values
-plot(fitted(fit), resid(fit), pch = 16,
-     xlab = "Fitted strength", ylab = "Residual")
-abline(h = 0, lty = 2)
-
-# Normal Q-Q plot of residuals
-qqnorm(resid(fit))
-qqline(resid(fit))
-
-# Examine spread within each factor combination
-df$cell <- interaction(df$punch, df$force, sep = "/")
-boxplot(strength ~ cell, data = df,
-        xlab = "Punch / Force", ylab = "Strength (MPa)")
 ```
 
-Do not use a non-significant normality or variance test as proof that assumptions hold. Combine knowledge of the experimental design with graphical checks and an assessment of sample size.
+#### 2. Residuals versus fitted values
+
+**Purpose:** Examine whether residual variability is approximately constant across fitted values.
+
+```r
+plot(
+  fitted(fit), resid(fit),
+  pch = 16,
+  xlab = "Fitted strength (MPa)",
+  ylab = "Residual (MPa)",
+  main = "Residuals vs Fitted Values"
+)
+
+abline(h = 0, lty = 2)
+```
+In this two-way ANOVA model, fitted(fit) gives the mean of each punch × force combination, while resid(fit) gives each observation minus its corresponding cell mean. The plot compares residual variability across all six experimental conditions.
+
+**Interpretation:** Residuals should be scattered around zero with approximately constant vertical spread. A funnel-shaped pattern may indicate unequal variances.
+
+#### 3. Normal Q-Q plot
+
+**Purpose:** Examine whether residuals are approximately normally distributed.
+
+```r
+qqnorm(
+  resid(fit),
+  main = "Normal Q-Q Plot"
+)
+
+qqline(resid(fit))
+```
+
+**Interpretation:** Points should approximately follow the straight reference line. Systematic departures from this line may indicate non-normality. In this example, the Q-Q plot shows a mildly S-shaped pattern, suggesting some departure from normality. However, most points remain reasonably close to the reference line. This mild deviation does not necessarily invalidate the ANOVA results.
+
+
+#### 4. Boxplots by factor combination
+
+**Purpose:** Compare variability among the six punch × force combinations.
+
+```r
+df$cell <- interaction(
+  df$punch,
+  df$force,
+  sep = "/"
+)
+
+boxplot(
+  strength ~ cell,
+  data = df,
+  xlab = "Punch / Force",
+  ylab = "Strength (MPa)",
+  main = "Tablet Strength by Experimental Condition"
+)
+```
+
+**Interpretation:** The six groups may have different mean strengths, but their within-group variability should be reasonably similar. Large differences in box or whisker lengths may indicate unequal variances.
+
+### What do these plots tell us?
+
+Together, these plots help identify possible violations of the **normality and equal-variance assumptions** of two-way ANOVA.
+
+The **independence assumption** cannot be established from these plots; it must be assessed from how the experiment was designed and the measurements were collected.
+
+Since there are only six observations per factor combination, these graphical checks are approximate rather than definitive.
 
 ---
 
-# 9. Choosing and reporting the model
+# 9. Choosing an ANOVA model
 
 | Experimental question | Appropriate starting point | R formula/function |
 |---|---|---|

@@ -107,6 +107,12 @@ id="toc-lecture-06-analysis-of-variance-beyond-one-way-anova">Lecture 06
 id="toc-recall-one-way-or-one-factor-anova">1. Recall: one-way (or
 one-factor) ANOVA</a>
 <ul>
+<li><a href="#decomposing-an-observation-into-deviations"
+id="toc-decomposing-an-observation-into-deviations">Decomposing an
+observation into deviations</a></li>
+<li><a href="#connection-to-the-normality-assumption"
+id="toc-connection-to-the-normality-assumption">Connection to the
+normality assumption</a></li>
 <li><a href="#recall-in-r" id="toc-recall-in-r">Recall in R</a></li>
 </ul></li>
 <li><a href="#factors-levels-and-factorial-experiments"
@@ -121,8 +127,9 @@ R</a></li>
 id="toc-two-way-or-two-factor-anova-the-statistical-model">3. Two-way
 (or two-factor) ANOVA: the statistical model</a>
 <ul>
-<li><a href="#means-and-dot-notation"
-id="toc-means-and-dot-notation">Means and dot notation</a></li>
+<li><a href="#assumptions-of-two-way-anova"
+id="toc-assumptions-of-two-way-anova">Assumptions of two-way
+ANOVA</a></li>
 <li><a href="#formula-notation-in-r"
 id="toc-formula-notation-in-r">Formula notation in R</a></li>
 <li><a href="#three-null-hypotheses"
@@ -149,9 +156,9 @@ id="toc-interpreting-and-reporting-the-anova-results">Interpreting and
 reporting the ANOVA results</a></li>
 </ul></li>
 </ul></li>
-<li><a href="#interpreting-main-effects-and-interaction"
-id="toc-interpreting-main-effects-and-interaction">5. Interpreting main
-effects and interaction</a>
+<li><a href="#understanding-main-effects-and-interaction"
+id="toc-understanding-main-effects-and-interaction">5. Understanding
+main effects and interaction</a>
 <ul>
 <li><a href="#r-interaction-plot-for-example-1"
 id="toc-r-interaction-plot-for-example-1">R: interaction plot for
@@ -190,13 +197,18 @@ three-factor experiment</a></li>
 id="toc-assumptions-and-model-checking">8. Assumptions and model
 checking</a>
 <ul>
-<li><a href="#r-examine-diagnostic-plots-for-the-tablet-example"
-id="toc-r-examine-diagnostic-plots-for-the-tablet-example">R: examine
-diagnostic plots for the tablet example</a></li>
+<li><a href="#observed-values-fitted-values-and-residuals"
+id="toc-observed-values-fitted-values-and-residuals">Observed values,
+fitted values, and residuals</a></li>
+<li><a href="#r-diagnostic-plots-for-the-tablet-example"
+id="toc-r-diagnostic-plots-for-the-tablet-example">R: Diagnostic plots
+for the tablet example</a></li>
+<li><a href="#what-do-these-plots-tell-us"
+id="toc-what-do-these-plots-tell-us">What do these plots tell
+us?</a></li>
 </ul></li>
-<li><a href="#choosing-and-reporting-the-model"
-id="toc-choosing-and-reporting-the-model">9. Choosing and reporting the
-model</a></li>
+<li><a href="#choosing-an-anova-model"
+id="toc-choosing-an-anova-model">9. Choosing an ANOVA model</a></li>
 </ul>
 </nav>
 <table style="width:100%; border:none;">
@@ -272,9 +284,9 @@ doses?</strong></p>
 test this question.</p>
 <p>Lecture 05 used <strong><span class="math inline">\(X_{ij}\)</span>
 for an individual measurement</strong>, where <strong><span
-class="math inline">\(i\)</span> is the observation number</strong> and
-<strong><span class="math inline">\(j\)</span> is the treatment-group
-number</strong>. We keep exactly that convention in Lecture 06.</p>
+class="math inline">\(i\)</span> (row index) is the observation
+number</strong> and <strong><span class="math inline">\(j\)</span>
+(column index) is the treatment-group number</strong>.</p>
 <p>Recall the enzyme-activity measurements from Lecture 05:</p>
 <table>
 <colgroup>
@@ -341,55 +353,13 @@ class="math inline">\(j=3\)</span>)</th>
 </table>
 <p>Here <span class="math inline">\(X_{ij}\)</span> means <strong>the
 measurement in row <span class="math inline">\(i\)</span>, column <span
-class="math inline">\(j\)</span></strong>:</p>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Where to look in the table</th>
-<th style="text-align: right;">Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="math inline">\(X_{11}\)</span></td>
-<td>Observation 1, Control</td>
-<td style="text-align: right;">10.2</td>
-</tr>
-<tr>
-<td><span class="math inline">\(X_{21}\)</span></td>
-<td>Observation 2, Control</td>
-<td style="text-align: right;">11.4</td>
-</tr>
-<tr>
-<td><span class="math inline">\(X_{12}\)</span></td>
-<td>Observation 1, Low dose</td>
-<td style="text-align: right;">11.0</td>
-</tr>
-<tr>
-<td><span class="math inline">\(X_{32}\)</span></td>
-<td>Observation 3, Low dose</td>
-<td style="text-align: right;">11.8</td>
-</tr>
-<tr>
-<td><span class="math inline">\(X_{13}\)</span></td>
-<td>Observation 1, High dose</td>
-<td style="text-align: right;">13.1</td>
-</tr>
-<tr>
-<td><span class="math inline">\(X_{63}\)</span></td>
-<td>Observation 6, High dose</td>
-<td style="text-align: right;">14.1</td>
-</tr>
-</tbody>
-</table>
-<p><strong>The subscripts are labels, not multiplication.</strong> Thus
-<span class="math inline">\(X_{32}=11.8\)</span> is the third
-observation in the second treatment group.</p>
+class="math inline">\(j\)</span></strong>: Thus <span
+class="math inline">\(X_{32}=11.8\)</span> is the third observation in
+the second treatment group.</p>
 <p>Each group has its own mean, written <span class="math inline">\(\bar
 X_j\)</span>. For example, <span class="math inline">\(\bar
-X_1=11.0833\)</span> is the Control mean. The <strong>grand
-mean</strong> over all 18 measurements is <span
+X_1=11.0833\)</span> is the Control mean.</p>
+<p>The <strong>grand mean</strong> over all 18 measurements is <span
 class="math inline">\(\bar X=12.3722\)</span>.</p>
 <p>A one-way ANOVA model describes each measurement as</p>
 <p><span class="math display">\[
@@ -408,37 +378,78 @@ baseline.</li>
 for observation <span class="math inline">\(i\)</span> in group <span
 class="math inline">\(j\)</span>.</li>
 </ul>
-<p><strong>Worked decomposition:</strong> For the first Control
-measurement, <span class="math inline">\(X_{11}=10.2\)</span>:</p>
+<h3 id="decomposing-an-observation-into-deviations">Decomposing an
+observation into deviations</h3>
+<p>Recall that ANOVA separates variation into
+<strong>between-group</strong> and <strong>within-group</strong>
+components.</p>
+<p>For the first Control measurement, <span
+class="math inline">\(X_{11}=10.2\)</span>, we can obtain this
+decomposition by <strong>adding and subtracting the Control group mean
+(<span class="math inline">\(11.0833\)</span>) and the grand mean (<span
+class="math inline">\(12.3722\)</span>)</strong>:</p>
 <p><span class="math display">\[
 \begin{aligned}
-10.2
-&amp;= \underbrace{12.3722}_{\text{sample grand mean}}
-+ \underbrace{(11.0833-12.3722)}_{\text{estimated Control effect}}\\
-&amp;\quad+\underbrace{(10.2-11.0833)}_{\text{observed residual}}\\
+X_{11}
+&amp;=10.2\\
+&amp;=10.2-11.0833+11.0833-12.3722+12.3722\\
+&amp;=\underbrace{12.3722}_{\text{grand mean}}
++\underbrace{(11.0833-12.3722)}_{\text{between-group deviation}}\\
+&amp;\quad+\underbrace{(10.2-11.0833)}_{\text{within-group deviation}}\\
 &amp;=12.3722-1.2889-0.8833.
 \end{aligned}
 \]</span></p>
-<p>This is an <strong>exact sample-data decomposition</strong> using
-estimates of the unknown model parameters. It connects the model
-directly to the <strong>between-group</strong> and
-<strong>within-group</strong> deviations calculated in Lecture 05. In
-the model, random errors are assumed independent with mean zero and
-common variance; normality supports the classical small-sample
-F-test.</p>
+<p>Thus, every observation can be expressed as</p>
+<p><span class="math display">\[
+\boxed{
+X_{ij}=\bar X+(\bar X_j-\bar X)+(X_{ij}-\bar X_j)
+}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\bar X\)</span> is the sample grand
+mean.</li>
+<li><span class="math inline">\(\bar X_j-\bar X\)</span> is the
+deviation of group <span class="math inline">\(j\)</span>’s mean from
+the grand mean (<strong>between-group deviation</strong>).</li>
+<li><span class="math inline">\(X_{ij}-\bar X_j\)</span> is the
+deviation of an observation from its group mean (<strong>within-group
+deviation</strong>, or observed residual).</li>
+</ul>
+<p>This is an exact mathematical identity. Squaring and summing these
+deviations gives the familiar one-way ANOVA decomposition:</p>
+<p><span class="math display">\[
+SS_{\mathrm{total}}=SS_{\mathrm{between}}+SS_{\mathrm{within}}.
+\]</span></p>
+<h3 id="connection-to-the-normality-assumption">Connection to the
+normality assumption</h3>
+<p>The corresponding statistical model is</p>
+<p><span class="math display">\[
+X_{ij}=\mu+\alpha_j+\varepsilon_{ij},
+\]</span></p>
+<p>where <span class="math inline">\(\mu+\alpha_j=\mu_j\)</span> is the
+population mean of group <span class="math inline">\(j\)</span>.</p>
+<p>For classical one-way ANOVA, we assume that the random errors are
+independent and follow</p>
+<p><span class="math display">\[
+\boxed{
+\varepsilon_{ij}\sim N(0,\sigma^2)
+}
+\]</span></p>
+<p>This means that observations fluctuate normally around <strong>their
+respective population group means</strong>, with the same variance <span
+class="math inline">\(\sigma^2\)</span>. Normality is assumed for the
+errors within groups, not for differences between group means.</p>
+<p>The decomposition into deviations is an algebraic identity; the
+normality assumption is an additional condition used to justify the
+classical ANOVA F-test.</p>
 <p>The null hypothesis remains exactly the one used in Lecture 05:</p>
 <p><span class="math display">\[
 H_0:\mu_1=\mu_2=\cdots=\mu_k.
 \]</span></p>
 <p>Equivalently, with the usual constraint that the group effects sum to
 zero, <span class="math inline">\(H_0\)</span> says that all <span
-class="math inline">\(\alpha_j=0\)</span>. This new notation
-<strong>describes the same one-way ANOVA</strong>, rather than
-introducing a new statistical test.</p>
-<p>ANOVA partitions the total sum of squares:</p>
-<p><span class="math display">\[
-SS_{\mathrm{total}}=SS_{\mathrm{between}}+SS_{\mathrm{within}}.
-\]</span></p>
+class="math inline">\(\alpha_j=0\)</span>.</p>
 <p>The statistic is</p>
 <p><span class="math display">\[
 F=\frac{MS_{\mathrm{between}}}{MS_{\mathrm{within}}}.
@@ -463,8 +474,9 @@ such as Tukey’s HSD, address that question.</p>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit))</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">TukeyHSD</span>(fit))</span></code></pre></div>
 <p><strong>Question:</strong> What if enzyme activity also depends on
-genotype? Would the treatment have the same effect in every genotype?
-One-way ANOVA cannot directly answer that second question.</p>
+another factor such as genotype? Would the treatment have the same
+effect in every genotype? One-way ANOVA cannot directly answer that
+second question.</p>
 <hr />
 <h1 id="factors-levels-and-factorial-experiments">2. Factors, levels,
 and factorial experiments</h1>
@@ -533,10 +545,10 @@ R</h3>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(design_50) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(design_50<span class="sc">$</span>catalyst, design_50<span class="sc">$</span>mixing))</span></code></pre></div>
 <blockquote>
-<p>[!NOTE] Replication means <strong>independent experimental
-units</strong>, not repeatedly recording the same underlying unit as
-though the readings were independent. The experimental design determines
-what counts as a replicate.</p>
+<p>[!NOTE] For demonstration, we use <code>expand.grid()</code> and
+<code>rep()</code> to quickly create a table with five replicates for
+each factor combination. In a real experiment, replicates must represent
+independent experimental units.</p>
 </blockquote>
 <hr />
 <h1 id="two-way-or-two-factor-anova-the-statistical-model">3. Two-way
@@ -579,20 +591,15 @@ group index</strong> while continuing to put the
 </tr>
 </tbody>
 </table>
-<p>For example, in textbook Table 14.7:</p>
+<p>For example, when <span class="math inline">\(X\)</span> represents
+yield (%) in chemical synthesis:</p>
 <ul>
 <li><span class="math inline">\(X_{111}=11.1\)</span> is
 <strong>replicate 1</strong>, <strong>Platinum</strong>,
 <strong>Stirred</strong>.</li>
-<li><span class="math inline">\(X_{211}=11.7\)</span> is
-<strong>replicate 2</strong>, <strong>Platinum</strong>,
-<strong>Stirred</strong>.</li>
 <li><span class="math inline">\(X_{121}=15.9\)</span> is
 <strong>replicate 1</strong>, <strong>Palladium</strong>,
 <strong>Stirred</strong>.</li>
-<li><span class="math inline">\(X_{112}=12.8\)</span> is
-<strong>replicate 1</strong>, <strong>Platinum</strong>,
-<strong>Ultrasonic</strong>.</li>
 </ul>
 <p>The terms of the model are:</p>
 <ul>
@@ -618,49 +625,6 @@ effect + interaction + replicate-to-replicate error.</strong></p>
 <p>An interaction means that the effect of changing the mixing method
 <strong>depends on which catalyst is used</strong>. Without an
 interaction, effects are additive.</p>
-<h2 id="means-and-dot-notation">Means and dot notation</h2>
-<p>A bar indicates an average; a <strong>dot</strong> in a subscript
-means average over that index.</p>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="math inline">\(\bar X_{\cdot jk}\)</span></td>
-<td>Mean across replicates <span class="math inline">\(i\)</span> for
-catalyst <span class="math inline">\(j\)</span>, mixing <span
-class="math inline">\(k\)</span> (cell mean)</td>
-</tr>
-<tr>
-<td><span class="math inline">\(\bar X_{\cdot j\cdot}\)</span></td>
-<td>Mean across replicates and mixing methods for catalyst <span
-class="math inline">\(j\)</span></td>
-</tr>
-<tr>
-<td><span class="math inline">\(\bar X_{\cdot\cdot k}\)</span></td>
-<td>Mean across replicates and catalysts for mixing method <span
-class="math inline">\(k\)</span></td>
-</tr>
-<tr>
-<td><span class="math inline">\(\bar X_{\cdot\cdot\cdot}\)</span></td>
-<td>Grand mean across all observations</td>
-</tr>
-</tbody>
-</table>
-<p>For example, <span class="math inline">\(\bar X_{\cdot
-11}=10.80\)</span> averages the five Platinum–Stirred measurements, and
-<span class="math inline">\(\bar X_{\cdot 1\cdot}=11.73\)</span>
-averages all ten Platinum measurements across the two mixing methods.
-These are ordinary observation-weighted averages; the design is balanced
-here.</p>
 <p>With the usual constraints on the effects, ANOVA decomposes variation
 as</p>
 <p><span class="math display">\[
@@ -723,14 +687,26 @@ class="math inline">\(abr-1\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>These F-tests use the standard <strong>independent, equal-variance,
-fixed-effects</strong> ANOVA assumptions. Designs with random factors or
-correlated measurements require different error structures.</p>
+<h3 id="assumptions-of-two-way-anova">Assumptions of two-way ANOVA</h3>
+<p>As in one-way ANOVA, the classical two-way ANOVA assumes that the
+random errors <span class="math inline">\(\varepsilon_{ijk}\)</span> are
+<strong>independent, normally distributed, and have the same
+variance</strong> across all factor combinations:</p>
+<p><span class="math display">\[
+\boxed{\varepsilon_{ijk}\sim N(0,\sigma^2)}
+\]</span></p>
+<p>This means that observations are normally distributed around
+<strong>their respective factor-combination (cell) means</strong>, with
+a common variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Normality is assumed for the <strong>random errors within each
+cell</strong>, not for the combined observations across all cells. These
+assumptions allow us to use the F-distribution for hypothesis testing in
+the standard fixed-effects ANOVA model.</p>
 <h2 id="formula-notation-in-r">Formula notation in R</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects only (additive model; assumes no interaction)</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>yield <span class="sc">~</span> catalyst <span class="sc">+</span> mixing</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction term alone</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction term alone (not usually a complete ANOVA model)</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>yield <span class="sc">~</span> catalyst<span class="sc">:</span>mixing</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects and interaction (full factorial model)</span></span>
@@ -759,8 +735,7 @@ scientifically relevant differences. Interpret the interaction
 <hr />
 <h1 id="example-1-catalyst-and-mixing-method">4. Example 1: catalyst and
 mixing method</h1>
-<p><strong>Source:</strong> Rowe, Chapter 14, Table 14.7 (p. 190) and
-ANOVA Table 14.10 (p. 193).</p>
+<p><strong>Source:</strong> Rowe, Chapter 14.</p>
 <p><strong>Scientific question:</strong> Does drug-synthesis yield (%)
 depend on the catalyst, mixing method, or their interaction?</p>
 <p>Five separate syntheses were reported for <strong>each</strong>
@@ -1081,26 +1056,30 @@ catalysts studied.</p>
 <code>summary(fit)</code>; the average yield difference comes from the
 group means calculated with <code>aggregate()</code>.</p>
 <hr />
-<h1 id="interpreting-main-effects-and-interaction">5. Interpreting main
-effects and interaction</h1>
-<p>An <strong>interaction</strong> is present when changing one factor
-produces different effects at different levels of another factor.</p>
-<p>For Example 1, the effect of changing from stirred to ultrasonic
-mixing is:</p>
-<p><span class="math display">\[
-\Delta_j=\bar X_{\cdot j2}-\bar X_{\cdot j1}.
-\]</span></p>
-<p>Here <span class="math inline">\(k=1\)</span> means Stirred and <span
-class="math inline">\(k=2\)</span> means Ultrasonic. The differences
-(1.86, 2.36, 2.72, 2.38, 1.98) are similar, and the interaction F-test
-is non-significant. Thus, the experiment is <strong>consistent
-with</strong> an approximately common mixing effect of 2.26 yield
-percentage points.</p>
-<p>An <strong>interaction plot</strong> shows cell means. If the effect
-is additive, lines are approximately parallel. If the effect changes
-across factor levels, lines are not parallel. These plots are
-<strong>descriptive</strong>; statistical inference requires the
-appropriate test and assumptions.</p>
+<h1 id="understanding-main-effects-and-interaction">5. Understanding
+main effects and interaction</h1>
+<p>A <strong>main effect</strong> describes how the mean response
+changes with one factor, averaged across the levels of the other factor.
+An <strong>interaction</strong> occurs when the effect of one factor
+depends on the level of the other.</p>
+<p>In Example 1, ultrasonication increases mean yield by <strong>1.86,
+2.36, 2.72, 2.38, and 1.98 percentage points</strong> for the five
+catalysts. These increases are similar, with an average of <strong>2.26
+percentage points</strong>. This suggests an approximately
+<strong>additive</strong> effect: ultrasonication improves yield by
+roughly the same amount for each catalyst. The interaction F-test finds
+no statistically significant evidence that these increases differ.</p>
+<p>An <strong>interaction plot</strong> helps visualize this pattern. It
+connects the two mixing-method means for each catalyst:</p>
+<ul>
+<li><strong>Approximately parallel lines</strong> suggest similar mixing
+effects across catalysts (little interaction).</li>
+<li><strong>Different slopes or crossing lines</strong> suggest that the
+mixing effect depends on the catalyst (interaction).</li>
+</ul>
+<p>The plot describes the observed data; the ANOVA interaction test
+evaluates whether the differences provide statistical evidence of
+interaction.</p>
 <h3 id="r-interaction-plot-for-example-1">R: interaction plot for
 Example 1</h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 04_Catalyst_interaction.R — standalone, base R</span></span>
@@ -1122,19 +1101,10 @@ Example 1</h3>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>increase <span class="ot">&lt;-</span> ultra <span class="sc">-</span> stir</span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(catalyst, increase))</span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Average improvement =&quot;</span>, <span class="fu">mean</span>(increase), <span class="st">&quot;percentage points</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
-<blockquote>
-<p>[!IMPORTANT] <strong>Main effect vs interaction:</strong> A main
-effect describes an average difference across the other factor’s levels
-(for a balanced design). An interaction asks whether those
-<strong>differences themselves differ</strong>. When a meaningful
-interaction exists, report effects <strong>within each level</strong>
-rather than assuming there is one universal treatment effect.</p>
-</blockquote>
 <hr />
 <h1 id="example-2-tablet-strength-with-interaction">6. Example 2: tablet
 strength with interaction</h1>
-<p><strong>Source:</strong> Rowe, Chapter 14, Table 14.12 (p. 195) and
-Table 14.13 (p. 196).</p>
+<p><strong>Source:</strong> Rowe, Chapter 14.</p>
 <p><strong>Scientific question:</strong> How do punch design (A, B, C)
 and compression force (low, high) affect the tensile strength (MPa) of
 tablets?</p>
@@ -1439,10 +1409,9 @@ interactions, and one three-factor interaction.</p>
 <li>Sex: female vs male (<strong>2 levels</strong>)</li>
 </ul>
 <p>There are <span class="math inline">\(2\times2\times2=8\)</span>
-cells. A full model is:</p>
-<p><span class="math display">\[
-X=\mu+A+B+C+A:B+A:C+B:C+A:B:C+\varepsilon.
-\]</span></p>
+factor combinations (cells). The full model includes the three main
+effects, all three two-factor interactions, and the three-factor
+interaction.</p>
 <p>In R:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>expression <span class="sc">~</span> treatment <span class="sc">*</span> genotype <span class="sc">*</span> sex</span></code></pre></div>
 <p>The three-way interaction asks whether the <strong>treatment ×
@@ -1503,53 +1472,155 @@ tested by a reported ANOVA table depends on the sums-of-squares
 convention, factor coding, and design; sequential (Type I) tests can
 depend on term order.</li>
 </ol>
-<p>If assumptions are seriously violated, possible alternatives include
-transforming the response, heteroscedasticity-robust models, generalized
-linear models for counts/proportions, or mixed models for
-clustered/repeated observations. <strong>Welch’s one-way ANOVA</strong>
-from Lecture 05 does not automatically provide a general solution for
-all two-way unequal-variance designs.</p>
-<h3 id="r-examine-diagnostic-plots-for-the-tablet-example">R: examine
-diagnostic plots for the tablet example</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 07_Diagnostics.R — standalone, base R</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.00</span>, <span class="fl">4.79</span>, <span class="fl">5.50</span>, <span class="fl">5.15</span>, <span class="fl">5.26</span>, <span class="fl">6.55</span>),</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">6.49</span>, <span class="fl">8.35</span>, <span class="fl">6.40</span>, <span class="fl">6.37</span>, <span class="fl">6.86</span>, <span class="fl">8.08</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">7.92</span>, <span class="fl">8.15</span>, <span class="fl">7.60</span>, <span class="fl">9.64</span>, <span class="fl">9.98</span>, <span class="fl">9.23</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.90</span>, <span class="fl">4.90</span>, <span class="fl">5.04</span>, <span class="fl">6.93</span>, <span class="fl">7.13</span>, <span class="fl">5.82</span>),</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">9.63</span>, <span class="fl">9.67</span>, <span class="fl">8.72</span>, <span class="fl">8.08</span>, <span class="fl">10.25</span>, <span class="fl">8.10</span>),</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">14.60</span>, <span class="fl">13.81</span>, <span class="fl">13.20</span>, <span class="fl">14.62</span>, <span class="fl">13.77</span>, <span class="fl">13.18</span>)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>make_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(group, force_label) {</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">punch =</span> <span class="fu">rep</span>(<span class="fu">names</span>(group), <span class="at">each =</span> <span class="dv">6</span>),</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">force =</span> force_label, <span class="at">strength =</span> <span class="fu">unlist</span>(group, <span class="at">use.names =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">make_rows</span>(low, <span class="st">&quot;Low&quot;</span>), <span class="fu">make_rows</span>(high, <span class="st">&quot;High&quot;</span>))</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>punch <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>punch)</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>force <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>force)</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> punch <span class="sc">*</span> force, <span class="at">data =</span> df)</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals against fitted values</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(fit), <span class="fu">resid</span>(fit), <span class="at">pch =</span> <span class="dv">16</span>,</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Fitted strength&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residual&quot;</span>)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal Q-Q plot of residuals</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(fit))</span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(fit))</span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine spread within each factor combination</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cell <span class="ot">&lt;-</span> <span class="fu">interaction</span>(df<span class="sc">$</span>punch, df<span class="sc">$</span>force, <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>)</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(strength <span class="sc">~</span> cell, <span class="at">data =</span> df,</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Punch / Force&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Strength (MPa)&quot;</span>)</span></code></pre></div>
-<p>Do not use a non-significant normality or variance test as proof that
-assumptions hold. Combine knowledge of the experimental design with
-graphical checks and an assessment of sample size.</p>
+<p>If ANOVA assumptions are seriously violated, alternative statistical
+methods may be needed. <strong>Welch’s ANOVA</strong>, introduced in
+Lecture 05, handles unequal variances in one-way ANOVA but is
+<strong>not directly applicable to factorial ANOVA with two or more
+factors</strong>. Such designs require other methods that account for
+unequal variances.</p>
+<h3 id="observed-values-fitted-values-and-residuals">Observed values,
+fitted values, and residuals</h3>
+<p>In two-way ANOVA, each observation belongs to a particular
+combination of factor levels (a <strong>cell</strong>).</p>
+<p>For example, Punch A at low compression force has six observed tablet
+strengths:</p>
+<p><span class="math display">\[
+4.00,\ 4.79,\ 5.50,\ 5.15,\ 5.26,\ 6.55.
+\]</span></p>
+<p>Their mean is</p>
+<p><span class="math display">\[
+\bar X=\frac{4.00+4.79+5.50+5.15+5.26+6.55}{6}
+=5.208\text{ MPa}.
+\]</span></p>
+<p>In our two-way ANOVA model with interaction, the <strong>fitted
+value</strong> for each observation is the mean of its corresponding
+cell.</p>
+<p>The <strong>residual</strong> is the difference between an observed
+value and its fitted value:</p>
+<p><span class="math display">\[
+\boxed{\text{Residual}=\text{Observed value}-\text{Fitted value}}
+\]</span></p>
+<p>For the first observation (4.00 MPa):</p>
+<p><span class="math display">\[
+\text{Residual}=4.00-5.208=-1.208\text{ MPa}.
+\]</span></p>
+<p>Thus, the fitted value represents the mean strength for that
+experimental condition, while the residual represents the variation of
+an individual observation around that mean.</p>
+<p>In R:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fitted values (cell means)</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fitted</span>(fit)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals (observed - fitted)</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">resid</span>(fit)</span></code></pre></div>
+<p>We can now examine these residuals to check whether the ANOVA
+assumptions are reasonable.</p>
+<h3 id="r-diagnostic-plots-for-the-tablet-example">R: Diagnostic plots
+for the tablet example</h3>
+<p>We use three diagnostic plots to check whether the assumptions of
+two-way ANOVA are reasonable.</p>
+<p>First, prepare the data and fit the ANOVA model. Then run each
+diagnostic plot separately.</p>
+<h4 id="prepare-the-data-and-fit-the-anova-model">1. Prepare the data
+and fit the ANOVA model</h4>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 07_Diagnostics.R — base R</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.00</span>, <span class="fl">4.79</span>, <span class="fl">5.50</span>, <span class="fl">5.15</span>, <span class="fl">5.26</span>, <span class="fl">6.55</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">6.49</span>, <span class="fl">8.35</span>, <span class="fl">6.40</span>, <span class="fl">6.37</span>, <span class="fl">6.86</span>, <span class="fl">8.08</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">7.92</span>, <span class="fl">8.15</span>, <span class="fl">7.60</span>, <span class="fl">9.64</span>, <span class="fl">9.98</span>, <span class="fl">9.23</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.90</span>, <span class="fl">4.90</span>, <span class="fl">5.04</span>, <span class="fl">6.93</span>, <span class="fl">7.13</span>, <span class="fl">5.82</span>),</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">9.63</span>, <span class="fl">9.67</span>, <span class="fl">8.72</span>, <span class="fl">8.08</span>, <span class="fl">10.25</span>, <span class="fl">8.10</span>),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">14.60</span>, <span class="fl">13.81</span>, <span class="fl">13.20</span>, <span class="fl">14.62</span>, <span class="fl">13.77</span>, <span class="fl">13.18</span>)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>make_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(group, force_label) {</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">punch =</span> <span class="fu">rep</span>(<span class="fu">names</span>(group), <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">force =</span> force_label,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">strength =</span> <span class="fu">unlist</span>(group, <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_rows</span>(low, <span class="st">&quot;Low&quot;</span>),</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">make_rows</span>(high, <span class="st">&quot;High&quot;</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>punch <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>punch)</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>force <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>force)</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> punch <span class="sc">*</span> force, <span class="at">data =</span> df)</span></code></pre></div>
+<h4 id="residuals-versus-fitted-values">2. Residuals versus fitted
+values</h4>
+<p><strong>Purpose:</strong> Examine whether residual variability is
+approximately constant across fitted values.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitted</span>(fit), <span class="fu">resid</span>(fit),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Fitted strength (MPa)&quot;</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Residual (MPa)&quot;</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Residuals vs Fitted Values&quot;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>In this two-way ANOVA model, fitted(fit) gives the mean of each punch
+× force combination, while resid(fit) gives each observation minus its
+corresponding cell mean. The plot compares residual variability across
+all six experimental conditions.</p>
+<p><strong>Interpretation:</strong> Residuals should be scattered around
+zero with approximately constant vertical spread. A funnel-shaped
+pattern may indicate unequal variances.</p>
+<h4 id="normal-q-q-plot">3. Normal Q-Q plot</h4>
+<p><strong>Purpose:</strong> Examine whether residuals are approximately
+normally distributed.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">resid</span>(fit),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Normal Q-Q Plot&quot;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(fit))</span></code></pre></div>
+<p><strong>Interpretation:</strong> Points should approximately follow
+the straight reference line. Systematic departures from this line may
+indicate non-normality. In this example, the Q-Q plot shows a mildly
+S-shaped pattern, suggesting some departure from normality. However,
+most points remain reasonably close to the reference line. This mild
+deviation does not necessarily invalidate the ANOVA results.</p>
+<h4 id="boxplots-by-factor-combination">4. Boxplots by factor
+combination</h4>
+<p><strong>Purpose:</strong> Compare variability among the six punch ×
+force combinations.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cell <span class="ot">&lt;-</span> <span class="fu">interaction</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>punch,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  df<span class="sc">$</span>force,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;/&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  strength <span class="sc">~</span> cell,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Punch / Force&quot;</span>,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Strength (MPa)&quot;</span>,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Tablet Strength by Experimental Condition&quot;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong>Interpretation:</strong> The six groups may have different
+mean strengths, but their within-group variability should be reasonably
+similar. Large differences in box or whisker lengths may indicate
+unequal variances.</p>
+<h3 id="what-do-these-plots-tell-us">What do these plots tell us?</h3>
+<p>Together, these plots help identify possible violations of the
+<strong>normality and equal-variance assumptions</strong> of two-way
+ANOVA.</p>
+<p>The <strong>independence assumption</strong> cannot be established
+from these plots; it must be assessed from how the experiment was
+designed and the measurements were collected.</p>
+<p>Since there are only six observations per factor combination, these
+graphical checks are approximate rather than definitive.</p>
 <hr />
-<h1 id="choosing-and-reporting-the-model">9. Choosing and reporting the
-model</h1>
+<h1 id="choosing-an-anova-model">9. Choosing an ANOVA model</h1>
 <table>
 <colgroup>
 <col style="width: 33%" />

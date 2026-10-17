@@ -1586,3 +1586,12 @@ Select a test by asking **what the scientific question concerns**, how the obser
 
 For each test, report the **scientific question**, **hypotheses**, **test statistic**, **degrees of freedom** (where applicable), **p-value**, **decision at the chosen $\alpha$**, and a conclusion in biological terms. Report uncertainty and effect size where useful. **Failure to reject $H_0$ is not proof of equality.**
 
+
+### Direct statistical tests versus model fitting in R
+
+Some R functions, such as `t.test()` and `chisq.test()`, perform a **statistical test directly**. Others, such as `aov()`, **fit a statistical model** that is stored in an object (commonly named `fit`).
+
+We then use `summary(fit)` to examine the statistical results.
+
+Both approaches can be used for hypothesis testing, but **model fitting provides additional flexibility** for analyzing multiple factors and their interactions, as we will see in Lecture 06.
+

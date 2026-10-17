@@ -324,7 +324,12 @@ using <code>chisq.test()</code></a></li>
 </ul></li>
 <li><a href="#choosing-the-appropriate-test"
 id="toc-choosing-the-appropriate-test">11. Choosing the appropriate
-test</a></li>
+test</a>
+<ul>
+<li><a href="#direct-statistical-tests-versus-model-fitting-in-r"
+id="toc-direct-statistical-tests-versus-model-fitting-in-r">Direct
+statistical tests versus model fitting in R</a></li>
+</ul></li>
 </ul>
 </nav>
 <table style="width:100%; border:none;">
@@ -3134,5 +3139,17 @@ class="math inline">\(\alpha\)</span></strong>, and a conclusion in
 biological terms. Report uncertainty and effect size where useful.
 <strong>Failure to reject <span class="math inline">\(H_0\)</span> is
 not proof of equality.</strong></p>
+<h3 id="direct-statistical-tests-versus-model-fitting-in-r">Direct
+statistical tests versus model fitting in R</h3>
+<p>Some R functions, such as <code>t.test()</code> and
+<code>chisq.test()</code>, perform a <strong>statistical test
+directly</strong>. Others, such as <code>aov()</code>, <strong>fit a
+statistical model</strong> that is stored in an object (commonly named
+<code>fit</code>).</p>
+<p>We then use <code>summary(fit)</code> to examine the statistical
+results.</p>
+<p>Both approaches can be used for hypothesis testing, but <strong>model
+fitting provides additional flexibility</strong> for analyzing multiple
+factors and their interactions, as we will see in Lecture 06.</p>
 </body>
 </html>
