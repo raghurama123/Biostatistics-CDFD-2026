@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lec06</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#lecture-06-analysis-of-variance-beyond-one-way-anova"
+id="toc-lecture-06-analysis-of-variance-beyond-one-way-anova">Lecture 06
+— Analysis of Variance: Beyond One-Way ANOVA</a></li>
+<li><a href="#recall-one-way-or-one-factor-anova"
+id="toc-recall-one-way-or-one-factor-anova">1. Recall: one-way (or
+one-factor) ANOVA</a>
+<ul>
+<li><a href="#recall-in-r" id="toc-recall-in-r">Recall in R</a></li>
+</ul></li>
+<li><a href="#factors-levels-and-factorial-experiments"
+id="toc-factors-levels-and-factorial-experiments">2. Factors, levels,
+and factorial experiments</a>
+<ul>
+<li><a href="#generate-a-factorial-design-in-r"
+id="toc-generate-a-factorial-design-in-r">Generate a factorial design in
+R</a></li>
+</ul></li>
+<li><a href="#two-way-or-two-factor-anova-the-statistical-model"
+id="toc-two-way-or-two-factor-anova-the-statistical-model">3. Two-way
+(or two-factor) ANOVA: the statistical model</a>
+<ul>
+<li><a href="#means-and-dot-notation"
+id="toc-means-and-dot-notation">Means and dot notation</a></li>
+<li><a href="#formula-notation-in-r"
+id="toc-formula-notation-in-r">Formula notation in R</a></li>
+<li><a href="#three-null-hypotheses"
+id="toc-three-null-hypotheses">Three null hypotheses</a></li>
+</ul></li>
+<li><a href="#example-1-catalyst-and-mixing-method"
+id="toc-example-1-catalyst-and-mixing-method">4. Example 1: catalyst and
+mixing method</a>
+<ul>
+<li><a href="#observed-measurements-yield"
+id="toc-observed-measurements-yield">Observed measurements: yield
+(%)</a></li>
+<li><a href="#summary-cell-means" id="toc-summary-cell-means">Summary:
+cell means</a></li>
+<li><a href="#two-way-anova-using-aov"
+id="toc-two-way-anova-using-aov">Two-way ANOVA using
+<code>aov()</code></a>
+<ul>
+<li><a href="#calculate-the-observed-mixing-effect-in-r"
+id="toc-calculate-the-observed-mixing-effect-in-r">Calculate the
+observed mixing effect in R</a></li>
+<li><a href="#interpreting-and-reporting-the-anova-results"
+id="toc-interpreting-and-reporting-the-anova-results">Interpreting and
+reporting the ANOVA results</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#interpreting-main-effects-and-interaction"
+id="toc-interpreting-main-effects-and-interaction">5. Interpreting main
+effects and interaction</a>
+<ul>
+<li><a href="#r-interaction-plot-for-example-1"
+id="toc-r-interaction-plot-for-example-1">R: interaction plot for
+Example 1</a></li>
+</ul></li>
+<li><a href="#example-2-tablet-strength-with-interaction"
+id="toc-example-2-tablet-strength-with-interaction">6. Example 2: tablet
+strength with interaction</a>
+<ul>
+<li><a href="#observed-measurements-tensile-strength-mpa"
+id="toc-observed-measurements-tensile-strength-mpa">Observed
+measurements: tensile strength (MPa)</a></li>
+<li><a href="#summary-means-and-effects-of-force"
+id="toc-summary-means-and-effects-of-force">Summary: means and effects
+of force</a></li>
+<li><a href="#two-way-anova-using-aov-1"
+id="toc-two-way-anova-using-aov-1">Two-way ANOVA using
+<code>aov()</code></a>
+<ul>
+<li><a href="#calculate-punch-specific-force-effects-in-r"
+id="toc-calculate-punch-specific-force-effects-in-r">Calculate
+punch-specific force effects in R</a></li>
+<li><a href="#interpreting-and-reporting-the-anova-results-1"
+id="toc-interpreting-and-reporting-the-anova-results-1">Interpreting and
+reporting the ANOVA results</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#beyond-two-factors" id="toc-beyond-two-factors">7. Beyond
+two factors</a>
+<ul>
+<li><a href="#r-illustrative-three-factor-experiment"
+id="toc-r-illustrative-three-factor-experiment">R: illustrative
+three-factor experiment</a></li>
+</ul></li>
+<li><a href="#assumptions-and-model-checking"
+id="toc-assumptions-and-model-checking">8. Assumptions and model
+checking</a>
+<ul>
+<li><a href="#r-examine-diagnostic-plots-for-the-tablet-example"
+id="toc-r-examine-diagnostic-plots-for-the-tablet-example">R: examine
+diagnostic plots for the tablet example</a></li>
+</ul></li>
+<li><a href="#choosing-and-reporting-the-model"
+id="toc-choosing-and-reporting-the-model">9. Choosing and reporting the
+model</a></li>
+</ul>
+</nav>
+<table style="width:100%; border:none;">
+<tr>
+<td style="width:33%; text-align:left; border:none;">
+<a href="../Lec05/Lec05.html"><strong>← Previous Lecture</strong></a>
+</td>
+<td style="width:34%; text-align:center; border:none;">
+<a href="../"><strong>Home</strong></a>
+</td>
+<td style="width:33%; text-align:right; border:none;">
+<a href="../Lec07/Lec07.html"><strong>Next Lecture →</strong></a>
+</td>
+</tr>
+</table>
+<h1 id="lecture-06-analysis-of-variance-beyond-one-way-anova">Lecture 06
+— Analysis of Variance: Beyond One-Way ANOVA</h1>
+<h1 id="recall-one-way-or-one-factor-anova">1. Recall: one-way (or
+one-factor) ANOVA</h1>
+<p>In Lecture 05, we investigated whether <strong>enzyme activity
+depends on the dose of a treatment</strong>.</p>
+<p>The experiment included three treatment groups:</p>
+<ul>
+<li><strong>Control:</strong> No treatment (zero dose).</li>
+<li><strong>Low dose:</strong> A low concentration of the
+treatment.</li>
+<li><strong>High dose:</strong> A high concentration of the
+treatment.</li>
+</ul>
+<p>Although there are three treatment groups, they represent
+<strong>three levels of the same experimental factor: treatment
+dose</strong>.</p>
+<p>A <strong>factor</strong> is an experimental variable that may
+influence the measured outcome. The different values or categories of
+that factor are called <strong>levels</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>In our experiment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Factor</td>
+<td>Treatment dose</td>
+</tr>
+<tr>
+<td>Levels</td>
+<td>Control, Low dose, High dose</td>
+</tr>
+<tr>
+<td>Number of factors</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Number of levels</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Measured response</td>
+<td>Enzyme activity</td>
+</tr>
+</tbody>
+</table>
+<p>Since we vary only <strong>one factor (treatment dose)</strong>, this
+is called <strong>one-way ANOVA</strong>, regardless of how many levels
+that factor has.</p>
+<p>The scientific question is:</p>
+<p><strong>Does mean enzyme activity differ among the three treatment
+doses?</strong></p>
+<p>One-way ANOVA compares the means of the three independent groups to
+test this question.</p>
+<p>Lecture 05 used <strong><span class="math inline">\(X_{ij}\)</span>
+for an individual measurement</strong>, where <strong><span
+class="math inline">\(i\)</span> is the observation number</strong> and
+<strong><span class="math inline">\(j\)</span> is the treatment-group
+number</strong>. We keep exactly that convention in Lecture 06.</p>
+<p>Recall the enzyme-activity measurements from Lecture 05:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr>
+<th>Observation <span class="math inline">\(i\)</span></th>
+<th style="text-align: right;">Control (<span
+class="math inline">\(j=1\)</span>)</th>
+<th style="text-align: right;">Low dose (<span
+class="math inline">\(j=2\)</span>)</th>
+<th style="text-align: right;">High dose (<span
+class="math inline">\(j=3\)</span>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td style="text-align: right;">10.2</td>
+<td style="text-align: right;">11.0</td>
+<td style="text-align: right;">13.1</td>
+</tr>
+<tr>
+<td>2</td>
+<td style="text-align: right;">11.4</td>
+<td style="text-align: right;">12.6</td>
+<td style="text-align: right;">14.3</td>
+</tr>
+<tr>
+<td>3</td>
+<td style="text-align: right;">10.9</td>
+<td style="text-align: right;">11.8</td>
+<td style="text-align: right;">13.8</td>
+</tr>
+<tr>
+<td>4</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">12.1</td>
+<td style="text-align: right;">14.9</td>
+</tr>
+<tr>
+<td>5</td>
+<td style="text-align: right;">11.3</td>
+<td style="text-align: right;">13.2</td>
+<td style="text-align: right;">12.9</td>
+</tr>
+<tr>
+<td>6</td>
+<td style="text-align: right;">10.7</td>
+<td style="text-align: right;">12.4</td>
+<td style="text-align: right;">14.1</td>
+</tr>
+<tr>
+<td><strong>Group mean</strong></td>
+<td style="text-align: right;"><strong>11.0833</strong></td>
+<td style="text-align: right;"><strong>12.1833</strong></td>
+<td style="text-align: right;"><strong>13.8500</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Here <span class="math inline">\(X_{ij}\)</span> means <strong>the
+measurement in row <span class="math inline">\(i\)</span>, column <span
+class="math inline">\(j\)</span></strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Where to look in the table</th>
+<th style="text-align: right;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(X_{11}\)</span></td>
+<td>Observation 1, Control</td>
+<td style="text-align: right;">10.2</td>
+</tr>
+<tr>
+<td><span class="math inline">\(X_{21}\)</span></td>
+<td>Observation 2, Control</td>
+<td style="text-align: right;">11.4</td>
+</tr>
+<tr>
+<td><span class="math inline">\(X_{12}\)</span></td>
+<td>Observation 1, Low dose</td>
+<td style="text-align: right;">11.0</td>
+</tr>
+<tr>
+<td><span class="math inline">\(X_{32}\)</span></td>
+<td>Observation 3, Low dose</td>
+<td style="text-align: right;">11.8</td>
+</tr>
+<tr>
+<td><span class="math inline">\(X_{13}\)</span></td>
+<td>Observation 1, High dose</td>
+<td style="text-align: right;">13.1</td>
+</tr>
+<tr>
+<td><span class="math inline">\(X_{63}\)</span></td>
+<td>Observation 6, High dose</td>
+<td style="text-align: right;">14.1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The subscripts are labels, not multiplication.</strong> Thus
+<span class="math inline">\(X_{32}=11.8\)</span> is the third
+observation in the second treatment group.</p>
+<p>Each group has its own mean, written <span class="math inline">\(\bar
+X_j\)</span>. For example, <span class="math inline">\(\bar
+X_1=11.0833\)</span> is the Control mean. The <strong>grand
+mean</strong> over all 18 measurements is <span
+class="math inline">\(\bar X=12.3722\)</span>.</p>
+<p>A one-way ANOVA model describes each measurement as</p>
+<p><span class="math display">\[
+\boxed{X_{ij}=\mu+\alpha_j+\varepsilon_{ij}}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(X_{ij}\)</span>: observation <span
+class="math inline">\(i\)</span> from treatment group <span
+class="math inline">\(j\)</span>.</li>
+<li><span class="math inline">\(\mu\)</span>: common baseline (the
+overall population mean, with effects constrained to sum to zero).</li>
+<li><span class="math inline">\(\alpha_j\)</span>: the effect of
+treatment group <span class="math inline">\(j\)</span> relative to that
+baseline.</li>
+<li><span class="math inline">\(\varepsilon_{ij}\)</span>: random error
+for observation <span class="math inline">\(i\)</span> in group <span
+class="math inline">\(j\)</span>.</li>
+</ul>
+<p><strong>Worked decomposition:</strong> For the first Control
+measurement, <span class="math inline">\(X_{11}=10.2\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+10.2
+&amp;= \underbrace{12.3722}_{\text{sample grand mean}}
++ \underbrace{(11.0833-12.3722)}_{\text{estimated Control effect}}\\
+&amp;\quad+\underbrace{(10.2-11.0833)}_{\text{observed residual}}\\
+&amp;=12.3722-1.2889-0.8833.
+\end{aligned}
+\]</span></p>
+<p>This is an <strong>exact sample-data decomposition</strong> using
+estimates of the unknown model parameters. It connects the model
+directly to the <strong>between-group</strong> and
+<strong>within-group</strong> deviations calculated in Lecture 05. In
+the model, random errors are assumed independent with mean zero and
+common variance; normality supports the classical small-sample
+F-test.</p>
+<p>The null hypothesis remains exactly the one used in Lecture 05:</p>
+<p><span class="math display">\[
+H_0:\mu_1=\mu_2=\cdots=\mu_k.
+\]</span></p>
+<p>Equivalently, with the usual constraint that the group effects sum to
+zero, <span class="math inline">\(H_0\)</span> says that all <span
+class="math inline">\(\alpha_j=0\)</span>. This new notation
+<strong>describes the same one-way ANOVA</strong>, rather than
+introducing a new statistical test.</p>
+<p>ANOVA partitions the total sum of squares:</p>
+<p><span class="math display">\[
+SS_{\mathrm{total}}=SS_{\mathrm{between}}+SS_{\mathrm{within}}.
+\]</span></p>
+<p>The statistic is</p>
+<p><span class="math display">\[
+F=\frac{MS_{\mathrm{between}}}{MS_{\mathrm{within}}}.
+\]</span></p>
+<p>A large <span class="math inline">\(F\)</span> indicates that the
+differences among group means are large relative to ordinary variation
+within groups. <strong>A significant overall ANOVA does not identify
+which group means differ</strong>; appropriately adjusted comparisons,
+such as Tukey’s HSD, address that question.</p>
+<h3 id="recall-in-r">Recall in R</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 01_RecallOneWay.R — standalone, base R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.2</span>, <span class="fl">11.4</span>, <span class="fl">10.9</span>, <span class="fl">12.0</span>, <span class="fl">11.3</span>, <span class="fl">10.7</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">11.0</span>, <span class="fl">12.6</span>, <span class="fl">11.8</span>, <span class="fl">12.1</span>, <span class="fl">13.2</span>, <span class="fl">12.4</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">13.1</span>, <span class="fl">14.3</span>, <span class="fl">13.8</span>, <span class="fl">14.9</span>, <span class="fl">12.9</span>, <span class="fl">14.1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">activity =</span> <span class="fu">c</span>(control, low, high),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>), <span class="at">each =</span> <span class="dv">6</span>))</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(activity <span class="sc">~</span> treatment, <span class="at">data =</span> df)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">TukeyHSD</span>(fit))</span></code></pre></div>
+<p><strong>Question:</strong> What if enzyme activity also depends on
+genotype? Would the treatment have the same effect in every genotype?
+One-way ANOVA cannot directly answer that second question.</p>
+<hr />
+<h1 id="factors-levels-and-factorial-experiments">2. Factors, levels,
+and factorial experiments</h1>
+<p>We now add a second factor. A <strong>factor</strong> is an
+explanatory variable, such as treatment, genotype, catalyst, or mixing
+method; its categories are called <strong>levels</strong>.</p>
+<p>Suppose a chemical synthesis uses two factors:</p>
+<table>
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 30%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr>
+<th>Factor</th>
+<th>Levels</th>
+<th style="text-align: right;">Number of levels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catalyst</td>
+<td>Platinum, Palladium, Iridium, Palladium/Iridium, Rhodium</td>
+<td style="text-align: right;">5</td>
+</tr>
+<tr>
+<td>Mixing</td>
+<td>Stirring, Ultrasonication</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+<p>If every catalyst is tested under both mixing conditions, there
+are</p>
+<p><span class="math display">\[
+5\times2=10
+\]</span></p>
+<p><strong>factor combinations</strong> (also called <em>cells</em>).
+Testing all combinations is a <strong>full factorial design</strong>.
+With five independent syntheses per cell, the total number of
+observations is</p>
+<p><span class="math display">\[
+N=5\times2\times5=50.
+\]</span></p>
+<p>The scientific questions are now:</p>
+<ol type="1">
+<li>Does mean yield differ by <strong>catalyst</strong>?</li>
+<li>Does mean yield differ by <strong>mixing method</strong>?</li>
+<li>Does the <strong>effect of mixing depend on the
+catalyst</strong>?</li>
+</ol>
+<p>The third question concerns an <strong>interaction</strong>.</p>
+<h3 id="generate-a-factorial-design-in-r">Generate a factorial design in
+R</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 02_FactorialDesign.R — standalone, base R</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>catalyst <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Platinum&quot;</span>, <span class="st">&quot;Palladium&quot;</span>, <span class="st">&quot;Iridium&quot;</span>, <span class="st">&quot;PdIr&quot;</span>, <span class="st">&quot;Rhodium&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mixing <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Stirred&quot;</span>, <span class="st">&quot;Ultrasonic&quot;</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">catalyst =</span> catalyst, <span class="at">mixing =</span> mixing)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(design)                    <span class="co"># 5 x 2 = 10 combinations</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">nrow</span>(design))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add five replicate rows per combination</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>design_50 <span class="ot">&lt;-</span> design[<span class="fu">rep</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(design)), <span class="at">each =</span> <span class="dv">5</span>), ]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(design_50) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(design_50<span class="sc">$</span>catalyst, design_50<span class="sc">$</span>mixing))</span></code></pre></div>
+<blockquote>
+<p>[!NOTE] Replication means <strong>independent experimental
+units</strong>, not repeatedly recording the same underlying unit as
+though the readings were independent. The experimental design determines
+what counts as a replicate.</p>
+</blockquote>
+<hr />
+<h1 id="two-way-or-two-factor-anova-the-statistical-model">3. Two-way
+(or two-factor) ANOVA: the statistical model</h1>
+<p>For two categorical factors <span class="math inline">\(A\)</span>
+and <span class="math inline">\(B\)</span>, we add <strong>one more
+group index</strong> while continuing to put the
+<strong>observation/replicate index first</strong>:</p>
+<p><span class="math display">\[
+\boxed{X_{ijk}=\mu+\alpha_j+\beta_k+(\alpha\beta)_{jk}+\varepsilon_{ijk}}
+\]</span></p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Index</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(i\)</span></td>
+<td>Replicate within one factor combination</td>
+<td><span class="math inline">\(i=1\)</span>: first synthesis</td>
+</tr>
+<tr>
+<td><span class="math inline">\(j\)</span></td>
+<td>Level of factor <span class="math inline">\(A\)</span></td>
+<td>Catalyst <span class="math inline">\(j=1\)</span>: Platinum</td>
+</tr>
+<tr>
+<td><span class="math inline">\(k\)</span></td>
+<td>Level of factor <span class="math inline">\(B\)</span></td>
+<td>Mixing <span class="math inline">\(k=1\)</span>: Stirred</td>
+</tr>
+</tbody>
+</table>
+<p>For example, in textbook Table 14.7:</p>
+<ul>
+<li><span class="math inline">\(X_{111}=11.1\)</span> is
+<strong>replicate 1</strong>, <strong>Platinum</strong>,
+<strong>Stirred</strong>.</li>
+<li><span class="math inline">\(X_{211}=11.7\)</span> is
+<strong>replicate 2</strong>, <strong>Platinum</strong>,
+<strong>Stirred</strong>.</li>
+<li><span class="math inline">\(X_{121}=15.9\)</span> is
+<strong>replicate 1</strong>, <strong>Palladium</strong>,
+<strong>Stirred</strong>.</li>
+<li><span class="math inline">\(X_{112}=12.8\)</span> is
+<strong>replicate 1</strong>, <strong>Platinum</strong>,
+<strong>Ultrasonic</strong>.</li>
+</ul>
+<p>The terms of the model are:</p>
+<ul>
+<li><span class="math inline">\(\mu\)</span>: overall population
+mean;</li>
+<li><span class="math inline">\(\alpha_j\)</span>: effect of catalyst
+<span class="math inline">\(j\)</span>;</li>
+<li><span class="math inline">\(\beta_k\)</span>: effect of mixing
+method <span class="math inline">\(k\)</span>;</li>
+<li><span class="math inline">\((\alpha\beta)_{jk}\)</span>:
+<strong>interaction</strong>, or departure from adding the two main
+effects;</li>
+<li><span class="math inline">\(\varepsilon_{ijk}\)</span>: random error
+for replicate <span class="math inline">\(i\)</span> with catalyst <span
+class="math inline">\(j\)</span> and mixing <span
+class="math inline">\(k\)</span>.</li>
+</ul>
+<p>In plain language:</p>
+<blockquote>
+<p><strong>Observed yield = overall mean + catalyst effect + mixing
+effect + interaction + replicate-to-replicate error.</strong></p>
+</blockquote>
+<p>An interaction means that the effect of changing the mixing method
+<strong>depends on which catalyst is used</strong>. Without an
+interaction, effects are additive.</p>
+<h2 id="means-and-dot-notation">Means and dot notation</h2>
+<p>A bar indicates an average; a <strong>dot</strong> in a subscript
+means average over that index.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\(\bar X_{\cdot jk}\)</span></td>
+<td>Mean across replicates <span class="math inline">\(i\)</span> for
+catalyst <span class="math inline">\(j\)</span>, mixing <span
+class="math inline">\(k\)</span> (cell mean)</td>
+</tr>
+<tr>
+<td><span class="math inline">\(\bar X_{\cdot j\cdot}\)</span></td>
+<td>Mean across replicates and mixing methods for catalyst <span
+class="math inline">\(j\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(\bar X_{\cdot\cdot k}\)</span></td>
+<td>Mean across replicates and catalysts for mixing method <span
+class="math inline">\(k\)</span></td>
+</tr>
+<tr>
+<td><span class="math inline">\(\bar X_{\cdot\cdot\cdot}\)</span></td>
+<td>Grand mean across all observations</td>
+</tr>
+</tbody>
+</table>
+<p>For example, <span class="math inline">\(\bar X_{\cdot
+11}=10.80\)</span> averages the five Platinum–Stirred measurements, and
+<span class="math inline">\(\bar X_{\cdot 1\cdot}=11.73\)</span>
+averages all ten Platinum measurements across the two mixing methods.
+These are ordinary observation-weighted averages; the design is balanced
+here.</p>
+<p>With the usual constraints on the effects, ANOVA decomposes variation
+as</p>
+<p><span class="math display">\[
+SS_{\mathrm{total}}=SS_A+SS_B+SS_{A:B}+SS_{\mathrm{error}}.
+\]</span></p>
+<p>For a <strong>balanced</strong> <span class="math inline">\(a\times
+b\)</span> design with <span class="math inline">\(r\)</span> replicates
+per combination:</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 30%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: right;">Degrees of freedom</th>
+<th>Mean square</th>
+<th>F-statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Factor A</td>
+<td style="text-align: right;"><span
+class="math inline">\(a-1\)</span></td>
+<td><span class="math inline">\(MS_A=SS_A/(a-1)\)</span></td>
+<td><span class="math inline">\(MS_A/MS_E\)</span></td>
+</tr>
+<tr>
+<td>Factor B</td>
+<td style="text-align: right;"><span
+class="math inline">\(b-1\)</span></td>
+<td><span class="math inline">\(MS_B=SS_B/(b-1)\)</span></td>
+<td><span class="math inline">\(MS_B/MS_E\)</span></td>
+</tr>
+<tr>
+<td>Interaction <span class="math inline">\(A:B\)</span></td>
+<td style="text-align: right;"><span
+class="math inline">\((a-1)(b-1)\)</span></td>
+<td><span
+class="math inline">\(MS_{A:B}=SS_{A:B}/[(a-1)(b-1)]\)</span></td>
+<td><span class="math inline">\(MS_{A:B}/MS_E\)</span></td>
+</tr>
+<tr>
+<td>Residual/error</td>
+<td style="text-align: right;"><span
+class="math inline">\(ab(r-1)\)</span></td>
+<td><span class="math inline">\(MS_E=SS_E/[ab(r-1)]\)</span></td>
+<td>—</td>
+</tr>
+<tr>
+<td>Total</td>
+<td style="text-align: right;"><span
+class="math inline">\(abr-1\)</span></td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p>These F-tests use the standard <strong>independent, equal-variance,
+fixed-effects</strong> ANOVA assumptions. Designs with random factors or
+correlated measurements require different error structures.</p>
+<h2 id="formula-notation-in-r">Formula notation in R</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects only (additive model; assumes no interaction)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>yield <span class="sc">~</span> catalyst <span class="sc">+</span> mixing</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction term alone</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>yield <span class="sc">~</span> catalyst<span class="sc">:</span>mixing</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Main effects and interaction (full factorial model)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>yield <span class="sc">~</span> catalyst <span class="sc">*</span> mixing</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Exactly equivalent expanded formula</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>yield <span class="sc">~</span> catalyst <span class="sc">+</span> mixing <span class="sc">+</span> catalyst<span class="sc">:</span>mixing</span></code></pre></div>
+<p><strong>Meaning of <code>*</code>:</strong> In a model formula,
+<code>A * B</code> means <code>A + B + A:B</code>; it is not arithmetic
+multiplication of the measured data.</p>
+<h2 id="three-null-hypotheses">Three null hypotheses</h2>
+<p>For the full model, we consider:</p>
+<ul>
+<li><span class="math inline">\(H_{0,A}\)</span>: no main effect of A
+(equal <strong>marginal means</strong> across its levels in a balanced
+design).</li>
+<li><span class="math inline">\(H_{0,B}\)</span>: no main effect of
+B.</li>
+<li><span class="math inline">\(H_{0,A:B}\)</span>: <strong>no
+interaction</strong> (the effect of A does not change across levels of
+B).</li>
+</ul>
+<p>If interaction is important, the average main effect may conceal the
+scientifically relevant differences. Interpret the interaction
+<strong>before</strong> making broad claims about the main effects.</p>
+<hr />
+<h1 id="example-1-catalyst-and-mixing-method">4. Example 1: catalyst and
+mixing method</h1>
+<p><strong>Source:</strong> Rowe, Chapter 14, Table 14.7 (p. 190) and
+ANOVA Table 14.10 (p. 193).</p>
+<p><strong>Scientific question:</strong> Does drug-synthesis yield (%)
+depend on the catalyst, mixing method, or their interaction?</p>
+<p>Five separate syntheses were reported for <strong>each</strong>
+catalyst–mixing combination. All 50 published measurements follow.</p>
+<h2 id="observed-measurements-yield">Observed measurements: yield
+(%)</h2>
+<table>
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mixing</th>
+<th style="text-align: right;">Replicate</th>
+<th style="text-align: right;">Platinum</th>
+<th style="text-align: right;">Palladium</th>
+<th style="text-align: right;">Iridium</th>
+<th style="text-align: right;">Pd/Ir alloy</th>
+<th style="text-align: right;">Rhodium</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stirred</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11.1</td>
+<td style="text-align: right;">15.9</td>
+<td style="text-align: right;">10.9</td>
+<td style="text-align: right;">14.1</td>
+<td style="text-align: right;">13.0</td>
+</tr>
+<tr>
+<td>Stirred</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">11.7</td>
+<td style="text-align: right;">18.9</td>
+<td style="text-align: right;">13.4</td>
+<td style="text-align: right;">13.9</td>
+<td style="text-align: right;">12.3</td>
+</tr>
+<tr>
+<td>Stirred</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">9.8</td>
+<td style="text-align: right;">18.9</td>
+<td style="text-align: right;">10.5</td>
+<td style="text-align: right;">14.2</td>
+<td style="text-align: right;">11.0</td>
+</tr>
+<tr>
+<td>Stirred</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">12.1</td>
+<td style="text-align: right;">15.5</td>
+<td style="text-align: right;">12.2</td>
+<td style="text-align: right;">13.5</td>
+<td style="text-align: right;">9.9</td>
+</tr>
+<tr>
+<td>Stirred</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">9.3</td>
+<td style="text-align: right;">17.2</td>
+<td style="text-align: right;">10.9</td>
+<td style="text-align: right;">14.0</td>
+<td style="text-align: right;">10.6</td>
+</tr>
+<tr>
+<td>Ultrasonic</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">12.8</td>
+<td style="text-align: right;">20.0</td>
+<td style="text-align: right;">14.8</td>
+<td style="text-align: right;">16.3</td>
+<td style="text-align: right;">13.1</td>
+</tr>
+<tr>
+<td>Ultrasonic</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">13.8</td>
+<td style="text-align: right;">19.9</td>
+<td style="text-align: right;">11.9</td>
+<td style="text-align: right;">17.2</td>
+<td style="text-align: right;">13.4</td>
+</tr>
+<tr>
+<td>Ultrasonic</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">12.3</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: right;">15.3</td>
+<td style="text-align: right;">16.0</td>
+<td style="text-align: right;">13.8</td>
+</tr>
+<tr>
+<td>Ultrasonic</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">12.4</td>
+<td style="text-align: right;">20.5</td>
+<td style="text-align: right;">14.3</td>
+<td style="text-align: right;">15.1</td>
+<td style="text-align: right;">13.6</td>
+</tr>
+<tr>
+<td>Ultrasonic</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">18.3</td>
+<td style="text-align: right;">15.2</td>
+<td style="text-align: right;">17.0</td>
+<td style="text-align: right;">12.8</td>
+</tr>
+</tbody>
+</table>
+<h2 id="summary-cell-means">Summary: cell means</h2>
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 17%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mixing</th>
+<th style="text-align: right;">Platinum</th>
+<th style="text-align: right;">Palladium</th>
+<th style="text-align: right;">Iridium</th>
+<th style="text-align: right;">Pd/Ir alloy</th>
+<th style="text-align: right;">Rhodium</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stirred</td>
+<td style="text-align: right;">10.80</td>
+<td style="text-align: right;">17.28</td>
+<td style="text-align: right;">11.58</td>
+<td style="text-align: right;">13.94</td>
+<td style="text-align: right;">11.36</td>
+</tr>
+<tr>
+<td>Ultrasonic</td>
+<td style="text-align: right;">12.66</td>
+<td style="text-align: right;">19.64</td>
+<td style="text-align: right;">14.30</td>
+<td style="text-align: right;">16.32</td>
+<td style="text-align: right;">13.34</td>
+</tr>
+<tr>
+<td><strong>Ultrasonic − stirred</strong></td>
+<td style="text-align: right;"><strong>1.86</strong></td>
+<td style="text-align: right;"><strong>2.36</strong></td>
+<td style="text-align: right;"><strong>2.72</strong></td>
+<td style="text-align: right;"><strong>2.38</strong></td>
+<td style="text-align: right;"><strong>1.98</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ultrasonication produces an observed yield increase of roughly
+<strong>2–3 percentage points</strong> for every catalyst. Because these
+increases are similar, the pattern suggests an <strong>approximately
+additive effect</strong> (little catalyst × mixing interaction). Their
+average is <strong>2.26 percentage points</strong>; the interaction test
+below assesses whether the differences among these increases exceed what
+random variation could explain.</p>
+<h2 id="two-way-anova-using-aov">Two-way ANOVA using
+<code>aov()</code></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 03_Catalyst_aov.R — standalone, base R</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>catalyst <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Platinum&quot;</span>, <span class="st">&quot;Palladium&quot;</span>, <span class="st">&quot;Iridium&quot;</span>, <span class="st">&quot;PdIr&quot;</span>, <span class="st">&quot;Rhodium&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>stir <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">11.1</span>, <span class="fl">11.7</span>, <span class="fl">9.8</span>, <span class="fl">12.1</span>, <span class="fl">9.3</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">15.9</span>, <span class="fl">18.9</span>, <span class="fl">18.9</span>, <span class="fl">15.5</span>, <span class="fl">17.2</span>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">10.9</span>, <span class="fl">13.4</span>, <span class="fl">10.5</span>, <span class="fl">12.2</span>, <span class="fl">10.9</span>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">14.1</span>, <span class="fl">13.9</span>, <span class="fl">14.2</span>, <span class="fl">13.5</span>, <span class="fl">14.0</span>),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">13.0</span>, <span class="fl">12.3</span>, <span class="fl">11.0</span>, <span class="fl">9.9</span>, <span class="fl">10.6</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>ultra <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">12.8</span>, <span class="fl">13.8</span>, <span class="fl">12.3</span>, <span class="fl">12.4</span>, <span class="fl">12.0</span>),</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">20.0</span>, <span class="fl">19.9</span>, <span class="fl">19.5</span>, <span class="fl">20.5</span>, <span class="fl">18.3</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">14.8</span>, <span class="fl">11.9</span>, <span class="fl">15.3</span>, <span class="fl">14.3</span>, <span class="fl">15.2</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">16.3</span>, <span class="fl">17.2</span>, <span class="fl">16.0</span>, <span class="fl">15.1</span>, <span class="fl">17.0</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="fl">13.1</span>, <span class="fl">13.4</span>, <span class="fl">13.8</span>, <span class="fl">13.6</span>, <span class="fl">12.8</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>make_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(values, mixing_label) {</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">catalyst =</span> <span class="fu">rep</span>(catalyst, <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">mixing =</span> mixing_label,</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">yield =</span> <span class="fu">unlist</span>(values, <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">make_rows</span>(stir, <span class="st">&quot;Stirred&quot;</span>),</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            <span class="fu">make_rows</span>(ultra, <span class="st">&quot;Ultrasonic&quot;</span>))</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>catalyst <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>catalyst, <span class="at">levels =</span> catalyst)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>mixing <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>mixing, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Stirred&quot;</span>, <span class="st">&quot;Ultrasonic&quot;</span>))</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">table</span>(df<span class="sc">$</span>catalyst, df<span class="sc">$</span>mixing))</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">aggregate</span>(yield <span class="sc">~</span> catalyst <span class="sc">+</span> mixing, <span class="at">data =</span> df, <span class="at">FUN =</span> mean))</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(yield <span class="sc">~</span> catalyst <span class="sc">*</span> mixing, <span class="at">data =</span> df)</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> result[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(p)) {</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">names</span>(p)[i], <span class="st">&quot;:&quot;</span>, <span class="cf">if</span> (p[i] <span class="sc">&lt;</span> alpha) <span class="st">&quot;Reject H0&quot;</span> <span class="cf">else</span> <span class="st">&quot;Do not reject H0&quot;</span>, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="calculate-the-observed-mixing-effect-in-r">Calculate the
+observed mixing effect in R</h3>
+<p>Run this after <code>03_Catalyst_aov.R</code>, while its
+<code>df</code> is available:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean yield for each catalyst and mixing method</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  yield <span class="sc">~</span> catalyst <span class="sc">+</span> mixing,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> mean</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(group_means)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall mean yield for each mixing method</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>mixing_means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  yield <span class="sc">~</span> mixing,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> mean</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(mixing_means)</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Average increase due to ultrasonication</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>increase <span class="ot">&lt;-</span> mixing_means<span class="sc">$</span>yield[</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  mixing_means<span class="sc">$</span>mixing <span class="sc">==</span> <span class="st">&quot;Ultrasonic&quot;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>] <span class="sc">-</span> mixing_means<span class="sc">$</span>yield[</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  mixing_means<span class="sc">$</span>mixing <span class="sc">==</span> <span class="st">&quot;Stirred&quot;</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean yield increase =&quot;</span>, increase,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;percentage points</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<h3 id="interpreting-and-reporting-the-anova-results">Interpreting and
+reporting the ANOVA results</h3>
+<p>In <code>summary(fit)</code>, <strong>Df</strong> gives the degrees
+of freedom, <strong>Sum Sq</strong> the sum of squares, <strong>Mean
+Sq</strong> the mean square, <strong>F value</strong> the test
+statistic, and <strong>Pr(&gt;F)</strong> the p-value. Each F-statistic
+compares the mean square for that term with the residual mean square. We
+report it as <span class="math inline">\(F_{df_1,df_2}\)</span>, where
+<span class="math inline">\(df_1\)</span> is the term’s degrees of
+freedom and <span class="math inline">\(df_2\)</span> is the residual
+degrees of freedom.</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Catalyst</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">67.41</td>
+<td style="text-align: right;"><span
+class="math inline">\(&lt;0.001\)</span></td>
+</tr>
+<tr>
+<td>Mixing</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">57.20</td>
+<td style="text-align: right;"><span
+class="math inline">\(&lt;0.001\)</span></td>
+</tr>
+<tr>
+<td>Catalyst × Mixing</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.27</td>
+<td style="text-align: right;">0.898</td>
+</tr>
+<tr>
+<td>Residuals</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<p>At <span class="math inline">\(\alpha=0.05\)</span>, catalyst and
+mixing both have significant main effects, while the interaction is not
+significant. Thus, mean yield differs among catalysts and between mixing
+methods, but there is <strong>insufficient evidence</strong> that the
+effect of mixing differs among catalysts. The observed average
+improvement with ultrasonication is <strong>2.26 percentage
+points</strong>; the lack of significant interaction does not establish
+that its effect is exactly equal for all catalysts.</p>
+<p><strong>Example of statistical reporting:</strong></p>
+<blockquote>
+<p>Two-way ANOVA indicated effects of catalyst (<span
+class="math inline">\(F_{4,40}=67.41\)</span>, <span
+class="math inline">\(p&lt;0.001\)</span>) and mixing method (<span
+class="math inline">\(F_{1,40}=57.20\)</span>, <span
+class="math inline">\(p&lt;0.001\)</span>), with no detected catalyst ×
+mixing interaction (<span class="math inline">\(F_{4,40}=0.27\)</span>,
+<span class="math inline">\(p=0.898\)</span>). Ultrasonication increased
+mean yield by approximately 2.26 percentage points across the five
+catalysts studied.</p>
+</blockquote>
+<p>The F-statistics, degrees of freedom, and p-values come from
+<code>summary(fit)</code>; the average yield difference comes from the
+group means calculated with <code>aggregate()</code>.</p>
+<hr />
+<h1 id="interpreting-main-effects-and-interaction">5. Interpreting main
+effects and interaction</h1>
+<p>An <strong>interaction</strong> is present when changing one factor
+produces different effects at different levels of another factor.</p>
+<p>For Example 1, the effect of changing from stirred to ultrasonic
+mixing is:</p>
+<p><span class="math display">\[
+\Delta_j=\bar X_{\cdot j2}-\bar X_{\cdot j1}.
+\]</span></p>
+<p>Here <span class="math inline">\(k=1\)</span> means Stirred and <span
+class="math inline">\(k=2\)</span> means Ultrasonic. The differences
+(1.86, 2.36, 2.72, 2.38, 1.98) are similar, and the interaction F-test
+is non-significant. Thus, the experiment is <strong>consistent
+with</strong> an approximately common mixing effect of 2.26 yield
+percentage points.</p>
+<p>An <strong>interaction plot</strong> shows cell means. If the effect
+is additive, lines are approximately parallel. If the effect changes
+across factor levels, lines are not parallel. These plots are
+<strong>descriptive</strong>; statistical inference requires the
+appropriate test and assumptions.</p>
+<h3 id="r-interaction-plot-for-example-1">R: interaction plot for
+Example 1</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 04_Catalyst_interaction.R — standalone, base R</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>catalyst <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Platinum&quot;</span>, <span class="st">&quot;Palladium&quot;</span>, <span class="st">&quot;Iridium&quot;</span>, <span class="st">&quot;PdIr&quot;</span>, <span class="st">&quot;Rhodium&quot;</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>stir <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">10.80</span>, <span class="fl">17.28</span>, <span class="fl">11.58</span>, <span class="fl">13.94</span>, <span class="fl">11.36</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ultra <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">12.66</span>, <span class="fl">19.64</span>, <span class="fl">14.30</span>, <span class="fl">16.32</span>, <span class="fl">13.34</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot each catalyst&#39;s line from stirred to ultrasonic mixing</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="fu">range</span>(<span class="fu">c</span>(stir, ultra)), <span class="at">type =</span> <span class="st">&quot;n&quot;</span>, <span class="at">xaxt =</span> <span class="st">&quot;n&quot;</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Mixing method&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Mean yield (%)&quot;</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Catalyst x mixing: approximately additive effects&quot;</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">axis</span>(<span class="dv">1</span>, <span class="at">at =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Stirred&quot;</span>, <span class="st">&quot;Ultrasonic&quot;</span>))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(catalyst)) {</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="fu">c</span>(stir[i], ultra[i]), <span class="at">type =</span> <span class="st">&quot;b&quot;</span>, <span class="at">pch =</span> i, <span class="at">lty =</span> i)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> catalyst, <span class="at">pch =</span> <span class="fu">seq_along</span>(catalyst),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">seq_along</span>(catalyst), <span class="at">cex =</span> <span class="fl">0.8</span>, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>increase <span class="ot">&lt;-</span> ultra <span class="sc">-</span> stir</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(catalyst, increase))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Average improvement =&quot;</span>, <span class="fu">mean</span>(increase), <span class="st">&quot;percentage points</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>[!IMPORTANT] <strong>Main effect vs interaction:</strong> A main
+effect describes an average difference across the other factor’s levels
+(for a balanced design). An interaction asks whether those
+<strong>differences themselves differ</strong>. When a meaningful
+interaction exists, report effects <strong>within each level</strong>
+rather than assuming there is one universal treatment effect.</p>
+</blockquote>
+<hr />
+<h1 id="example-2-tablet-strength-with-interaction">6. Example 2: tablet
+strength with interaction</h1>
+<p><strong>Source:</strong> Rowe, Chapter 14, Table 14.12 (p. 195) and
+Table 14.13 (p. 196).</p>
+<p><strong>Scientific question:</strong> How do punch design (A, B, C)
+and compression force (low, high) affect the tensile strength (MPa) of
+tablets?</p>
+<p>There are <span class="math inline">\(3\times2=6\)</span>
+combinations, <strong>six replicates in each</strong>, and <span
+class="math inline">\(N=36\)</span> observations.</p>
+<h2 id="observed-measurements-tensile-strength-mpa">Observed
+measurements: tensile strength (MPa)</h2>
+<table>
+<thead>
+<tr>
+<th>Compression force</th>
+<th style="text-align: right;">Replicate</th>
+<th style="text-align: right;">Punch A</th>
+<th style="text-align: right;">Punch B</th>
+<th style="text-align: right;">Punch C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.00</td>
+<td style="text-align: right;">6.49</td>
+<td style="text-align: right;">7.92</td>
+</tr>
+<tr>
+<td>Low</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4.79</td>
+<td style="text-align: right;">8.35</td>
+<td style="text-align: right;">8.15</td>
+</tr>
+<tr>
+<td>Low</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5.50</td>
+<td style="text-align: right;">6.40</td>
+<td style="text-align: right;">7.60</td>
+</tr>
+<tr>
+<td>Low</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">5.15</td>
+<td style="text-align: right;">6.37</td>
+<td style="text-align: right;">9.64</td>
+</tr>
+<tr>
+<td>Low</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">5.26</td>
+<td style="text-align: right;">6.86</td>
+<td style="text-align: right;">9.98</td>
+</tr>
+<tr>
+<td>Low</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">6.55</td>
+<td style="text-align: right;">8.08</td>
+<td style="text-align: right;">9.23</td>
+</tr>
+<tr>
+<td>High</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4.90</td>
+<td style="text-align: right;">9.63</td>
+<td style="text-align: right;">14.60</td>
+</tr>
+<tr>
+<td>High</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4.90</td>
+<td style="text-align: right;">9.67</td>
+<td style="text-align: right;">13.81</td>
+</tr>
+<tr>
+<td>High</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">5.04</td>
+<td style="text-align: right;">8.72</td>
+<td style="text-align: right;">13.20</td>
+</tr>
+<tr>
+<td>High</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">6.93</td>
+<td style="text-align: right;">8.08</td>
+<td style="text-align: right;">14.62</td>
+</tr>
+<tr>
+<td>High</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7.13</td>
+<td style="text-align: right;">10.25</td>
+<td style="text-align: right;">13.77</td>
+</tr>
+<tr>
+<td>High</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">5.82</td>
+<td style="text-align: right;">8.10</td>
+<td style="text-align: right;">13.18</td>
+</tr>
+</tbody>
+</table>
+<h2 id="summary-means-and-effects-of-force">Summary: means and effects
+of force</h2>
+<table>
+<thead>
+<tr>
+<th>Punch</th>
+<th style="text-align: right;">Low force mean</th>
+<th style="text-align: right;">High force mean</th>
+<th style="text-align: right;">High − low (MPa)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td style="text-align: right;">5.208</td>
+<td style="text-align: right;">5.787</td>
+<td style="text-align: right;"><strong>0.578</strong></td>
+</tr>
+<tr>
+<td>B</td>
+<td style="text-align: right;">7.092</td>
+<td style="text-align: right;">9.075</td>
+<td style="text-align: right;"><strong>1.983</strong></td>
+</tr>
+<tr>
+<td>C</td>
+<td style="text-align: right;">8.753</td>
+<td style="text-align: right;">13.863</td>
+<td style="text-align: right;"><strong>5.110</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The observed benefit of higher compression force differs markedly by
+punch design: <strong>0.58 MPa</strong> for A versus <strong>5.11
+MPa</strong> for C. We use the interaction F-test to assess whether this
+pattern provides evidence of a genuine difference in force effects.</p>
+<h2 id="two-way-anova-using-aov-1">Two-way ANOVA using
+<code>aov()</code></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 05_Tablet_aov.R — standalone, base R</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.00</span>, <span class="fl">4.79</span>, <span class="fl">5.50</span>, <span class="fl">5.15</span>, <span class="fl">5.26</span>, <span class="fl">6.55</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">6.49</span>, <span class="fl">8.35</span>, <span class="fl">6.40</span>, <span class="fl">6.37</span>, <span class="fl">6.86</span>, <span class="fl">8.08</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">7.92</span>, <span class="fl">8.15</span>, <span class="fl">7.60</span>, <span class="fl">9.64</span>, <span class="fl">9.98</span>, <span class="fl">9.23</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.90</span>, <span class="fl">4.90</span>, <span class="fl">5.04</span>, <span class="fl">6.93</span>, <span class="fl">7.13</span>, <span class="fl">5.82</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">9.63</span>, <span class="fl">9.67</span>, <span class="fl">8.72</span>, <span class="fl">8.08</span>, <span class="fl">10.25</span>, <span class="fl">8.10</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">14.60</span>, <span class="fl">13.81</span>, <span class="fl">13.20</span>, <span class="fl">14.62</span>, <span class="fl">13.77</span>, <span class="fl">13.18</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>make_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(group, force_label) {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">punch =</span> <span class="fu">rep</span>(<span class="fu">names</span>(group), <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>             <span class="at">force =</span> force_label,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>             <span class="at">strength =</span> <span class="fu">unlist</span>(group, <span class="at">use.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">make_rows</span>(low, <span class="st">&quot;Low&quot;</span>), <span class="fu">make_rows</span>(high, <span class="st">&quot;High&quot;</span>))</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>punch <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>punch, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>))</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>force <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>force, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Low&quot;</span>, <span class="st">&quot;High&quot;</span>))</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">aggregate</span>(strength <span class="sc">~</span> punch <span class="sc">+</span> force, <span class="at">data =</span> df, mean))</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> punch <span class="sc">*</span> force, <span class="at">data =</span> df)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> result[[<span class="dv">1</span>]][<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="st">&quot;Pr(&gt;F)&quot;</span>]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(p)) {</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">names</span>(p)[i], <span class="st">&quot;:&quot;</span>, <span class="cf">if</span> (p[i] <span class="sc">&lt;</span> alpha) <span class="st">&quot;Reject H0&quot;</span> <span class="cf">else</span> <span class="st">&quot;Do not reject H0&quot;</span>, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="fu">interaction.plot</span>(df<span class="sc">$</span>force, df<span class="sc">$</span>punch, df<span class="sc">$</span>strength,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xlab =</span> <span class="st">&quot;Compression force&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Mean strength (MPa)&quot;</span>,</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>                 <span class="at">trace.label =</span> <span class="st">&quot;Punch&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Tablet strength: interaction&quot;</span>)</span></code></pre></div>
+<h3 id="calculate-punch-specific-force-effects-in-r">Calculate
+punch-specific force effects in R</h3>
+<p>Run this after <code>05_Tablet_aov.R</code>, while its
+<code>df</code> is available:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mean tablet strength for each combination</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  strength <span class="sc">~</span> punch <span class="sc">+</span> force,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> mean</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(group_means)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate High - Low for each punch</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  group_means,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  force <span class="sc">==</span> <span class="st">&quot;Low&quot;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">subset</span>(</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  group_means,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  force <span class="sc">==</span> <span class="st">&quot;High&quot;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Match the punch designs</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> low[<span class="fu">order</span>(low<span class="sc">$</span>punch), ]</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> high[<span class="fu">order</span>(high<span class="sc">$</span>punch), ]</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Difference in mean strength</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>increase <span class="ot">&lt;-</span> high<span class="sc">$</span>strength <span class="sc">-</span> low<span class="sc">$</span>strength</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Punch =</span> low<span class="sc">$</span>punch,</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">Low =</span> low<span class="sc">$</span>strength,</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">High =</span> high<span class="sc">$</span>strength,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">Increase =</span> increase</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">transform</span>(</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  results,</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">Low =</span> <span class="fu">round</span>(Low, <span class="dv">3</span>),</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">High =</span> <span class="fu">round</span>(High, <span class="dv">3</span>),</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">Increase =</span> <span class="fu">round</span>(Increase, <span class="dv">3</span>)</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<h3 id="interpreting-and-reporting-the-anova-results-1">Interpreting and
+reporting the ANOVA results</h3>
+<p>The design has <span class="math inline">\(a=3\)</span> punch
+designs, <span class="math inline">\(b=2\)</span> force levels, and
+<span class="math inline">\(r=6\)</span> independent replicates per
+combination. The ANOVA results from <code>summary(fit)</code> are:</p>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Punch design</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">128.23</td>
+<td style="text-align: right;"><span
+class="math inline">\(&lt;0.001\)</span></td>
+</tr>
+<tr>
+<td>Compression force</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">74.21</td>
+<td style="text-align: right;"><span
+class="math inline">\(&lt;0.001\)</span></td>
+</tr>
+<tr>
+<td>Punch × Force</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">20.35</td>
+<td style="text-align: right;"><span
+class="math inline">\(&lt;0.001\)</span></td>
+</tr>
+<tr>
+<td>Residuals</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<p>At <span class="math inline">\(\alpha=0.05\)</span>, both punch
+design and compression force have significant main effects. More
+importantly, the <strong>punch × force interaction</strong> is
+significant, indicating that the effect of increasing compression force
+depends on punch design.</p>
+<p>The observed <strong>high-minus-low</strong> mean strength
+differences are <strong>0.58 MPa</strong> for Punch A, <strong>1.98
+MPa</strong> for Punch B, and <strong>5.11 MPa</strong> for Punch C.
+Because the interaction is significant, these punch-specific effects are
+more informative than a single average effect of force.</p>
+<p><strong>Example of statistical reporting:</strong></p>
+<blockquote>
+<p>Two-way ANOVA detected a punch × force interaction (<span
+class="math inline">\(F_{2,30}=20.35\)</span>, <span
+class="math inline">\(p&lt;0.001\)</span>), indicating that the effect
+of greater compression force differed among punch designs. The observed
+high-minus-low mean strength difference was approximately 0.58 MPa for
+A, 1.98 MPa for B, and 5.11 MPa for C.</p>
+</blockquote>
+<p>As in Example 1, the test statistics and p-values come from
+<code>summary(fit)</code>; the strength differences come from the means
+calculated with <code>aggregate()</code>.</p>
+<p><strong>Compare Examples 1 and 2:</strong> Both show strong main
+effects, but only Example 2 provides strong evidence that the effect of
+one factor differs across the levels of the other.</p>
+<hr />
+<h1 id="beyond-two-factors">7. Beyond two factors</h1>
+<p>Nothing prevents us from adding a third factor, such as genotype,
+sex, temperature category, or treatment duration. A <strong>three-way
+factorial ANOVA</strong> can test three main effects, three two-factor
+interactions, and one three-factor interaction.</p>
+<p>For example, suppose gene expression depends on three factors:</p>
+<ul>
+<li>Treatment: control vs drug (<strong>2 levels</strong>)</li>
+<li>Genotype: wild type vs mutant (<strong>2 levels</strong>)</li>
+<li>Sex: female vs male (<strong>2 levels</strong>)</li>
+</ul>
+<p>There are <span class="math inline">\(2\times2\times2=8\)</span>
+cells. A full model is:</p>
+<p><span class="math display">\[
+X=\mu+A+B+C+A:B+A:C+B:C+A:B:C+\varepsilon.
+\]</span></p>
+<p>In R:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>expression <span class="sc">~</span> treatment <span class="sc">*</span> genotype <span class="sc">*</span> sex</span></code></pre></div>
+<p>The three-way interaction asks whether the <strong>treatment ×
+genotype interaction differs by sex</strong>. It is not just another
+main effect.</p>
+<h3 id="r-illustrative-three-factor-experiment">R: illustrative
+three-factor experiment</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 06_ThreeWay.R — standalone, base R (simulated example)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">206</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">c</span>(<span class="st">&quot;Control&quot;</span>, <span class="st">&quot;Drug&quot;</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">genotype =</span> <span class="fu">c</span>(<span class="st">&quot;WT&quot;</span>, <span class="st">&quot;Mutant&quot;</span>),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;Female&quot;</span>, <span class="st">&quot;Male&quot;</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">replicate =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>treatment <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>treatment)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>genotype <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>genotype)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>sex)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>drug <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;Drug&quot;</span>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>mutant <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>genotype <span class="sc">==</span> <span class="st">&quot;Mutant&quot;</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>sex <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>expression <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">2</span><span class="sc">*</span>drug <span class="sc">+</span> mutant <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>male <span class="sc">+</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span><span class="sc">*</span>drug<span class="sc">*</span>mutant <span class="sc">+</span> <span class="fl">1.5</span><span class="sc">*</span>drug<span class="sc">*</span>mutant<span class="sc">*</span>male <span class="sc">+</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rnorm</span>(<span class="fu">nrow</span>(df), <span class="at">sd =</span> <span class="fl">1.5</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(expression <span class="sc">~</span> treatment <span class="sc">*</span> genotype <span class="sc">*</span> sex, <span class="at">data =</span> df)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit))</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">aggregate</span>(expression <span class="sc">~</span> treatment <span class="sc">+</span> genotype <span class="sc">+</span> sex, df, mean))</span></code></pre></div>
+<p>As the number of factors and their levels grow, the number of
+combinations rises rapidly. Chapter 14 (Section 14.5) introduces
+<strong>fractional factorial designs</strong>, which study a carefully
+selected subset of combinations, typically with assumptions about which
+interactions can be estimated. Such designs must be chosen
+<strong>before</strong> data collection.</p>
+<hr />
+<h1 id="assumptions-and-model-checking">8. Assumptions and model
+checking</h1>
+<p>For the standard fixed-effects ANOVA models in this lecture,
+check:</p>
+<ol type="1">
+<li><strong>Independence:</strong> different experimental units supply
+independent errors. Repeated measurements on the same person or batch
+require a suitable dependent-data model.</li>
+<li><strong>Residual normality:</strong> errors within combinations are
+approximately normal; inspect residuals rather than requiring every
+pooled observation to look normal.</li>
+<li><strong>Equal residual variance:</strong> spread is similar across
+the combinations being compared.</li>
+<li><strong>Correct specification:</strong> include scientifically
+important interactions; check whether all factor combinations were
+observed.</li>
+<li><strong>Balanced versus unbalanced data:</strong> equal cell sizes
+make the traditional sums-of-squares decomposition simple. Unbalanced
+designs can still be analyzed with linear models, but the hypothesis
+tested by a reported ANOVA table depends on the sums-of-squares
+convention, factor coding, and design; sequential (Type I) tests can
+depend on term order.</li>
+</ol>
+<p>If assumptions are seriously violated, possible alternatives include
+transforming the response, heteroscedasticity-robust models, generalized
+linear models for counts/proportions, or mixed models for
+clustered/repeated observations. <strong>Welch’s one-way ANOVA</strong>
+from Lecture 05 does not automatically provide a general solution for
+all two-way unequal-variance designs.</p>
+<h3 id="r-examine-diagnostic-plots-for-the-tablet-example">R: examine
+diagnostic plots for the tablet example</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 07_Diagnostics.R — standalone, base R</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>low <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.00</span>, <span class="fl">4.79</span>, <span class="fl">5.50</span>, <span class="fl">5.15</span>, <span class="fl">5.26</span>, <span class="fl">6.55</span>),</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">6.49</span>, <span class="fl">8.35</span>, <span class="fl">6.40</span>, <span class="fl">6.37</span>, <span class="fl">6.86</span>, <span class="fl">8.08</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">7.92</span>, <span class="fl">8.15</span>, <span class="fl">7.60</span>, <span class="fl">9.64</span>, <span class="fl">9.98</span>, <span class="fl">9.23</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>high <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">A =</span> <span class="fu">c</span>(<span class="fl">4.90</span>, <span class="fl">4.90</span>, <span class="fl">5.04</span>, <span class="fl">6.93</span>, <span class="fl">7.13</span>, <span class="fl">5.82</span>),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">B =</span> <span class="fu">c</span>(<span class="fl">9.63</span>, <span class="fl">9.67</span>, <span class="fl">8.72</span>, <span class="fl">8.08</span>, <span class="fl">10.25</span>, <span class="fl">8.10</span>),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">c</span>(<span class="fl">14.60</span>, <span class="fl">13.81</span>, <span class="fl">13.20</span>, <span class="fl">14.62</span>, <span class="fl">13.77</span>, <span class="fl">13.18</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>make_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(group, force_label) {</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">punch =</span> <span class="fu">rep</span>(<span class="fu">names</span>(group), <span class="at">each =</span> <span class="dv">6</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>             <span class="at">force =</span> force_label, <span class="at">strength =</span> <span class="fu">unlist</span>(group, <span class="at">use.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">make_rows</span>(low, <span class="st">&quot;Low&quot;</span>), <span class="fu">make_rows</span>(high, <span class="st">&quot;High&quot;</span>))</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>punch <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>punch)</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>force <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>force)</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">aov</span>(strength <span class="sc">~</span> punch <span class="sc">*</span> force, <span class="at">data =</span> df)</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals against fitted values</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(fit), <span class="fu">resid</span>(fit), <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Fitted strength&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residual&quot;</span>)</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal Q-Q plot of residuals</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">resid</span>(fit))</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">resid</span>(fit))</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine spread within each factor combination</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>cell <span class="ot">&lt;-</span> <span class="fu">interaction</span>(df<span class="sc">$</span>punch, df<span class="sc">$</span>force, <span class="at">sep =</span> <span class="st">&quot;/&quot;</span>)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(strength <span class="sc">~</span> cell, <span class="at">data =</span> df,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">&quot;Punch / Force&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Strength (MPa)&quot;</span>)</span></code></pre></div>
+<p>Do not use a non-significant normality or variance test as proof that
+assumptions hold. Combine knowledge of the experimental design with
+graphical checks and an assessment of sample size.</p>
+<hr />
+<h1 id="choosing-and-reporting-the-model">9. Choosing and reporting the
+model</h1>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Experimental question</th>
+<th>Appropriate starting point</th>
+<th>R formula/function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One factor, 3+ independent groups</td>
+<td>One-way ANOVA</td>
+<td><code>aov(activity ~ A)</code></td>
+</tr>
+<tr>
+<td>Two fixed factors, independent observations</td>
+<td>Two-way ANOVA</td>
+<td><code>aov(activity ~ A * B)</code></td>
+</tr>
+<tr>
+<td>Two fixed factors, additive effects specified in advance</td>
+<td>Additive two-way model</td>
+<td><code>aov(activity ~ A + B)</code></td>
+</tr>
+<tr>
+<td>Three fixed factors</td>
+<td>Three-way ANOVA</td>
+<td><code>aov(activity ~ A * B * C)</code></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
