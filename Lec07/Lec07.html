@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lec07</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../css/style.css" />
+  <script defer=""
+  src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a
+href="#lecture-07-correlation-linear-regression-and-analysis-of-covariance-ancova"
+id="toc-lecture-07-correlation-linear-regression-and-analysis-of-covariance-ancova">Lecture
+07 — Correlation, Linear Regression, and Analysis of Covariance
+(ANCOVA)</a></li>
+<li><a href="#from-anova-to-continuous-predictors"
+id="toc-from-anova-to-continuous-predictors">1. From ANOVA to continuous
+predictors</a></li>
+<li><a href="#correlation-direction-and-strength"
+id="toc-correlation-direction-and-strength">2. Correlation: direction
+and strength</a>
+<ul>
+<li><a href="#worked-example-leaf-height-and-drug-content"
+id="toc-worked-example-leaf-height-and-drug-content">Worked example —
+leaf height and drug content</a>
+<ul>
+<li><a href="#why-are-the-degrees-of-freedom-n-2-in-a-correlation-test"
+id="toc-why-are-the-degrees-of-freedom-n-2-in-a-correlation-test">Why
+are the degrees of freedom <span class="math inline">\(n-2\)</span> in a
+correlation test?</a></li>
+<li><a href="#pearson-correlation-in-r-cor.test"
+id="toc-pearson-correlation-in-r-cor.test">Pearson correlation in R:
+<code>cor.test()</code></a></li>
+</ul></li>
+</ul></li>
+<li><a href="#simple-linear-regression"
+id="toc-simple-linear-regression">3. Simple linear regression</a>
+<ul>
+<li><a href="#zero-conditional-mean-assumption"
+id="toc-zero-conditional-mean-assumption">Zero conditional mean
+assumption</a></li>
+</ul></li>
+<li><a href="#least-squares-fitted-values-and-residuals"
+id="toc-least-squares-fitted-values-and-residuals">4. Least squares,
+fitted values, and residuals</a>
+<ul>
+<li><a href="#fit-the-least-squares-regression-line-in-r"
+id="toc-fit-the-least-squares-regression-line-in-r">Fit the
+least-squares regression line in R</a></li>
+</ul></li>
+<li><a href="#testing-and-interpreting-regression"
+id="toc-testing-and-interpreting-regression">5. Testing and interpreting
+regression</a>
+<ul>
+<li><a
+href="#test-the-slope-inspect-confidence-intervals-and-make-predictions"
+id="toc-test-the-slope-inspect-confidence-intervals-and-make-predictions">Test
+the slope, inspect confidence intervals, and make predictions</a></li>
+<li><a href="#why-do-correlation-and-regression-use-a-t-statistic"
+id="toc-why-do-correlation-and-regression-use-a-t-statistic">Why do
+correlation and regression use a t-statistic?</a></li>
+</ul></li>
+<li><a href="#ancova-combining-a-factor-and-a-covariate"
+id="toc-ancova-combining-a-factor-and-a-covariate">6. ANCOVA: combining
+a factor and a covariate</a></li>
+<li><a
+href="#worked-example-chronic-obstructive-pulmonary-disease-copd-treatments-and-age"
+id="toc-worked-example-chronic-obstructive-pulmonary-disease-copd-treatments-and-age">7.
+Worked example: Chronic Obstructive Pulmonary Disease (COPD) treatments
+and age</a>
+<ul>
+<li><a href="#observed-data" id="toc-observed-data">Observed
+data</a></li>
+<li><a href="#explore-the-data-and-check-interaction"
+id="toc-explore-the-data-and-check-interaction">7.1. Explore the data
+and check interaction</a></li>
+<li><a href="#fit-and-interpret-the-common-slopes-ancova"
+id="toc-fit-and-interpret-the-common-slopes-ancova">7.2. Fit and
+interpret the common-slopes ANCOVA</a></li>
+<li><a href="#check-ancova-residuals"
+id="toc-check-ancova-residuals">7.3. Check ANCOVA residuals</a></li>
+</ul></li>
+<li><a href="#comparing-a-t-test-and-ancova"
+id="toc-comparing-a-t-test-and-ancova">8. Comparing a t-test and
+ANCOVA</a></li>
+<li><a href="#which-statistical-method-should-we-use"
+id="toc-which-statistical-method-should-we-use">9. Which statistical
+method should we use?</a></li>
+</ul>
+</nav>
+<table style="width:100%; border:none;">
+<tr>
+<td style="width:33%; text-align:left; border:none;">
+<a href="../Lec06/Lec06.html"><strong>← Previous Lecture</strong></a>
+</td>
+<td style="width:34%; text-align:center; border:none;">
+<a href="../"><strong>Home</strong></a>
+</td>
+<td style="width:33%; text-align:right; border:none;">
+<strong>Next Lecture →</strong>
+</td>
+</tr>
+</table>
+<h1
+id="lecture-07-correlation-linear-regression-and-analysis-of-covariance-ancova">Lecture
+07 — Correlation, Linear Regression, and Analysis of Covariance
+(ANCOVA)</h1>
+<p>Building on the analysis of variance (ANOVA) framework introduced in
+<a href="../Lec06/Lec06.html">Lecture 06</a>, this lecture examines
+relationships between measured variables through
+<strong>correlation</strong> and <strong>simple linear
+regression</strong>. It then introduces <strong>analysis of covariance
+(ANCOVA)</strong>, which combines a categorical factor and a continuous
+covariate in one linear model.</p>
+<p>The worked examples use data from Philip Rowe, <em>Essential
+Statistics for the Pharmaceutical Sciences</em>, 2nd edition, Chapters
+15 and 16.</p>
+<hr />
+<h1 id="from-anova-to-continuous-predictors">1. From ANOVA to continuous
+predictors</h1>
+<p>In <a href="../Lec06/Lec06.html">Lecture 06</a>, we expressed an
+observed response as an overall mean, a group effect, and random error.
+The one-way ANOVA model was</p>
+<p><span class="math display">\[
+X_{ij}=\mu+\alpha_j+\varepsilon_{ij}.
+\]</span></p>
+<p>Here, the explanatory variable is <strong>categorical</strong>: each
+observation belongs to a treatment group. However, biological responses
+may also depend on <strong>continuous predictors</strong>, such as age,
+concentration, or height. The choice of statistical method depends on
+whether the explanatory variables are categorical, continuous, or a
+combination of both.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Scientific question</th>
+<th>Response (continuous)</th>
+<th>Explanatory variable(s)</th>
+<th>Method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Does mean enzyme activity differ across treatments?</td>
+<td>Enzyme activity</td>
+<td>Treatment group (categorical)</td>
+<td>One-way ANOVA</td>
+</tr>
+<tr>
+<td>How is drug content associated with the height of a leaf?</td>
+<td>Drug content</td>
+<td>Leaf height (continuous)</td>
+<td>Correlation / regression</td>
+</tr>
+<tr>
+<td>Do treatments differ in mean lung-function improvement after
+accounting for age?</td>
+<td>Percentage change in FEV1 (forced expiratory volume in one
+second)</td>
+<td>Treatment (categorical) and age (continuous)</td>
+<td>ANCOVA</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Unifying idea:</strong> ANOVA, linear regression, and ANCOVA
+are all forms of the <strong>linear model</strong>. Each can be fitted
+in R using <code>lm()</code>; what differs is the choice of explanatory
+variables and the scientific question.</p>
+<hr />
+<h1 id="correlation-direction-and-strength">2. Correlation: direction
+and strength</h1>
+<p><strong>Correlation</strong> describes how two measured variables
+vary together. A <strong>positive correlation</strong> means that higher
+values of one variable tend to accompany higher values of the other; a
+<strong>negative correlation</strong> means that higher values of one
+tend to accompany lower values of the other.</p>
+<p>For paired observations <span
+class="math inline">\((x_i,y_i)\)</span>, the <strong>Pearson sample
+correlation coefficient</strong> is</p>
+<p><span class="math display">\[
+r=\frac{\sum_{i=1}^n(x_i-\bar x)(y_i-\bar y)}
+{\sqrt{\sum_{i=1}^n(x_i-\bar x)^2\sum_{i=1}^n(y_i-\bar y)^2}}.
+\]</span></p>
+<p>Pearson’s <span class="math inline">\(r\)</span> lies between <span
+class="math inline">\(-1\)</span> and <span
+class="math inline">\(+1\)</span>. Its <strong>sign</strong> indicates
+the direction of the linear association, while its <strong>absolute
+value</strong> indicates the strength. Values near zero suggest little
+<em>linear</em> association, but do not rule out a nonlinear
+relationship. The coefficient has no units and is unchanged when <span
+class="math inline">\(x\)</span> and <span
+class="math inline">\(y\)</span> are exchanged.</p>
+<h2 id="worked-example-leaf-height-and-drug-content">Worked example —
+leaf height and drug content</h2>
+<p>Table 15.1 in Rowe (Chapter 15) gives 24 pairs of measurements: the
+height at which a leaf grew and its drug content. We ask whether drug
+content tends to increase or decrease with leaf height.</p>
+<table style="width:100%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">Leaf</th>
+<th style="text-align: right;">Height (m)</th>
+<th style="text-align: right;">Drug (mg/100 g dry leaf)</th>
+<th style="text-align: right;">Leaf</th>
+<th style="text-align: right;">Height (m)</th>
+<th style="text-align: right;">Drug (mg/100 g dry leaf)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.70</td>
+<td style="text-align: right;">1.66</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">3.23</td>
+<td style="text-align: right;">1.27</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2.31</td>
+<td style="text-align: right;">1.34</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">3.29</td>
+<td style="text-align: right;">0.85</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">2.89</td>
+<td style="text-align: right;">1.27</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">3.46</td>
+<td style="text-align: right;">1.16</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.30</td>
+<td style="text-align: right;">1.61</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">3.95</td>
+<td style="text-align: right;">1.14</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3.21</td>
+<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">1.70</td>
+<td style="text-align: right;">1.25</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1.84</td>
+<td style="text-align: right;">1.73</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">2.92</td>
+<td style="text-align: right;">1.49</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">3.27</td>
+<td style="text-align: right;">1.17</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">2.67</td>
+<td style="text-align: right;">1.17</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">4.21</td>
+<td style="text-align: right;">1.19</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">3.02</td>
+<td style="text-align: right;">1.16</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">1.32</td>
+<td style="text-align: right;">1.93</td>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">2.37</td>
+<td style="text-align: right;">1.75</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">3.67</td>
+<td style="text-align: right;">1.10</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">2.64</td>
+<td style="text-align: right;">1.36</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">2.78</td>
+<td style="text-align: right;">1.37</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">4.25</td>
+<td style="text-align: right;">1.00</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">3.71</td>
+<td style="text-align: right;">1.19</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1.90</td>
+<td style="text-align: right;">1.48</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 1 — examine the scatterplot.</strong> Before calculating
+a correlation, look for an approximately linear trend, unusual
+observations, or evidence of curvature.</p>
+<p><strong>Step 2 — hypotheses:</strong> <span
+class="math inline">\(H_0:\rho=0\)</span> versus <span
+class="math inline">\(H_A:\rho\ne0\)</span>, where <span
+class="math inline">\(\rho\)</span> is the <strong>population</strong>
+Pearson correlation.</p>
+<p><strong>Step 3 — calculate the test statistic.</strong> For the
+conventional Pearson correlation test, assuming independent pairs and a
+bivariate normal population for exact small-sample inference,</p>
+<p><span class="math display">\[
+t=r\sqrt{\frac{n-2}{1-r^2}},\qquad df=n-2.
+\]</span></p>
+<p><strong>Step 4 — interpret the result.</strong> Rowe reports
+approximately <span class="math inline">\(r=-0.777\)</span>, indicating
+a relatively strong negative linear association: drug content tends to
+be lower in leaves collected at greater heights. A small p-value
+provides evidence against <span
+class="math inline">\(H_0:\rho=0\)</span>. <strong>Correlation does not,
+by itself, establish causation.</strong></p>
+<h3 id="why-are-the-degrees-of-freedom-n-2-in-a-correlation-test">Why
+are the degrees of freedom <span class="math inline">\(n-2\)</span> in a
+correlation test?</h3>
+<p>In simple linear regression with an intercept, testing whether the
+population slope is zero is equivalent to testing whether the population
+Pearson correlation is zero. The regression estimates <strong>two
+parameters</strong> from <span class="math inline">\(n\)</span> paired
+observations: the intercept <span class="math inline">\(\beta_0\)</span>
+and the slope <span class="math inline">\(\beta_1\)</span>. The residual
+degrees of freedom are therefore</p>
+<p><span class="math display">\[
+\boxed{df=n-2}.
+\]</span></p>
+<p>We subtract two <strong>because the model estimates two
+parameters</strong>, not simply because two variables were measured.</p>
+<h3 id="pearson-correlation-in-r-cor.test">Pearson correlation in R:
+<code>cor.test()</code></h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 01_Correlation_Rtest.R — base R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.70</span>,<span class="fl">2.31</span>,<span class="fl">2.89</span>,<span class="fl">1.30</span>,<span class="fl">3.21</span>,<span class="fl">1.84</span>,<span class="fl">3.27</span>,<span class="fl">4.21</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>            <span class="fl">1.32</span>,<span class="fl">3.67</span>,<span class="fl">2.78</span>,<span class="fl">3.71</span>,<span class="fl">3.23</span>,<span class="fl">3.29</span>,<span class="fl">3.46</span>,<span class="fl">3.95</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>            <span class="fl">1.70</span>,<span class="fl">2.92</span>,<span class="fl">2.67</span>,<span class="fl">3.02</span>,<span class="fl">2.37</span>,<span class="fl">2.64</span>,<span class="fl">4.25</span>,<span class="fl">1.90</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>drug <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.66</span>,<span class="fl">1.34</span>,<span class="fl">1.27</span>,<span class="fl">1.61</span>,<span class="fl">1.17</span>,<span class="fl">1.73</span>,<span class="fl">1.17</span>,<span class="fl">1.19</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.93</span>,<span class="fl">1.10</span>,<span class="fl">1.37</span>,<span class="fl">1.19</span>,<span class="fl">1.27</span>,<span class="fl">0.85</span>,<span class="fl">1.16</span>,<span class="fl">1.14</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.25</span>,<span class="fl">1.49</span>,<span class="fl">1.17</span>,<span class="fl">1.16</span>,<span class="fl">1.75</span>,<span class="fl">1.36</span>,<span class="fl">1.00</span>,<span class="fl">1.48</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(height, drug, <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Leaf height (m)&quot;</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Drug content (mg/100 g dry leaf)&quot;</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;Leaf height and drug content&quot;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">cor.test</span>(height, drug, <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(result)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Pearson r =&quot;</span>, <span class="fu">unname</span>(result<span class="sc">$</span>estimate), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="cf">if</span> (result<span class="sc">$</span>p.value <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="st">&quot;Reject H0</span><span class="sc">\n</span><span class="st">&quot;</span> <span class="cf">else</span> <span class="st">&quot;Do not reject H0</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<blockquote>
+<p>[!CAUTION] Pearson correlation measures <strong>linear</strong>
+association and can be sensitive to outliers. Inspect the scatterplot
+before interpreting <span class="math inline">\(r\)</span> or its
+p-value.</p>
+</blockquote>
+<hr />
+<h1 id="simple-linear-regression">3. Simple linear regression</h1>
+<p>Correlation summarizes the <strong>direction and strength of a linear
+association</strong> without assigning response and predictor roles.
+Regression distinguishes the <strong>response</strong> (<span
+class="math inline">\(Y\)</span>) from the <strong>predictor</strong>
+(<span class="math inline">\(x\)</span>) and estimates how the <em>mean
+response</em> changes with a one-unit change in the predictor.</p>
+<p>For the leaf example, let <span class="math inline">\(Y_i\)</span>
+denote drug content and <span class="math inline">\(x_i\)</span> denote
+leaf height. The <strong>population regression model</strong> is</p>
+<p><span class="math display">\[
+\boxed{Y_i=\beta_0+\beta_1x_i+\varepsilon_i}.
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span>: intercept — expected
+drug content when height is zero (possibly outside the observed
+range).</li>
+<li><span class="math inline">\(\beta_1\)</span>: slope — change in
+<strong>mean</strong> drug content for a 1 m increase in height.</li>
+<li><span class="math inline">\(\varepsilon_i\)</span>: unexplained
+random deviation from the population regression line.</li>
+</ul>
+<p>The fitted sample equation is</p>
+<p><span class="math display">\[
+\boxed{\hat Y_i=b_0+b_1x_i}.
+\]</span></p>
+<p>The hat in <span class="math inline">\(\hat Y_i\)</span> denotes a
+<strong>fitted value</strong>. The coefficients <span
+class="math inline">\(b_0\)</span> and <span
+class="math inline">\(b_1\)</span> estimate the unknown population
+intercept <span class="math inline">\(\beta_0\)</span> and slope <span
+class="math inline">\(\beta_1\)</span>. A negative <span
+class="math inline">\(b_1\)</span> indicates that the fitted mean drug
+content decreases as leaf height increases.</p>
+<p>In the R formula <code>drug ~ height</code>, the response
+(<code>drug</code>) is on the left of <code>~</code>, and the predictor
+(<code>height</code>) is on the right.</p>
+<h3 id="zero-conditional-mean-assumption">Zero conditional mean
+assumption</h3>
+<p>An important assumption of the regression model is</p>
+<p><span class="math display">\[
+\boxed{E(\varepsilon_i\mid x_i)=0}.
+\]</span></p>
+<p>This is the <strong>zero conditional mean assumption</strong>: at
+every specified predictor value, the expected random error is zero.</p>
+<p>For example, among leaves growing at a given height, some may have
+more drug than the population regression line predicts and others less.
+The assumption is that these deviations average to zero <strong>at that
+height</strong>, and likewise at other heights.</p>
+<p>It follows that</p>
+<p><span class="math display">\[
+\boxed{E(Y_i\mid x_i)=\beta_0+\beta_1x_i}.
+\]</span></p>
+<p>Thus, the population regression line describes the <strong>expected
+(mean) drug content at a given height</strong>, not the drug content of
+every individual leaf.</p>
+<blockquote>
+<p>[!NOTE] <strong>Population error versus sample residual:</strong>
+<span class="math inline">\(\varepsilon_i\)</span> is an unobserved
+deviation from the population conditional mean, whereas <span
+class="math inline">\(e_i=Y_i-\hat Y_i\)</span> is calculated using the
+fitted sample line. Ordinary least squares with an intercept ensures
+that the <em>sample residuals</em> sum to zero; it does
+<strong>not</strong> establish that the <em>population errors</em> have
+zero conditional mean.</p>
+</blockquote>
+<hr />
+<h1 id="least-squares-fitted-values-and-residuals">4. Least squares,
+fitted values, and residuals</h1>
+<p>As in Lecture 06, distinguish the <strong>observed response</strong>
+<span class="math inline">\(Y_i\)</span>, the <strong>fitted
+response</strong> <span class="math inline">\(\hat Y_i\)</span>, and
+their difference, the <strong>residual</strong> <span
+class="math inline">\(e_i\)</span>:</p>
+<p><span class="math display">\[
+Y_i=\hat Y_i+e_i,\qquad e_i=Y_i-\hat Y_i.
+\]</span></p>
+<p>The <strong>ordinary least-squares (OLS)</strong> method chooses
+<span class="math inline">\(b_0\)</span> and <span
+class="math inline">\(b_1\)</span> to minimize the sum of squared
+residuals:</p>
+<p><span class="math display">\[
+SSE=\sum_{i=1}^n\big[Y_i-(b_0+b_1x_i)\big]^2.
+\]</span></p>
+<p>For simple linear regression with an intercept, the solution is</p>
+<p><span class="math display">\[
+b_1=\frac{\sum(x_i-\bar x)(Y_i-\bar Y)}{\sum(x_i-\bar x)^2}
+=\frac{S_{xy}}{S_{xx}},
+\qquad b_0=\bar Y-b_1\bar x.
+\]</span></p>
+<p>With an intercept in the fitted model, the total variation in the
+response can be partitioned as</p>
+<p><span class="math display">\[
+\underbrace{\sum(Y_i-\bar Y)^2}_{SST}
+=\underbrace{\sum(\hat Y_i-\bar Y)^2}_{SSR}
++\underbrace{\sum(Y_i-\hat Y_i)^2}_{SSE}.
+\]</span></p>
+<p>This is the regression version of the ANOVA decomposition:
+<strong>total variation = variation explained by the model + residual
+variation</strong>.</p>
+<h3 id="fit-the-least-squares-regression-line-in-r">Fit the
+least-squares regression line in R</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 02_Regression_lm.R — base R</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.70</span>,<span class="fl">2.31</span>,<span class="fl">2.89</span>,<span class="fl">1.30</span>,<span class="fl">3.21</span>,<span class="fl">1.84</span>,<span class="fl">3.27</span>,<span class="fl">4.21</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>            <span class="fl">1.32</span>,<span class="fl">3.67</span>,<span class="fl">2.78</span>,<span class="fl">3.71</span>,<span class="fl">3.23</span>,<span class="fl">3.29</span>,<span class="fl">3.46</span>,<span class="fl">3.95</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="fl">1.70</span>,<span class="fl">2.92</span>,<span class="fl">2.67</span>,<span class="fl">3.02</span>,<span class="fl">2.37</span>,<span class="fl">2.64</span>,<span class="fl">4.25</span>,<span class="fl">1.90</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>drug <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.66</span>,<span class="fl">1.34</span>,<span class="fl">1.27</span>,<span class="fl">1.61</span>,<span class="fl">1.17</span>,<span class="fl">1.73</span>,<span class="fl">1.17</span>,<span class="fl">1.19</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.93</span>,<span class="fl">1.10</span>,<span class="fl">1.37</span>,<span class="fl">1.19</span>,<span class="fl">1.27</span>,<span class="fl">0.85</span>,<span class="fl">1.16</span>,<span class="fl">1.14</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.25</span>,<span class="fl">1.49</span>,<span class="fl">1.17</span>,<span class="fl">1.16</span>,<span class="fl">1.75</span>,<span class="fl">1.36</span>,<span class="fl">1.00</span>,<span class="fl">1.48</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(drug <span class="sc">~</span> height)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">data.frame</span>(<span class="at">observed =</span> drug, <span class="at">fitted =</span> <span class="fu">fitted</span>(fit),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">residual =</span> <span class="fu">resid</span>(fit)))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(height, drug, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">xlab =</span> <span class="st">&quot;Height (m)&quot;</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Drug content (mg/100 g)&quot;</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><strong>Think:</strong> In one-way ANOVA, all observations in a group
+have the same fitted group mean. In regression, different values of
+height generally produce different fitted values. Use the fitted
+equation to predict drug content at a height of 3 m.</p>
+<hr />
+<h1 id="testing-and-interpreting-regression">5. Testing and interpreting
+regression</h1>
+<p>To assess whether mean drug content changes linearly with height,
+test whether the <strong>population regression slope</strong> differs
+from zero:</p>
+<p><span class="math display">\[
+H_0:\beta_1=0,\qquad H_A:\beta_1\ne0.
+\]</span></p>
+<p>With independent errors, constant error variance, and normally
+distributed errors for exact small-sample inference, the residual
+variance estimate and standard error of the estimated slope are</p>
+<p><span class="math display">\[
+s^2=\frac{SSE}{n-2},\qquad SE(b_1)=\frac{s}{\sqrt{S_{xx}}}.
+\]</span></p>
+<p>The test statistic is</p>
+<p><span class="math display">\[
+t=\frac{b_1}{SE(b_1)},\qquad df=n-2.
+\]</span></p>
+<p>A <span class="math inline">\((1-\alpha)100\%\)</span> confidence
+interval for the population slope is</p>
+<p><span class="math display">\[
+b_1\pm t_{1-\alpha/2,n-2}SE(b_1).
+\]</span></p>
+<p>The <strong>coefficient of determination</strong> is</p>
+<p><span class="math display">\[
+R^2=1-\frac{SSE}{SST}.
+\]</span></p>
+<p>For a model fitted with an intercept, <span
+class="math inline">\(R^2\)</span> is the <strong>proportion of the
+observed variation in the response explained by the fitted
+model</strong>. In simple linear regression, <span
+class="math inline">\(R^2=r^2\)</span>. Because <span
+class="math inline">\(R^2\)</span> is nonnegative, the direction of
+association must be determined from <span
+class="math inline">\(r\)</span> or <span
+class="math inline">\(b_1\)</span>.</p>
+<h3
+id="test-the-slope-inspect-confidence-intervals-and-make-predictions">Test
+the slope, inspect confidence intervals, and make predictions</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 03_SlopeTest_lm.R — base R</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>height <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.70</span>,<span class="fl">2.31</span>,<span class="fl">2.89</span>,<span class="fl">1.30</span>,<span class="fl">3.21</span>,<span class="fl">1.84</span>,<span class="fl">3.27</span>,<span class="fl">4.21</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>            <span class="fl">1.32</span>,<span class="fl">3.67</span>,<span class="fl">2.78</span>,<span class="fl">3.71</span>,<span class="fl">3.23</span>,<span class="fl">3.29</span>,<span class="fl">3.46</span>,<span class="fl">3.95</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="fl">1.70</span>,<span class="fl">2.92</span>,<span class="fl">2.67</span>,<span class="fl">3.02</span>,<span class="fl">2.37</span>,<span class="fl">2.64</span>,<span class="fl">4.25</span>,<span class="fl">1.90</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>drug <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.66</span>,<span class="fl">1.34</span>,<span class="fl">1.27</span>,<span class="fl">1.61</span>,<span class="fl">1.17</span>,<span class="fl">1.73</span>,<span class="fl">1.17</span>,<span class="fl">1.19</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.93</span>,<span class="fl">1.10</span>,<span class="fl">1.37</span>,<span class="fl">1.19</span>,<span class="fl">1.27</span>,<span class="fl">0.85</span>,<span class="fl">1.16</span>,<span class="fl">1.14</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="fl">1.25</span>,<span class="fl">1.49</span>,<span class="fl">1.17</span>,<span class="fl">1.16</span>,<span class="fl">1.75</span>,<span class="fl">1.36</span>,<span class="fl">1.00</span>,<span class="fl">1.48</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(drug <span class="sc">~</span> height)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">confint</span>(fit))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>new_leaf <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">height =</span> <span class="dv">3</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">predict</span>(fit, <span class="at">newdata =</span> new_leaf, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>))</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">predict</span>(fit, <span class="at">newdata =</span> new_leaf, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>))</span></code></pre></div>
+<p><strong>Confidence interval versus prediction interval:</strong> A
+confidence interval expresses uncertainty about the <strong>population
+mean drug content</strong> at a specified height. A prediction interval
+accounts for uncertainty about the drug content of <strong>one new
+leaf</strong> at that height; it is wider because individual leaves also
+vary around the mean. Predictions far outside the observed height range
+(1.30–4.25 m) involve extrapolation and may be unreliable.</p>
+<blockquote>
+<p>[!NOTE] <strong>Correlation and regression are connected, but not
+identical.</strong> With one predictor and an intercept, testing <span
+class="math inline">\(H_0:\rho=0\)</span> by Pearson’s test and testing
+<span class="math inline">\(H_0:\beta_1=0\)</span> by regression give
+the same t-statistic and p-value under the standard model assumptions.
+Correlation is symmetric; predicting drug content from height is
+<strong>not</strong> the same regression as predicting height from drug
+content.</p>
+</blockquote>
+<h3 id="why-do-correlation-and-regression-use-a-t-statistic">Why do
+correlation and regression use a t-statistic?</h3>
+<p>The <strong>t-statistic</strong> in correlation and regression
+follows the same idea as in a one-sample t-test: it expresses the
+distance between an estimated parameter and its hypothesized value in
+<strong>standard-error units</strong>.</p>
+<p><span class="math display">\[
+\boxed{
+t=\frac{\text{Estimated parameter}-\text{Hypothesized
+value}}{\text{Standard error}}
+}
+\]</span></p>
+<p>The difference lies in <strong>which population parameter is being
+tested</strong>:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Test</th>
+<th>t-statistic</th>
+<th>Null hypothesis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One-sample t-test</td>
+<td><span class="math inline">\(\displaystyle t=\frac{\bar
+X-\mu_0}{s/\sqrt n}\)</span></td>
+<td><span class="math inline">\(H_0:\mu=\mu_0\)</span></td>
+</tr>
+<tr>
+<td>Linear regression</td>
+<td><span class="math inline">\(\displaystyle
+t=\frac{b_1}{SE(b_1)}\)</span></td>
+<td><span class="math inline">\(H_0:\beta_1=0\)</span></td>
+</tr>
+<tr>
+<td>Pearson correlation</td>
+<td><span class="math inline">\(\displaystyle
+t=r\sqrt{\frac{n-2}{1-r^2}}\)</span></td>
+<td><span class="math inline">\(H_0:\rho=0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Here, <span class="math inline">\(b_1\)</span> estimates the
+population slope <span class="math inline">\(\beta_1\)</span>; <span
+class="math inline">\(r\)</span> estimates the population correlation
+<span class="math inline">\(\rho\)</span>.</p>
+<p>In simple linear regression with an intercept, testing <span
+class="math inline">\(H_0:\beta_1=0\)</span> produces <strong>the same
+t-statistic and two-sided p-value</strong> as testing <span
+class="math inline">\(H_0:\rho=0\)</span> with the conventional Pearson
+test. Both have <span class="math inline">\(df=n-2\)</span> under their
+usual assumptions. The one-sample t-test instead has <span
+class="math inline">\(df=n-1\)</span>.</p>
+<p><strong>Key point:</strong> A t-statistic is not restricted to
+testing means. It can also test a regression slope or a correlation
+coefficient.</p>
+<hr />
+<h1 id="ancova-combining-a-factor-and-a-covariate">6. ANCOVA: combining
+a factor and a covariate</h1>
+<p>Lecture 06 examined two-way ANOVA with <strong>categorical
+factors</strong>. <strong>Analysis of covariance (ANCOVA)</strong> uses
+the same linear-model framework but combines a categorical factor, such
+as treatment, with a <strong>continuous covariate</strong>, such as age.
+Accounting for the covariate can reduce unexplained variation in the
+response.</p>
+<p>Suppose <span class="math inline">\(Y_i\)</span> is the percent
+change in lung function (FEV1), <span class="math inline">\(x_i\)</span>
+is patient age, and <span class="math inline">\(D_i\)</span> indicates
+treatment:</p>
+<p><span class="math display">\[
+D_i=\begin{cases}0&amp;\text{OldDrug}\\1&amp;\text{NewDrug}.\end{cases}
+\]</span></p>
+<p>The <strong>common-slopes ANCOVA</strong> model is</p>
+<p><span class="math display">\[
+\boxed{Y_i=\beta_0+\tau D_i+\beta_1(x_i-x_0)+\varepsilon_i},
+\]</span></p>
+<p>where <span class="math inline">\(x_0\)</span> is a chosen reference
+age (often the overall sample mean).</p>
+<ul>
+<li><span class="math inline">\(\beta_0\)</span>: expected outcome with
+OldDrug at age <span class="math inline">\(x_0\)</span>.</li>
+<li><span class="math inline">\(\tau\)</span>: <strong>age-adjusted
+treatment difference</strong>, NewDrug minus OldDrug, at the same
+age.</li>
+<li><span class="math inline">\(\beta_1\)</span>: common change in mean
+outcome per additional year of age.</li>
+<li><span class="math inline">\(\varepsilon_i\)</span>: individual
+deviation from the fitted treatment-specific line.</li>
+</ul>
+<p>The common-slopes model describes the two treatment groups with
+<strong>parallel lines</strong>: they have the same age slope <span
+class="math inline">\(\beta_1\)</span>, but may have different
+intercepts. To allow the age slope to differ between treatments, include
+an <strong>interaction term</strong>:</p>
+<p><span class="math display">\[
+\boxed{Y_i=\beta_0+\tau D_i+\beta_1(x_i-x_0)
++\gamma D_i(x_i-x_0)+\varepsilon_i}.
+\]</span></p>
+<p>Here, <span class="math inline">\(\gamma\)</span> is the
+<strong>difference between the treatment-specific age slopes</strong>.
+Consequently, the expected treatment contrast at age <span
+class="math inline">\(x\)</span> is <span
+class="math inline">\(\tau+\gamma(x-x_0)\)</span>, which can vary with
+age. This is analogous to the interaction in two-way ANOVA from Lecture
+06.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>R formula</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>change ~ treatment</code></td>
+<td>Unadjusted comparison of treatment means (one-way ANOVA / pooled
+t-test)</td>
+</tr>
+<tr>
+<td><code>change ~ age</code></td>
+<td>Regression using age alone</td>
+</tr>
+<tr>
+<td><code>change ~ treatment + age</code></td>
+<td>ANCOVA, common slopes</td>
+</tr>
+<tr>
+<td><code>change ~ treatment * age</code></td>
+<td>ANCOVA with treatment × age interaction</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!IMPORTANT] <strong>Check the interaction before interpreting a
+common treatment effect.</strong> A nonsignificant interaction does not
+<em>prove</em> slopes are equal. Use the common-slopes model when it is
+scientifically plausible and adequately supported, not solely because a
+preliminary interaction test gives <span
+class="math inline">\(p&gt;0.05\)</span>. If slopes differ meaningfully,
+report treatment contrasts at specified ages rather than one universal
+adjusted difference.</p>
+</blockquote>
+<hr />
+<h1
+id="worked-example-chronic-obstructive-pulmonary-disease-copd-treatments-and-age">7.
+Worked example: Chronic Obstructive Pulmonary Disease (COPD) treatments
+and age</h1>
+<p><strong>Source:</strong> Rowe, Chapter 16, Table 16.1. In this
+clinical-trial example, patients were randomly assigned to OldDrug or
+NewDrug. The response was the <strong>percentage change in FEV1 after
+one week</strong>; age was recorded as a continuous covariate. The
+dataset includes 20 patients receiving OldDrug and 25 receiving
+NewDrug.</p>
+<h2 id="observed-data">Observed data</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: right;">Patient</th>
+<th style="text-align: right;">OldDrug age</th>
+<th style="text-align: right;">OldDrug FEV1 change (%)</th>
+<th style="text-align: right;">NewDrug age</th>
+<th style="text-align: right;">NewDrug FEV1 change (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">30</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">52</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">27</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">77</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">48</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">50</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">62</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">46</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">72</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">57</td>
+<td style="text-align: right;">37</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">47</td>
+<td style="text-align: right;">29</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">66</td>
+<td style="text-align: right;">27</td>
+<td style="text-align: right;">46</td>
+<td style="text-align: right;">52</td>
+</tr>
+<tr>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">32</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">73</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">25</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">61</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">53</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">29</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">58</td>
+<td style="text-align: right;">42</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">56</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">43</td>
+<td style="text-align: right;">43</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">—</td>
+<td style="text-align: right;">44</td>
+<td style="text-align: right;">41</td>
+</tr>
+<tr>
+<td style="text-align: right;"><strong>Mean</strong></td>
+<td style="text-align: right;"><strong>60.25</strong></td>
+<td style="text-align: right;"><strong>24.05</strong></td>
+<td style="text-align: right;"><strong>57.92</strong></td>
+<td style="text-align: right;"><strong>37.84</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The observed mean FEV1 changes are 24.05% for OldDrug and 37.84% for
+NewDrug. Their <strong>unadjusted difference</strong> is <span
+class="math inline">\(37.84-24.05=13.79\)</span> <strong>percentage
+points</strong>. Because the groups also differ in mean age, ANCOVA
+estimates the treatment difference <strong>at the same age</strong>.</p>
+<h2 id="explore-the-data-and-check-interaction">7.1. Explore the data
+and check interaction</h2>
+<p><strong>Interaction hypotheses:</strong> <span
+class="math inline">\(H_0:\gamma=0\)</span> versus <span
+class="math inline">\(H_A:\gamma\ne0\)</span>. Fit the model containing
+<code>treatment * age_c</code> and compare it with the common-slopes
+model using a partial F-test. Because only one interaction coefficient
+is added, this F-statistic equals the square of the interaction
+coefficient’s t-statistic.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 05_COPD_Interaction.R — base R</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>old_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">70</span>,<span class="dv">77</span>,<span class="dv">64</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">77</span>,<span class="dv">69</span>,<span class="dv">48</span>,<span class="dv">43</span>,<span class="dv">62</span>,<span class="dv">44</span>,<span class="dv">58</span>,<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">66</span>,<span class="dv">55</span>,<span class="dv">73</span>,<span class="dv">61</span>,<span class="dv">53</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>old_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">24</span>,<span class="dv">15</span>,<span class="dv">26</span>,<span class="dv">28</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">24</span>,<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">29</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">11</span>,<span class="dv">24</span>,<span class="dv">23</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>new_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">57</span>,<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">72</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">45</span>,<span class="dv">63</span>,<span class="dv">56</span>,<span class="dv">57</span>,<span class="dv">63</span>,<span class="dv">57</span>,<span class="dv">50</span>,<span class="dv">46</span>,<span class="dv">74</span>,<span class="dv">74</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">58</span>,<span class="dv">56</span>,<span class="dv">43</span>,<span class="dv">50</span>,<span class="dv">44</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>new_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">46</span>,<span class="dv">40</span>,<span class="dv">30</span>,<span class="dv">38</span>,<span class="dv">27</span>,<span class="dv">39</span>,<span class="dv">36</span>,<span class="dv">50</span>,<span class="dv">41</span>,<span class="dv">36</span>,<span class="dv">46</span>,<span class="dv">38</span>,<span class="dv">37</span>,<span class="dv">35</span>,<span class="dv">52</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">36</span>,<span class="dv">29</span>,<span class="dv">42</span>,<span class="dv">38</span>,<span class="dv">43</span>,<span class="dv">48</span>,<span class="dv">41</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(old_age, new_age),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">change =</span> <span class="fu">c</span>(old_change, new_change),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="fu">length</span>(old_age)),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">rep</span>(<span class="st">&quot;NewDrug&quot;</span>, <span class="fu">length</span>(new_age))),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="st">&quot;NewDrug&quot;</span>))</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age_c <span class="ot">&lt;-</span> df<span class="sc">$</span>age <span class="sc">-</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">aggregate</span>(<span class="fu">cbind</span>(age, change) <span class="sc">~</span> treatment, <span class="at">data =</span> df, mean))</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>age, df<span class="sc">$</span>change, <span class="at">col =</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>treatment), <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Age (years)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;FEV1 change (%)&quot;</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(df<span class="sc">$</span>treatment), <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>fit_common <span class="ot">&lt;-</span> <span class="fu">lm</span>(change <span class="sc">~</span> treatment <span class="sc">+</span> age_c, <span class="at">data =</span> df)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>fit_interaction <span class="ot">&lt;-</span> <span class="fu">lm</span>(change <span class="sc">~</span> treatment <span class="sc">*</span> age_c, <span class="at">data =</span> df)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit_interaction))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>comparison <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_common, fit_interaction)</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(comparison)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>p_value <span class="ot">&lt;-</span> comparison<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">2</span>]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="cf">if</span> (p_value <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="st">&quot;Reject H0: evidence of interaction</span><span class="sc">\n</span><span class="st">&quot;</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="st">&quot;Do not reject H0: insufficient evidence of interaction</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">levels</span>(df<span class="sc">$</span>treatment)) {</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  d <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, treatment <span class="sc">==</span> g)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="fu">lm</span>(change <span class="sc">~</span> age, <span class="at">data =</span> d), <span class="at">col =</span> <span class="fu">which</span>(<span class="fu">levels</span>(df<span class="sc">$</span>treatment) <span class="sc">==</span> g), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>Rowe reports an interaction p-value of approximately
+<strong>0.356</strong> (Chapter 16, Table 16.2). Since <span
+class="math inline">\(p&gt;0.05\)</span>, we <strong>do not
+reject</strong> <span class="math inline">\(H_0:\gamma=0\)</span>. There
+is insufficient evidence that the age slopes differ, although this does
+not prove they are identical. We therefore examine the scientifically
+plausible common-slopes model.</p>
+<h2 id="fit-and-interpret-the-common-slopes-ancova">7.2. Fit and
+interpret the common-slopes ANCOVA</h2>
+<p>In the common-slopes model, <span
+class="math inline">\(H_0:\tau=0\)</span> tests for an
+<strong>age-adjusted treatment difference</strong>, while <span
+class="math inline">\(H_0:\beta_1=0\)</span> tests for an association
+between age and response after accounting for treatment. The treatment
+coefficient is expressed in <strong>percentage points</strong>, not as a
+percentage relative to OldDrug.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 06_COPD_ANCOVA.R — base R</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>old_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">70</span>,<span class="dv">77</span>,<span class="dv">64</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">77</span>,<span class="dv">69</span>,<span class="dv">48</span>,<span class="dv">43</span>,<span class="dv">62</span>,<span class="dv">44</span>,<span class="dv">58</span>,<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">66</span>,<span class="dv">55</span>,<span class="dv">73</span>,<span class="dv">61</span>,<span class="dv">53</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>old_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">24</span>,<span class="dv">15</span>,<span class="dv">26</span>,<span class="dv">28</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">24</span>,<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">29</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">11</span>,<span class="dv">24</span>,<span class="dv">23</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>new_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">57</span>,<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">72</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">45</span>,<span class="dv">63</span>,<span class="dv">56</span>,<span class="dv">57</span>,<span class="dv">63</span>,<span class="dv">57</span>,<span class="dv">50</span>,<span class="dv">46</span>,<span class="dv">74</span>,<span class="dv">74</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">58</span>,<span class="dv">56</span>,<span class="dv">43</span>,<span class="dv">50</span>,<span class="dv">44</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>new_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">46</span>,<span class="dv">40</span>,<span class="dv">30</span>,<span class="dv">38</span>,<span class="dv">27</span>,<span class="dv">39</span>,<span class="dv">36</span>,<span class="dv">50</span>,<span class="dv">41</span>,<span class="dv">36</span>,<span class="dv">46</span>,<span class="dv">38</span>,<span class="dv">37</span>,<span class="dv">35</span>,<span class="dv">52</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">36</span>,<span class="dv">29</span>,<span class="dv">42</span>,<span class="dv">38</span>,<span class="dv">43</span>,<span class="dv">48</span>,<span class="dv">41</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">c</span>(old_age, new_age),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">change =</span> <span class="fu">c</span>(old_change, new_change),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">&quot;NewDrug&quot;</span>, <span class="dv">25</span>)),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="st">&quot;NewDrug&quot;</span>)))</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>reference_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>age)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>age_c <span class="ot">&lt;-</span> df<span class="sc">$</span>age <span class="sc">-</span> reference_age</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(change <span class="sc">~</span> treatment <span class="sc">+</span> age_c, <span class="at">data =</span> df)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(fit))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">confint</span>(fit))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">anova</span>(fit))</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Reference age:&quot;</span>, reference_age, <span class="st">&quot;years</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Adjusted NewDrug - OldDrug difference:&quot;</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">coef</span>(fit)[<span class="st">&quot;treatmentNewDrug&quot;</span>], <span class="st">&quot;percentage points</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>new_patients <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="st">&quot;NewDrug&quot;</span>),</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                                             <span class="at">levels =</span> <span class="fu">levels</span>(df<span class="sc">$</span>treatment)),</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>                           <span class="at">age_c =</span> <span class="fu">c</span>(<span class="dv">60</span>, <span class="dv">60</span>) <span class="sc">-</span> reference_age)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">cbind</span>(new_patients, <span class="fu">predict</span>(fit, <span class="at">newdata =</span> new_patients,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)))</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>age, df<span class="sc">$</span>change, <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">col =</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>treatment),</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Age (years)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;FEV1 change (%)&quot;</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(df<span class="sc">$</span>age), <span class="fu">max</span>(df<span class="sc">$</span>age), <span class="at">length.out =</span> <span class="dv">100</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (g <span class="cf">in</span> <span class="fu">levels</span>(df<span class="sc">$</span>treatment)) {</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>  nd <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age_c =</span> ages <span class="sc">-</span> reference_age,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>                   <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">rep</span>(g, <span class="fu">length</span>(ages)),</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">levels =</span> <span class="fu">levels</span>(df<span class="sc">$</span>treatment)))</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lines</span>(ages, <span class="fu">predict</span>(fit, <span class="at">newdata =</span> nd),</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">which</span>(<span class="fu">levels</span>(df<span class="sc">$</span>treatment) <span class="sc">==</span> g), <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(df<span class="sc">$</span>treatment), <span class="at">col =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">16</span>, <span class="at">lty =</span> <span class="dv">1</span>, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p>Rowe reports an age-adjusted NewDrug–OldDrug difference of
+approximately <strong>12.405 percentage points</strong> and a common age
+slope of approximately <strong>−0.594 percentage points per
+year</strong> (Chapter 16, Table 16.3). Interpret these as follows:</p>
+<ul>
+<li>Comparing patients <strong>of the same age</strong>, the model
+estimates an average FEV1 improvement <strong>12.4 percentage points
+higher</strong> with NewDrug.</li>
+<li>Holding treatment fixed, each additional year of age is associated
+with an average FEV1 improvement <strong>0.594 percentage points
+lower</strong>.</li>
+<li>These are model-based estimates, not statements that every
+individual patient will follow the line.</li>
+</ul>
+<blockquote>
+<p>[!NOTE] <strong>Why center age?</strong> With
+<code>age_c = age - mean(age)</code>, the intercept is the OldDrug
+expected response at a representative age. Centering changes the
+intercept but does not change fitted responses, the common slope, or the
+treatment contrast in the common-slopes model. With an interaction,
+centering also makes the treatment main-effect coefficient refer to the
+selected reference age rather than age zero.</p>
+</blockquote>
+<h2 id="check-ancova-residuals">7.3. Check ANCOVA residuals</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 07_COPD_Diagnostics.R — base R</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>old_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">70</span>,<span class="dv">77</span>,<span class="dv">64</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">77</span>,<span class="dv">69</span>,<span class="dv">48</span>,<span class="dv">43</span>,<span class="dv">62</span>,<span class="dv">44</span>,<span class="dv">58</span>,<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">66</span>,<span class="dv">55</span>,<span class="dv">73</span>,<span class="dv">61</span>,<span class="dv">53</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>old_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">24</span>,<span class="dv">15</span>,<span class="dv">26</span>,<span class="dv">28</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">24</span>,<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">29</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">11</span>,<span class="dv">24</span>,<span class="dv">23</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>new_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">57</span>,<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">72</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">45</span>,<span class="dv">63</span>,<span class="dv">56</span>,<span class="dv">57</span>,<span class="dv">63</span>,<span class="dv">57</span>,<span class="dv">50</span>,<span class="dv">46</span>,<span class="dv">74</span>,<span class="dv">74</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">58</span>,<span class="dv">56</span>,<span class="dv">43</span>,<span class="dv">50</span>,<span class="dv">44</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>new_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">46</span>,<span class="dv">40</span>,<span class="dv">30</span>,<span class="dv">38</span>,<span class="dv">27</span>,<span class="dv">39</span>,<span class="dv">36</span>,<span class="dv">50</span>,<span class="dv">41</span>,<span class="dv">36</span>,<span class="dv">46</span>,<span class="dv">38</span>,<span class="dv">37</span>,<span class="dv">35</span>,<span class="dv">52</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">36</span>,<span class="dv">29</span>,<span class="dv">42</span>,<span class="dv">38</span>,<span class="dv">43</span>,<span class="dv">48</span>,<span class="dv">41</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">c</span>(old_age, new_age),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">change =</span> <span class="fu">c</span>(old_change, new_change),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">&quot;NewDrug&quot;</span>, <span class="dv">25</span>))))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(change <span class="sc">~</span> treatment <span class="sc">+</span> age, <span class="at">data =</span> df)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>age, <span class="fu">resid</span>(fit), <span class="at">col =</span> <span class="fu">as.integer</span>(df<span class="sc">$</span>treatment), <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;Age (years)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Residual (percentage points)&quot;</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;ANCOVA residuals versus age&quot;</span>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p>Inspect the residual plots for curvature, unequal scatter, outliers,
+and influential observations. Independence of errors must also be
+justified from the study design. Age was measured <strong>before
+treatment</strong>, so adjusting for it does not remove an effect of
+treatment acting through age.</p>
+<hr />
+<h1 id="comparing-a-t-test-and-ancova">8. Comparing a t-test and
+ANCOVA</h1>
+<p>A two-sample t-test compares <strong>unadjusted group means</strong>,
+whereas ANCOVA compares <strong>model-adjusted means at a common
+covariate value</strong>. If age explains substantial variation in FEV1
+response, adjusting for it can reduce the residual variation and improve
+precision. This benefit is not guaranteed, however, and covariate
+adjustment does not automatically eliminate confounding or bias.</p>
+<p>For a fair comparison here, use a pooled two-sample t-test
+(<code>var.equal = TRUE</code>), corresponding to
+<code>lm(change ~ treatment)</code>; Welch’s t-test uses a different
+variance assumption and is a separate alternative.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 08_COPD_Ttest_vs_ANCOVA.R — base R</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>old_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">70</span>,<span class="dv">77</span>,<span class="dv">64</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">77</span>,<span class="dv">69</span>,<span class="dv">48</span>,<span class="dv">43</span>,<span class="dv">62</span>,<span class="dv">44</span>,<span class="dv">58</span>,<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">66</span>,<span class="dv">55</span>,<span class="dv">73</span>,<span class="dv">61</span>,<span class="dv">53</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>old_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">24</span>,<span class="dv">15</span>,<span class="dv">26</span>,<span class="dv">28</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">24</span>,<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">29</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">11</span>,<span class="dv">24</span>,<span class="dv">23</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>new_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">57</span>,<span class="dv">65</span>,<span class="dv">52</span>,<span class="dv">72</span>,<span class="dv">63</span>,<span class="dv">64</span>,<span class="dv">45</span>,<span class="dv">63</span>,<span class="dv">56</span>,<span class="dv">57</span>,<span class="dv">63</span>,<span class="dv">57</span>,<span class="dv">50</span>,<span class="dv">46</span>,<span class="dv">74</span>,<span class="dv">74</span>,<span class="dv">55</span>,<span class="dv">65</span>,<span class="dv">58</span>,<span class="dv">56</span>,<span class="dv">43</span>,<span class="dv">50</span>,<span class="dv">44</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>new_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">28</span>,<span class="dv">46</span>,<span class="dv">40</span>,<span class="dv">30</span>,<span class="dv">38</span>,<span class="dv">27</span>,<span class="dv">39</span>,<span class="dv">36</span>,<span class="dv">50</span>,<span class="dv">41</span>,<span class="dv">36</span>,<span class="dv">46</span>,<span class="dv">38</span>,<span class="dv">37</span>,<span class="dv">35</span>,<span class="dv">52</span>,<span class="dv">25</span>,<span class="dv">25</span>,<span class="dv">36</span>,<span class="dv">29</span>,<span class="dv">42</span>,<span class="dv">38</span>,<span class="dv">43</span>,<span class="dv">48</span>,<span class="dv">41</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">c</span>(old_age, new_age),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                 <span class="at">change =</span> <span class="fu">c</span>(old_change, new_change),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                 <span class="at">treatment =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="dv">20</span>), <span class="fu">rep</span>(<span class="st">&quot;NewDrug&quot;</span>, <span class="dv">25</span>)),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;OldDrug&quot;</span>, <span class="st">&quot;NewDrug&quot;</span>)))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>unadjusted <span class="ot">&lt;-</span> <span class="fu">lm</span>(change <span class="sc">~</span> treatment, <span class="at">data =</span> df)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>adjusted <span class="ot">&lt;-</span> <span class="fu">lm</span>(change <span class="sc">~</span> treatment <span class="sc">+</span> age, <span class="at">data =</span> df)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>t_result <span class="ot">&lt;-</span> <span class="fu">t.test</span>(new_change, old_change, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t_result)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(unadjusted))</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">summary</span>(adjusted))</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>ci_unadjusted <span class="ot">&lt;-</span> <span class="fu">confint</span>(unadjusted)[<span class="st">&quot;treatmentNewDrug&quot;</span>, ]</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>ci_adjusted <span class="ot">&lt;-</span> <span class="fu">confint</span>(adjusted)[<span class="st">&quot;treatmentNewDrug&quot;</span>, ]</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unadjusted =</span> <span class="fu">c</span>(<span class="at">estimate =</span> <span class="fu">coef</span>(unadjusted)[<span class="st">&quot;treatmentNewDrug&quot;</span>],</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>                 <span class="at">lower =</span> ci_unadjusted[<span class="dv">1</span>], <span class="at">upper =</span> ci_unadjusted[<span class="dv">2</span>],</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>                 <span class="at">residual_SD =</span> <span class="fu">sigma</span>(unadjusted)),</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">ANCOVA =</span> <span class="fu">c</span>(<span class="at">estimate =</span> <span class="fu">coef</span>(adjusted)[<span class="st">&quot;treatmentNewDrug&quot;</span>],</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>             <span class="at">lower =</span> ci_adjusted[<span class="dv">1</span>], <span class="at">upper =</span> ci_adjusted[<span class="dv">2</span>],</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>             <span class="at">residual_SD =</span> <span class="fu">sigma</span>(adjusted))</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(results)</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;CI widths:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(results[, <span class="st">&quot;upper&quot;</span>] <span class="sc">-</span> results[, <span class="st">&quot;lower&quot;</span>])</span></code></pre></div>
+<p><strong>Questions to answer:</strong> Why is the unadjusted estimate
+about 13.79, while the age-adjusted estimate is about 12.4? Which
+confidence interval is narrower? What part of the within-treatment
+variation can age explain? Would you still adjust for age if it were
+measured <strong>after</strong> treatment and potentially affected by
+the drug?</p>
+<hr />
+<h1 id="which-statistical-method-should-we-use">9. Which statistical
+method should we use?</h1>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Response</th>
+<th>Predictor(s)</th>
+<th>Typical R function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Compare two independent group means</td>
+<td>Continuous</td>
+<td>Binary group</td>
+<td><code>t.test(y ~ group)</code></td>
+</tr>
+<tr>
+<td>Compare three or more group means</td>
+<td>Continuous</td>
+<td>Categorical factor</td>
+<td><code>aov(y ~ group)</code></td>
+</tr>
+<tr>
+<td>Test two categorical factors and their interaction</td>
+<td>Continuous</td>
+<td>Two factors</td>
+<td><code>aov(y ~ A * B)</code></td>
+</tr>
+<tr>
+<td>Describe linear association</td>
+<td>Two continuous variables</td>
+<td>Neither designated as response</td>
+<td><code>cor.test(x, y)</code></td>
+</tr>
+<tr>
+<td>Estimate a continuous response from a measured predictor</td>
+<td>Continuous</td>
+<td>One continuous predictor</td>
+<td><code>lm(y ~ x)</code></td>
+</tr>
+<tr>
+<td>Compare treatment groups adjusting for a measured baseline
+covariate</td>
+<td>Continuous</td>
+<td>Group + continuous covariate</td>
+<td><code>lm(y ~ group + x)</code></td>
+</tr>
+<tr>
+<td>Ask whether a treatment effect changes with a covariate</td>
+<td>Continuous</td>
+<td>Group × continuous covariate</td>
+<td><code>lm(y ~ group * x)</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Take-home message:</strong> ANOVA, linear regression, and
+ANCOVA use a shared modeling framework: <strong>observed response =
+fitted systematic component + residual variation</strong>. Choose among
+them according to the scientific question and the types of predictors
+available.</p>
+</body>
+</html>
