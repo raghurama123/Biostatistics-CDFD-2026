@@ -78,15 +78,85 @@ $$
 
 **Step 4 — interpret the result.** Rowe reports approximately $r=-0.777$, indicating a relatively strong negative linear association: drug content tends to be lower in leaves collected at greater heights. A small p-value provides evidence against $H_0:\rho=0$. **Correlation does not, by itself, establish causation.**
 
+
+### Why are the degrees of freedom $n-1$ in a one-sample t-test?
+
+In a one-sample t-test, we estimate the population mean $\mu$ using the sample mean $\bar X$. As the population variance $\sigma^2$ is unknown, we also estimate it using the sample variance:
+
+$$
+s^2=\frac{\sum_{i=1}^{n}(X_i-\bar X)^2}{n-1}.
+$$
+
+The denominator is $n-1$ because the sample mean $\bar X$ is estimated from the same $n$ observations. Consequently, the deviations from the sample mean must satisfy
+
+$$
+\sum_{i=1}^{n}(X_i-\bar X)=0.
+$$
+
+Once $n-1$ deviations are known, the last deviation is determined by this constraint. Therefore, only $n-1$ deviations are free to vary.
+
+The degrees of freedom for the one-sample t-test are thus
+
+$$
+\boxed{df=n-1}.
+$$
+
+We subtract one **because estimating the sample mean imposes one constraint on the deviations**, even though both the population mean and variance are unknown.
+
 ### Why are the degrees of freedom $n-2$ in a correlation test?
 
-In simple linear regression with an intercept, testing whether the population slope is zero is equivalent to testing whether the population Pearson correlation is zero. The regression estimates **two parameters** from $n$ paired observations: the intercept $\beta_0$ and the slope $\beta_1$. The residual degrees of freedom are therefore
+In simple linear regression with an intercept, testing whether the population slope is zero is equivalent to testing whether the population Pearson correlation is zero.
+
+The regression model is
+
+$$
+Y_i=\beta_0+\beta_1X_i+\varepsilon_i.
+$$
+
+The regression estimates **two parameters** from $n$ paired observations:
+
+- The intercept $\beta_0$.
+- The slope $\beta_1$.
+
+The fitted values are
+
+$$
+\hat Y_i=\hat\beta_0+\hat\beta_1X_i,
+$$
+
+and the residuals are
+
+$$
+e_i=Y_i-\hat Y_i.
+$$
+
+As the intercept and slope are estimated using least squares, the residuals satisfy two constraints:
+
+$$
+\sum_{i=1}^{n}e_i=0
+$$
+
+and
+
+$$
+\sum_{i=1}^{n}X_i e_i=0.
+$$
+
+Thus, two degrees of freedom are used in fitting the regression line, leaving
 
 $$
 \boxed{df=n-2}.
 $$
 
-We subtract two **because the model estimates two parameters**, not simply because two variables were measured.
+We subtract two **because the model estimates two regression parameters**, not simply because two variables were measured.
+
+
+**General principle:** In a linear model with $n$ independent observations and $p$ linearly independent fitted parameters,
+
+$$
+\boxed{df_{\text{residual}}=n-p}.
+$$
+
 
 ### Pearson correlation in R: `cor.test()`
 
@@ -249,7 +319,7 @@ $$
 R^2=1-\frac{SSE}{SST}.
 $$
 
-For a model fitted with an intercept, $R^2$ is the **proportion of the observed variation in the response explained by the fitted model**. In simple linear regression, $R^2=r^2$. Because $R^2$ is nonnegative, the direction of association must be determined from $r$ or $b_1$.
+For a model fitted with an intercept, $R^2$ is the **proportion of the observed variation in the response explained by the fitted model**. In simple linear regression, $R^2=r^2$. 
 
 ### Test the slope, inspect confidence intervals, and make predictions
 
@@ -272,7 +342,21 @@ print(predict(fit, newdata = new_leaf, interval = "prediction"))
 **Confidence interval versus prediction interval:** A confidence interval expresses uncertainty about the **population mean drug content** at a specified height. A prediction interval accounts for uncertainty about the drug content of **one new leaf** at that height; it is wider because individual leaves also vary around the mean. Predictions far outside the observed height range (1.30–4.25 m) involve extrapolation and may be unreliable.
 
 > [!NOTE]
-> **Correlation and regression are connected, but not identical.** With one predictor and an intercept, testing $H_0:\rho=0$ by Pearson's test and testing $H_0:\beta_1=0$ by regression give the same t-statistic and p-value under the standard model assumptions. Correlation is symmetric; predicting drug content from height is **not** the same regression as predicting height from drug content.
+> **Why do Pearson correlation and simple linear regression give the same p-value?**
+>
+> In simple linear regression with an intercept, testing whether the population slope is zero is mathematically equivalent to testing whether the population Pearson correlation is zero:
+>
+> $$
+> \boxed{
+> H_0:\rho=0
+> \quad\Longleftrightarrow\quad
+> H_0:\beta_1=0
+> }
+> $$
+>
+> Both tests give the **same t-statistic, $n-2$ degrees of freedom, and two-sided p-value**, provided the same paired observations and standard model assumptions are used.
+>
+> Thus, both tests provide the same statistical evidence for a nonzero linear association, although they answer different scientific questions: **correlation measures the strength and direction of linear association, whereas regression estimates how the response variable changes with the predictor.**
 
 ### Why do correlation and regression use a t-statistic?
 
@@ -292,11 +376,6 @@ The difference lies in **which population parameter is being tested**:
 | Linear regression | $\displaystyle t=\frac{b_1}{SE(b_1)}$ | $H_0:\beta_1=0$ |
 | Pearson correlation | $\displaystyle t=r\sqrt{\frac{n-2}{1-r^2}}$ | $H_0:\rho=0$ |
 
-Here, $b_1$ estimates the population slope $\beta_1$; $r$ estimates the population correlation $\rho$.
-
-In simple linear regression with an intercept, testing $H_0:\beta_1=0$ produces **the same t-statistic and two-sided p-value** as testing $H_0:\rho=0$ with the conventional Pearson test. Both have $df=n-2$ under their usual assumptions. The one-sample t-test instead has $df=n-1$.
-
-**Key point:** A t-statistic is not restricted to testing means. It can also test a regression slope or a correlation coefficient.
 
 ---
 
@@ -323,7 +402,10 @@ where $x_0$ is a chosen reference age (often the overall sample mean).
 - $\beta_1$: common change in mean outcome per additional year of age.
 - $\varepsilon_i$: individual deviation from the fitted treatment-specific line.
 
-The common-slopes model describes the two treatment groups with **parallel lines**: they have the same age slope $\beta_1$, but may have different intercepts. To allow the age slope to differ between treatments, include an **interaction term**:
+
+The common-slopes ANCOVA model describes the two treatment groups using **parallel regression lines**. Both groups share the same age slope $\beta$, while the treatment effect $\tau$ represents the constant vertical difference between their regression lines. Thus, the groups may have different intercepts, but the estimated treatment difference remains the same at every age.
+
+To allow the age slope to differ between treatments, include an **interaction term**:
 
 $$
 \boxed{Y_i=\beta_0+\tau D_i+\beta_1(x_i-x_0)
@@ -338,9 +420,6 @@ Here, $\gamma$ is the **difference between the treatment-specific age slopes**. 
 | `change ~ age` | Regression using age alone |
 | `change ~ treatment + age` | ANCOVA, common slopes |
 | `change ~ treatment * age` | ANCOVA with treatment × age interaction |
-
-> [!IMPORTANT]
-> **Check the interaction before interpreting a common treatment effect.** A nonsignificant interaction does not *prove* slopes are equal. Use the common-slopes model when it is scientifically plausible and adequately supported, not solely because a preliminary interaction test gives $p>0.05$. If slopes differ meaningfully, report treatment contrasts at specified ages rather than one universal adjusted difference.
 
 ---
 
@@ -379,11 +458,13 @@ Here, $\gamma$ is the **difference between the treatment-specific age slopes**. 
 | 25 | — | — | 44 | 41 |
 | **Mean** | **60.25** | **24.05** | **57.92** | **37.84** |
 
-The observed mean FEV1 changes are 24.05% for OldDrug and 37.84% for NewDrug. Their **unadjusted difference** is $37.84-24.05=13.79$ **percentage points**. Because the groups also differ in mean age, ANCOVA estimates the treatment difference **at the same age**.
+The observed mean FEV1 changes are 24.05% for OldDrug and 37.84% for NewDrug. Their **unadjusted difference** is $37.84-24.05=13.79$ **percentage points**. 
+
+As the treatment groups have different mean ages, their overall mean responses may differ partly because of age rather than treatment. ANCOVA accounts for this by comparing the predicted responses of the two treatment groups **at the same age**, thereby estimating the treatment effect after adjusting for age. In the common-slopes model, this adjusted treatment difference is represented by $\tau$ and is assumed to be constant across ages.
 
 ## 7.1. Explore the data and check interaction
 
-**Interaction hypotheses:** $H_0:\gamma=0$ versus $H_A:\gamma\ne0$. Fit the model containing `treatment * age_c` and compare it with the common-slopes model using a partial F-test. Because only one interaction coefficient is added, this F-statistic equals the square of the interaction coefficient's t-statistic.
+**Interaction hypotheses:** $H_0:\gamma=0$ versus $H_A:\gamma\ne0$. Fit the model containing `treatment * age_c` and compare it with the common-slopes model using a partial F-test. Since  only one interaction coefficient is added, this F-statistic equals the square of the interaction coefficient's t-statistic.
 
 ```r
 # 05_COPD_Interaction.R — base R

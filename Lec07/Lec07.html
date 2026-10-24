@@ -116,6 +116,10 @@ and strength</a>
 id="toc-worked-example-leaf-height-and-drug-content">Worked example —
 leaf height and drug content</a>
 <ul>
+<li><a href="#why-are-the-degrees-of-freedom-n-1-in-a-one-sample-t-test"
+id="toc-why-are-the-degrees-of-freedom-n-1-in-a-one-sample-t-test">Why
+are the degrees of freedom <span class="math inline">\(n-1\)</span> in a
+one-sample t-test?</a></li>
 <li><a href="#why-are-the-degrees-of-freedom-n-2-in-a-correlation-test"
 id="toc-why-are-the-degrees-of-freedom-n-2-in-a-correlation-test">Why
 are the degrees of freedom <span class="math inline">\(n-2\)</span> in a
@@ -432,21 +436,82 @@ be lower in leaves collected at greater heights. A small p-value
 provides evidence against <span
 class="math inline">\(H_0:\rho=0\)</span>. <strong>Correlation does not,
 by itself, establish causation.</strong></p>
+<h3 id="why-are-the-degrees-of-freedom-n-1-in-a-one-sample-t-test">Why
+are the degrees of freedom <span class="math inline">\(n-1\)</span> in a
+one-sample t-test?</h3>
+<p>In a one-sample t-test, we estimate the population mean <span
+class="math inline">\(\mu\)</span> using the sample mean <span
+class="math inline">\(\bar X\)</span>. As the population variance <span
+class="math inline">\(\sigma^2\)</span> is unknown, we also estimate it
+using the sample variance:</p>
+<p><span class="math display">\[
+s^2=\frac{\sum_{i=1}^{n}(X_i-\bar X)^2}{n-1}.
+\]</span></p>
+<p>The denominator is <span class="math inline">\(n-1\)</span> because
+the sample mean <span class="math inline">\(\bar X\)</span> is estimated
+from the same <span class="math inline">\(n\)</span> observations.
+Consequently, the deviations from the sample mean must satisfy</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}(X_i-\bar X)=0.
+\]</span></p>
+<p>Once <span class="math inline">\(n-1\)</span> deviations are known,
+the last deviation is determined by this constraint. Therefore, only
+<span class="math inline">\(n-1\)</span> deviations are free to
+vary.</p>
+<p>The degrees of freedom for the one-sample t-test are thus</p>
+<p><span class="math display">\[
+\boxed{df=n-1}.
+\]</span></p>
+<p>We subtract one <strong>because estimating the sample mean imposes
+one constraint on the deviations</strong>, even though both the
+population mean and variance are unknown.</p>
 <h3 id="why-are-the-degrees-of-freedom-n-2-in-a-correlation-test">Why
 are the degrees of freedom <span class="math inline">\(n-2\)</span> in a
 correlation test?</h3>
 <p>In simple linear regression with an intercept, testing whether the
 population slope is zero is equivalent to testing whether the population
-Pearson correlation is zero. The regression estimates <strong>two
-parameters</strong> from <span class="math inline">\(n\)</span> paired
-observations: the intercept <span class="math inline">\(\beta_0\)</span>
-and the slope <span class="math inline">\(\beta_1\)</span>. The residual
-degrees of freedom are therefore</p>
+Pearson correlation is zero.</p>
+<p>The regression model is</p>
+<p><span class="math display">\[
+Y_i=\beta_0+\beta_1X_i+\varepsilon_i.
+\]</span></p>
+<p>The regression estimates <strong>two parameters</strong> from <span
+class="math inline">\(n\)</span> paired observations:</p>
+<ul>
+<li>The intercept <span class="math inline">\(\beta_0\)</span>.</li>
+<li>The slope <span class="math inline">\(\beta_1\)</span>.</li>
+</ul>
+<p>The fitted values are</p>
+<p><span class="math display">\[
+\hat Y_i=\hat\beta_0+\hat\beta_1X_i,
+\]</span></p>
+<p>and the residuals are</p>
+<p><span class="math display">\[
+e_i=Y_i-\hat Y_i.
+\]</span></p>
+<p>As the intercept and slope are estimated using least squares, the
+residuals satisfy two constraints:</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}e_i=0
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+\sum_{i=1}^{n}X_i e_i=0.
+\]</span></p>
+<p>Thus, two degrees of freedom are used in fitting the regression line,
+leaving</p>
 <p><span class="math display">\[
 \boxed{df=n-2}.
 \]</span></p>
-<p>We subtract two <strong>because the model estimates two
+<p>We subtract two <strong>because the model estimates two regression
 parameters</strong>, not simply because two variables were measured.</p>
+<p><strong>General principle:</strong> In a linear model with <span
+class="math inline">\(n\)</span> independent observations and <span
+class="math inline">\(p\)</span> linearly independent fitted
+parameters,</p>
+<p><span class="math display">\[
+\boxed{df_{\text{residual}}=n-p}.
+\]</span></p>
 <h3 id="pearson-correlation-in-r-cor.test">Pearson correlation in R:
 <code>cor.test()</code></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 01_Correlation_Rtest.R — base R</span></span>
@@ -623,11 +688,7 @@ R^2=1-\frac{SSE}{SST}.
 class="math inline">\(R^2\)</span> is the <strong>proportion of the
 observed variation in the response explained by the fitted
 model</strong>. In simple linear regression, <span
-class="math inline">\(R^2=r^2\)</span>. Because <span
-class="math inline">\(R^2\)</span> is nonnegative, the direction of
-association must be determined from <span
-class="math inline">\(r\)</span> or <span
-class="math inline">\(b_1\)</span>.</p>
+class="math inline">\(R^2=r^2\)</span>.</p>
 <h3
 id="test-the-slope-inspect-confidence-intervals-and-make-predictions">Test
 the slope, inspect confidence intervals, and make predictions</h3>
@@ -652,14 +713,27 @@ leaf</strong> at that height; it is wider because individual leaves also
 vary around the mean. Predictions far outside the observed height range
 (1.30–4.25 m) involve extrapolation and may be unreliable.</p>
 <blockquote>
-<p>[!NOTE] <strong>Correlation and regression are connected, but not
-identical.</strong> With one predictor and an intercept, testing <span
-class="math inline">\(H_0:\rho=0\)</span> by Pearson’s test and testing
-<span class="math inline">\(H_0:\beta_1=0\)</span> by regression give
-the same t-statistic and p-value under the standard model assumptions.
-Correlation is symmetric; predicting drug content from height is
-<strong>not</strong> the same regression as predicting height from drug
-content.</p>
+<p>[!NOTE] <strong>Why do Pearson correlation and simple linear
+regression give the same p-value?</strong></p>
+<p>In simple linear regression with an intercept, testing whether the
+population slope is zero is mathematically equivalent to testing whether
+the population Pearson correlation is zero:</p>
+<p><span class="math display">\[
+\boxed{
+H_0:\rho=0
+\quad\Longleftrightarrow\quad
+H_0:\beta_1=0
+}
+\]</span></p>
+<p>Both tests give the <strong>same t-statistic, <span
+class="math inline">\(n-2\)</span> degrees of freedom, and two-sided
+p-value</strong>, provided the same paired observations and standard
+model assumptions are used.</p>
+<p>Thus, both tests provide the same statistical evidence for a nonzero
+linear association, although they answer different scientific questions:
+<strong>correlation measures the strength and direction of linear
+association, whereas regression estimates how the response variable
+changes with the predictor.</strong></p>
 </blockquote>
 <h3 id="why-do-correlation-and-regression-use-a-t-statistic">Why do
 correlation and regression use a t-statistic?</h3>
@@ -709,20 +783,6 @@ t=r\sqrt{\frac{n-2}{1-r^2}}\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>Here, <span class="math inline">\(b_1\)</span> estimates the
-population slope <span class="math inline">\(\beta_1\)</span>; <span
-class="math inline">\(r\)</span> estimates the population correlation
-<span class="math inline">\(\rho\)</span>.</p>
-<p>In simple linear regression with an intercept, testing <span
-class="math inline">\(H_0:\beta_1=0\)</span> produces <strong>the same
-t-statistic and two-sided p-value</strong> as testing <span
-class="math inline">\(H_0:\rho=0\)</span> with the conventional Pearson
-test. Both have <span class="math inline">\(df=n-2\)</span> under their
-usual assumptions. The one-sample t-test instead has <span
-class="math inline">\(df=n-1\)</span>.</p>
-<p><strong>Key point:</strong> A t-statistic is not restricted to
-testing means. It can also test a regression slope or a correlation
-coefficient.</p>
 <hr />
 <h1 id="ancova-combining-a-factor-and-a-covariate">6. ANCOVA: combining
 a factor and a covariate</h1>
@@ -756,11 +816,15 @@ outcome per additional year of age.</li>
 <li><span class="math inline">\(\varepsilon_i\)</span>: individual
 deviation from the fitted treatment-specific line.</li>
 </ul>
-<p>The common-slopes model describes the two treatment groups with
-<strong>parallel lines</strong>: they have the same age slope <span
-class="math inline">\(\beta_1\)</span>, but may have different
-intercepts. To allow the age slope to differ between treatments, include
-an <strong>interaction term</strong>:</p>
+<p>The common-slopes ANCOVA model describes the two treatment groups
+using <strong>parallel regression lines</strong>. Both groups share the
+same age slope <span class="math inline">\(\beta\)</span>, while the
+treatment effect <span class="math inline">\(\tau\)</span> represents
+the constant vertical difference between their regression lines. Thus,
+the groups may have different intercepts, but the estimated treatment
+difference remains the same at every age.</p>
+<p>To allow the age slope to differ between treatments, include an
+<strong>interaction term</strong>:</p>
 <p><span class="math display">\[
 \boxed{Y_i=\beta_0+\tau D_i+\beta_1(x_i-x_0)
 +\gamma D_i(x_i-x_0)+\varepsilon_i}.
@@ -803,16 +867,6 @@ t-test)</td>
 </tr>
 </tbody>
 </table>
-<blockquote>
-<p>[!IMPORTANT] <strong>Check the interaction before interpreting a
-common treatment effect.</strong> A nonsignificant interaction does not
-<em>prove</em> slopes are equal. Use the common-slopes model when it is
-scientifically plausible and adequately supported, not solely because a
-preliminary interaction test gives <span
-class="math inline">\(p&gt;0.05\)</span>. If slopes differ meaningfully,
-report treatment contrasts at specified ages rather than one universal
-adjusted difference.</p>
-</blockquote>
 <hr />
 <h1
 id="worked-example-chronic-obstructive-pulmonary-disease-copd-treatments-and-age">7.
@@ -1030,16 +1084,23 @@ NewDrug.</p>
 <p>The observed mean FEV1 changes are 24.05% for OldDrug and 37.84% for
 NewDrug. Their <strong>unadjusted difference</strong> is <span
 class="math inline">\(37.84-24.05=13.79\)</span> <strong>percentage
-points</strong>. Because the groups also differ in mean age, ANCOVA
-estimates the treatment difference <strong>at the same age</strong>.</p>
+points</strong>.</p>
+<p>As the treatment groups have different mean ages, their overall mean
+responses may differ partly because of age rather than treatment. ANCOVA
+accounts for this by comparing the predicted responses of the two
+treatment groups <strong>at the same age</strong>, thereby estimating
+the treatment effect after adjusting for age. In the common-slopes
+model, this adjusted treatment difference is represented by <span
+class="math inline">\(\tau\)</span> and is assumed to be constant across
+ages.</p>
 <h2 id="explore-the-data-and-check-interaction">7.1. Explore the data
 and check interaction</h2>
 <p><strong>Interaction hypotheses:</strong> <span
 class="math inline">\(H_0:\gamma=0\)</span> versus <span
 class="math inline">\(H_A:\gamma\ne0\)</span>. Fit the model containing
 <code>treatment * age_c</code> and compare it with the common-slopes
-model using a partial F-test. Because only one interaction coefficient
-is added, this F-statistic equals the square of the interaction
+model using a partial F-test. Since only one interaction coefficient is
+added, this F-statistic equals the square of the interaction
 coefficient’s t-statistic.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 05_COPD_Interaction.R — base R</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>old_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">70</span>,<span class="dv">77</span>,<span class="dv">64</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">77</span>,<span class="dv">69</span>,<span class="dv">48</span>,<span class="dv">43</span>,<span class="dv">62</span>,<span class="dv">44</span>,<span class="dv">58</span>,<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">66</span>,<span class="dv">55</span>,<span class="dv">73</span>,<span class="dv">61</span>,<span class="dv">53</span>)</span>
