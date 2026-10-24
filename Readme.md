@@ -82,6 +82,19 @@ Lecture 06 extends one-way ANOVA to factorial experiments involving two or more 
 8. **ANOVA assumptions and diagnostics** — checking independence, residual normality, and equal variances using residual plots, Q-Q plots, and boxplots.
 9. **Choosing the appropriate ANOVA model** — selecting one-way, two-way, additive, or three-way ANOVA based on the experimental design and scientific question.
 
+### [**Lecture 07**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec07/Lec07.html)
+
+Lecture 07 introduces linear regression and Analysis of Covariance (ANCOVA), extending ANOVA to incorporate continuous predictors and examine how treatment effects depend on covariates:
+
+1. **Introduction to linear regression** — understanding relationships between continuous variables, the regression equation, intercept, slope, and residual error.
+2. **Simple linear regression in R** — fitting regression models using `lm()`, interpreting regression coefficients, and visualizing fitted regression lines.
+3. **Model predictions and residuals** — distinguishing observed and fitted values, calculating residuals, and assessing model assumptions using diagnostic plots.
+4. **From ANOVA to ANCOVA** — understanding how ANCOVA combines categorical factors and continuous covariates within a single linear model.
+5. **ANCOVA with common slopes** — fitting parallel regression lines for treatment groups, adjusting treatment comparisons for differences in a continuous covariate, and interpreting adjusted treatment effects.
+6. **Treatment–covariate interactions** — allowing regression slopes to differ between treatment groups, interpreting interaction coefficients, and understanding how treatment effects can vary with the covariate.
+7. **Model comparison and interpretation** — comparing regression and ANCOVA models, interpreting coefficients and statistical significance, and selecting models based on the scientific question.
+8. **Choosing the appropriate linear model** — distinguishing simple regression, ANOVA, ANCOVA with common slopes, and ANCOVA with interactions based on predictor types and experimental design.
+
 
 _Additional content will be added as the course progresses._
 
@@ -121,6 +134,7 @@ The [`HowToR`](HowToR/) folder contains short manuals and examples explaining ho
 1. Biostatistical Analysis, Jerrold H. Zar, Ed. 5, Pearson Education (2014)  
 2. **[Modern Statistics for Modern Biology](https://www.huber.embl.de/msmb/)** by Susan Holmes and Wolfgang Huber   
 3. Essential Statistics for the Pharmaceutical Sciences, Philip Rowe, Wiley (2016)
+4. Statistical and Data Handling Skills in Biology, Roland Ennos, Magnus L. Johnson, Ed. 4, Pearson (2018)
 
 ## Contact
 Raghunathan Ramakrishnan     
