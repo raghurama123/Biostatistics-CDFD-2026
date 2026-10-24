@@ -546,3 +546,13 @@ Rowe reports an age-adjusted NewDrug–OldDrug difference of approximately **12.
 - Holding treatment fixed, each additional year of age is associated with an average FEV1 improvement **0.594 percentage points lower**.
 - These are model-based estimates, not statements that every individual patient will follow the line.
 
+
+This exercise demonstrates how **ANCOVA compares treatment effects while accounting for a continuous covariate**. Although patients receiving the two drugs differ in age, ANCOVA allows us to estimate the difference in FEV1 improvement at the same age.
+
+Using the common-slopes model, we find that:
+
+1. The new drug is associated with approximately **12.41 percentage points greater FEV1 improvement** than the old drug after adjusting for age.
+2. FEV1 improvement decreases with increasing age, independently of treatment in the fitted model.
+3. The two fitted regression lines are parallel because the model assumes that the effect of age is identical for both treatments.
+
+**The key lesson is that ANCOVA separates the estimated treatment effect from the relationship between age and the response, allowing a comparison of treatments at a common age.**
