@@ -458,8 +458,6 @@ Here, $\gamma$ is the **difference between the treatment-specific age slopes**. 
 | 25 | — | — | 44 | 41 |
 | **Mean** | **60.25** | **24.05** | **57.92** | **37.84** |
 
-The observed mean FEV1 changes are 24.05% for OldDrug and 37.84% for NewDrug. Their **unadjusted difference** is $37.84-24.05=13.79$ **percentage points**. 
-
 As the treatment groups have different mean ages, their overall mean responses may differ partly because of age rather than treatment. ANCOVA accounts for this by comparing the predicted responses of the two treatment groups **at the same age**, thereby estimating the treatment effect after adjusting for age. In the common-slopes model, this adjusted treatment difference is represented by $\tau$ and is assumed to be constant across ages.
 
 ## 7.1. Explore the data and check interaction
