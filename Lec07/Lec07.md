@@ -546,29 +546,6 @@ Rowe reports an age-adjusted NewDrug–OldDrug difference of approximately **12.
 - Holding treatment fixed, each additional year of age is associated with an average FEV1 improvement **0.594 percentage points lower**.
 - These are model-based estimates, not statements that every individual patient will follow the line.
 
-## 7.3. Check ANCOVA residuals
-
-```r
-# 07_COPD_Diagnostics.R — base R
-old_age <- c(61,70,77,64,53,52,77,69,48,43,62,44,58,72,47,66,55,73,61,53)
-old_change <- c(23,24,15,26,28,30,10,24,30,33,23,33,20,16,29,27,32,11,24,23)
-new_age <- c(72,47,57,65,52,72,63,64,45,63,56,57,63,57,50,46,74,74,55,65,58,56,43,50,44)
-new_change <- c(28,46,40,30,38,27,39,36,50,41,36,46,38,37,35,52,25,25,36,29,42,38,43,48,41)
-df <- data.frame(age = c(old_age, new_age),
-                 change = c(old_change, new_change),
-                 treatment = factor(c(rep("OldDrug", 20), rep("NewDrug", 25))))
-fit <- lm(change ~ treatment + age, data = df)
-par(mfrow = c(2, 2))
-plot(fit)
-par(mfrow = c(1, 1))
-plot(df$age, resid(fit), col = as.integer(df$treatment), pch = 16,
-     xlab = "Age (years)", ylab = "Residual (percentage points)",
-     main = "ANCOVA residuals versus age")
-abline(h = 0, lty = 2)
-```
-
-Inspect the residual plots for curvature, unequal scatter, outliers, and influential observations. Independence of errors must also be justified from the study design. Age was measured **before treatment**, so adjusting for it does not remove an effect of treatment acting through age.
-
 ---
 
 # 8. Comparing a t-test and ANCOVA
