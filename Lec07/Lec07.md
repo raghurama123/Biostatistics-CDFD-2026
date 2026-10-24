@@ -546,9 +546,6 @@ Rowe reports an age-adjusted NewDrug–OldDrug difference of approximately **12.
 - Holding treatment fixed, each additional year of age is associated with an average FEV1 improvement **0.594 percentage points lower**.
 - These are model-based estimates, not statements that every individual patient will follow the line.
 
-> [!NOTE]
-> **Why center age?** With `age_c = age - mean(age)`, the intercept is the OldDrug expected response at a representative age. Centering changes the intercept but does not change fitted responses, the common slope, or the treatment contrast in the common-slopes model. With an interaction, centering also makes the treatment main-effect coefficient refer to the selected reference age rather than age zero.
-
 ## 7.3. Check ANCOVA residuals
 
 ```r
