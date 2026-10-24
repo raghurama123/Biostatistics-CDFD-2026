@@ -1095,9 +1095,7 @@ and check interaction</h2>
 class="math inline">\(H_0:\gamma=0\)</span> versus <span
 class="math inline">\(H_A:\gamma\ne0\)</span>. Fit the model containing
 <code>treatment * age_c</code> and compare it with the common-slopes
-model using a partial F-test. Since only one interaction coefficient is
-added, this F-statistic equals the square of the interaction
-coefficient’s t-statistic.</p>
+model using a partial F-test.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 05_COPD_Interaction.R — base R</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>old_age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">61</span>,<span class="dv">70</span>,<span class="dv">77</span>,<span class="dv">64</span>,<span class="dv">53</span>,<span class="dv">52</span>,<span class="dv">77</span>,<span class="dv">69</span>,<span class="dv">48</span>,<span class="dv">43</span>,<span class="dv">62</span>,<span class="dv">44</span>,<span class="dv">58</span>,<span class="dv">72</span>,<span class="dv">47</span>,<span class="dv">66</span>,<span class="dv">55</span>,<span class="dv">73</span>,<span class="dv">61</span>,<span class="dv">53</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>old_change <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">23</span>,<span class="dv">24</span>,<span class="dv">15</span>,<span class="dv">26</span>,<span class="dv">28</span>,<span class="dv">30</span>,<span class="dv">10</span>,<span class="dv">24</span>,<span class="dv">30</span>,<span class="dv">33</span>,<span class="dv">23</span>,<span class="dv">33</span>,<span class="dv">20</span>,<span class="dv">16</span>,<span class="dv">29</span>,<span class="dv">27</span>,<span class="dv">32</span>,<span class="dv">11</span>,<span class="dv">24</span>,<span class="dv">23</span>)</span>

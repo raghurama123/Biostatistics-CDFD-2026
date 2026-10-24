@@ -462,7 +462,7 @@ As the treatment groups have different mean ages, their overall mean responses m
 
 ## 7.1. Explore the data and check interaction
 
-**Interaction hypotheses:** $H_0:\gamma=0$ versus $H_A:\gamma\ne0$. Fit the model containing `treatment * age_c` and compare it with the common-slopes model using a partial F-test. Since  only one interaction coefficient is added, this F-statistic equals the square of the interaction coefficient's t-statistic.
+**Interaction hypotheses:** $H_0:\gamma=0$ versus $H_A:\gamma\ne0$. Fit the model containing `treatment * age_c` and compare it with the common-slopes model using a partial F-test. 
 
 ```r
 # 05_COPD_Interaction.R — base R
