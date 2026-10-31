@@ -95,6 +95,20 @@ Lecture 07 introduces linear regression and Analysis of Covariance (ANCOVA), ext
 7. **Model comparison and interpretation** — comparing regression and ANCOVA models, interpreting coefficients and statistical significance, and selecting models based on the scientific question.
 8. **Choosing the appropriate linear model** — distinguishing simple regression, ANOVA, ANCOVA with common slopes, and ANCOVA with interactions based on predictor types and experimental design.
 
+### [**Lecture 08**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec08/Lec08.html)
+
+Lecture 08 introduces biodiversity measurement using the Shannon–Wiener Diversity Index and extends hypothesis testing to compare species diversity between two independent ecological samples using Hutcheson's t-test:
+
+1. **Introduction to biodiversity and species diversity** — understanding species richness, abundance, relative frequency, and the importance of measuring biodiversity in ecological studies.
+2. **Shannon–Wiener Diversity Index** — defining the diversity index using species proportions, understanding its mathematical formulation, and interpreting diversity in terms of species richness and evenness.
+3. **Derivation of the Shannon Diversity Index** — expressing species proportions in terms of observed frequencies and deriving an alternative formula for calculating Shannon diversity directly from species counts.
+4. **Maximum Shannon diversity** — deriving the maximum diversity index when all species have equal abundance, establishing \(H'_{\max}=\log c\), and understanding how species evenness influences diversity.
+5. **Comparing biodiversity between two populations** — introducing the statistical problem of determining whether observed differences in Shannon diversity indices represent significant differences between ecological communities.
+6. **Hutcheson's t-test** — formulating null and alternative hypotheses, calculating the t-statistic for comparing two independent Shannon diversity estimates, and interpreting statistical significance.
+7. **Variance estimation and degrees of freedom** — estimating the variance of Shannon diversity from species frequencies and calculating approximate degrees of freedom using the Welch–Satterthwaite formula.
+8. **Example: Bird diversity in Michigan and Louisiana** — calculating Shannon diversity indices and their variances from bird-species abundance data, performing Hutcheson's t-test, and evaluating whether the two ecological samples differ significantly in diversity.
+9. **R implementation and statistical interpretation** — implementing Shannon diversity calculations, variance estimation, Hutcheson's t-test, p-value computation, and hypothesis-testing decisions using reproducible base R code.
+
 
 _Additional content will be added as the course progresses._
 

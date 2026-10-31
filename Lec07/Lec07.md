@@ -2,7 +2,7 @@
 <tr>
 <td style="width:33%; text-align:left; border:none;"><a href="../Lec06/Lec06.html"><strong>← Previous Lecture</strong></a></td>
 <td style="width:34%; text-align:center; border:none;"><a href="../"><strong>Home</strong></a></td>
-<td style="width:33%; text-align:right; border:none;"><strong>Next Lecture →</strong></td>
+<td style="width:33%; text-align:right; border:none;"><a href="../Lec08/Lec08.html"><strong>Next Lecture →</strong></a></td>
 </tr>
 </table>
 
