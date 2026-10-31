@@ -109,7 +109,6 @@ Lecture 08 introduces biodiversity measurement using the Shannon–Wiener Divers
 8. **Example: Bird diversity in Michigan and Louisiana** — calculating Shannon diversity indices and their variances from bird-species abundance data, performing Hutcheson's t-test, and evaluating whether the two ecological samples differ significantly in diversity.
 9. **R implementation and statistical interpretation** — implementing Shannon diversity calculations, variance estimation, Hutcheson's t-test, p-value computation, and hypothesis-testing decisions using reproducible base R code.
 
-
 _Additional content will be added as the course progresses._
 
 ## Repository 
@@ -132,16 +131,11 @@ Biostatistics-CDFD-2026/
 |   ├── ...
 ```
 
-
 ## Interactive plots
 
 - [Normal distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/NormalDistribution.html)
 - [Binomial distribution](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/BinomialDistribution.html)
 - [Hypothesis testing, Type-I/Type-II errors, power  using Z-test](https://raghurama123.github.io/Biostatistics-CDFD-2026/interactive_plots/HypothesisTestingZtest.html)
-
-## How to do various things in R programming? 
-
-The [`HowToR`](./HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. 
 
 ## General references
 
