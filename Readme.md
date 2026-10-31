@@ -141,7 +141,7 @@ Biostatistics-CDFD-2026/
 
 ## How to do various things in R programming? 
 
-The [`HowToR`](HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. 
+The [`HowToR`](./HowToR/) folder contains short manuals and examples explaining how to perform various tasks in **R**. 
 
 ## General references
 
