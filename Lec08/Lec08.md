@@ -99,7 +99,7 @@ At significance level $\alpha=0.05$, reject $H_0$ for a two-sided test when $|t|
 
 ## 4. Example: bird diets in Michigan and Louisiana
 
-The handwritten example records counts in six food categories. Here, each food category is treated as a category in the Shannon calculation; strictly speaking, this measures **diet-category diversity**, not bird-species diversity.
+Here, each food category is treated as a category in the Shannon calculation; strictly speaking, this measures **diet-category diversity**, not bird-species diversity.
 
 | Diet category | Michigan blue jay | Louisiana blue jay |
 |---|---:|---:|
