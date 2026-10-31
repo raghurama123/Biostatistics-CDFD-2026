@@ -79,7 +79,7 @@ $$
 \boxed{t=\frac{H'_1-H'_2}{\sqrt{\widehat{\operatorname{Var}}(H'_1)+\widehat{\operatorname{Var}}(H'_2)}}.}
 $$
 
-An approximate variance estimator, in the form used in the handwritten notes, is
+An approximate variance estimator, is
 
 $$
 \boxed{\widehat{\operatorname{Var}}(H')=
