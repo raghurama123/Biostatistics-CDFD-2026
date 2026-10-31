@@ -6,110 +6,35 @@ A Biostatistics course offered to PhD students at _BRIC-Centre for DNA Fingerpri
 
 ### [**Lecture 01**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html)
 
-Lecture 01 introduces R:
-
-1. **R Basics** — basic syntax, variables, vectors, data frames, descriptive statistics, plots, statistical tests, correlation, and linear regression.
-2. **Reading data files** — reading CSV/TSV files, inspecting data, selecting rows and columns, modifying data, and saving results.
-3. **ggplot2** — introduction to plotting with `ggplot2`, including scatter plots and fitted regression lines.
-4. **Bioconductor** — a first example using `Biostrings` to work with DNA sequences.
+**Introduction to R:** Basic syntax, vectors, data frames, descriptive statistics, data import/export, and plotting with `ggplot2`. Introduction to Bioconductor using `Biostrings`.
 
 ### [**Lecture 02**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html)
 
-Lecture 02 introduces discrete probability distributions and hypothesis testing using biological examples:
-
-1. **Discrete random variables** — introduction to discrete data, probability distributions, and biological examples involving counts.
-2. **Binomial distribution** — modeling repeated independent trials with two possible outcomes, illustrated using coin tosses and implemented in R with `dbinom()` and `pbinom()`.
-3. **Poisson distribution** — modeling counts of rare events and understanding the Poisson approximation to the binomial distribution when $n$ is large and $p$ is small.
-4. **HIV mutation example** — modeling the number of mutations in an HIV genome using the binomial distribution and comparing it with the Poisson approximation.
-5. **Cumulative probability** — calculating probabilities such as $P(X\leq x)$ by summing individual probabilities and using cumulative distribution functions.
-6. **Hypothesis testing** — introducing the null and alternative hypotheses, p-values, significance levels, rejection regions, and left-tailed tests using the HIV mutation example.
-7. **Confidence and significance levels** — connecting $\alpha=0.05$ with a corresponding 95% probability level and interpreting significance thresholds in discrete probability distributions.
+**Probability distributions:** Discrete random variables, binomial and Poisson distributions, cumulative probabilities, and biological count examples. Introduction to hypotheses, p-values, and significance levels.
 
 ### [**Lecture 03**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec03/Lec03.html)
 
-Lecture 03 develops exact binomial hypothesis testing using biological examples:
-
-1. **When to use the binomial distribution** — recognizing situations with a fixed number of independent trials, two possible outcomes per trial, and a constant probability of success.
-2. **Null model and observed proportion** — distinguishing between the null probability $p_0$, the unknown underlying probability $p$, the observed proportion $\hat p$, and the expected count $np_0$.
-3. **Hypothesis testing and compatibility regions** — interpreting $\alpha=0.05$ as defining an approximately 95% central region of outcomes expected under $H_0$ and rejection regions in the tails.
-4. **p-values and the CDF** — calculating left- and right-tailed p-values using cumulative probabilities with `pbinom()` and understanding the connection between the CDF and hypothesis testing.
-5. **Exact binomial test in R** — using `binom.test()` for left-tailed, right-tailed, and two-sided tests and extracting the p-value using `result$p.value`.
-6. **Mendel's pea experiment** — testing whether the observed proportion of round seeds differs from the Mendelian expectation of $p_0=0.75$.
-7. **Allele-specific expression** — testing whether allele-specific sequencing reads deviate from the 50:50 expectation using a two-sided exact binomial test.
-8. **EXACT precision-oncology trial** — performing a right-tailed exact binomial test with $\alpha=0.025$ and connecting the p-value with the critical rejection region.
+**Exact binomial tests:** Null models, one- and two-sided p-values, rejection regions, and `binom.test()`. Applications to Mendelian inheritance, allele-specific expression, and clinical trials.
 
 ### [**Lecture 04**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec04/Lec04.html)
 
-Lecture 04 introduces inference for a population mean using the normal distribution:
-
-1. **Central Limit Theorem** — understanding the sampling distribution of the sample mean and the standard error $\sigma/\sqrt{n}$.
-2. **Standard normal distribution** — standardizing sample means using the Z-score and calculating probabilities with `pnorm()`.
-3. **Confidence intervals and critical values** — using standard normal critical values to construct confidence intervals for a population mean.
-4. **Sample size for a fixed confidence interval** — estimating the sample size required for a chosen confidence level and margin of error, including the use of prior or pilot estimates of variability.
-5. **One-sample Z-test** — testing a population mean when the population standard deviation is known, including left-tailed, right-tailed, and two-tailed tests.
-6. **Statistical decisions and errors** — relating true positives, true negatives, false positives, and false negatives to hypothesis-testing decisions.
-7. **Type I and Type II errors** — interpreting $\alpha$ and $\beta$ as the probabilities of false-positive and false-negative decisions.
-8. **Statistical power** — defining power as $1-\beta$ and examining how effect size, sample size, variability, and significance level affect power.
+**Inference with the normal distribution:** Central Limit Theorem, standard errors, Z-tests, confidence intervals, and sample-size estimation. Type I and Type II errors, and statistical power.
 
 ### [**Lecture 05**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec05/Lec05.html)
 
-Lecture 05 extends hypothesis testing beyond the Z-test to compare population means, variances, and categorical data:
-
-1. **Recap of the Z-test** — reviewing hypothesis testing for a population mean when the population standard deviation $\sigma$ is known.
-2. **Student's t-distribution** — understanding why the t-distribution is used when $\sigma$ is unknown, how it differs from the normal distribution, and the role of degrees of freedom.
-3. **One-sample t-test** — testing whether a population mean differs from a specified value using `t.test()`, illustrated by comparing crab body temperature with lake water temperature.
-4. **Two-sample t-tests** — comparing means from independent samples using Welch's or pooled t-tests, and comparing paired observations using a paired t-test.
-5. **Analysis of Variance (ANOVA)** — comparing means across three or more groups using the F-statistic, performing one-way ANOVA with `aov()`, and identifying differences between groups using Tukey's post-hoc test.
-6. **Chi-square test for one variance** — testing whether a population variance differs from a specified value using the chi-square distribution.
-7. **F-test for two variances** — comparing variability between two populations using the F-distribution and `var.test()`.
-8. **Levene's test** — testing whether groups have equal variances using a method less sensitive to departures from normality.
-9. **Chi-square goodness-of-fit test** — comparing observed categorical counts with expected frequencies under a hypothesized probability distribution using `chisq.test()`.
-10. **Chi-square test of independence** — testing whether two categorical variables are associated using contingency tables and `chisq.test()`, with Fisher's exact test as an alternative for sparse tables.
-11. **Choosing the appropriate statistical test** — selecting a test based on the scientific question, data type, number of groups, study design, and statistical assumptions.
-
+**Common statistical tests:** One- and two-sample t-tests, paired t-tests, one-way ANOVA and Tukey comparisons, variance tests, Levene's test, and chi-square tests for categorical data.
 
 ### [**Lecture 06**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec06/Lec06.html)
 
-Lecture 06 extends one-way ANOVA to factorial experiments involving two or more factors, with emphasis on main effects, interactions, and their interpretation using R:
-
-1. **Recall of one-way ANOVA** — revisiting the enzyme-activity experiment from Lecture 05, distinguishing factors from levels, and introducing the one-way ANOVA statistical model.
-2. **Factors, levels, and factorial experiments** — understanding experimental combinations, replication, and full factorial designs involving multiple factors.
-3. **Two-way ANOVA** — introducing the statistical model, partitioning variation into main effects, interaction, and residual error, and specifying models using R formula notation.
-4. **Catalyst and mixing method** — analyzing published drug-synthesis yield data using `aov()`, interpreting significant main effects and a nonsignificant interaction, and calculating mean yield differences.
-5. **Main effects and interactions** — distinguishing additive effects from interactions and visualizing them using interaction plots in R.
-6. **Tablet strength with interaction** — analyzing published tablet-strength data to demonstrate how the effect of compression force depends on punch design, including statistical interpretation and reporting.
-7. **Beyond two factors** — extending factorial ANOVA to three factors, interpreting higher-order interactions, and introducing fractional factorial designs.
-8. **ANOVA assumptions and diagnostics** — checking independence, residual normality, and equal variances using residual plots, Q-Q plots, and boxplots.
-9. **Choosing the appropriate ANOVA model** — selecting one-way, two-way, additive, or three-way ANOVA based on the experimental design and scientific question.
+**Factorial ANOVA:** Main effects, interactions, two-way and higher-order designs, model selection, and residual diagnostics, illustrated with experimental datasets.
 
 ### [**Lecture 07**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec07/Lec07.html)
 
-Lecture 07 introduces linear regression and Analysis of Covariance (ANCOVA), extending ANOVA to incorporate continuous predictors and examine how treatment effects depend on covariates:
-
-1. **Introduction to linear regression** — understanding relationships between continuous variables, the regression equation, intercept, slope, and residual error.
-2. **Simple linear regression in R** — fitting regression models using `lm()`, interpreting regression coefficients, and visualizing fitted regression lines.
-3. **Model predictions and residuals** — distinguishing observed and fitted values, calculating residuals, and assessing model assumptions using diagnostic plots.
-4. **From ANOVA to ANCOVA** — understanding how ANCOVA combines categorical factors and continuous covariates within a single linear model.
-5. **ANCOVA with common slopes** — fitting parallel regression lines for treatment groups, adjusting treatment comparisons for differences in a continuous covariate, and interpreting adjusted treatment effects.
-6. **Treatment–covariate interactions** — allowing regression slopes to differ between treatment groups, interpreting interaction coefficients, and understanding how treatment effects can vary with the covariate.
-7. **Model comparison and interpretation** — comparing regression and ANCOVA models, interpreting coefficients and statistical significance, and selecting models based on the scientific question.
-8. **Choosing the appropriate linear model** — distinguishing simple regression, ANOVA, ANCOVA with common slopes, and ANCOVA with interactions based on predictor types and experimental design.
+**Regression and ANCOVA:** Linear regression, coefficients, predictions, residuals, baseline-adjusted group comparisons, common slopes, and treatment–covariate interactions using `lm()`.
 
 ### [**Lecture 08**](https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec08/Lec08.html)
 
-Lecture 08 introduces biodiversity measurement using the Shannon–Wiener Diversity Index and extends hypothesis testing to compare species diversity between two independent ecological samples using Hutcheson's t-test:
-
-1. **Introduction to biodiversity and species diversity** — understanding species richness, abundance, relative frequency, and the importance of measuring biodiversity in ecological studies.
-2. **Shannon–Wiener Diversity Index** — defining the diversity index using species proportions, understanding its mathematical formulation, and interpreting diversity in terms of species richness and evenness.
-3. **Derivation of the Shannon Diversity Index** — expressing species proportions in terms of observed frequencies and deriving an alternative formula for calculating Shannon diversity directly from species counts.
-4. **Maximum Shannon diversity** — deriving the maximum diversity index when all species have equal abundance, establishing \(H'_{\max}=\log c\), and understanding how species evenness influences diversity.
-5. **Comparing biodiversity between two populations** — introducing the statistical problem of determining whether observed differences in Shannon diversity indices represent significant differences between ecological communities.
-6. **Hutcheson's t-test** — formulating null and alternative hypotheses, calculating the t-statistic for comparing two independent Shannon diversity estimates, and interpreting statistical significance.
-7. **Variance estimation and degrees of freedom** — estimating the variance of Shannon diversity from species frequencies and calculating approximate degrees of freedom using the Welch–Satterthwaite formula.
-8. **Example: Bird diversity in Michigan and Louisiana** — calculating Shannon diversity indices and their variances from bird-species abundance data, performing Hutcheson's t-test, and evaluating whether the two ecological samples differ significantly in diversity.
-9. **R implementation and statistical interpretation** — implementing Shannon diversity calculations, variance estimation, Hutcheson's t-test, p-value computation, and hypothesis-testing decisions using reproducible base R code.
-
-_Additional content will be added as the course progresses._
+**Biodiversity statistics:** Species richness, evenness, the Shannon–Wiener diversity index, and Hutcheson's t-test for comparing diversity between ecological samples, with calculations in R.
 
 ## Repository 
 

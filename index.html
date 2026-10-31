@@ -38,303 +38,56 @@ DNA Fingerprinting and Diagnostics - CDFD</em> during August-December
 <h3 id="lecture-01"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec01/Lec01.html"><strong>Lecture
 01</strong></a></h3>
-<p>Lecture 01 introduces R:</p>
-<ol type="1">
-<li><strong>R Basics</strong> — basic syntax, variables, vectors, data
-frames, descriptive statistics, plots, statistical tests, correlation,
-and linear regression.</li>
-<li><strong>Reading data files</strong> — reading CSV/TSV files,
-inspecting data, selecting rows and columns, modifying data, and saving
-results.</li>
-<li><strong>ggplot2</strong> — introduction to plotting with
-<code>ggplot2</code>, including scatter plots and fitted regression
-lines.</li>
-<li><strong>Bioconductor</strong> — a first example using
-<code>Biostrings</code> to work with DNA sequences.</li>
-</ol>
+<p><strong>Introduction to R:</strong> Basic syntax, vectors, data
+frames, descriptive statistics, data import/export, and plotting with
+<code>ggplot2</code>. Introduction to Bioconductor using
+<code>Biostrings</code>.</p>
 <h3 id="lecture-02"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec02/Lec02.html"><strong>Lecture
 02</strong></a></h3>
-<p>Lecture 02 introduces discrete probability distributions and
-hypothesis testing using biological examples:</p>
-<ol type="1">
-<li><strong>Discrete random variables</strong> — introduction to
-discrete data, probability distributions, and biological examples
-involving counts.</li>
-<li><strong>Binomial distribution</strong> — modeling repeated
-independent trials with two possible outcomes, illustrated using coin
-tosses and implemented in R with <code>dbinom()</code> and
-<code>pbinom()</code>.</li>
-<li><strong>Poisson distribution</strong> — modeling counts of rare
-events and understanding the Poisson approximation to the binomial
-distribution when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
-is large and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
-is small.</li>
-<li><strong>HIV mutation example</strong> — modeling the number of
-mutations in an HIV genome using the binomial distribution and comparing
-it with the Poisson approximation.</li>
-<li><strong>Cumulative probability</strong> — calculating probabilities
-such as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>≤</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P(X\leq x)</annotation></semantics></math>
-by summing individual probabilities and using cumulative distribution
-functions.</li>
-<li><strong>Hypothesis testing</strong> — introducing the null and
-alternative hypotheses, p-values, significance levels, rejection
-regions, and left-tailed tests using the HIV mutation example.</li>
-<li><strong>Confidence and significance levels</strong> — connecting
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha=0.05</annotation></semantics></math>
-with a corresponding 95% probability level and interpreting significance
-thresholds in discrete probability distributions.</li>
-</ol>
+<p><strong>Probability distributions:</strong> Discrete random
+variables, binomial and Poisson distributions, cumulative probabilities,
+and biological count examples. Introduction to hypotheses, p-values, and
+significance levels.</p>
 <h3 id="lecture-03"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec03/Lec03.html"><strong>Lecture
 03</strong></a></h3>
-<p>Lecture 03 develops exact binomial hypothesis testing using
-biological examples:</p>
-<ol type="1">
-<li><strong>When to use the binomial distribution</strong> — recognizing
-situations with a fixed number of independent trials, two possible
-outcomes per trial, and a constant probability of success.</li>
-<li><strong>Null model and observed proportion</strong> — distinguishing
-between the null probability
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>p</mi><mn>0</mn></msub><annotation encoding="application/x-tex">p_0</annotation></semantics></math>,
-the unknown underlying probability
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>,
-the observed proportion
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>p</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat p</annotation></semantics></math>,
-and the expected count
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><msub><mi>p</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">np_0</annotation></semantics></math>.</li>
-<li><strong>Hypothesis testing and compatibility regions</strong> —
-interpreting
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\alpha=0.05</annotation></semantics></math>
-as defining an approximately 95% central region of outcomes expected
-under
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>H</mi><mn>0</mn></msub><annotation encoding="application/x-tex">H_0</annotation></semantics></math>
-and rejection regions in the tails.</li>
-<li><strong>p-values and the CDF</strong> — calculating left- and
-right-tailed p-values using cumulative probabilities with
-<code>pbinom()</code> and understanding the connection between the CDF
-and hypothesis testing.</li>
-<li><strong>Exact binomial test in R</strong> — using
-<code>binom.test()</code> for left-tailed, right-tailed, and two-sided
-tests and extracting the p-value using <code>result$p.value</code>.</li>
-<li><strong>Mendel’s pea experiment</strong> — testing whether the
-observed proportion of round seeds differs from the Mendelian
-expectation of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mn>0</mn></msub><mo>=</mo><mn>0.75</mn></mrow><annotation encoding="application/x-tex">p_0=0.75</annotation></semantics></math>.</li>
-<li><strong>Allele-specific expression</strong> — testing whether
-allele-specific sequencing reads deviate from the 50:50 expectation
-using a two-sided exact binomial test.</li>
-<li><strong>EXACT precision-oncology trial</strong> — performing a
-right-tailed exact binomial test with
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><mn>0.025</mn></mrow><annotation encoding="application/x-tex">\alpha=0.025</annotation></semantics></math>
-and connecting the p-value with the critical rejection region.</li>
-</ol>
+<p><strong>Exact binomial tests:</strong> Null models, one- and
+two-sided p-values, rejection regions, and <code>binom.test()</code>.
+Applications to Mendelian inheritance, allele-specific expression, and
+clinical trials.</p>
 <h3 id="lecture-04"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec04/Lec04.html"><strong>Lecture
 04</strong></a></h3>
-<p>Lecture 04 introduces inference for a population mean using the
-normal distribution:</p>
-<ol type="1">
-<li><strong>Central Limit Theorem</strong> — understanding the sampling
-distribution of the sample mean and the standard error
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mi>/</mi><msqrt><mi>n</mi></msqrt></mrow><annotation encoding="application/x-tex">\sigma/\sqrt{n}</annotation></semantics></math>.</li>
-<li><strong>Standard normal distribution</strong> — standardizing sample
-means using the Z-score and calculating probabilities with
-<code>pnorm()</code>.</li>
-<li><strong>Confidence intervals and critical values</strong> — using
-standard normal critical values to construct confidence intervals for a
-population mean.</li>
-<li><strong>Sample size for a fixed confidence interval</strong> —
-estimating the sample size required for a chosen confidence level and
-margin of error, including the use of prior or pilot estimates of
-variability.</li>
-<li><strong>One-sample Z-test</strong> — testing a population mean when
-the population standard deviation is known, including left-tailed,
-right-tailed, and two-tailed tests.</li>
-<li><strong>Statistical decisions and errors</strong> — relating true
-positives, true negatives, false positives, and false negatives to
-hypothesis-testing decisions.</li>
-<li><strong>Type I and Type II errors</strong> — interpreting
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-as the probabilities of false-positive and false-negative
-decisions.</li>
-<li><strong>Statistical power</strong> — defining power as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>−</mo><mi>β</mi></mrow><annotation encoding="application/x-tex">1-\beta</annotation></semantics></math>
-and examining how effect size, sample size, variability, and
-significance level affect power.</li>
-</ol>
+<p><strong>Inference with the normal distribution:</strong> Central
+Limit Theorem, standard errors, Z-tests, confidence intervals, and
+sample-size estimation. Type I and Type II errors, and statistical
+power.</p>
 <h3 id="lecture-05"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec05/Lec05.html"><strong>Lecture
 05</strong></a></h3>
-<p>Lecture 05 extends hypothesis testing beyond the Z-test to compare
-population means, variances, and categorical data:</p>
-<ol type="1">
-<li><strong>Recap of the Z-test</strong> — reviewing hypothesis testing
-for a population mean when the population standard deviation
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>
-is known.</li>
-<li><strong>Student’s t-distribution</strong> — understanding why the
-t-distribution is used when
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>
-is unknown, how it differs from the normal distribution, and the role of
-degrees of freedom.</li>
-<li><strong>One-sample t-test</strong> — testing whether a population
-mean differs from a specified value using <code>t.test()</code>,
-illustrated by comparing crab body temperature with lake water
-temperature.</li>
-<li><strong>Two-sample t-tests</strong> — comparing means from
-independent samples using Welch’s or pooled t-tests, and comparing
-paired observations using a paired t-test.</li>
-<li><strong>Analysis of Variance (ANOVA)</strong> — comparing means
-across three or more groups using the F-statistic, performing one-way
-ANOVA with <code>aov()</code>, and identifying differences between
-groups using Tukey’s post-hoc test.</li>
-<li><strong>Chi-square test for one variance</strong> — testing whether
-a population variance differs from a specified value using the
-chi-square distribution.</li>
-<li><strong>F-test for two variances</strong> — comparing variability
-between two populations using the F-distribution and
-<code>var.test()</code>.</li>
-<li><strong>Levene’s test</strong> — testing whether groups have equal
-variances using a method less sensitive to departures from
-normality.</li>
-<li><strong>Chi-square goodness-of-fit test</strong> — comparing
-observed categorical counts with expected frequencies under a
-hypothesized probability distribution using
-<code>chisq.test()</code>.</li>
-<li><strong>Chi-square test of independence</strong> — testing whether
-two categorical variables are associated using contingency tables and
-<code>chisq.test()</code>, with Fisher’s exact test as an alternative
-for sparse tables.</li>
-<li><strong>Choosing the appropriate statistical test</strong> —
-selecting a test based on the scientific question, data type, number of
-groups, study design, and statistical assumptions.</li>
-</ol>
+<p><strong>Common statistical tests:</strong> One- and two-sample
+t-tests, paired t-tests, one-way ANOVA and Tukey comparisons, variance
+tests, Levene’s test, and chi-square tests for categorical data.</p>
 <h3 id="lecture-06"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec06/Lec06.html"><strong>Lecture
 06</strong></a></h3>
-<p>Lecture 06 extends one-way ANOVA to factorial experiments involving
-two or more factors, with emphasis on main effects, interactions, and
-their interpretation using R:</p>
-<ol type="1">
-<li><strong>Recall of one-way ANOVA</strong> — revisiting the
-enzyme-activity experiment from Lecture 05, distinguishing factors from
-levels, and introducing the one-way ANOVA statistical model.</li>
-<li><strong>Factors, levels, and factorial experiments</strong> —
-understanding experimental combinations, replication, and full factorial
-designs involving multiple factors.</li>
-<li><strong>Two-way ANOVA</strong> — introducing the statistical model,
-partitioning variation into main effects, interaction, and residual
-error, and specifying models using R formula notation.</li>
-<li><strong>Catalyst and mixing method</strong> — analyzing published
-drug-synthesis yield data using <code>aov()</code>, interpreting
-significant main effects and a nonsignificant interaction, and
-calculating mean yield differences.</li>
-<li><strong>Main effects and interactions</strong> — distinguishing
-additive effects from interactions and visualizing them using
-interaction plots in R.</li>
-<li><strong>Tablet strength with interaction</strong> — analyzing
-published tablet-strength data to demonstrate how the effect of
-compression force depends on punch design, including statistical
-interpretation and reporting.</li>
-<li><strong>Beyond two factors</strong> — extending factorial ANOVA to
-three factors, interpreting higher-order interactions, and introducing
-fractional factorial designs.</li>
-<li><strong>ANOVA assumptions and diagnostics</strong> — checking
-independence, residual normality, and equal variances using residual
-plots, Q-Q plots, and boxplots.</li>
-<li><strong>Choosing the appropriate ANOVA model</strong> — selecting
-one-way, two-way, additive, or three-way ANOVA based on the experimental
-design and scientific question.</li>
-</ol>
+<p><strong>Factorial ANOVA:</strong> Main effects, interactions, two-way
+and higher-order designs, model selection, and residual diagnostics,
+illustrated with experimental datasets.</p>
 <h3 id="lecture-07"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec07/Lec07.html"><strong>Lecture
 07</strong></a></h3>
-<p>Lecture 07 introduces linear regression and Analysis of Covariance
-(ANCOVA), extending ANOVA to incorporate continuous predictors and
-examine how treatment effects depend on covariates:</p>
-<ol type="1">
-<li><strong>Introduction to linear regression</strong> — understanding
-relationships between continuous variables, the regression equation,
-intercept, slope, and residual error.</li>
-<li><strong>Simple linear regression in R</strong> — fitting regression
-models using <code>lm()</code>, interpreting regression coefficients,
-and visualizing fitted regression lines.</li>
-<li><strong>Model predictions and residuals</strong> — distinguishing
-observed and fitted values, calculating residuals, and assessing model
-assumptions using diagnostic plots.</li>
-<li><strong>From ANOVA to ANCOVA</strong> — understanding how ANCOVA
-combines categorical factors and continuous covariates within a single
-linear model.</li>
-<li><strong>ANCOVA with common slopes</strong> — fitting parallel
-regression lines for treatment groups, adjusting treatment comparisons
-for differences in a continuous covariate, and interpreting adjusted
-treatment effects.</li>
-<li><strong>Treatment–covariate interactions</strong> — allowing
-regression slopes to differ between treatment groups, interpreting
-interaction coefficients, and understanding how treatment effects can
-vary with the covariate.</li>
-<li><strong>Model comparison and interpretation</strong> — comparing
-regression and ANCOVA models, interpreting coefficients and statistical
-significance, and selecting models based on the scientific
-question.</li>
-<li><strong>Choosing the appropriate linear model</strong> —
-distinguishing simple regression, ANOVA, ANCOVA with common slopes, and
-ANCOVA with interactions based on predictor types and experimental
-design.</li>
-</ol>
+<p><strong>Regression and ANCOVA:</strong> Linear regression,
+coefficients, predictions, residuals, baseline-adjusted group
+comparisons, common slopes, and treatment–covariate interactions using
+<code>lm()</code>.</p>
 <h3 id="lecture-08"><a
 href="https://raghurama123.github.io/Biostatistics-CDFD-2026/Lec08/Lec08.html"><strong>Lecture
 08</strong></a></h3>
-<p>Lecture 08 introduces biodiversity measurement using the
-Shannon–Wiener Diversity Index and extends hypothesis testing to compare
-species diversity between two independent ecological samples using
-Hutcheson’s t-test:</p>
-<ol type="1">
-<li><strong>Introduction to biodiversity and species diversity</strong>
-— understanding species richness, abundance, relative frequency, and the
-importance of measuring biodiversity in ecological studies.</li>
-<li><strong>Shannon–Wiener Diversity Index</strong> — defining the
-diversity index using species proportions, understanding its
-mathematical formulation, and interpreting diversity in terms of species
-richness and evenness.</li>
-<li><strong>Derivation of the Shannon Diversity Index</strong> —
-expressing species proportions in terms of observed frequencies and
-deriving an alternative formula for calculating Shannon diversity
-directly from species counts.</li>
-<li><strong>Maximum Shannon diversity</strong> — deriving the maximum
-diversity index when all species have equal abundance, establishing
-(H’_{}=c), and understanding how species evenness influences
-diversity.</li>
-<li><strong>Comparing biodiversity between two populations</strong> —
-introducing the statistical problem of determining whether observed
-differences in Shannon diversity indices represent significant
-differences between ecological communities.</li>
-<li><strong>Hutcheson’s t-test</strong> — formulating null and
-alternative hypotheses, calculating the t-statistic for comparing two
-independent Shannon diversity estimates, and interpreting statistical
-significance.</li>
-<li><strong>Variance estimation and degrees of freedom</strong> —
-estimating the variance of Shannon diversity from species frequencies
-and calculating approximate degrees of freedom using the
-Welch–Satterthwaite formula.</li>
-<li><strong>Example: Bird diversity in Michigan and Louisiana</strong> —
-calculating Shannon diversity indices and their variances from
-bird-species abundance data, performing Hutcheson’s t-test, and
-evaluating whether the two ecological samples differ significantly in
-diversity.</li>
-<li><strong>R implementation and statistical interpretation</strong> —
-implementing Shannon diversity calculations, variance estimation,
-Hutcheson’s t-test, p-value computation, and hypothesis-testing
-decisions using reproducible base R code.</li>
-</ol>
-<p><em>Additional content will be added as the course
-progresses.</em></p>
+<p><strong>Biodiversity statistics:</strong> Species richness, evenness,
+the Shannon–Wiener diversity index, and Hutcheson’s t-test for comparing
+diversity between ecological samples, with calculations in R.</p>
 <h2 id="repository">Repository</h2>
 <p>The repository <a
 href="https://github.com/raghurama123/Biostatistics-CDFD-2026">https://github.com/raghurama123/Biostatistics-CDFD-2026</a>
